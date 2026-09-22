@@ -32,57 +32,52 @@
             z-index: 1;
         }
 
-        /* --- TÈKS KONTÈ NWAYO AK DIFERAN EKRI --- */
+        /* --- TÈKS INTRO (HAPPY BIRTHDAY) --- */
         .matrix-text-container {
             position: absolute;
             z-index: 2;
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             font-weight: bold;
             color: #ff3385;
             text-shadow: 0 0 20px #ff1a75, 0 0 40px #ff1a75;
             animation: pulseText 0.8s ease-in-out infinite alternate;
             text-align: center;
             letter-spacing: 2px;
+            padding: 0 20px;
         }
         @keyframes pulseText {
             0% { transform: scale(1); opacity: 0.85; }
             100% { transform: scale(1.08); opacity: 1; }
         }
 
-        /* --- EKRAN FÒM KÈ FINAL --- */
+        /* --- EKRAN FÒM KÈ FINAL AK FOTO --- */
         .heart-gallery-screen {
             display: none;
             position: absolute;
             width: 100%;
             height: 100%;
             background: #05050a;
-            z-index: 5;
+            z-index: 10;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
         }
         .heart-gallery-screen.active {
             display: flex;
         }
-
         .heart-shape-container {
             position: relative;
             width: 320px;
             height: 320px;
         }
-        .heart-item {
+        .heart-photo {
             position: absolute;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 51, 133, 0.2);
-            border: 2px solid #ff3385;
+            width: 55px;
+            height: 55px;
+            object-fit: cover;
             border-radius: 8px;
+            border: 2px solid #ff3385;
             box-shadow: 0 0 12px rgba(255, 51, 133, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-weight: bold;
-            font-size: 0.8rem;
             animation: fadeInPhoto 0.4s ease forwards;
         }
         @keyframes fadeInPhoto {
@@ -93,19 +88,19 @@
 </head>
 <body>
 
-    <!-- Canvas Matrix Woz -->
+    <!-- Canvas pou liy woz Matrix yo -->
     <canvas id="matrixCanvas"></canvas>
 
-    <!-- Tèks ki ap defile yo -->
-    <div class="matrix-text-container" id="mainText">3</div>
+    <!-- Tèks kap parèt an premye -->
+    <div class="matrix-text-container" id="mainText">HAPPY BIRTHDAY</div>
 
-    <!-- Ekran Fòm Kè nan fen an -->
+    <!-- Ekran fòm kè nan fen an (ki pral parèt dirèkteman apre tèks la) -->
     <div class="heart-gallery-screen" id="heartGallery">
         <div class="heart-shape-container" id="heartContainer"></div>
     </div>
 
     <script>
-        // --- 1. MATRIX Woz ANIME ---
+        // --- 1. EFIKA MATRIX WOZ ANIME ---
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
 
@@ -145,7 +140,7 @@
 
 
         // --- 2. SEKANS TÈKS INTRO ---
-        const sequence = ["3", "2", "1", "HAPPY", "BIRTHDAY", "TO", "HARLIE"];
+        const sequence = ["HAPPY BIRTHDAY", "Harlie 💖"];
         let seqIndex = 0;
         const textElement = document.getElementById('mainText');
 
@@ -156,12 +151,21 @@
             } else {
                 clearInterval(textInterval);
                 textElement.style.display = 'none';
-                showHeartGallery(); 
+                showHeartGallery(); // Lè tèks la fini, fòm kè a parèt dirèkteman!
             }
-        }, 1400);
+        }, 2000);
 
 
-        // --- 3. FÒM KÈ A ---
+        // --- FOTO OSWA LYEN YO ---
+        const userPhotos = [
+            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500",
+            "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=500",
+            "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=500",
+            "https://images.unsplash.com/photo-1426604966848-d7adac902bff?w=500"
+        ];
+
+
+        // --- 3. FÒM KÈ FINAL AK FOTO YO ---
         function showHeartGallery() {
             const galleryScreen = document.getElementById('heartGallery');
             const container = document.getElementById('heartContainer');
@@ -178,12 +182,12 @@
 
             points.forEach((pt, index) => {
                 setTimeout(() => {
-                    const item = document.createElement('div');
-                    item.className = 'heart-item';
-                    item.style.left = pt.x + 'px';
-                    item.style.top = pt.y + 'px';
-                    item.innerText = "💖";
-                    container.appendChild(item);
+                    const img = document.createElement('img');
+                    img.src = userPhotos[index % userPhotos.length];
+                    img.className = 'heart-photo';
+                    img.style.left = pt.x + 'px';
+                    img.style.top = pt.y + 'px';
+                    container.appendChild(img);
                 }, index * 80);
             });
         }
