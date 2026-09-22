@@ -11,15 +11,46 @@
             box-sizing: border-box;
         }
         body {
-            background-color: #000;
+            background-color: #0d0d1a;
             color: #fff;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
+            position: relative;
         }
+
+        /* --- TI KÈ WOZ YO AP TONBE --- */
+        .hearts-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .heart {
+            position: absolute;
+            color: #ff4d79;
+            font-size: 20px;
+            animation: fall linear infinite;
+            opacity: 0.8;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) translateX(50px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
         .screen {
             display: none;
             flex-direction: column;
@@ -28,30 +59,41 @@
             padding: 20px;
             max-width: 600px;
             width: 100%;
+            z-index: 2;
         }
         .screen.active {
             display: flex;
         }
+
+        /* --- TI CHAT LA --- */
         .cat-img {
-            width: 180px;
-            height: 180px;
+            width: 160px;
+            height: 160px;
             object-fit: contain;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             animation: floatCat 3s ease-in-out infinite;
         }
         @keyframes floatCat {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-12px); }
         }
+
+        /* --- LIV LA AK FOTO YO --- */
         .card-container {
             position: relative;
             background: #fff;
             color: #333;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 77, 121, 0.4);
             width: 100%;
+            animation: popIn 0.5s ease-in-out;
         }
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
         .images-row {
             display: flex;
             gap: 15px;
@@ -60,57 +102,94 @@
         }
         .images-row img {
             width: 45%;
-            height: 250px;
+            height: 240px;
             object-fit: cover;
-            border-radius: 10px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #ff4d79, #ff758c);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 77, 121, 0.4);
+            transition: transform 0.2s;
+        }
+        .btn:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
 
-    <!-- SCREEN 1: CHAT AK AKÈY -->
+    <!-- KÈ WOZ YO -->
+    <div class="hearts-container" id="hearts"></div>
+
+    <!-- SCREEN 1: PREMYE PAJ AK TI CHAT AK HAPPY BIRTHDAY -->
     <div id="screen-1" class="screen active">
-        <!-- Asire w ou mete imaj chat la sou GitHub ak menm non sa a, oswa chanje non an isit la -->
-        <img src="cat.gif" alt="Chat k ap jwe gitè" class="cat-img">
-        <h1>Anivèsè Siksè!</h1>
+        <img src="happy3.gif" alt="Chat k ap jwe gitè" class="cat-img">
+        <h1 style="color: #ff4d79; margin-bottom: 10px; font-size: 2.2rem;">Happy Birthday Harlie! 💖</h1>
+        <p style="color: #ddd; font-size: 1.1rem; margin-bottom: 20px;">M gen yon bèl ti sipriz ki fèt espesyalman pou ou...</p>
+        <button class="btn" onclick="nextScreen()">Louvri Liv la ✨</button>
     </div>
 
-    <!-- SCREEN 2: SLIDESHOW FOTO AK MESAJ -->
+    <!-- SCREEN 2: LIV PAJ PA PAJ -->
     <div id="screen-2" class="screen">
         <div class="card-container" id="card-content">
-            <!-- Kontni an ap soti otomatikman nan JavaScript -->
+            <!-- Kontni an ap soti la a -->
         </div>
+        <button class="btn" onclick="nextSlide()">Paj Suivan ➔</button>
     </div>
 
     <script>
-        // --- 3. CARD SLIDESHOW AK MESAJ OU YO ---
-        const slides = [
+        // Fonksyon pou kreye ti kè woz k ap tonbe
+        function createHearts() {
+            const heartsContainer = Document.getElementById('hearts');
+            setInterval(() => {
+                Const heart = document.createElement('div');
+                Heart.classList.add('heart');
+                Heart.innerHTML = '💖';
+                Heart.style.left = Math.random() * 100 + 'vw';
+                Heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                Heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                HeartsContainer.appendChild(heart);
+                
+                SetTimeout(() => {
+                    Heart.remove();
+                }, 6000);
+            }, 300);
+        }
+        CreateHearts();
+
+        // Lis paj yo ak tout bèl mesaj ou yo ansanm ak foto w yo sou GitHub
+        Const slides = [
             {
-                msg: "Happy Birthday mon nounours👩🏽‍❤️‍👨🏾💖",
-                img1: "WhatsApp Image 2026-09-22 at 5.01.23 PM (1).jpeg",
-                img2: "WhatsApp Image 2026-09-22 at 5.01.23 PM (2).jpeg"
+                Msg: "Happy Birthday mon nounours👩🏽‍❤️‍👨🏾💖",
+                Img1: "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg",
+                Img2: "WhatsApp Image 2026-09-22 at 5.01.25 PM.jpeg"
             },
             {
-                msg: "Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. Et aujourd'hui encore plus, je veux que tu te sentes unique, chouchoutée, aimée, valorisée, comblée. ✨",
-                img1: "WhatsApp Image 2026-09-22 at 5.01.24 PM.jpeg",
-                img2: "WhatsApp Image 2026-09-22 at 5.01.24 PM (1).jpeg"
-            },
-            {
-                msg: "Toi qui as fait de mon cœur un musée qui déborde",
-                img1: "WhatsApp Image 2026-09-22 at 5.01.25 PM.jpeg",
-                img2: "WhatsApp Image 2026-09-22 at 5.01.26 PM.jpeg"
+                Msg: "Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. ✨",
+                Img1: "WhatsApp Image 2026-09-22 at 5.01.26 PM.jpeg",
+                Img2: "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg"
             }
         ];
 
-        let currentSlide = 0;
+        Let currentSlide = 0;
 
-        function renderSlide() {
-            const cardContent = document.getElementById('card-content');
-            if (!cardContent) return;
+        Function renderSlide() {
+            Const cardContent = document.getElementById('card-content');
+            If (!cardContent) return;
             
-            const slide = slides[currentSlide];
-            cardContent.innerHTML = `
-                <p style="font-size: 1.1rem; margin-bottom: 10px;">${slide.msg}</p>
+            Const slide = slides[currentSlide];
+            CardContent.innerHTML = `
+                <p style="font-size: 1.2rem; margin-bottom: 12px; font-weight: bold; color: #ff4d79;">${slide.msg}</p>
                 <div class="images-row">
                     <img src="${slide.img1}" alt="Foto Harlie">
                     <img src="${slide.img2}" alt="Foto Harlie">
@@ -118,16 +197,21 @@
             `;
         }
 
-        // Fonksyonalite pou chanje ekran oubyen slide otomatikman si sa nesesè
-        document.addEventListener("DOMContentLoaded", () => {
-            renderSlide();
-            
-            // Pa egzanp, apre 5 segonn l ap pase sou ekran dezyèm nan si l pa t ankò aktif
-            setTimeout(() => {
-                document.getElementById('screen-1').classList.remove('active');
-                document.getElementById('screen-2').classList.add('active');
-            }, 4000);
-        });
+        Function nextScreen() {
+            Document.getElementById('screen-1').classList.remove('active');
+            Document.getElementById('screen-2').classList.add('active');
+            RenderSlide();
+        }
+
+        Function nextSlide() {
+            CurrentSlide++;
+            If (currentSlide < slides.length) {
+                RenderSlide();
+            } else {
+                CurrentSlide = 0; // Lè l fini l tounen nan premye paj liv la
+                RenderSlide();
+            }
+        }
     </script>
 </body>
 </html>
