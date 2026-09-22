@@ -11,9 +11,9 @@
             box-sizing: border-box;
         }
         body {
-            background-color: #05050a;
-            color: #ff3385;
-            font-family: 'Courier New', Courier, monospace;
+            background-color: #0d0d1a;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,174 +22,195 @@
             position: relative;
         }
 
-        /* --- EFE MATRIX WOZ AP DESANN --- */
-        canvas {
+        /* --- TI KÈ WOZ YO --- */
+        .hearts-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            overflow: hidden;
             z-index: 1;
+            pointer-events: none;
         }
-
-        /* --- TÈKS INTRO (HAPPY BIRTHDAY) --- */
-        .matrix-text-container {
+        .heart {
             position: absolute;
-            z-index: 2;
-            font-size: 3.2rem;
-            font-weight: bold;
-            color: #ff3385;
-            text-shadow: 0 0 20px #ff1a75, 0 0 40px #ff1a75;
-            animation: pulseText 0.8s ease-in-out infinite alternate;
-            text-align: center;
-            letter-spacing: 2px;
-            padding: 0 20px;
+            color: #ff4d79;
+            font-size: 20px;
+            animation: fall linear infinite;
+            opacity: 0.7;
         }
-        @keyframes pulseText {
-            0% { transform: scale(1); opacity: 0.85; }
-            100% { transform: scale(1.08); opacity: 1; }
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) translateX(50px) rotate(360deg);
+                opacity: 0;
+            }
         }
 
-        /* --- EKRAN FÒM KÈ FINAL AK FOTO --- */
-        .heart-gallery-screen {
+        .screen {
             display: none;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: #05050a;
-            z-index: 10;
-            justify-content: center;
-            align-items: center;
             flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+            z-index: 2;
         }
-        .heart-gallery-screen.active {
+        .screen.active {
             display: flex;
         }
-        .heart-shape-container {
+
+        /* --- TI CHAT LA --- */
+        .cat-img {
+            width: 160px;
+            height: 160px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            animation: floatCat 3s ease-in-out infinite;
+        }
+        @keyframes floatCat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* --- LIV LA AK FOTO YO --- */
+        .card-container {
             position: relative;
-            width: 320px;
-            height: 320px;
+            background: #fff;
+            color: #333;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 77, 121, 0.3);
+            width: 100%;
+            animation: popIn 0.5s ease-in-out;
         }
-        .heart-photo {
-            position: absolute;
-            width: 55px;
-            height: 55px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 2px solid #ff3385;
-            box-shadow: 0 0 12px rgba(255, 51, 133, 0.7);
-            animation: fadeInPhoto 0.4s ease forwards;
-        }
-        @keyframes fadeInPhoto {
-            0% { transform: scale(0); opacity: 0; }
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
+        }
+
+        .images-row {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        .images-row img {
+            width: 45%;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #ff4d79, #ff758c);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 77, 121, 0.4);
+            transition: transform 0.2s;
+        }
+        .btn:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
 
-    <!-- Canvas pou liy woz Matrix yo -->
-    <canvas id="matrixCanvas"></canvas>
+    <!-- BACKGROUND AK TI KÈ WOZ YO -->
+    <div class="hearts-container" id="hearts"></div>
 
-    <!-- Tèks kap parèt an premye -->
-    <div class="matrix-text-container" id="mainText">HAPPY BIRTHDAY</div>
+    <!-- SCREEN 1: CHAT KI AP JWE GITÈ A AK AKÈY -->
+    <div id="screen-1" class="screen active">
+        <img src="happy3.gif" alt="Chat k ap jwe gitè" class="cat-img">
+        <h1 style="color: #ff4d79; margin-bottom: 10px; font-size: 2rem;">Happy Birthday Harlie! 💖</h1>
+        <p style="color: #ddd; margin-bottom: 15px;">M gen yon bèl sipriz pou ou...</p>
+        <button class="btn" onclick="nextScreen()">Louvri Liv la ✨</button>
+    </div>
 
-    <!-- Ekran fòm kè nan fen an (ki pral parèt dirèkteman apre tèks la) -->
-    <div class="heart-gallery-screen" id="heartGallery">
-        <div class="heart-shape-container" id="heartContainer"></div>
+    <!-- SCREEN 2: LIV LA AK FOTO YO -->
+    <div id="screen-2" class="screen">
+        <div class="card-container" id="card-content">
+            <!-- Kontni an ap soti otomatikman nan JavaScript -->
+        </div>
+        <button class="btn" onclick="nextSlide()">Paj Suivan ➔</button>
     </div>
 
     <script>
-        // --- 1. EFIKA MATRIX WOZ ANIME ---
-        const canvas = document.getElementById('matrixCanvas');
-        const ctx = canvas.getContext('2d');
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        // --- TI KÈ WOZ YO ---
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '💖';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                heartsContainer.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 6000);
+            }, 400);
         }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        createHearts();
 
-        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789HARLIE💖✨";
-        const fontSize = 16;
-        let columns = canvas.width / fontSize;
-        const drops = [];
-        for (let i = 0; i < columns; i++) {
-            drops[i] = 1;
-        }
-
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(5, 5, 10, 0.15)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = '#ff3385';
-            ctx.font = fontSize + 'px monospace';
-
-            for (let i = 0; i < drops.length; i++) {
-                const text = letters.charAt(Math.floor(Math.random() * letters.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
+        // --- LIST SLIDES AK NON EGZAK FOTO W YO SOU GITHUB ---
+        const slides = [
+            {
+                msg: "Happy Birthday mon nounours👩🏽‍❤️‍👨🏾💖",
+                img1: "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg",
+                img2: "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg"
+            },
+            {
+                msg: "Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. ✨",
+                img1: "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg",
+                img2: "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg"
             }
-        }
-        setInterval(drawMatrix, 50);
-
-
-        // --- 2. SEKANS TÈKS INTRO ---
-        const sequence = ["HAPPY BIRTHDAY", "Harlie 💖"];
-        let seqIndex = 0;
-        const textElement = document.getElementById('mainText');
-
-        const textInterval = setInterval(() => {
-            seqIndex++;
-            if (seqIndex < sequence.length) {
-                textElement.innerText = sequence[seqIndex];
-            } else {
-                clearInterval(textInterval);
-                textElement.style.display = 'none';
-                showHeartGallery(); // Lè tèks la fini, fòm kè a parèt dirèkteman!
-            }
-        }, 2000);
-
-
-        // --- FOTO OSWA LYEN YO ---
-        const userPhotos = [
-            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500",
-            "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=500",
-            "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=500",
-            "https://images.unsplash.com/photo-1426604966848-d7adac902bff?w=500"
         ];
 
+        let currentSlide = 0;
 
-        // --- 3. FÒM KÈ FINAL AK FOTO YO ---
-        function showHeartGallery() {
-            const galleryScreen = document.getElementById('heartGallery');
-            const container = document.getElementById('heartContainer');
-            galleryScreen.classList.add('active');
+        function renderSlide() {
+            const cardContent = document.getElementById('card-content');
+            if (!cardContent) return;
+            
+            const slide = slides[currentSlide];
+            cardContent.innerHTML = `
+                <p style="font-size: 1.2rem; margin-bottom: 12px; font-weight: bold; color: #ff4d79;">${slide.msg}</p>
+                <div class="images-row">
+                    <img src="${slide.img1}" alt="Foto Harlie">
+                    <img src="${slide.img2}" alt="Foto Harlie">
+                </div>
+            `;
+        }
 
-            const points = [
-                {x: 160, y: 60}, {x: 130, y: 40}, {x: 100, y: 50}, {x: 80, y: 70},
-                {x: 75, y: 100}, {x: 85, y: 130}, {x: 110, y: 160}, {x: 135, y: 190},
-                {x: 160, y: 220}, {x: 185, y: 190}, {x: 210, y: 160}, {x: 235, y: 130},
-                {x: 245, y: 100}, {x: 240, y: 70}, {x: 220, y: 50}, {x: 190, y: 40},
-                {x: 160, y: 90}, {x: 145, y: 70}, {x: 175, y: 70}, {x: 120, y: 90},
-                {x: 200, y: 90}, {x: 130, y: 120}, {x: 190, y: 120}, {x: 160, y: 150}
-            ];
+        function nextScreen() {
+            document.getElementById('screen-1').classList.remove('active');
+            document.getElementById('screen-2').classList.add('active');
+            renderSlide();
+        }
 
-            points.forEach((pt, index) => {
-                setTimeout(() => {
-                    const img = document.createElement('img');
-                    img.src = userPhotos[index % userPhotos.length];
-                    img.className = 'heart-photo';
-                    img.style.left = pt.x + 'px';
-                    img.style.top = pt.y + 'px';
-                    container.appendChild(img);
-                }, index * 80);
-            });
+        function nextSlide() {
+            currentSlide++;
+            if (currentSlide < slides.length) {
+                renderSlide();
+            } else {
+                currentSlide = 0;
+                renderSlide();
+            }
         }
     </script>
 </body>
