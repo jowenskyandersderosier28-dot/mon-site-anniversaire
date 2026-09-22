@@ -32,119 +32,57 @@
             z-index: 1;
         }
 
-        /* --- TÈKS KONTÈ NWAYO (HAPPY BIRTHDAY / ETC) --- */
+        /* --- TÈKS KONTÈ NWAYO AK DIFERAN EKRI --- */
         .matrix-text-container {
             position: absolute;
             z-index: 2;
-            font-size: 3.2rem;
+            font-size: 3.5rem;
             font-weight: bold;
             color: #ff3385;
             text-shadow: 0 0 20px #ff1a75, 0 0 40px #ff1a75;
             animation: pulseText 0.8s ease-in-out infinite alternate;
             text-align: center;
             letter-spacing: 2px;
-            padding: 0 20px;
         }
         @keyframes pulseText {
             0% { transform: scale(1); opacity: 0.85; }
             100% { transform: scale(1.08); opacity: 1; }
         }
 
-        /* --- EKRAN LIV LA (PAJ PA PAJ AK FOTO) --- */
-        .book-screen {
-            display: none;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: rgba(5, 5, 10, 0.95);
-            z-index: 5;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 20px;
-        }
-        .book-screen.active {
-            display: flex;
-        }
-
-        .card-container {
-            position: relative;
-            background: #fff;
-            color: #333;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(255, 51, 133, 0.5);
-            max-width: 480px;
-            width: 100%;
-            text-align: center;
-            animation: popIn 0.5s ease-in-out;
-        }
-        @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .images-row {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 15px;
-        }
-        .images-row img {
-            width: 45%;
-            height: 210px;
-            object-fit: cover;
-            border-radius: 12px;
-            border: 2px solid #ff3385;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        .btn {
-            margin-top: 25px;
-            padding: 12px 30px;
-            background: linear-gradient(135deg, #ff3385, #ff758c);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(255, 51, 133, 0.4);
-            transition: transform 0.2s;
-            font-family: 'Arial', sans-serif;
-        }
-        .btn:hover {
-            transform: scale(1.05);
-        }
-
-        /* --- EKRAN FÒM KÈ FINAL AK FOTO YO --- */
+        /* --- EKRAN FÒM KÈ FINAL --- */
         .heart-gallery-screen {
             display: none;
             position: absolute;
             width: 100%;
             height: 100%;
             background: #05050a;
-            z-index: 10;
+            z-index: 5;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
         }
         .heart-gallery-screen.active {
             display: flex;
         }
+
         .heart-shape-container {
             position: relative;
             width: 320px;
             height: 320px;
         }
-        .heart-photo {
+        .heart-item {
             position: absolute;
-            width: 55px;
-            height: 55px;
-            object-fit: cover;
-            border-radius: 8px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 51, 133, 0.2);
             border: 2px solid #ff3385;
+            border-radius: 8px;
             box-shadow: 0 0 12px rgba(255, 51, 133, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
             animation: fadeInPhoto 0.4s ease forwards;
         }
         @keyframes fadeInPhoto {
@@ -158,22 +96,16 @@
     <!-- Canvas Matrix Woz -->
     <canvas id="matrixCanvas"></canvas>
 
-    <!-- Tèks Intro (HAPPY BIRTHDAY / ETC) -->
-    <div class="matrix-text-container" id="mainText">HAPPY BIRTHDAY</div>
+    <!-- Tèks ki ap defile yo -->
+    <div class="matrix-text-container" id="mainText">3</div>
 
-    <!-- Ekran Liv la ak mesaj ak foto -->
-    <div class="book-screen" id="bookScreen">
-        <div class="card-container" id="cardContent"></div>
-        <button class="btn" onclick="nextSlide()">Paj Suivan ➔</button>
-    </div>
-
-    <!-- Ekran Fòm Kè final ak tout foto yo -->
+    <!-- Ekran Fòm Kè nan fen an -->
     <div class="heart-gallery-screen" id="heartGallery">
         <div class="heart-shape-container" id="heartContainer"></div>
     </div>
 
     <script>
-        // --- 1. EFIKA MATRIX WOZ ANIME ---
+        // --- 1. MATRIX Woz ANIME ---
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
 
@@ -213,7 +145,7 @@
 
 
         // --- 2. SEKANS TÈKS INTRO ---
-        const sequence = ["HAPPY BIRTHDAY", "Harlie 💖"];
+        const sequence = ["3", "2", "1", "HAPPY", "BIRTHDAY", "TO", "HARLIE"];
         let seqIndex = 0;
         const textElement = document.getElementById('mainText');
 
@@ -224,70 +156,12 @@
             } else {
                 clearInterval(textInterval);
                 textElement.style.display = 'none';
-                showBookScreen(); // Lè tèks la fini, liv la ouvè!
+                showHeartGallery(); 
             }
-        }, 2000);
+        }, 1400);
 
 
-        // --- LIS FOTO W YO ---
-        // Asire w non fichye foto w yo sou GitHub ekri egzakteman menm jan isit la:
-        const userPhotos = [
-            "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg",
-            "WhatsApp Image 2026-09-22 at 5.01.25 PM.jpeg",
-            "WhatsApp Image 2026-09-22 at 5.01.26 PM.jpeg"
-        ];
-
-
-        // --- 3. PAJ LIV LA (MESAJ AK FOTO) ---
-        const slides = [
-            {
-                msg: "Happy Birthday Say 💖",
-                img1: userPhotos[0],
-                img2: userPhotos[1]
-            },
-            {
-                msg: "As long as you're smiling ✨",
-                img1: userPhotos[2],
-                img2: userPhotos[0]
-            },
-            {
-                msg: "Mwen renmen w anpil 💕",
-                img1: userPhotos[1],
-                img2: userPhotos[2]
-            }
-        ];
-
-        let currentSlide = 0;
-
-        function showBookScreen() {
-            document.getElementById('bookScreen').classList.add('active');
-            renderSlide();
-        }
-
-        function renderSlide() {
-            const cardContent = document.getElementById('cardContent');
-            const slide = slides[currentSlide];
-            cardContent.innerHTML = `
-                <p style="font-size: 1.15rem; margin-bottom: 12px; font-weight: bold; color: #ff3385; font-family: Arial, sans-serif;">${slide.msg}</p>
-                <div class="images-row">
-                    <img src="${slide.img1}" alt="Foto Harlie">
-                    <img src="${slide.img2}" alt="Foto Harlie">
-                </div>
-            `;
-        }
-
-        function nextSlide() {
-            currentSlide++;
-            if (currentSlide < slides.length) {
-                renderSlide();
-            } else {
-                document.getElementById('bookScreen').classList.remove('active');
-                showHeartGallery(); // Lè liv la fini, fòm kè a parèt!
-            }
-        }
-
-
-        // --- 4. FÒM KÈ AK FOTO YO ---
+        // --- 3. FÒM KÈ A ---
         function showHeartGallery() {
             const galleryScreen = document.getElementById('heartGallery');
             const container = document.getElementById('heartContainer');
@@ -304,12 +178,12 @@
 
             points.forEach((pt, index) => {
                 setTimeout(() => {
-                    const img = document.createElement('img');
-                    img.src = userPhotos[index % userPhotos.length];
-                    img.className = 'heart-photo';
-                    img.style.left = pt.x + 'px';
-                    img.style.top = pt.y + 'px';
-                    container.appendChild(img);
+                    const item = document.createElement('div');
+                    item.className = 'heart-item';
+                    item.style.left = pt.x + 'px';
+                    item.style.top = pt.y + 'px';
+                    item.innerText = "💖";
+                    container.appendChild(item);
                 }, index * 80);
             });
         }
