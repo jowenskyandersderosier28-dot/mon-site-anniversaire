@@ -1,130 +1,181 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="ht">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Joyeux Anniversaire Harlie ❤️</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+  <title>Happy Birthday Harlie</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    /* Fòse ekran an rete an paysage sou telefòn */
+    @media screen and (orientation: portrait) {
+      body {
+        transform: rotate(90deg);
+        transform-origin: left top;
+        width: 100vh;
+        height: 100vw;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        overflow: hidden;
+      }
     }
+
     body {
-      background-color: #0b0b10;
-      color: #ffffff;
-      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #0d0d0d;
+      font-family: 'Courier New', Courier, monospace;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       min-height: 100vh;
-      padding: 20px 15px;
+      text-align: center;
+      overflow: hidden;
     }
-    #countdown {
-      font-size: 5rem;
-      font-weight: 600;
-      color: #ff4d8d;
-      text-shadow: 0 0 20px rgba(255, 77, 141, 0.6);
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
     }
+
     #content {
       display: none;
+      position: relative;
+      z-index: 2;
       width: 100%;
-      max-width: 380px;
-      animation: fadeInUp 1s ease-out;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
-    h1 {
-      font-size: 1.8rem;
-      font-weight: 600;
+
+    .card {
+      background: rgba(26, 26, 26, 0.9);
+      border: 2px solid #ff4d8d;
+      border-radius: 15px;
+      padding: 10px 15px;
+      max-width: 420px;
+      box-shadow: 0 0 15px rgba(255, 77, 141, 0.4);
+      margin-bottom: 5px;
+    }
+
+    p {
+      font-size: 0.75rem;
+      line-height: 1.3;
       color: #ffffff;
-      text-align: center;
-      margin-bottom: 20px;
+      margin: 0;
     }
-    h1 span {
-      color: #ff4d8d;
-      display: block;
-      font-size: 2.2rem;
+
+    .heart-container {
+      position: relative;
+      width: 280px;
+      height: 240px;
       margin-top: 5px;
     }
-    .card {
-      background: rgba(26, 26, 36, 0.95);
-      border: 1px solid rgba(255, 77, 141, 0.4);
-      border-radius: 24px;
-      padding: 25px 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 77, 141, 0.2);
-    }
-    .heart-icon {
-      text-align: center;
-      font-size: 3rem;
-      margin-bottom: 20px;
-      animation: heartbeat 1.3s infinite ease-in-out;
-    }
-    .message {
-      font-size: 0.95rem;
-      line-height: 1.7;
-      color: #e0e0e0;
-      text-align: center;
-      font-weight: 300;
-    }
-    .message p {
-      margin-bottom: 16px;
-    }
-    .poetic {
-      font-style: italic;
-      color: #ffb3d1;
-    }
-    .signature {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #ff4d8d;
-      margin-top: 20px;
-      display: block;
-    }
-    @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.15); }
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+
+    .heart-container img {
+      position: absolute;
+      width: 45px;
+      height: 45px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid #ff4d8d;
+      box-shadow: 0 0 8px #ff4d8d;
     }
   </style>
 </head>
 <body>
 
-  <div id="countdown">3</div>
+  <canvas id="matrix"></canvas>
 
   <div id="content">
-    <h1>HAPPY BIRTHDAY! <span>Harlie ❤️</span></h1>
     <div class="card">
-      <div class="heart-icon">💖</div>
-      <div class="message">
-        <p>Que le Seigneur t'accorde la paix, la joie, le succès, la santé et beaucoup d'amour.</p>
-        <p>Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. Et aujourd'hui encore plus, je veux que tu te sentes unique, chouchoutée, aimée, valorisée, comblée.</p>
-        <p class="poetic">Toi qui as fait de mon cœur un musée qui déborde de tes plus beaux portraits, ce musée dont j'ai jeté les clés afin qu'il reste ouvert à jamais...</p>
-        <p class="poetic">Ainsi, je pourrai contempler ces œuvres d'art, sans jamais me lasser.</p>
-        <span class="signature">Joyeux anniversaire mon Nounours ! 🧸❤️✨</span>
-      </div>
+      <p>
+        Que le Seigneur t'accorde la paix, la joie, le succès, la santé et beaucoup d'amour. Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. Et aujourd'hui encore plus, je veux que tu te sentes unique, chouchoutée, aimée, valorisée, comblée. Toi qui as fait de mon cœur un musée qui déborde de tes plus beaux portraits, ce musée dont j'ai jeté les clés afin qu'il reste ouvert à jamais... Ainsi, je pourrai contempler ces œuvres d'art, et penser à m'en lasser, jamais. Merci d'être cette personne exceptionnelle qui illumine ma vie. Joyeux anniversaire mon Nounours ! 🧸❤️✨
+      </p>
     </div>
+
+    <div class="heart-container" id="heartGallery"></div>
   </div>
 
   <script>
-    let count = 3;
-    const countElement = document.getElementById('countdown');
-    const contentElement = document.getElementById('content');
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
 
-    const timer = setInterval(() => {
-      count--;
-      if (count > 0) {
-        countElement.textContent = count;
-      } else {
-        clearInterval(timer);
-        countElement.style.display = 'none';
-        contentElement.style.display = 'block';
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const fontSize = 16;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = [];
+
+    for (let i = 0; i < columns; i++) {
+      drops[i] = Math.floor(Math.random() * canvas.height);
+    }
+
+    const steps = ["3", "2", "1", "HAPPY", "BIRTHDAY", "TO", "HARLIE"];
+    let currentStep = 0;
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(13, 13, 13, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#ff1493';
+      ctx.font = 'bold ' + fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = String.fromCharCode(0x30A0 + Math.floor(Math.random() * 96));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
       }
-    }, 1000);
+
+      ctx.fillStyle = '#ff4d8d';
+      ctx.shadowColor = '#ff1493';
+      ctx.shadowBlur = 20;
+      ctx.font = 'bold 4rem monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(steps[currentStep], canvas.width / 2, canvas.height / 2);
+      ctx.shadowBlur = 0;
+    }
+
+    const matrixInterval = setInterval(drawMatrix, 50);
+
+    const stepInterval = setInterval(() => {
+      currentStep++;
+      if (currentStep >= steps.length) {
+        clearInterval(matrixInterval);
+        clearInterval(stepInterval);
+        canvas.style.display = 'none';
+        document.getElementById('content').style.display = 'flex';
+        loadHeartPhotos();
+      }
+    }, 1500);
+
+    function loadHeartPhotos() {
+      const container = document.getElementById('heartGallery');
+      const totalPhotos = 15;
+      
+      for (let i = 1; i <= totalPhotos; i++) {
+        const img = document.createElement('img');
+        img.src = `image/photos/b${i}.jpg`;
+        
+        const t = (i / totalPhotos) * 2 * Math.PI;
+        const x = 140 + 100 * Math.sin(t) * Math.sin(t) * Math.sin(t);
+        const y = 110 - 80 * Math.cos(t) + 30 * Math.cos(2*t) + 12 * Math.cos(3*t);
+        
+        img.style.left = `${x}px`;
+        img.style.top = `${y}px`;
+        container.appendChild(img);
+      }
+    }
   </script>
 </body>
 </html>
