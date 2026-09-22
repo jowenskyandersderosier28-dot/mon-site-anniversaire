@@ -11,9 +11,9 @@
             box-sizing: border-box;
         }
         body {
-            background-color: #0d0d1a;
-            color: #fff;
-            font-family: 'Arial', sans-serif;
+            background-color: #05050a;
+            color: #ff3385;
+            font-family: 'Courier New', Courier, monospace;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,71 +22,60 @@
             position: relative;
         }
 
-        /* --- TI KÈ WOZ YO AP TONBE --- */
-        .hearts-container {
+        /* --- KÒD WOZ KI AP DESANN (MATRIX EFFECT) --- */
+        canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
             z-index: 1;
-            pointer-events: none;
-        }
-        .heart {
-            position: absolute;
-            color: #ff4d79;
-            font-size: 20px;
-            animation: fall linear infinite;
-            opacity: 0.8;
-        }
-        @keyframes fall {
-            0% {
-                transform: translateY(-10vh) translateX(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(110vh) translateX(50px) rotate(360deg);
-                opacity: 0;
-            }
         }
 
-        .screen {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            max-width: 600px;
-            width: 100%;
+        /* --- TÈKS KONTÈ NWAYO (3, 2, 1, HAPPY, BIRTHDAY, TO, HARLIE) --- */
+        .matrix-text-container {
+            position: absolute;
             z-index: 2;
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #ff3385;
+            text-shadow: 0 0 20px #ff1a75, 0 0 40px #ff1a75;
+            animation: pulseText 0.8s ease-in-out infinite alternate;
+            text-align: center;
+            letter-spacing: 2px;
         }
-        .screen.active {
+        @keyframes pulseText {
+            0% { transform: scale(1); opacity: 0.85; }
+            100% { transform: scale(1.08); opacity: 1; }
+        }
+
+        /* --- KONTÈNÈ PANN POU LIV LA AK FOTO YO --- */
+        .book-screen {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 10, 0.92);
+            z-index: 5;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .book-screen.active {
             display: flex;
         }
 
-        /* --- TI CHAT LA --- */
-        .cat-img {
-            width: 160px;
-            height: 160px;
-            object-fit: contain;
-            margin-bottom: 15px;
-            animation: floatCat 3s ease-in-out infinite;
-        }
-        @keyframes floatCat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
-        }
-
-        /* --- LIV LA AK FOTO YO --- */
         .card-container {
             position: relative;
             background: #fff;
             color: #333;
             padding: 25px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(255, 77, 121, 0.4);
+            box-shadow: 0 10px 30px rgba(255, 51, 133, 0.5);
+            max-width: 500px;
             width: 100%;
+            text-align: center;
             animation: popIn 0.5s ease-in-out;
         }
         @keyframes popIn {
@@ -102,94 +91,171 @@
         }
         .images-row img {
             width: 45%;
-            height: 240px;
+            height: 220px;
             object-fit: cover;
             border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         .btn {
             margin-top: 25px;
             padding: 12px 30px;
-            background: linear-gradient(135deg, #ff4d79, #ff758c);
+            background: linear-gradient(135deg, #ff3385, #ff758c);
             color: white;
             border: none;
             border-radius: 30px;
             cursor: pointer;
             font-size: 1.1rem;
             font-weight: bold;
-            box-shadow: 0 4px 15px rgba(255, 77, 121, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 51, 133, 0.4);
             transition: transform 0.2s;
+            font-family: 'Arial', sans-serif;
         }
         .btn:hover {
             transform: scale(1.05);
+        }
+
+        /* --- FÒM KÈ AK FOTO NAN FEN AN --- */
+        .heart-gallery-screen {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #05050a;
+            z-index: 10;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .heart-gallery-screen.active {
+            display: flex;
+        }
+        .heart-shape-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+        .heart-photo {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 2px solid #ff3385;
+            box-shadow: 0 0 10px rgba(255, 51, 133, 0.6);
+            animation: fadeInPhoto 0.4s ease forwards;
+        }
+        @keyframes fadeInPhoto {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
     </style>
 </head>
 <body>
 
-    <!-- KÈ WOZ YO -->
-    <div class="hearts-container" id="hearts"></div>
+    <!-- Canvas Matrix Woz -->
+    <canvas id="matrixCanvas"></canvas>
 
-    <!-- SCREEN 1: PREMYE PAJ AK TI CHAT AK HAPPY BIRTHDAY -->
-    <div id="screen-1" class="screen active">
-        <img src="happy3.gif" alt="Chat k ap jwe gitè" class="cat-img">
-        <h1 style="color: #ff4d79; margin-bottom: 10px; font-size: 2.2rem;">Happy Birthday Harlie! 💖</h1>
-        <p style="color: #ddd; font-size: 1.1rem; margin-bottom: 20px;">M gen yon bèl ti sipriz ki fèt espesyalman pou ou...</p>
-        <button class="btn" onclick="nextScreen()">Louvri Liv la ✨</button>
-    </div>
+    <!-- Tèks Intro (3, 2, 1, HAPPY, BIRTHDAY, TO, HARLIE) -->
+    <div class="matrix-text-container" id="mainText">3</div>
 
-    <!-- SCREEN 2: LIV PAJ PA PAJ -->
-    <div id="screen-2" class="screen">
-        <div class="card-container" id="card-content">
-            <!-- Kontni an ap soti la a -->
+    <!-- Ekran Liv la (Paj pa paj ak foto w yo) -->
+    <div class="book-screen" id="bookScreen">
+        <div class="card-container" id="cardContent">
+            <!-- Kontni paj la ap parèt la a -->
         </div>
         <button class="btn" onclick="nextSlide()">Paj Suivan ➔</button>
     </div>
 
-    <script>
-        // Fonksyon pou kreye ti kè woz k ap tonbe
-        function createHearts() {
-            const heartsContainer = Document.getElementById('hearts');
-            setInterval(() => {
-                Const heart = document.createElement('div');
-                Heart.classList.add('heart');
-                Heart.innerHTML = '💖';
-                Heart.style.left = Math.random() * 100 + 'vw';
-                Heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                Heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
-                HeartsContainer.appendChild(heart);
-                
-                SetTimeout(() => {
-                    Heart.remove();
-                }, 6000);
-            }, 300);
-        }
-        CreateHearts();
+    <!-- Ekran Fòm Kè final ak foto yo -->
+    <div class="heart-gallery-screen" id="heartGallery">
+        <h2 style="color: #ff3385; margin-bottom: 20px; font-family: Arial, sans-serif;">Mwen tèlman renmen ou Harlie! 💖</h2>
+        <div class="heart-shape-container" id="heartContainer"></div>
+    </div>
 
-        // Lis paj yo ak tout bèl mesaj ou yo ansanm ak foto w yo sou GitHub
-        Const slides = [
+    <script>
+        // --- 1. MATRIX Woz ANIME ---
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789HARLIE💖✨";
+        const fontSize = 16;
+        let columns = canvas.width / fontSize;
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(5, 5, 10, 0.15)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#ff3385';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 50);
+
+
+        // --- 2. SEKANS TÈKS INTRO (3, 2, 1...) ---
+        const sequence = ["3", "2", "1", "HAPPY", "BIRTHDAY", "TO", "HARLIE"];
+        let seqIndex = 0;
+        const textElement = document.getElementById('mainText');
+
+        const textInterval = setInterval(() => {
+            seqIndex++;
+            if (seqIndex < sequence.length) {
+                textElement.innerText = sequence[seqIndex];
+            } else {
+                clearInterval(textInterval);
+                textElement.style.display = 'none';
+                showBookScreen(); // Lè tèks yo fini, liv la ouvri!
+            }
+        }, 1400);
+
+
+        // --- 3. LOGIK LIV LA AK FOTO W YO ---
+        const slides = [
             {
-                Msg: "Happy Birthday mon nounours👩🏽‍❤️‍👨🏾💖",
-                Img1: "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg",
-                Img2: "WhatsApp Image 2026-09-22 at 5.01.25 PM.jpeg"
+                msg: "Happy Birthday mon nounours 👩🏽‍❤️‍👨🏾💖",
+                img1: "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg",
+                img2: "WhatsApp Image 2026-09-22 at 5.01.25 PM.jpeg"
             },
             {
-                Msg: "Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. ✨",
-                Img1: "WhatsApp Image 2026-09-22 at 5.01.26 PM.jpeg",
-                Img2: "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg"
+                msg: "Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. ✨",
+                img1: "WhatsApp Image 2026-09-22 at 5.01.26 PM.jpeg",
+                img2: "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg"
             }
         ];
 
-        Let currentSlide = 0;
+        let currentSlide = 0;
 
-        Function renderSlide() {
-            Const cardContent = document.getElementById('card-content');
-            If (!cardContent) return;
-            
-            Const slide = slides[currentSlide];
-            CardContent.innerHTML = `
-                <p style="font-size: 1.2rem; margin-bottom: 12px; font-weight: bold; color: #ff4d79;">${slide.msg}</p>
+        function showBookScreen() {
+            document.getElementById('bookScreen').classList.add('active');
+            renderSlide();
+        }
+
+        function renderSlide() {
+            const cardContent = document.getElementById('cardContent');
+            const slide = slides[currentSlide];
+            cardContent.innerHTML = `
+                <p style="font-size: 1.15rem; margin-bottom: 12px; font-weight: bold; color: #ff3385; font-family: Arial, sans-serif;">${slide.msg}</p>
                 <div class="images-row">
                     <img src="${slide.img1}" alt="Foto Harlie">
                     <img src="${slide.img2}" alt="Foto Harlie">
@@ -197,20 +263,49 @@
             `;
         }
 
-        Function nextScreen() {
-            Document.getElementById('screen-1').classList.remove('active');
-            Document.getElementById('screen-2').classList.add('active');
-            RenderSlide();
+        function nextSlide() {
+            currentSlide++;
+            if (currentSlide < slides.length) {
+                renderSlide();
+            } else {
+                // Lè tout paj liv yo fini, nou montre bèl fòm kè final la ak foto yo
+                document.getElementById('bookScreen').classList.remove('active');
+                showHeartGallery();
+            }
         }
 
-        Function nextSlide() {
-            CurrentSlide++;
-            If (currentSlide < slides.length) {
-                RenderSlide();
-            } else {
-                CurrentSlide = 0; // Lè l fini l tounen nan premye paj liv la
-                RenderSlide();
-            }
+
+        // --- 4. FÒM KÈ FINAL AK FOTO YO ---
+        function showHeartGallery() {
+            const galleryScreen = document.getElementById('heartGallery');
+            const container = document.getElementById('heartContainer');
+            galleryScreen.classList.add('active');
+
+            const points = [
+                {x: 150, y: 50}, {x: 120, y: 30}, {x: 90, y: 40}, {x: 70, y: 60},
+                {x: 65, y: 90}, {x: 75, y: 120}, {x: 100, y: 150}, {x: 125, y: 180},
+                {x: 150, y: 210}, {x: 175, y: 180}, {x: 200, y: 150}, {x: 225, y: 120},
+                {x: 235, y: 90}, {x: 230, y: 60}, {x: 210, y: 40}, {x: 180, y: 30},
+                {x: 150, y: 80}, {x: 135, y: 60}, {x: 165, y: 60}, {x: 110, y: 80},
+                {x: 190, y: 80}, {x: 120, y: 110}, {x: 180, y: 110}, {x: 150, y: 140}
+            ];
+
+            const userPhotos = [
+                "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg",
+                "WhatsApp Image 2026-09-22 at 5.01.25 PM.jpeg",
+                "WhatsApp Image 2026-09-22 at 5.01.26 PM.jpeg"
+            ];
+
+            points.forEach((pt, index) => {
+                setTimeout(() => {
+                    const img = document.createElement('img');
+                    img.src = userPhotos[index % userPhotos.length];
+                    img.className = 'heart-photo';
+                    img.style.left = pt.x + 'px';
+                    img.style.top = pt.y + 'px';
+                    container.appendChild(img);
+                }, index * 80);
+            });
         }
     </script>
 </body>
