@@ -47,7 +47,6 @@
       z-index: 2;
       width: 100%;
       height: 100vh;
-      display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -121,7 +120,7 @@
     let currentStep = 0;
 
     function drawMatrix() {
-      ctx.fillStyle = 'rgba(13, 13, 13, 0.1)';
+      ctx.fillStyle = 'rgba(13, 13, 13, 0.2)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.fillStyle = '#ff1493';
@@ -142,6 +141,7 @@
       ctx.shadowBlur = 20;
       ctx.font = 'bold 4rem monospace';
       ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
       ctx.fillText(steps[currentStep], canvas.width / 2, canvas.height / 2);
       ctx.shadowBlur = 0;
     }
@@ -168,8 +168,8 @@
         img.src = `image/photos/b${i}.jpg`;
         
         const t = (i / totalPhotos) * 2 * Math.PI;
-        const x = 140 + 100 * Math.sin(t) * Math.sin(t) * Math.sin(t);
-        const y = 110 - 80 * Math.cos(t) + 30 * Math.cos(2*t) + 12 * Math.cos(3*t);
+        const x = 120 + 90 * Math.sin(t) * Math.sin(t) * Math.sin(t);
+        const y = 100 - 70 * Math.cos(t) + 25 * Math.cos(2*t) + 10 * Math.cos(3*t);
         
         img.style.left = `${x}px`;
         img.style.top = `${y}px`;
