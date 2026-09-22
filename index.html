@@ -49,101 +49,35 @@
             100% { transform: scale(1.08); opacity: 1; }
         }
 
-        /* --- KONTÈNÈ PANN POU LIV LA AK FOTO YO --- */
-        .book-screen {
-            display: none;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: rgba(5, 5, 10, 0.92);
-            z-index: 5;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 20px;
-        }
-        .book-screen.active {
-            display: flex;
-        }
-
-        .card-container {
-            position: relative;
-            background: #fff;
-            color: #333;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(255, 51, 133, 0.5);
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-            animation: popIn 0.5s ease-in-out;
-        }
-        @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .images-row {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 15px;
-        }
-        .images-row img {
-            width: 45%;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        .btn {
-            margin-top: 25px;
-            padding: 12px 30px;
-            background: linear-gradient(135deg, #ff3385, #ff758c);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(255, 51, 133, 0.4);
-            transition: transform 0.2s;
-            font-family: 'Arial', sans-serif;
-        }
-        .btn:hover {
-            transform: scale(1.05);
-        }
-
-        /* --- FÒM KÈ AK FOTO NAN FEN AN --- */
+        /* --- EKRAN FÒM KÈ AK FOTO YO NAN FEN AN --- */
         .heart-gallery-screen {
             display: none;
             position: absolute;
             width: 100%;
             height: 100%;
             background: #05050a;
-            z-index: 10;
+            z-index: 5;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
         }
         .heart-gallery-screen.active {
             display: flex;
         }
+
         .heart-shape-container {
             position: relative;
-            width: 300px;
-            height: 300px;
+            width: 320px;
+            height: 320px;
         }
         .heart-photo {
             position: absolute;
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             object-fit: cover;
-            border-radius: 6px;
+            border-radius: 8px;
             border: 2px solid #ff3385;
             box-shadow: 0 0 10px rgba(255, 51, 133, 0.6);
-            animation: fadeInPhoto 0.4s ease forwards;
+            animation: fadeInPhoto 0.5s ease forwards;
         }
         @keyframes fadeInPhoto {
             0% { transform: scale(0); opacity: 0; }
@@ -153,26 +87,19 @@
 </head>
 <body>
 
-    <!-- Canvas Matrix Woz -->
+    <!-- Canvas pou efè liy woz k ap desann yo -->
     <canvas id="matrixCanvas"></canvas>
 
-    <!-- Tèks Intro (3, 2, 1, HAPPY, BIRTHDAY, TO, HARLIE) -->
+    <!-- Tèks ki ap defile youn apre lòt -->
     <div class="matrix-text-container" id="mainText">3</div>
 
-    <!-- Ekran Liv la (Paj pa paj ak foto w yo) -->
-    <div class="book-screen" id="bookScreen">
-        <div class="card-container" id="cardContent"></div>
-        <button class="btn" onclick="nextSlide()">Paj Suivan ➔</button>
-    </div>
-
-    <!-- Ekran Fòm Kè final ak foto yo -->
+    <!-- Ekran fòm kè ak foto yo nan fen an -->
     <div class="heart-gallery-screen" id="heartGallery">
-        <h2 style="color: #ff3385; margin-bottom: 20px; font-family: Arial, sans-serif;">Mwen tèlman renmen ou Harlie! 💖</h2>
         <div class="heart-shape-container" id="heartContainer"></div>
     </div>
 
     <script>
-        // --- 1. MATRIX Woz ANIME ---
+        // --- 1. EFIKA KÒD WOZ KI AP DESANN ---
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
 
@@ -211,7 +138,7 @@
         setInterval(drawMatrix, 50);
 
 
-        // --- 2. SEKANS TÈKS INTRO (3, 2, 1...) ---
+        // --- 2. SEKANS TÈKS YO (3, 2, 1, HAPPY, BIRTHDAY, TO, HARLIE) ---
         const sequence = ["3", "2", "1", "HAPPY", "BIRTHDAY", "TO", "HARLIE"];
         let seqIndex = 0;
         const textElement = document.getElementById('mainText');
@@ -223,75 +150,32 @@
             } else {
                 clearInterval(textInterval);
                 textElement.style.display = 'none';
-                showBookScreen(); 
+                showHeartGallery(); // Lè tèks yo fini, fòm kè a parèt ak foto yo!
             }
-        }, 1400);
+        }, 1500); // Chak tèks rete pandan 1.5 segonn
 
 
-        // --- FOTO OU YO (Asire w non sa yo sanble egzak ak non fichye ki sou GitHub ou yo) ---
+        // --- 3. FÒM KÈ AK FOTO YO ---
+        // Asire w non yo ekri egzakteman jan yo ye sou GitHub la:
         const userPhotos = [
             "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg",
             "WhatsApp Image 2026-09-22 at 5.01.25 PM.jpeg",
             "WhatsApp Image 2026-09-22 at 5.01.26 PM.jpeg"
         ];
 
-        // --- 3. LOGIK LIV LA AK FOTO W YO ---
-        const slides = [
-            {
-                msg: "Happy Birthday mon nounours 👩🏽‍❤️‍👨🏾💖",
-                img1: userPhotos[0],
-                img2: userPhotos[1]
-            },
-            {
-                msg: "Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. ✨",
-                img1: userPhotos[2],
-                img2: userPhotos[0]
-            }
-        ];
-
-        let currentSlide = 0;
-
-        function showBookScreen() {
-            document.getElementById('bookScreen').classList.add('active');
-            renderSlide();
-        }
-
-        function renderSlide() {
-            const cardContent = document.getElementById('cardContent');
-            const slide = slides[currentSlide];
-            cardContent.innerHTML = `
-                <p style="font-size: 1.15rem; margin-bottom: 12px; font-weight: bold; color: #ff3385; font-family: Arial, sans-serif;">${slide.msg}</p>
-                <div class="images-row">
-                    <img src="${slide.img1}" alt="Foto Harlie">
-                    <img src="${slide.img2}" alt="Foto Harlie">
-                </div>
-            `;
-        }
-
-        function nextSlide() {
-            currentSlide++;
-            if (currentSlide < slides.length) {
-                renderSlide();
-            } else {
-                document.getElementById('bookScreen').classList.remove('active');
-                showHeartGallery();
-            }
-        }
-
-
-        // --- 4. FÒM KÈ FINAL AK FOTO YO ---
         function showHeartGallery() {
             const galleryScreen = document.getElementById('heartGallery');
             const container = document.getElementById('heartContainer');
             galleryScreen.classList.add('active');
 
+            // Kòdone pou fòme fòm kè a sou ekran an
             const points = [
-                {x: 150, y: 50}, {x: 120, y: 30}, {x: 90, y: 40}, {x: 70, y: 60},
-                {x: 65, y: 90}, {x: 75, y: 120}, {x: 100, y: 150}, {x: 125, y: 180},
-                {x: 150, y: 210}, {x: 175, y: 180}, {x: 200, y: 150}, {x: 225, y: 120},
-                {x: 235, y: 90}, {x: 230, y: 60}, {x: 210, y: 40}, {x: 180, y: 30},
-                {x: 150, y: 80}, {x: 135, y: 60}, {x: 165, y: 60}, {x: 110, y: 80},
-                {x: 190, y: 80}, {x: 120, y: 110}, {x: 180, y: 110}, {x: 150, y: 140}
+                {x: 160, y: 60}, {x: 130, y: 40}, {x: 100, y: 50}, {x: 80, y: 70},
+                {x: 75, y: 100}, {x: 85, y: 130}, {x: 110, y: 160}, {x: 135, y: 190},
+                {x: 160, y: 220}, {x: 185, y: 190}, {x: 210, y: 160}, {x: 235, y: 130},
+                {x: 245, y: 100}, {x: 240, y: 70}, {x: 220, y: 50}, {x: 190, y: 40},
+                {x: 160, y: 90}, {x: 145, y: 70}, {x: 175, y: 70}, {x: 120, y: 90},
+                {x: 200, y: 90}, {x: 130, y: 120}, {x: 190, y: 120}, {x: 160, y: 150}
             ];
 
             points.forEach((pt, index) => {
@@ -302,7 +186,7 @@
                     img.style.left = pt.x + 'px';
                     img.style.top = pt.y + 'px';
                     container.appendChild(img);
-                }, index * 80);
+                }, index * 100);
             });
         }
     </script>
