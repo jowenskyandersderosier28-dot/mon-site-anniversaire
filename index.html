@@ -22,7 +22,7 @@
             position: relative;
         }
 
-        /* --- TI KÈ WOZ AK ZETWAL NAN BACKGROUND NAN --- */
+        /* --- TI KÈ WOZ YO --- */
         .hearts-container {
             position: absolute;
             top: 0;
@@ -167,22 +167,17 @@
         }
         createHearts();
 
-        // --- LIST SLIDES AK MESAJ AK FOTO YO ---
+        // --- LIST SLIDES AK TOUT NON FOTO W YO ---
         const slides = [
             {
                 msg: "Happy Birthday mon nounours👩🏽‍❤️‍👨🏾💖",
-                img1: "photos/1000088907.jpg",
-                img2: "photos/1000088908.jpg"
+                img1: "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg",
+                img2: "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg"
             },
             {
                 msg: "Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. ✨",
-                img1: "photos/1000088909.jpg",
-                img2: "photos/1000088910.jpg"
-            },
-            {
-                msg: "Toi qui as fait de mon cœur un musée qui déborde de bonheur.",
-                img1: "photos/1000088911.jpg",
-                img2: "photos/1000088914.jpg"
+                img1: "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg",
+                img2: "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg"
             }
         ];
 
@@ -213,7 +208,7 @@
             if (currentSlide < slides.length) {
                 renderSlide();
             } else {
-                currentSlide = 0; // Tounen nan premye paj la
+                currentSlide = 0;
                 renderSlide();
             }
         }
