@@ -11,46 +11,15 @@
             box-sizing: border-box;
         }
         body {
-            background-color: #0d0d1a;
+            background-color: #000;
             color: #fff;
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
-            position: relative;
         }
-
-        /* --- TI KÈ WOZ YO --- */
-        .hearts-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-            pointer-events: none;
-        }
-        .heart {
-            position: absolute;
-            color: #ff4d79;
-            font-size: 20px;
-            animation: fall linear infinite;
-            opacity: 0.7;
-        }
-        @keyframes fall {
-            0% {
-                transform: translateY(-10vh) translateX(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(110vh) translateX(50px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
         .screen {
             display: none;
             flex-direction: column;
@@ -59,41 +28,30 @@
             padding: 20px;
             max-width: 600px;
             width: 100%;
-            z-index: 2;
         }
         .screen.active {
             display: flex;
         }
-
-        /* --- TI CHAT LA --- */
         .cat-img {
-            width: 160px;
-            height: 160px;
+            width: 180px;
+            height: 180px;
             object-fit: contain;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             animation: floatCat 3s ease-in-out infinite;
         }
         @keyframes floatCat {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
+            50% { transform: translateY(-15px); }
         }
-
-        /* --- LIV LA AK FOTO YO --- */
         .card-container {
             position: relative;
             background: #fff;
             color: #333;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(255, 77, 121, 0.3);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             width: 100%;
-            animation: popIn 0.5s ease-in-out;
         }
-        @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
         .images-row {
             display: flex;
             gap: 15px;
@@ -102,82 +60,45 @@
         }
         .images-row img {
             width: 45%;
-            height: 240px;
+            height: 250px;
             object-fit: cover;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-
-        .btn {
-            margin-top: 25px;
-            padding: 12px 30px;
-            background: linear-gradient(135deg, #ff4d79, #ff758c);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(255, 77, 121, 0.4);
-            transition: transform 0.2s;
-        }
-        .btn:hover {
-            transform: scale(1.05);
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
 
-    <!-- BACKGROUND AK TI KÈ WOZ YO -->
-    <div class="hearts-container" id="hearts"></div>
-
-    <!-- SCREEN 1: CHAT KI AP JWE GITÈ A AK AKÈY -->
+    <!-- SCREEN 1: CHAT AK AKÈY -->
     <div id="screen-1" class="screen active">
-        <img src="happy3.gif" alt="Chat k ap jwe gitè" class="cat-img">
-        <h1 style="color: #ff4d79; margin-bottom: 10px; font-size: 2rem;">Happy Birthday Harlie! 💖</h1>
-        <p style="color: #ddd; margin-bottom: 15px;">M gen yon bèl sipriz pou ou...</p>
-        <button class="btn" onclick="nextScreen()">Louvri Liv la ✨</button>
+        <!-- Asire w ou mete imaj chat la sou GitHub ak menm non sa a, oswa chanje non an isit la -->
+        <img src="cat.gif" alt="Chat k ap jwe gitè" class="cat-img">
+        <h1>Anivèsè Siksè!</h1>
     </div>
 
-    <!-- SCREEN 2: LIV LA AK FOTO YO -->
+    <!-- SCREEN 2: SLIDESHOW FOTO AK MESAJ -->
     <div id="screen-2" class="screen">
         <div class="card-container" id="card-content">
             <!-- Kontni an ap soti otomatikman nan JavaScript -->
         </div>
-        <button class="btn" onclick="nextSlide()">Paj Suivan ➔</button>
     </div>
 
     <script>
-        // --- TI KÈ WOZ YO ---
-        function createHearts() {
-            const heartsContainer = document.getElementById('hearts');
-            setInterval(() => {
-                const heart = document.createElement('div');
-                heart.classList.add('heart');
-                heart.innerHTML = '💖';
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
-                heartsContainer.appendChild(heart);
-                
-                setTimeout(() => {
-                    heart.remove();
-                }, 6000);
-            }, 400);
-        }
-        createHearts();
-
-        // --- LIST SLIDES AK TOUT NON FOTO W YO ---
+        // --- 3. CARD SLIDESHOW AK MESAJ OU YO ---
         const slides = [
             {
                 msg: "Happy Birthday mon nounours👩🏽‍❤️‍👨🏾💖",
-                img1: "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg",
-                img2: "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg"
+                img1: "WhatsApp Image 2026-09-22 at 5.01.23 PM (1).jpeg",
+                img2: "WhatsApp Image 2026-09-22 at 5.01.23 PM (2).jpeg"
             },
             {
-                msg: "Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. ✨",
-                img1: "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg",
-                img2: "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg"
+                msg: "Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. Et aujourd'hui encore plus, je veux que tu te sentes unique, chouchoutée, aimée, valorisée, comblée. ✨",
+                img1: "WhatsApp Image 2026-09-22 at 5.01.24 PM.jpeg",
+                img2: "WhatsApp Image 2026-09-22 at 5.01.24 PM (1).jpeg"
+            },
+            {
+                msg: "Toi qui as fait de mon cœur un musée qui déborde",
+                img1: "WhatsApp Image 2026-09-22 at 5.01.25 PM.jpeg",
+                img2: "WhatsApp Image 2026-09-22 at 5.01.26 PM.jpeg"
             }
         ];
 
@@ -189,7 +110,7 @@
             
             const slide = slides[currentSlide];
             cardContent.innerHTML = `
-                <p style="font-size: 1.2rem; margin-bottom: 12px; font-weight: bold; color: #ff4d79;">${slide.msg}</p>
+                <p style="font-size: 1.1rem; margin-bottom: 10px;">${slide.msg}</p>
                 <div class="images-row">
                     <img src="${slide.img1}" alt="Foto Harlie">
                     <img src="${slide.img2}" alt="Foto Harlie">
@@ -197,21 +118,16 @@
             `;
         }
 
-        function nextScreen() {
-            document.getElementById('screen-1').classList.remove('active');
-            document.getElementById('screen-2').classList.add('active');
+        // Fonksyonalite pou chanje ekran oubyen slide otomatikman si sa nesesè
+        document.addEventListener("DOMContentLoaded", () => {
             renderSlide();
-        }
-
-        function nextSlide() {
-            currentSlide++;
-            if (currentSlide < slides.length) {
-                renderSlide();
-            } else {
-                currentSlide = 0;
-                renderSlide();
-            }
-        }
+            
+            // Pa egzanp, apre 5 segonn l ap pase sou ekran dezyèm nan si l pa t ankò aktif
+            setTimeout(() => {
+                document.getElementById('screen-1').classList.remove('active');
+                document.getElementById('screen-2').classList.add('active');
+            }, 4000);
+        });
     </script>
 </body>
 </html>
