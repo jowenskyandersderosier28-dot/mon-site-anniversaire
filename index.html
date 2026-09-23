@@ -210,6 +210,8 @@ body{
     transform-style:preserve-3d;
 }
 
+/* Ombre anba liv la */
+
 .book::after{
     content:"";
     position:absolute;
@@ -223,6 +225,8 @@ body{
     z-index:-2;
 }
 
+/* Kò liv la */
+
 .book-inside{
     position:absolute;
     inset:0;
@@ -235,20 +239,9 @@ body{
     overflow:hidden;
 }
 
-.book-inside::before{
-    content:"";
-    position:absolute;
-    left:50%;
-    top:0;
-    height:100%;
-    width:3px;
-    background:rgba(210,110,145,.25);
-}
-
-
-/* =====================================================
-   NOUVO KOUVÈTI LIV LA
-===================================================== */
+/* =========================
+   KOUVÈTI DEVAN
+========================= */
 
 .book-cover{
     position:absolute;
@@ -256,16 +249,25 @@ body{
     z-index:20;
     transform-origin:left center;
     transform-style:preserve-3d;
+
     transition:
-        transform 2s cubic-bezier(.65,.05,.36,1);
+        transform 2.2s cubic-bezier(.65,.05,.36,1),
+        opacity .2s;
 }
 
 .book.open .book-cover{
     transform:rotateY(-165deg);
 }
 
+/*
+   Lè liv la ap fèmen,
+   kouvèti a pa fèmen touswit.
+   Paj yo ap reyini anvan.
+*/
 
-/* Kouvèti devan */
+.book.closing .book-cover{
+    transform:rotateY(0deg);
+}
 
 .cover-front{
     position:absolute;
@@ -303,8 +305,7 @@ body{
     overflow:hidden;
 }
 
-
-/* Dos liv sou bò gòch */
+/* Dos liv */
 
 .cover-front::before{
     content:"";
@@ -329,8 +330,7 @@ body{
         3px 0 8px rgba(90,0,40,.3);
 }
 
-
-/* Ankadreman dekoratif */
+/* Ankadreman */
 
 .cover-front::after{
     content:"";
@@ -345,8 +345,7 @@ body{
     pointer-events:none;
 }
 
-
-/* Kontni kouvèti a */
+/* Kontni kouvèti */
 
 .cover-front > div{
     position:relative;
@@ -360,8 +359,7 @@ body{
     align-items:center;
 }
 
-
-/* Ti kè anlè */
+/* Ti kè */
 
 .cover-front > div::before{
     content:"♥";
@@ -378,8 +376,7 @@ body{
         0 0 15px #ff3399;
 }
 
-
-/* Ti liy dekoratif anlè tit la */
+/* Dekorasyon */
 
 .cover-front > div::after{
     content:"✦  ✧  ✦";
@@ -396,8 +393,7 @@ body{
         0 0 8px rgba(255,255,255,.9);
 }
 
-
-/* TIT KOUVÈTI */
+/* TIT */
 
 .cover-title{
     font-family:'Great Vibes',cursive;
@@ -418,9 +414,6 @@ body{
     transform:rotate(-2deg);
 }
 
-
-/* Ti liy anba tit la */
-
 .cover-title::after{
     content:"────── ♥ ──────";
     display:block;
@@ -437,9 +430,6 @@ body{
     text-shadow:
         0 0 8px rgba(255,255,255,.8);
 }
-
-
-/* Sous-tit */
 
 .cover-subtitle{
     display:block;
@@ -460,9 +450,6 @@ body{
         0 1px 4px rgba(100,0,50,.8);
 }
 
-
-/* Ti dekorasyon anba */
-
 .cover-front .cover-subtitle::after{
     content:"🌸  ✨  🌸";
 
@@ -475,7 +462,6 @@ body{
     letter-spacing:2px;
 }
 
-
 /* =========================
    PAGES
 ========================= */
@@ -485,25 +471,56 @@ body{
     inset:10px;
     z-index:10;
     transform-style:preserve-3d;
+
+    /*
+       Sa pèmèt tout paj yo
+       reyini ansanm lè liv la ap fèmen.
+    */
+    transition:
+        transform 1.8s cubic-bezier(.65,.05,.36,1);
+}
+
+/*
+   Lè fermeture kòmanse,
+   tout bloc paj yo fè yon ti
+   retou tankou yon liv reyèl.
+*/
+.book.closing .pages{
+    transform:
+        translateZ(3px)
+        rotateY(0deg)
+        scaleX(.96);
 }
 
 .page{
     position:absolute;
     inset:0;
+
     background:#fff1a8;
+
     border:3px solid #ff78b5;
-    border-radius:7px 15px 15px 7px;
+
+    border-radius:
+        7px 15px 15px 7px;
+
     padding:22px 18px;
+
     color:#d63384;
+
     transform-origin:left center;
+
     transform-style:preserve-3d;
+
     transition:
         transform 1.5s cubic-bezier(.65,.05,.36,1),
         box-shadow 1s;
+
     backface-visibility:hidden;
+
     box-shadow:
         inset 0 0 15px rgba(255,255,255,.5),
         3px 5px 12px rgba(210,80,130,.25);
+
     overflow:hidden;
 }
 
@@ -527,13 +544,29 @@ body{
     transform:rotateY(-180deg);
 }
 
+/*
+   Lè fermeture a kòmanse,
+   paj ki te pase yo retounen
+   pou yo fòme liv la ankò.
+*/
+.book.closing .page{
+    transform:rotateY(0deg);
+    transition:
+        transform 1.7s cubic-bezier(.65,.05,.36,1);
+}
+
+/* Kontni paj */
+
 .page-content{
     width:100%;
     height:100%;
+
     display:flex;
     flex-direction:column;
+
     align-items:center;
     justify-content:center;
+
     text-align:center;
 }
 
@@ -547,13 +580,21 @@ body{
 .message-box{
     background:#fff8cf;
     border:2px solid #ff8fbe;
+
     padding:13px;
+
     border-radius:12px;
+
     margin-bottom:15px;
+
     font-family:'Great Vibes',cursive;
+
     font-size:1.45rem;
+
     color:#d63384;
+
     line-height:1.35;
+
     box-shadow:
         0 4px 12px rgba(255,51,153,.18);
 }
@@ -561,17 +602,24 @@ body{
 .photo-frame{
     display:flex;
     gap:9px;
+
     justify-content:center;
+
     width:100%;
+
     flex-shrink:0;
 }
 
 .photo-frame img{
     width:44%;
     height:175px;
+
     object-fit:cover;
+
     border-radius:8px;
+
     border:3px solid #ff72ad;
+
     box-shadow:
         0 5px 12px rgba(214,51,132,.3);
 }
@@ -582,27 +630,40 @@ body{
     margin-bottom:5px;
 }
 
-
 /* =========================
    SIGNATURE
 ========================= */
 
+/*
+   Ders anba foto yo,
+   a dwat.
+*/
+
 .signature{
     align-self:flex-end;
-    margin-top:0;
+
+    margin-top:-2px;
     margin-right:8px;
-    margin-bottom:14px;
+    margin-bottom:7px;
+
     flex-shrink:0;
+
     font-family:'Great Vibes',cursive;
-    font-size:1.35rem;
+
+    font-size:1.5rem;
+
     color:#d63384;
+
     text-decoration:underline;
+
     text-underline-offset:4px;
+
     transform:rotate(-4deg);
+
     position:relative;
+
     z-index:3;
 }
-
 
 /* =========================
    COEUR
@@ -611,30 +672,39 @@ body{
 .heart-grid{
     position:absolute;
     inset:0;
+
     width:100%;
     height:100%;
+
     z-index:2;
 }
 
 .mini-card{
     position:absolute;
+
     width:43px;
     height:51px;
+
     background:white;
+
     padding:2px;
+
     border-radius:5px;
+
     box-shadow:
         0 0 8px rgba(255,51,153,.8);
+
     transition:transform .5s;
 }
 
 .mini-card img{
     width:100%;
     height:100%;
+
     object-fit:cover;
+
     border-radius:3px;
 }
-
 
 /* =========================
    TITRE FINAL
@@ -642,17 +712,30 @@ body{
 
 .heart-title{
     position:absolute;
+
     z-index:6;
+
     top:7%;
+
     left:0;
     right:0;
+
     text-align:center;
+
     font-family:'Great Vibes',cursive;
+
     color:#ff79b5;
+
     font-size:2.5rem;
-    text-shadow:0 0 15px #ff3399;
+
+    text-shadow:
+        0 0 15px #ff3399;
+
     opacity:0;
-    animation:heartTitle 2s ease forwards;
+
+    animation:
+        heartTitle 2s ease forwards;
+
     animation-delay:1.5s;
 }
 
@@ -662,27 +745,35 @@ body{
     }
 }
 
-
-/* =====================================================
+/* =========================
    VRÈ TI ETWAL YO
-===================================================== */
+========================= */
 
 .star-field{
     position:absolute;
     inset:0;
+
     width:100%;
     height:100%;
+
     z-index:4;
+
     pointer-events:none;
+
     overflow:hidden;
 }
 
 .real-star{
     position:absolute;
+
     border-radius:50%;
+
     background:#fff;
+
     opacity:0;
+
     transform:scale(0);
+
     box-shadow:
         0 0 4px #fff,
         0 0 9px rgba(255,255,255,.95),
@@ -692,33 +783,42 @@ body{
 .real-star::before,
 .real-star::after{
     content:"";
+
     position:absolute;
+
     left:50%;
     top:50%;
-    transform:translate(-50%,-50%);
+
+    transform:
+        translate(-50%,-50%);
+
     border-radius:50%;
 }
 
 .real-star::before{
     width:2px;
     height:24px;
-    background:linear-gradient(
-        to bottom,
-        transparent,
-        #fff,
-        transparent
-    );
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent,
+            #fff,
+            transparent
+        );
 }
 
 .real-star::after{
     width:24px;
     height:2px;
-    background:linear-gradient(
-        to right,
-        transparent,
-        #fff,
-        transparent
-    );
+
+    background:
+        linear-gradient(
+            to right,
+            transparent,
+            #fff,
+            transparent
+        );
 }
 
 .real-star.lit{
@@ -757,7 +857,6 @@ body{
         transform:scale(1.2);
     }
 }
-
 
 /* =========================
    PETITS ECRANS
@@ -816,7 +915,7 @@ body{
     .signature{
         font-size:1.2rem;
         margin-right:5px;
-        margin-bottom:11px;
+        margin-bottom:6px;
     }
 
     .birthday-title{
@@ -1064,9 +1163,7 @@ body{
                             Toi qui as fait de mon cœur un musée qui déborde de tes plus beaux portraits, ce musée dont j'ai jeté les clés afin qu'il reste ouvert à jamais... Ainsi, je pourrai contempler ces œuvres d'art sans jamais me lasser. 💖
                         </div>
 
-                        <div class="signature">
-                            Ders
-                        </div>
+                        <!-- FOTO YO ANVAN -->
 
                         <div class="photo-frame">
 
@@ -1082,6 +1179,12 @@ body{
 
                         </div>
 
+                        <!-- DERS ANBA FOTO YO, A DWAT -->
+
+                        <div class="signature">
+                            Ders
+                        </div>
+
                         <div class="page-decoration">
                             💗 🌸 💗
                         </div>
@@ -1095,7 +1198,7 @@ body{
 
 
             <!-- =====================
-                 NOUVELLE COUVERTURE
+                 KOUVÈTI
             ====================== -->
 
             <div class="book-cover" id="bookCover">
@@ -1574,7 +1677,6 @@ function animateFireworks(time){
         lastRocketTime = time;
     }
 
-
     for(
         let i = fireworksRockets.length - 1;
         i >= 0;
@@ -1600,7 +1702,6 @@ function animateFireworks(time){
         }
     }
 
-
     for(
         let i = fireworksParticles.length - 1;
         i >= 0;
@@ -1623,7 +1724,6 @@ function animateFireworks(time){
             );
         }
     }
-
 
     fireworksAnimation =
         requestAnimationFrame(
@@ -1651,7 +1751,6 @@ function startFireworks(){
         requestAnimationFrame(
             animateFireworks
         );
-
 
     setTimeout(() => {
 
@@ -1717,7 +1816,10 @@ function startBookAnimation(){
         document.getElementById('page4');
 
 
+    /* RESET */
+
     book.classList.remove('open');
+    book.classList.remove('closing');
 
     page1.classList.remove('flipped');
     page2.classList.remove('flipped');
@@ -1771,8 +1873,29 @@ function startBookAnimation(){
 
 
     /*
-     * APRE 7 SEC SOU PAGE 4
-     * ALE SOU GWO KÈ FINAL LA
+     * PAGE 4 FINI PASE.
+     *
+     * Nou tann 1.5 sec pou
+     * mouvman paj 4 la fini.
+     */
+
+    setTimeout(() => {
+
+        /*
+         * KOUNYE A LIV LA
+         * KÒMANSE FÈMEN VRE.
+         */
+
+        book.classList.add('closing');
+
+    },28500);
+
+
+    /*
+     * KOUVÈTI/PAGES YO GEN TAN
+     * REYINI.
+     *
+     * Kè a pa parèt touswit.
      */
 
     setTimeout(() => {
@@ -1785,7 +1908,7 @@ function startBookAnimation(){
 
         createRealStars();
 
-    },28500);
+    },31500);
 }
 
 
