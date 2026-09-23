@@ -468,9 +468,13 @@ body{
     border-radius:3px;
 }
 
+/* =========================
+   TITRE FINAL
+========================= */
+
 .heart-title{
     position:absolute;
-    z-index:5;
+    z-index:6;
     top:7%;
     left:0;
     right:0;
@@ -489,6 +493,118 @@ body{
         opacity:1;
     }
 }
+
+
+/* =====================================================
+   VRÈ TI ETWAL CSS
+   PA GEN EMOJI
+===================================================== */
+
+.star-field{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:4;
+    pointer-events:none;
+}
+
+/*
+   Chak ti etwal se yon ti fòm CSS.
+   Li pa sèvi ak okenn emoji oswa karaktè.
+*/
+.real-star{
+    position:absolute;
+    width:3px;
+    height:3px;
+    border-radius:50%;
+    background:#fff;
+    opacity:0;
+    transform:scale(0);
+    box-shadow:
+        0 0 3px #fff,
+        0 0 7px rgba(255,255,255,.95),
+        0 0 13px rgba(255,210,245,.8);
+}
+
+/*
+   4 branch etwal la
+*/
+.real-star::before,
+.real-star::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    background:linear-gradient(
+        to bottom,
+        transparent,
+        #fff,
+        transparent
+    );
+    border-radius:50%;
+}
+
+/* Branch vètikal */
+.real-star::before{
+    width:1.5px;
+    height:15px;
+}
+
+/* Branch orizontal */
+.real-star::after{
+    width:15px;
+    height:1.5px;
+    background:linear-gradient(
+        to right,
+        transparent,
+        #fff,
+        transparent
+    );
+}
+
+/*
+   Lè etwal la limen,
+   li vin pi klere epi li fè yon ti twinkle.
+*/
+.real-star.lit{
+    animation:
+        starAppear .7s ease-out forwards,
+        starTwinkle 2.5s ease-in-out .7s infinite alternate;
+}
+
+@keyframes starAppear{
+
+    0%{
+        opacity:0;
+        transform:scale(0);
+    }
+
+    60%{
+        opacity:1;
+        transform:scale(1.45);
+    }
+
+    100%{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+@keyframes starTwinkle{
+
+    0%{
+        filter:brightness(.8);
+        transform:scale(.9);
+    }
+
+    100%{
+        filter:brightness(1.8);
+        transform:scale(1.15);
+    }
+}
+
 
 /* =========================
    PETITS ECRANS
@@ -534,6 +650,14 @@ body{
 
     .flower{
         font-size:1.35rem;
+    }
+
+    .real-star::before{
+        height:13px;
+    }
+
+    .real-star::after{
+        width:13px;
     }
 }
 </style>
@@ -631,7 +755,7 @@ body{
                         </div>
 
                         <div class="message-box">
-                            Happy Birthday mon nounours🧸❤️
+                            Joyeux Anniversaire mon Nounours 🧸❤️
                         </div>
 
                         <div class="photo-frame">
@@ -794,6 +918,9 @@ body{
 
     <div class="heart-grid" id="heartGrid"></div>
 
+    <!-- VRÈ TI ETWAL CSS -->
+    <div class="star-field" id="starField"></div>
+
     <div class="heart-title">
         Mon chef-d’œuvre ❤️
     </div>
@@ -928,12 +1055,6 @@ let seqTimer =
                 'screen-cat'
             );
 
-            /*
-             * GIF CHAT
-             * Li rete 4 secondes.
-             * Apre sa feu d'artifice la kòmanse.
-             */
-
             setTimeout(() => {
 
                 startFireworks();
@@ -990,7 +1111,9 @@ function resizeFireworks(){
 resizeFireworks();
 
 
-/* TI PATI FIREWORKS */
+/* =====================================================
+   PARTICULES FIREWORKS
+===================================================== */
 
 class FireworkParticle{
 
@@ -1074,7 +1197,9 @@ class FireworkParticle{
 }
 
 
-/* ROCKET */
+/* =====================================================
+   ROCKET
+===================================================== */
 
 class FireworkRocket{
 
@@ -1178,7 +1303,9 @@ class FireworkRocket{
 }
 
 
-/* COULEURS */
+/* =====================================================
+   COULEURS FIREWORKS
+===================================================== */
 
 function getFireworkColor(){
 
@@ -1202,7 +1329,9 @@ function getFireworkColor(){
 }
 
 
-/* AJOUTER DES ROCKETS */
+/* =====================================================
+   ANIMATION FIREWORKS
+===================================================== */
 
 let lastRocketTime = 0;
 
@@ -1227,8 +1356,6 @@ function animateFireworks(time){
         lastRocketTime = time;
     }
 
-
-    /* ROCKETS */
 
     for(
         let i = fireworksRockets.length - 1;
@@ -1255,8 +1382,6 @@ function animateFireworks(time){
         }
     }
 
-
-    /* PARTICULES */
 
     for(
         let i = fireworksParticles.length - 1;
@@ -1309,11 +1434,6 @@ function startFireworks(){
             animateFireworks
         );
 
-
-    /*
-     * Fireworks yo rete 4 secondes.
-     * Apre sa liv la parèt.
-     */
 
     setTimeout(() => {
 
@@ -1383,10 +1503,7 @@ function startBookAnimation(){
     page3.classList.remove('flipped');
 
 
-    /*
-     * LIVRE FÈMEN 3 SECONDES
-     * Apre sa li ouvri.
-     */
+    /* LIVRE FÈMEN 3 SEC */
 
     setTimeout(() => {
 
@@ -1395,10 +1512,7 @@ function startBookAnimation(){
     },3000);
 
 
-    /*
-     * PAGE 1
-     * Rete 5 secondes.
-     */
+    /* PAGE 1 - 5 SEC */
 
     setTimeout(() => {
 
@@ -1407,10 +1521,7 @@ function startBookAnimation(){
     },8000);
 
 
-    /*
-     * PAGE 2
-     * Rete 5 secondes.
-     */
+    /* PAGE 2 - 5 SEC */
 
     setTimeout(() => {
 
@@ -1419,10 +1530,7 @@ function startBookAnimation(){
     },13000);
 
 
-    /*
-     * PAGE 3
-     * Rete 7 secondes.
-     */
+    /* PAGE 3 - 7 SEC */
 
     setTimeout(() => {
 
@@ -1433,7 +1541,7 @@ function startBookAnimation(){
 
     /*
      * APRE 7 SEC SOU DÈNYE PAJ LA
-     * Pase sou ekran KÈ a.
+     * ALE SOU KÈ FINAL LA
      */
 
     setTimeout(() => {
@@ -1444,12 +1552,19 @@ function startBookAnimation(){
 
         createHeartFormation();
 
+        /*
+         * KOUNYE A TI VRÈ ETWAL YO
+         * KÒMANSE LIMEN YOUN APRÈ LÒT.
+         */
+
+        createRealStars();
+
     },21500);
 }
 
 
 /* =====================================================
-   ANIMATION COEUR
+   KÈ AK FOTO
 ===================================================== */
 
 function createHeartFormation(){
@@ -1509,9 +1624,11 @@ function createHeartFormation(){
             10
         );
 
+
     const centerX =
         (window.innerWidth / 2) -
         (cardWidth / 2);
+
 
     const centerY =
         (window.innerHeight / 2) -
@@ -1525,12 +1642,14 @@ function createHeartFormation(){
             (i / numCards) *
             Math.PI * 2;
 
+
         const x =
             16 *
             Math.pow(
                 Math.sin(t),
                 3
             );
+
 
         const y =
             -(
@@ -1540,18 +1659,22 @@ function createHeartFormation(){
                 - Math.cos(4 * t)
             );
 
+
         const posX =
             centerX +
             x * heartScale;
+
 
         const posY =
             centerY +
             y * heartScale;
 
+
         const photoSrc =
             photosList[
                 i % photosList.length
             ];
+
 
         const card =
             document.createElement('div');
@@ -1559,17 +1682,138 @@ function createHeartFormation(){
         card.className =
             'mini-card';
 
+
         card.style.left =
             posX + 'px';
+
 
         card.style.top =
             posY + 'px';
 
+
         card.innerHTML =
             `<img src="${photoSrc}" alt="Heart Photo">`;
 
+
         container.appendChild(card);
     }
+}
+
+
+/* =====================================================
+   VRÈ TI ETWAL CSS
+   30 ETWAL
+   YO PARÈT YOUN APRÈ LÒT
+   PANDAN 5 SEGOND
+===================================================== */
+
+function createRealStars(){
+
+    const container =
+        document.getElementById(
+            'starField'
+        );
+
+    container.innerHTML = "";
+
+
+    /*
+     * Pozisyon yo alantou kè a.
+     * Se pousantaj ekran an.
+     */
+
+    const positions = [
+
+        [13,18],
+        [20,14],
+        [28,11],
+        [36,9],
+        [44,8],
+        [52,8],
+        [60,9],
+        [68,11],
+        [76,14],
+        [83,18],
+
+        [89,25],
+        [92,33],
+        [94,42],
+        [94,51],
+        [92,60],
+        [89,69],
+
+        [83,77],
+        [76,82],
+        [68,86],
+        [60,89],
+        [52,91],
+        [44,91],
+        [36,89],
+        [28,86],
+        [20,82],
+        [13,77],
+
+        [8,69],
+        [5,60],
+        [4,51],
+        [5,42],
+        [7,33],
+        [9,25]
+    ];
+
+
+    positions.forEach(
+        (position,index) => {
+
+            const star =
+                document.createElement(
+                    'span'
+                );
+
+
+            star.className =
+                'real-star';
+
+
+            star.style.left =
+                position[0] + '%';
+
+
+            star.style.top =
+                position[1] + '%';
+
+
+            /*
+             * 32 etwal sou 5 sec.
+             * Chak youn gen anviwon
+             * 0.156 sec ant yo.
+             */
+
+            star.style.animationDelay =
+                (index * 0.156) + 's';
+
+
+            container.appendChild(
+                star
+            );
+
+
+            /*
+             * Nou mete class lit la
+             * touswit.
+             * Animation delay la ap fè
+             * yo parèt youn apre lòt.
+             */
+
+            requestAnimationFrame(() => {
+
+                star.classList.add(
+                    'lit'
+                );
+
+            });
+        }
+    );
 }
 
 
