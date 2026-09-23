@@ -39,7 +39,6 @@
             pointer-events: auto;
         }
 
-        /* --- MATRIX SCREEN --- */
         #matrix-canvas {
             position: absolute;
             top: 0;
@@ -66,7 +65,6 @@
             100% { transform: scale(1.08); }
         }
 
-        /* --- STARS & CAT SCREEN --- */
         .stars-bg {
             position: absolute;
             width: 100%;
@@ -94,7 +92,6 @@
             50% { transform: translateY(-15px); }
         }
 
-        /* --- ENVELOPE / CARD SCREEN --- */
         .card-container {
             position: relative;
             z-index: 2;
@@ -140,7 +137,6 @@
             border: 2px solid #ff3399;
         }
 
-        /* --- FINAL HEART SCREEN --- */
         .heart-grid {
             position: relative;
             width: 100%;
@@ -169,13 +165,11 @@
 </head>
 <body>
 
-    <!-- ETAP 1: MATRIX & DEKONT -->
     <div id="screen-matrix" class="screen active">
         <canvas id="matrix-canvas"></canvas>
         <div class="matrix-text" id="matrix-text">3</div>
     </div>
 
-    <!-- ETAP 2: ZETWAL AK CHAT -->
     <div id="screen-cat" class="screen">
         <div class="stars-bg"></div>
         <div class="content-box">
@@ -184,26 +178,23 @@
         </div>
     </div>
 
-    <!-- ETAP 3: KAT AK FOTO (SLIDESHOW) -->
     <div id="screen-card" class="screen">
         <div class="stars-bg"></div>
         <div class="card-container" id="card-box">
             <div class="message-box" id="card-msg">Happy Birthday mon nounours🧸❤️</div>
             <div class="photo-frame" id="card-photos">
-                <img src="1000088907.jpg" alt="Foto Harlie">
-                <img src="1000088908.jpg" alt="Foto Harlie">
+                <img src="WhatsApp Image 2026-09-22 at 5.01.25 PM.jpeg" alt="Foto Harlie">
+                <img src="WhatsApp Image 2026-09-22 at 5.01.24 PM (1).jpeg" alt="Foto Harlie">
             </div>
         </div>
     </div>
 
-    <!-- ETAP 4: GWO KÈ AK FOTO -->
     <div id="screen-heart" class="screen">
         <div class="stars-bg"></div>
         <div class="heart-grid" id="heartGrid"></div>
     </div>
 
     <script>
-        // --- 1. MATRIX EFFECT ---
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -227,9 +218,9 @@
                 drops[i]++;
             }
         }
+
         let matrixInterval = setInterval(drawMatrix, 33);
 
-        // Sekans dekont lan
         const textElement = document.getElementById('matrix-text');
         const sequence = ["3", "2", "1", "HAPPY", "BIRTHDAY", "TO", "HARLIE 🧸"];
         let seqIndex = 0;
@@ -254,24 +245,24 @@
             document.getElementById(screenId).classList.add('active');
         }
 
-        // --- 3. CARD SLIDESHOW AK MESAJ OU YO ---
         const slides = [
             { 
                 msg: "Happy Birthday mon nounours🧸❤️", 
-                img1: "1000088907.jpg", 
-                img2: "1000088908.jpg" 
+                img1: "WhatsApp Image 2026-09-22 at 5.01.25 PM.jpeg", 
+                img2: "WhatsApp Image 2026-09-22 at 5.01.24 PM (1).jpeg" 
             },
             { 
                 msg: "Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. Et aujourd'hui encore plus, je veux que tu te sentes unique, chouchoutée, aimée, valorisée, comblée. ✨", 
-                img1: "1000088909.jpg", 
-                img2: "1000088910.jpg" 
+                img1: "WhatsApp Image 2026-09-22 at 5.01.24 PM.jpeg", 
+                img2: "WhatsApp Image 2026-09-22 at 5.01.26 PM.jpeg" 
             },
             { 
                 msg: "Toi qui as fait de mon cœur un musée qui déborde de tes plus beaux portraits, ce musée dont j'ai jeté les clés afin qu'il reste ouvert à jamais... Ainsi, je pourrai contempler ces œuvres d'art sans jamais me lasser. 💖", 
-                img1: "1000088911.jpg", 
-                img2: "1000088914.jpg" 
+                img1: "WhatsApp Image 2026-09-22 at 5.01.23 PM.jpeg", 
+                img2: "WhatsApp Image 2026-09-22 at 5.01.23 PM (2).jpeg" 
             }
         ];
+
         let slideIdx = 0;
 
         function startCardSlideshow() {
@@ -291,17 +282,27 @@
             }, 6000); 
         }
 
-        // --- 4. HEART FORMATION ---
         function createHeartFormation() {
             const container = document.getElementById('heartGrid');
-            // Tout lis foto w yo enkli isit la
+
             const photosList = [
-                "1000088907.jpg", "1000088908.jpg", "1000088909.jpg", 
-                "1000088910.jpg", "1000088911.jpg", "1000088912.jpg", 
-                "1000088913.jpg", "1000088914.jpg", "1000088915.jpg", 
-                "1000088916.jpg", "1000088917.jpg", "1000088918.jpg", 
-                "1000088919.jpg", "1000088920.jpg", "1000088921.jpg"
+                "WhatsApp Image 2026-09-22 at 5.01.25 PM.jpeg",
+                "WhatsApp Image 2026-09-22 at 5.01.24 PM (1).jpeg",
+                "WhatsApp Image 2026-09-22 at 5.01.24 PM.jpeg",
+                "WhatsApp Image 2026-09-22 at 5.01.26 PM.jpeg",
+                "WhatsApp Image 2026-09-22 at 5.01.23 PM.jpeg",
+                "WhatsApp Image 2026-09-22 at 5.01.23 PM (2).jpeg",
+                "WhatsApp Image 2026-09-22 at 5.01.23 PM (1).jpeg",
+                "WhatsApp Image 2026-09-22 at 5.01.21 PM.jpeg",
+                "WhatsApp Image 2026-09-22 at 5.01.21 PM (2).jpeg",
+                "WhatsApp Image 2026-09-22 at 5.01.21 PM (1).jpeg",
+                "WhatsApp Image 2026-09-22 at 5.01.20 PM.jpeg",
+                "WhatsApp Image 2026-09-22 at 5.01.17 PM.jpeg",
+                "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg",
+                "WhatsApp Image 2026-09-22 at 5.01.22 PM.jpeg",
+                "WhatsApp Image 2026-09-22 at 5.01.16 PM.jpeg"
             ];
+
             const numCards = 20;
             const centerX = window.innerWidth / 2 - 30;
             const centerY = window.innerHeight / 2 - 35;
