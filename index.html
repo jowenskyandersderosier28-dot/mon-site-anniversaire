@@ -66,7 +66,7 @@
             100% { transform: scale(1.08); }
         }
 
-        /* --- STARS & CAT SCREEN --- */
+        /* --- STARS & ANIMATED HEART SCREEN --- */
         .stars-bg {
             position: absolute;
             width: 100%;
@@ -81,20 +81,18 @@
             text-align: center;
         }
 
-        .cat-img {
-            width: 180px;
-            height: 180px;
-            object-fit: contain;
+        .heart-icon-anim {
+            font-size: 5rem;
             margin-bottom: 20px;
-            animation: floatCat 3s ease-in-out infinite;
+            animation: floatHeart 3s ease-in-out infinite;
         }
 
-        @keyframes floatCat {
+        @keyframes floatHeart {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
         }
 
-        /* --- ENVELOPE / CARD SCREEN --- */
+        /* --- CARD SCREEN --- */
         .card-container {
             position: relative;
             z-index: 2;
@@ -169,34 +167,30 @@
 </head>
 <body>
 
-    <!-- ETAP 1: MATRIX & DEKONT -->
     <div id="screen-matrix" class="screen active">
         <canvas id="matrix-canvas"></canvas>
         <div class="matrix-text" id="matrix-text">3</div>
     </div>
 
-    <!-- ETAP 2: ZETWAL AK CHAT -->
     <div id="screen-cat" class="screen">
         <div class="stars-bg"></div>
         <div class="content-box">
-            <img src="https://media.giphy.com/media/3o7TKSjRrfIPjeiOkM/giphy.gif" alt="Cat" class="cat-img">
+            <div class="heart-icon-anim">💖</div>
             <h1 style="color: #ff3399; font-size: 2.2rem; text-shadow: 0 0 15px #ff3399;">HAPPY BIRTHDAY HARLIE</h1>
         </div>
     </div>
 
-    <!-- ETAP 3: KAT AK FOTO (SLIDESHOW) -->
     <div id="screen-card" class="screen">
         <div class="stars-bg"></div>
         <div class="card-container" id="card-box">
             <div class="message-box" id="card-msg">Happy Birthday mon nounours🧸❤️</div>
             <div class="photo-frame" id="card-photos">
-                <img src="1000088907.jpg" alt="Foto Harlie">
-                <img src="1000088908.jpg" alt="Foto Harlie">
+                <img src="1000089080.jpg" alt="Foto Harlie">
+                <img src="1000089081.jpg" alt="Foto Harlie">
             </div>
         </div>
     </div>
 
-    <!-- ETAP 4: GWO KÈ AK FOTO -->
     <div id="screen-heart" class="screen">
         <div class="stars-bg"></div>
         <div class="heart-grid" id="heartGrid"></div>
@@ -258,18 +252,18 @@
         const slides = [
             { 
                 msg: "Happy Birthday mon nounours🧸❤️", 
-                img1: "1000088907.jpg", 
-                img2: "1000088908.jpg" 
+                img1: "1000089080.jpg", 
+                img2: "1000089081.jpg" 
             },
             { 
                 msg: "Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. Et aujourd'hui encore plus, je veux que tu te sentes unique, chouchoutée, aimée, valorisée, comblée. ✨", 
-                img1: "1000088909.jpg", 
-                img2: "1000088910.jpg" 
+                img1: "1000089082.jpg", 
+                img2: "1000089083.jpg" 
             },
             { 
                 msg: "Toi qui as fait de mon cœur un musée qui déborde de tes plus beaux portraits, ce musée dont j'ai jeté les clés afin qu'il reste ouvert à jamais... Ainsi, je pourrai contempler ces œuvres d'art sans jamais me lasser. 💖", 
-                img1: "1000088911.jpg", 
-                img2: "1000088914.jpg" 
+                img1: "1000089084.jpg", 
+                img2: "1000089085.jpg" 
             }
         ];
         let slideIdx = 0;
@@ -294,14 +288,15 @@
         // --- 4. HEART FORMATION ---
         function createHeartFormation() {
             const container = document.getElementById('heartGrid');
-            // Tout lis foto w yo enkli isit la
+            
             const photosList = [
-                "1000088907.jpg", "1000088908.jpg", "1000088909.jpg", 
-                "1000088910.jpg", "1000088911.jpg", "1000088912.jpg", 
-                "1000088913.jpg", "1000088914.jpg", "1000088915.jpg", 
-                "1000088916.jpg", "1000088917.jpg", "1000088918.jpg", 
-                "1000088919.jpg", "1000088920.jpg", "1000088921.jpg"
+                "1000089080.jpg", "1000089081.jpg", "1000089082.jpg", 
+                "1000089083.jpg", "1000089084.jpg", "1000089085.jpg", 
+                "1000089087.jpg", "1000089092.jpg", "1000089107.jpg", 
+                "100008909.jpg" /* ou 1000089109.jpg */, "1000089111.jpg", "1000089113.jpg", 
+                "1000089115.jpg", "1000089124.jpg"
             ];
+            
             const numCards = 20;
             const centerX = window.innerWidth / 2 - 30;
             const centerY = window.innerHeight / 2 - 35;
