@@ -351,14 +351,18 @@ body{
 }
 
 .page:nth-child(1){
-    z-index:3;
+    z-index:4;
 }
 
 .page:nth-child(2){
-    z-index:2;
+    z-index:3;
 }
 
 .page:nth-child(3){
+    z-index:2;
+}
+
+.page:nth-child(4){
     z-index:1;
 }
 
@@ -402,6 +406,7 @@ body{
     gap:9px;
     justify-content:center;
     width:100%;
+    flex-shrink:0;
 }
 
 .photo-frame img{
@@ -426,15 +431,18 @@ body{
 
 .signature{
     align-self:flex-end;
-    margin-top:4px;
+    margin-top:0;
     margin-right:8px;
-    margin-bottom:8px;
+    margin-bottom:14px;
+    flex-shrink:0;
     font-family:'Great Vibes',cursive;
     font-size:1.35rem;
     color:#d63384;
     text-decoration:underline;
     text-underline-offset:4px;
     transform:rotate(-4deg);
+    position:relative;
+    z-index:3;
 }
 
 /* =========================
@@ -494,10 +502,10 @@ body{
     }
 }
 
-
 /* =====================================================
-   VRÈ TI ETWAL CSS
-   PA GEN EMOJI
+   VRÈ TI ETWAL YO
+   ETWAL YO ALEATOIRE
+   YO PA NAN YON WONN
 ===================================================== */
 
 .star-field{
@@ -507,29 +515,21 @@ body{
     height:100%;
     z-index:4;
     pointer-events:none;
+    overflow:hidden;
 }
 
-/*
-   Chak ti etwal se yon ti fòm CSS.
-   Li pa sèvi ak okenn emoji oswa karaktè.
-*/
 .real-star{
     position:absolute;
-    width:3px;
-    height:3px;
     border-radius:50%;
     background:#fff;
     opacity:0;
     transform:scale(0);
     box-shadow:
-        0 0 3px #fff,
-        0 0 7px rgba(255,255,255,.95),
-        0 0 13px rgba(255,210,245,.8);
+        0 0 4px #fff,
+        0 0 9px rgba(255,255,255,.95),
+        0 0 17px rgba(255,210,245,.9);
 }
 
-/*
-   4 branch etwal la
-*/
 .real-star::before,
 .real-star::after{
     content:"";
@@ -537,25 +537,27 @@ body{
     left:50%;
     top:50%;
     transform:translate(-50%,-50%);
+    border-radius:50%;
+}
+
+/* Branch vètikal */
+
+.real-star::before{
+    width:2px;
+    height:24px;
     background:linear-gradient(
         to bottom,
         transparent,
         #fff,
         transparent
     );
-    border-radius:50%;
-}
-
-/* Branch vètikal */
-.real-star::before{
-    width:1.5px;
-    height:15px;
 }
 
 /* Branch orizontal */
+
 .real-star::after{
-    width:15px;
-    height:1.5px;
+    width:24px;
+    height:2px;
     background:linear-gradient(
         to right,
         transparent,
@@ -564,10 +566,6 @@ body{
     );
 }
 
-/*
-   Lè etwal la limen,
-   li vin pi klere epi li fè yon ti twinkle.
-*/
 .real-star.lit{
     animation:
         starAppear .7s ease-out forwards,
@@ -583,7 +581,7 @@ body{
 
     60%{
         opacity:1;
-        transform:scale(1.45);
+        transform:scale(1.35);
     }
 
     100%{
@@ -595,13 +593,13 @@ body{
 @keyframes starTwinkle{
 
     0%{
-        filter:brightness(.8);
-        transform:scale(.9);
+        filter:brightness(.75);
+        transform:scale(.85);
     }
 
     100%{
-        filter:brightness(1.8);
-        transform:scale(1.15);
+        filter:brightness(2);
+        transform:scale(1.2);
     }
 }
 
@@ -641,6 +639,7 @@ body{
     .signature{
         font-size:1.2rem;
         margin-right:5px;
+        margin-bottom:11px;
     }
 
     .birthday-title{
@@ -653,11 +652,11 @@ body{
     }
 
     .real-star::before{
-        height:13px;
+        height:18px;
     }
 
     .real-star::after{
-        width:13px;
+        width:18px;
     }
 }
 </style>
@@ -738,6 +737,7 @@ body{
 
             <div class="pages">
 
+
                 <!-- =====================
                      PAGE 1
                 ====================== -->
@@ -794,11 +794,11 @@ body{
                         </div>
 
                         <div class="page-number">
-                            Une pensée pour toi
+                            Une bénédiction pour toi
                         </div>
 
                         <div class="message-box">
-                            Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. Et aujourd'hui encore plus, je veux que tu te sentes unique, chouchoutée, aimée, valorisée, comblée. ✨
+                            Que le Seigneur t'accorde la paix, la joie, le succès, la santé et beaucoup d'amour ❤️
                         </div>
 
                         <div class="photo-frame">
@@ -837,6 +837,49 @@ body{
                         </div>
 
                         <div class="page-number">
+                            Une pensée pour toi
+                        </div>
+
+                        <div class="message-box">
+                            Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. Et aujourd'hui encore plus, je veux que tu te sentes unique, chouchoutée, aimée, valorisée, comblée. ✨
+                        </div>
+
+                        <div class="photo-frame">
+
+                            <img
+                                src="WhatsApp Image 2026-09-22 at 5.01.23 PM (1).jpeg"
+                                alt="Foto Harlie"
+                            >
+
+                            <img
+                                src="WhatsApp Image 2026-09-22 at 5.01.21 PM.jpeg"
+                                alt="Foto Harlie"
+                            >
+
+                        </div>
+
+                        <div class="page-decoration">
+                            💗 🌸 💗
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =====================
+                     PAGE 4
+                ====================== -->
+
+                <div class="page" id="page4">
+
+                    <div class="page-content">
+
+                        <div class="page-decoration">
+                            💖 ✨ 💖
+                        </div>
+
+                        <div class="page-number">
                             Et encore une chose...
                         </div>
 
@@ -869,6 +912,7 @@ body{
                     </div>
 
                 </div>
+
 
             </div>
 
@@ -918,7 +962,6 @@ body{
 
     <div class="heart-grid" id="heartGrid"></div>
 
-    <!-- VRÈ TI ETWAL CSS -->
     <div class="star-field" id="starField"></div>
 
     <div class="heart-title">
@@ -1495,12 +1538,16 @@ function startBookAnimation(){
     const page3 =
         document.getElementById('page3');
 
+    const page4 =
+        document.getElementById('page4');
+
 
     book.classList.remove('open');
 
     page1.classList.remove('flipped');
     page2.classList.remove('flipped');
     page3.classList.remove('flipped');
+    page4.classList.remove('flipped');
 
 
     /* LIVRE FÈMEN 3 SEC */
@@ -1539,9 +1586,18 @@ function startBookAnimation(){
     },20000);
 
 
+    /* PAGE 4 - 7 SEC */
+
+    setTimeout(() => {
+
+        page4.classList.add('flipped');
+
+    },27000);
+
+
     /*
-     * APRE 7 SEC SOU DÈNYE PAJ LA
-     * ALE SOU KÈ FINAL LA
+     * APRE 7 SEC SOU PAGE 4
+     * ALE SOU GWO KÈ FINAL LA
      */
 
     setTimeout(() => {
@@ -1552,14 +1608,9 @@ function startBookAnimation(){
 
         createHeartFormation();
 
-        /*
-         * KOUNYE A TI VRÈ ETWAL YO
-         * KÒMANSE LIMEN YOUN APRÈ LÒT.
-         */
-
         createRealStars();
 
-    },21500);
+    },28500);
 }
 
 
@@ -1701,10 +1752,10 @@ function createHeartFormation(){
 
 
 /* =====================================================
-   VRÈ TI ETWAL CSS
-   30 ETWAL
+   ETWAL ALÉATWA
+   YO PA FÒME WONN
+   YO GEN GWOSÈ DIFERAN
    YO PARÈT YOUN APRÈ LÒT
-   PANDAN 5 SEGOND
 ===================================================== */
 
 function createRealStars(){
@@ -1718,48 +1769,29 @@ function createRealStars(){
 
 
     /*
-     * Pozisyon yo alantou kè a.
-     * Se pousantaj ekran an.
+     * 36 pozisyon aléatwa.
+     *
+     * Chak fwa paj la rive sou gwo kè a,
+     * JavaScript ap chwazi nouvo kote
+     * pou etwal yo.
      */
 
-    const positions = [
+    const positions = [];
 
-        [13,18],
-        [20,14],
-        [28,11],
-        [36,9],
-        [44,8],
-        [52,8],
-        [60,9],
-        [68,11],
-        [76,14],
-        [83,18],
 
-        [89,25],
-        [92,33],
-        [94,42],
-        [94,51],
-        [92,60],
-        [89,69],
+    for(let i = 0; i < 36; i++){
 
-        [83,77],
-        [76,82],
-        [68,86],
-        [60,89],
-        [52,91],
-        [44,91],
-        [36,89],
-        [28,86],
-        [20,82],
-        [13,77],
+        const left =
+            Math.random() * 94 + 3;
 
-        [8,69],
-        [5,60],
-        [4,51],
-        [5,42],
-        [7,33],
-        [9,25]
-    ];
+        const top =
+            Math.random() * 88 + 6;
+
+        positions.push([
+            left,
+            top
+        ]);
+    }
 
 
     positions.forEach(
@@ -1775,6 +1807,10 @@ function createRealStars(){
                 'real-star';
 
 
+            /*
+             * Pozisyon aléatwa
+             */
+
             star.style.left =
                 position[0] + '%';
 
@@ -1784,13 +1820,56 @@ function createRealStars(){
 
 
             /*
-             * 32 etwal sou 5 sec.
-             * Chak youn gen anviwon
-             * 0.156 sec ant yo.
+             * Gwosè aléatwa.
+             *
+             * Gen ti etwal,
+             * gen mwayen,
+             * gen pi gwo.
+             */
+
+            const size =
+                Math.random() * 4 + 2;
+
+
+            star.style.width =
+                size + 'px';
+
+
+            star.style.height =
+                size + 'px';
+
+
+            /*
+             * Branch yo adapte
+             * ak gwosè chak etwal.
+             */
+
+            const branch =
+                size * 5;
+
+
+            star.style.setProperty(
+                '--star-size',
+                size + 'px'
+            );
+
+
+            star.style.setProperty(
+                '--star-branch',
+                branch + 'px'
+            );
+
+
+            /*
+             * Chak etwal pran yon ti moman
+             * diferan pou l parèt.
+             *
+             * Tout seri a fèt anviwon
+             * 5 segonn.
              */
 
             star.style.animationDelay =
-                (index * 0.156) + 's';
+                (index * 0.14) + 's';
 
 
             container.appendChild(
@@ -1799,10 +1878,7 @@ function createRealStars(){
 
 
             /*
-             * Nou mete class lit la
-             * touswit.
-             * Animation delay la ap fè
-             * yo parèt youn apre lòt.
+             * Nou limen yo youn apre lòt.
              */
 
             requestAnimationFrame(() => {
@@ -1812,6 +1888,7 @@ function createRealStars(){
                 );
 
             });
+
         }
     );
 }
