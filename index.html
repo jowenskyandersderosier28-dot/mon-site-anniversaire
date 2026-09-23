@@ -153,34 +153,6 @@ body{
     z-index:1;
 }
 
-.fireworks-text{
-    position:relative;
-    z-index:3;
-    text-align:center;
-    font-family:'Great Vibes',cursive;
-    font-size:clamp(2.5rem,10vw,4.5rem);
-    color:#fff4a8;
-    text-shadow:
-        0 0 10px #ff5ca8,
-        0 0 25px #ff3399,
-        0 0 45px #ffd94d;
-    opacity:0;
-    animation:fireworksText 1s ease forwards;
-    animation-delay:.5s;
-    padding:0 20px;
-}
-
-@keyframes fireworksText{
-    from{
-        opacity:0;
-        transform:scale(.7);
-    }
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-}
-
 /* LIVRE */
 .book-area{
     position:relative;
@@ -485,10 +457,6 @@ body{
     .heart-title{
         font-size:2.2rem;
     }
-
-    .fireworks-text{
-        font-size:2.8rem;
-    }
 }
 </style>
 </head>
@@ -533,10 +501,6 @@ body{
 <div id="fireworks-screen" class="screen">
 
     <canvas id="fireworks-canvas"></canvas>
-
-    <div class="fireworks-text">
-        Happy Birthday Harlie 🎆❤️
-    </div>
 
 </div>
 
@@ -1223,8 +1187,7 @@ function startFireworks(){
 
 
     /*
-     * Fireworks yo rete
-     * anviwon 5 secondes.
+     * Fireworks yo rete 4 secondes.
      * Apre sa liv la parèt.
      */
     setTimeout(() => {
@@ -1237,7 +1200,7 @@ function startFireworks(){
 
         startBookAnimation();
 
-    },5500);
+    },4000);
 }
 
 
@@ -1291,12 +1254,12 @@ function startBookAnimation(){
     page3.classList.remove('flipped');
 
 
-    /* LE LIVRE RESTE FERME 2 SECONDES */
+    /* LE LIVRE RESTE FERME 3 SECONDES */
     setTimeout(() => {
 
         book.classList.add('open');
 
-    },2000);
+    },3000);
 
 
     /* PAGE 1 */
@@ -1475,4 +1438,4 @@ window.addEventListener(
 </script>
 
 </body>
-                            </html>
+</html>
