@@ -1,1 +1,330 @@
-test
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Harlie</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .screen {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .screen.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* --- MATRIX SCREEN --- */
+        #matrix-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .matrix-text {
+            position: relative;
+            z-index: 2;
+            font-size: 4rem;
+            font-weight: bold;
+            color: #ff3399;
+            text-shadow: 0 0 20px #ff3399, 0 0 40px #ff007f;
+            animation: pulse 1s infinite alternate;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.08); }
+        }
+
+        /* --- STARS & CAT SCREEN --- */
+        .stars-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            z-index: 1;
+        }
+
+        .content-box {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .cat-img {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            margin-bottom: 20px;
+            animation: floatCat 3s ease-in-out infinite;
+        }
+
+        @keyframes floatCat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* --- ENVELOPE / CARD SCREEN --- */
+        .card-container {
+            position: relative;
+            z-index: 2;
+            background: #fff;
+            color: #333;
+            width: 350px;
+            max-height: 90vh;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(255, 51, 153, 0.4);
+            text-align: center;
+            animation: slideUp 1s ease-out;
+            overflow-y: auto;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .message-box {
+            background: #fdf2f8;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            color: #db2777;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        .photo-frame {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .photo-frame img {
+            width: 140px;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #ff3399;
+        }
+
+        /* --- FINAL HEART SCREEN --- */
+        .heart-grid {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .mini-card {
+            position: absolute;
+            width: 60px;
+            height: 70px;
+            background: white;
+            padding: 3px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 51, 153, 0.8);
+            transition: transform 0.5s;
+        }
+
+        .mini-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ETAP 1: MATRIX & DEKONT -->
+    <div id="screen-matrix" class="screen active">
+        <canvas id="matrix-canvas"></canvas>
+        <div class="matrix-text" id="matrix-text">3</div>
+    </div>
+
+    <!-- ETAP 2: ZETWAL AK CHAT -->
+    <div id="screen-cat" class="screen">
+        <div class="stars-bg"></div>
+        <div class="content-box">
+            <img src="https://media.giphy.com/media/3o7TKSjRrfIPjeiOkM/giphy.gif" alt="Cat" class="cat-img">
+            <h1 style="color: #ff3399; font-size: 2.2rem; text-shadow: 0 0 15px #ff3399;">HAPPY BIRTHDAY HARLIE</h1>
+        </div>
+    </div>
+
+    <!-- ETAP 3: KAT AK FOTO (SLIDESHOW) -->
+    <div id="screen-card" class="screen">
+        <div class="stars-bg"></div>
+        <div class="card-container" id="card-box">
+            <div class="message-box" id="card-msg">Happy Birthday mon nounours🧸❤️</div>
+            <div class="photo-frame" id="card-photos">
+                <img src="1000088907.jpg" alt="Foto Harlie">
+                <img src="1000088908.jpg" alt="Foto Harlie">
+            </div>
+        </div>
+    </div>
+
+    <!-- ETAP 4: GWO KÈ AK FOTO -->
+    <div id="screen-heart" class="screen">
+        <div class="stars-bg"></div>
+        <div class="heart-grid" id="heartGrid"></div>
+    </div>
+
+    <script>
+        // --- 1. MATRIX EFFECT ---
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const characters = "HAPPYBIRTHDAYHARLIE321🧸❤️";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+        for (let i = 0; i < columns; i++) drops[i] = 1;
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#ff3399';
+            ctx.font = fontSize + 'px monospace';
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        let matrixInterval = setInterval(drawMatrix, 33);
+
+        // Sekans dekont lan
+        const textElement = document.getElementById('matrix-text');
+        const sequence = ["3", "2", "1", "HAPPY", "BIRTHDAY", "TO", "HARLIE 🧸"];
+        let seqIndex = 0;
+
+        let seqTimer = setInterval(() => {
+            seqIndex++;
+            if (seqIndex < sequence.length) {
+                textElement.innerText = sequence[seqIndex];
+            } else {
+                clearInterval(seqTimer);
+                clearInterval(matrixInterval);
+                switchScreen('screen-cat');
+                setTimeout(() => {
+                    switchScreen('screen-card');
+                    startCardSlideshow();
+                }, 4000);
+            }
+        }, 1200);
+
+        function switchScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        // --- 3. CARD SLIDESHOW AK MESAJ OU YO ---
+        const slides = [
+            { 
+                msg: "Happy Birthday mon nounours🧸❤️", 
+                img1: "1000088907.jpg", 
+                img2: "1000088908.jpg" 
+            },
+            { 
+                msg: "Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. Et aujourd'hui encore plus, je veux que tu te sentes unique, chouchoutée, aimée, valorisée, comblée. ✨", 
+                img1: "1000088909.jpg", 
+                img2: "1000088910.jpg" 
+            },
+            { 
+                msg: "Toi qui as fait de mon cœur un musée qui déborde de tes plus beaux portraits, ce musée dont j'ai jeté les clés afin qu'il reste ouvert à jamais... Ainsi, je pourrai contempler ces œuvres d'art sans jamais me lasser. 💖", 
+                img1: "1000088911.jpg", 
+                img2: "1000088914.jpg" 
+            }
+        ];
+        let slideIdx = 0;
+
+        function startCardSlideshow() {
+            let cardInterval = setInterval(() => {
+                slideIdx++;
+                if (slideIdx < slides.length) {
+                    document.getElementById('card-msg').innerText = slides[slideIdx].msg;
+                    document.getElementById('card-photos').innerHTML = `
+                        <img src="${slides[slideIdx].img1}" alt="Foto Harlie">
+                        <img src="${slides[slideIdx].img2}" alt="Foto Harlie">
+                    `;
+                } else {
+                    clearInterval(cardInterval);
+                    switchScreen('screen-heart');
+                    createHeartFormation();
+                }
+            }, 6000); 
+        }
+
+        // --- 4. HEART FORMATION ---
+        function createHeartFormation() {
+            const container = document.getElementById('heartGrid');
+            // Tout lis foto w yo enkli isit la
+            const photosList = [
+                "1000088907.jpg", "1000088908.jpg", "1000088909.jpg", 
+                "1000088910.jpg", "1000088911.jpg", "1000088912.jpg", 
+                "1000088913.jpg", "1000088914.jpg", "1000088915.jpg", 
+                "1000088916.jpg", "1000088917.jpg", "1000088918.jpg", 
+                "1000088919.jpg", "1000088920.jpg", "1000088921.jpg"
+            ];
+            const numCards = 20;
+            const centerX = window.innerWidth / 2 - 30;
+            const centerY = window.innerHeight / 2 - 35;
+
+            for (let i = 0; i < numCards; i++) {
+                let t = (i / numCards) * Math.PI * 2;
+                let x = 16 * Math.pow(Math.sin(t), 3);
+                let y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+                
+                let posX = centerX + x * 15;
+                let posY = centerY + y * 15;
+
+                let photoSrc = photosList[i % photosList.length];
+
+                const card = document.createElement('div');
+                card.className = 'mini-card';
+                card.style.left = posX + 'px';
+                card.style.top = posY + 'px';
+                card.innerHTML = `<img src="${photoSrc}" alt="Heart Photo">`;
+                
+                container.appendChild(card);
+            }
+        }
+    </script>
+</body>
+</html>
