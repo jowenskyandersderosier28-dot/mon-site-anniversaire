@@ -44,7 +44,7 @@
       flex-direction: column;
       align-items: center;
       width: 100%;
-      max-width: 400px;
+      max-width: 380px;
       text-align: center;
     }
 
@@ -64,23 +64,23 @@
     }
 
     .message-box {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       line-height: 1.4;
       color: #ffc2d9;
-      margin-bottom: 12px;
       text-align: left;
+      margin: 0;
     }
 
     .heart-grid {
       position: relative;
-      width: 280px;
-      height: 260px;
+      width: 260px;
+      height: 240px;
     }
 
     .heart-grid img {
       position: absolute;
-      width: 45px;
-      height: 45px;
+      width: 42px;
+      height: 42px;
       object-fit: cover;
       border-radius: 50%;
       border: 2px solid #ff2a85;
@@ -105,11 +105,11 @@
       <div id="countdown-display">3</div>
     </div>
 
-    <!-- Ekran 2: Kat mesaj -->
+    <!-- Ekran 2: Tout gwo mesaj lan -->
     <div id="screen-card" class="screen">
       <div class="card-container">
         <div class="message-box">
-          Que le Seigneur t'accorde la paix, la joie, le succès, la santé et beaucoup d'amour. Joyeux anniversaire mon Nounours ! 🧸❤️✨
+          Que le Seigneur t'accorde la paix, la joie, le succès, la santé et beaucoup d'amour. Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. Et aujourd'hui encore plus, je veux que tu te sentes unique, chouchoutée, aimée, valorisée, comblée. Toi qui as fait de mon cœur un musée qui déborde de tes plus beaux portraits, ce musée dont j'ai jeté les clés afin qu'il reste ouvert à jamais... Ainsi, je pourrai contempler ces œuvres d'art, et penser à m'en lasser, jamais. Merci d'être cette personne exceptionnelle qui illumine ma vie. Joyeux anniversaire mon Nounours ! 🧸❤️✨
         </div>
       </div>
     </div>
@@ -152,7 +152,7 @@
     }
     setInterval(drawMatrix, 50);
 
-    // Lis egzak tout non WhatsApp ou yo sou GitHub la
+    // Tout foto WhatsApp ou yo
     const photosList = [
       "WhatsApp Image 2026-09-22 at 5.01.16 PM.jpeg",
       "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg",
@@ -182,24 +182,24 @@
         screenCountdown.classList.remove('active');
         screenCard.classList.add('active');
 
+        // Kat la ap rete pandan 6 segond anvan kè a parèt
         setTimeout(() => {
           screenCard.classList.remove('active');
           screenHeart.classList.add('active');
           createHeartFormation();
-        }, 5000);
+        }, 6000);
       }
     }, 1000);
 
     function createHeartFormation() {
       const container = document.getElementById('heartGrid');
       const totalPhotos = photosList.length;
-      const centerX = 140;
-      const centerY = 130;
+      const centerX = 130;
+      const centerY = 120;
       const scale = 8.5;
 
       for (let i = 0; i < totalPhotos; i++) {
         const img = document.createElement('img');
-        // Itilize encodeURI pou asire w navigatè a li espas ki nan non WhatsApp yo kòrèkteman
         img.src = encodeURI(photosList[i]);
 
         const t = ((i + 1) / totalPhotos) * 2 * Math.PI;
