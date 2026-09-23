@@ -245,9 +245,14 @@ body{
     background:rgba(210,110,145,.25);
 }
 
+
+/* =====================================================
+   NOUVO KOUVÈTI LIV LA
+===================================================== */
+
 .book-cover{
     position:absolute;
-    inset:0;
+    inset:-4px;
     z-index:20;
     transform-origin:left center;
     transform-style:preserve-3d;
@@ -259,65 +264,217 @@ body{
     transform:rotateY(-165deg);
 }
 
-.cover-front,
-.cover-back{
-    position:absolute;
-    inset:0;
-    border-radius:12px 20px 20px 12px;
-    backface-visibility:hidden;
-}
+
+/* Kouvèti devan */
 
 .cover-front{
-    background:linear-gradient(
-        135deg,
-        #ff6fae,
-        #ff9bc8 45%,
-        #ffd95e 100%
-    );
-    border:5px solid #ffd94d;
+    position:absolute;
+    inset:0;
+    border-radius:8px 20px 20px 8px;
+    backface-visibility:hidden;
+
+    background:
+        radial-gradient(
+            circle at 75% 18%,
+            rgba(255,255,255,.45),
+            transparent 18%
+        ),
+        linear-gradient(
+            135deg,
+            #c21868 0%,
+            #ed4f93 35%,
+            #ff86ba 70%,
+            #d91f72 100%
+        );
+
+    border:5px solid #ffd95e;
+
     box-shadow:
-        0 15px 40px rgba(255,51,153,.55),
-        inset 0 0 25px rgba(255,255,255,.3);
+        0 18px 45px rgba(255,51,153,.65),
+        inset 0 0 0 3px rgba(255,255,255,.35),
+        inset 0 0 30px rgba(120,0,55,.35);
+
     display:flex;
     justify-content:center;
     align-items:center;
     text-align:center;
-    padding:25px;
+    padding:32px 24px;
+
+    overflow:hidden;
 }
 
+
+/* Dos liv sou bò gòch */
+
 .cover-front::before{
+    content:"";
+    position:absolute;
+    left:9px;
+    top:8px;
+    bottom:8px;
+    width:18px;
+
+    background:
+        linear-gradient(
+            to right,
+            rgba(80,0,35,.55),
+            rgba(255,255,255,.2),
+            rgba(80,0,35,.35)
+        );
+
+    border-radius:5px 0 0 5px;
+
+    box-shadow:
+        inset -2px 0 4px rgba(255,255,255,.35),
+        3px 0 8px rgba(90,0,40,.3);
+}
+
+
+/* Ankadreman dekoratif */
+
+.cover-front::after{
+    content:"";
+    position:absolute;
+    inset:18px;
+    border:2px solid rgba(255,244,170,.85);
+    border-radius:7px 15px 15px 7px;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.35);
+
+    pointer-events:none;
+}
+
+
+/* Kontni kouvèti a */
+
+.cover-front > div{
+    position:relative;
+    z-index:3;
+    width:100%;
+    height:100%;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+
+/* Ti kè anlè */
+
+.cover-front > div::before{
     content:"♥";
     position:absolute;
-    top:20px;
-    font-size:35px;
-    color:#fff5a6;
-    text-shadow:0 0 10px #ff3399;
+    top:7px;
+    left:50%;
+    transform:translateX(-50%);
+
+    font-size:32px;
+    color:#fff5ad;
+
+    text-shadow:
+        0 0 6px #fff,
+        0 0 15px #ff3399;
 }
+
+
+/* Ti liy dekoratif anlè tit la */
+
+.cover-front > div::after{
+    content:"✦  ✧  ✦";
+    position:absolute;
+    top:48px;
+    left:50%;
+    transform:translateX(-50%);
+
+    color:#fff3a6;
+    font-size:16px;
+    letter-spacing:4px;
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,.9);
+}
+
+
+/* TIT KOUVÈTI */
 
 .cover-title{
     font-family:'Great Vibes',cursive;
-    font-size:3.5rem;
-    line-height:1.1;
-    color:#fff8a8;
+
+    font-size:clamp(3rem, 13vw, 4.2rem);
+
+    line-height:1.02;
+
+    color:#fff9bd;
+
     text-shadow:
-        2px 2px 0 #d63384,
-        0 0 15px rgba(255,255,255,.7);
+        2px 3px 0 #a7195d,
+        0 0 8px rgba(255,255,255,.9),
+        0 0 22px rgba(255,230,120,.65);
+
+    margin-top:22px;
+
+    transform:rotate(-2deg);
 }
+
+
+/* Ti liy anba tit la */
+
+.cover-title::after{
+    content:"────── ♥ ──────";
+    display:block;
+
+    font-family:'Playfair Display',serif;
+    font-size:11px;
+
+    letter-spacing:2px;
+
+    color:#fff4ad;
+
+    margin-top:12px;
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,.8);
+}
+
+
+/* Sous-tit */
 
 .cover-subtitle{
     display:block;
+
     font-family:'Playfair Display',serif;
-    font-size:1rem;
+
+    font-size:.82rem;
+
     margin-top:18px;
+
     color:#fff;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    text-shadow:
+        0 1px 4px rgba(100,0,50,.8);
+}
+
+
+/* Ti dekorasyon anba */
+
+.cover-front .cover-subtitle::after{
+    content:"🌸  ✨  🌸";
+
+    display:block;
+
+    margin-top:13px;
+
+    font-size:18px;
+
     letter-spacing:2px;
 }
 
-.cover-back{
-    transform:rotateY(180deg);
-    background:#ffd6e7;
-    border:5px solid #ff78b5;
-}
 
 /* =========================
    PAGES
@@ -425,6 +582,7 @@ body{
     margin-bottom:5px;
 }
 
+
 /* =========================
    SIGNATURE
 ========================= */
@@ -444,6 +602,7 @@ body{
     position:relative;
     z-index:3;
 }
+
 
 /* =========================
    COEUR
@@ -476,6 +635,7 @@ body{
     border-radius:3px;
 }
 
+
 /* =========================
    TITRE FINAL
 ========================= */
@@ -502,10 +662,9 @@ body{
     }
 }
 
+
 /* =====================================================
    VRÈ TI ETWAL YO
-   ETWAL YO ALEATOIRE
-   YO PA NAN YON WONN
 ===================================================== */
 
 .star-field{
@@ -540,8 +699,6 @@ body{
     border-radius:50%;
 }
 
-/* Branch vètikal */
-
 .real-star::before{
     width:2px;
     height:24px;
@@ -552,8 +709,6 @@ body{
         transparent
     );
 }
-
-/* Branch orizontal */
 
 .real-star::after{
     width:24px;
@@ -617,6 +772,28 @@ body{
 
     .cover-title{
         font-size:3rem;
+    }
+
+    .cover-front{
+        padding:28px 20px;
+    }
+
+    .cover-front::after{
+        inset:15px;
+    }
+
+    .cover-front > div::before{
+        top:5px;
+    }
+
+    .cover-front > div::after{
+        top:42px;
+        font-size:13px;
+    }
+
+    .cover-subtitle{
+        font-size:.72rem;
+        letter-spacing:1.5px;
     }
 
     .message-box{
@@ -918,7 +1095,7 @@ body{
 
 
             <!-- =====================
-                 COUVERTURE
+                 NOUVELLE COUVERTURE
             ====================== -->
 
             <div class="book-cover" id="bookCover">
@@ -940,8 +1117,6 @@ body{
                     </div>
 
                 </div>
-
-                <div class="cover-back"></div>
 
             </div>
 
@@ -1753,9 +1928,6 @@ function createHeartFormation(){
 
 /* =====================================================
    ETWAL ALÉATWA
-   YO PA FÒME WONN
-   YO GEN GWOSÈ DIFERAN
-   YO PARÈT YOUN APRÈ LÒT
 ===================================================== */
 
 function createRealStars(){
@@ -1767,14 +1939,6 @@ function createRealStars(){
 
     container.innerHTML = "";
 
-
-    /*
-     * 36 pozisyon aléatwa.
-     *
-     * Chak fwa paj la rive sou gwo kè a,
-     * JavaScript ap chwazi nouvo kote
-     * pou etwal yo.
-     */
 
     const positions = [];
 
@@ -1807,10 +1971,6 @@ function createRealStars(){
                 'real-star';
 
 
-            /*
-             * Pozisyon aléatwa
-             */
-
             star.style.left =
                 position[0] + '%';
 
@@ -1818,14 +1978,6 @@ function createRealStars(){
             star.style.top =
                 position[1] + '%';
 
-
-            /*
-             * Gwosè aléatwa.
-             *
-             * Gen ti etwal,
-             * gen mwayen,
-             * gen pi gwo.
-             */
 
             const size =
                 Math.random() * 4 + 2;
@@ -1838,11 +1990,6 @@ function createRealStars(){
             star.style.height =
                 size + 'px';
 
-
-            /*
-             * Branch yo adapte
-             * ak gwosè chak etwal.
-             */
 
             const branch =
                 size * 5;
@@ -1860,14 +2007,6 @@ function createRealStars(){
             );
 
 
-            /*
-             * Chak etwal pran yon ti moman
-             * diferan pou l parèt.
-             *
-             * Tout seri a fèt anviwon
-             * 5 segonn.
-             */
-
             star.style.animationDelay =
                 (index * 0.14) + 's';
 
@@ -1876,10 +2015,6 @@ function createRealStars(){
                 star
             );
 
-
-            /*
-             * Nou limen yo youn apre lòt.
-             */
 
             requestAnimationFrame(() => {
 
