@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -44,6 +45,7 @@ body{
     pointer-events:auto;
 }
 
+
 /* =========================
    MATRIX
 ========================= */
@@ -71,6 +73,7 @@ body{
 }
 
 @keyframes pulse{
+
     0%{
         transform:scale(1);
     }
@@ -78,7 +81,9 @@ body{
     100%{
         transform:scale(1.08);
     }
+
 }
+
 
 /* =========================
    FOND
@@ -87,11 +92,14 @@ body{
 .stars-bg{
     position:absolute;
     inset:0;
-    background:radial-gradient(
-        ellipse at bottom,
-        #1b2735 0%,
-        #090a0f 100%
-    );
+
+    background:
+        radial-gradient(
+            ellipse at bottom,
+            #1b2735 0%,
+            #090a0f 100%
+        );
+
     z-index:1;
 }
 
@@ -103,6 +111,7 @@ body{
     width:100%;
 }
 
+
 /* =========================
    GIF CHAT
 ========================= */
@@ -110,12 +119,17 @@ body{
 .cat-img{
     width:180px;
     height:180px;
+
     object-fit:contain;
+
     margin-bottom:20px;
-    animation:floatCat 3s ease-in-out infinite;
+
+    animation:
+        floatCat 3s ease-in-out infinite;
 }
 
 @keyframes floatCat{
+
     0%,100%{
         transform:translateY(0);
     }
@@ -123,39 +137,79 @@ body{
     50%{
         transform:translateY(-15px);
     }
+
 }
+
 
 /* =========================
    TITRE SOUS LE GIF
 ========================= */
 
 .birthday-title{
+
     color:#ff5ca8;
+
     font-family:'Playfair Display',serif;
-    font-size:clamp(1.25rem, 6.5vw, 2rem);
+
+    font-size:
+        clamp(
+            1.25rem,
+            6.5vw,
+            2rem
+        );
+
     font-weight:700;
+
     line-height:1.2;
+
     text-align:center;
+
     width:100%;
+
     max-width:95vw;
+
     margin:0 auto;
+
     padding:0 5px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     gap:8px;
+
     text-shadow:
         0 1px 3px rgba(255,255,255,.9);
 }
 
 .flower{
-    font-size:clamp(1.4rem, 7vw, 2rem);
+
+    font-size:
+        clamp(
+            1.4rem,
+            7vw,
+            2rem
+        );
+
     flex-shrink:0;
-    filter:drop-shadow(0 0 5px #ff69b4);
-    animation:flowerGlow 1.5s ease-in-out infinite alternate;
+
+    filter:
+        drop-shadow(
+            0 0 5px #ff69b4
+        );
+
+    animation:
+        flowerGlow
+        1.5s
+        ease-in-out
+        infinite
+        alternate;
 }
 
 @keyframes flowerGlow{
+
     from{
         transform:scale(1);
     }
@@ -163,13 +217,16 @@ body{
     to{
         transform:scale(1.15);
     }
+
 }
+
 
 /* =========================
    FEU D'ARTIFICE
 ========================= */
 
 #fireworks-screen{
+
     background:
         radial-gradient(
             ellipse at center,
@@ -177,110 +234,178 @@ body{
             #05050a 65%,
             #000 100%
         );
+
     z-index:50;
 }
 
 #fireworks-canvas{
+
     position:absolute;
     inset:0;
+
     width:100%;
     height:100%;
+
     z-index:1;
 }
+
 
 /* =========================
    LIVRE
 ========================= */
 
 .book-area{
+
     position:relative;
+
     z-index:2;
+
     width:100%;
     height:100%;
+
     display:flex;
+
     justify-content:center;
     align-items:center;
+
     perspective:1800px;
 }
 
 .book{
+
     position:relative;
-    width:min(350px,88vw);
-    height:min(450px,76vh);
+
+    width:
+        min(
+            350px,
+            88vw
+        );
+
+    height:
+        min(
+            450px,
+            76vh
+        );
+
     transform-style:preserve-3d;
 }
+
 
 /* Ombre anba liv la */
 
 .book::after{
+
     content:"";
+
     position:absolute;
+
     width:85%;
     height:25px;
+
     bottom:-22px;
     left:7.5%;
-    background:rgba(255,51,153,.35);
+
+    background:
+        rgba(
+            255,
+            51,
+            153,
+            .35
+        );
+
     filter:blur(15px);
+
     border-radius:50%;
+
     z-index:-2;
 }
+
 
 /* Kò liv la */
 
 .book-inside{
+
     position:absolute;
+
     inset:0;
+
     background:#ffd6e7;
-    border:5px solid #ff78b5;
-    border-radius:10px 18px 18px 10px;
+
+    border:
+        5px solid #ff78b5;
+
+    border-radius:
+        10px 18px 18px 10px;
+
     box-shadow:
         0 15px 40px rgba(255,51,153,.5),
         inset 0 0 20px rgba(255,255,255,.5);
+
     overflow:hidden;
 }
+
 
 /* =========================
    KOUVÈTI DEVAN
 ========================= */
 
 .book-cover{
+
     position:absolute;
+
     inset:-4px;
+
     z-index:20;
+
     transform-origin:left center;
+
     transform-style:preserve-3d;
 
     transition:
-        transform 2.2s cubic-bezier(.65,.05,.36,1),
+        transform 2.2s
+        cubic-bezier(.65,.05,.36,1),
+
         opacity .2s;
 }
 
 .book.open .book-cover{
-    transform:rotateY(-165deg);
+
+    transform:
+        rotateY(-165deg);
 }
+
 
 /*
    Lè liv la ap fèmen,
-   kouvèti a pa fèmen touswit.
-   Paj yo ap reyini anvan.
+   kouvèti a retounen devan.
 */
 
 .book.closing .book-cover{
-    transform:rotateY(0deg);
+
+    transform:
+        rotateY(0deg);
 }
 
+
 .cover-front{
+
     position:absolute;
+
     inset:0;
-    border-radius:8px 20px 20px 8px;
+
+    border-radius:
+        8px 20px 20px 8px;
+
     backface-visibility:hidden;
 
     background:
+
         radial-gradient(
             circle at 75% 18%,
             rgba(255,255,255,.45),
             transparent 18%
         ),
+
         linear-gradient(
             135deg,
             #c21868 0%,
@@ -289,33 +414,51 @@ body{
             #d91f72 100%
         );
 
-    border:5px solid #ffd95e;
+    border:
+        5px solid #ffd95e;
 
     box-shadow:
-        0 18px 45px rgba(255,51,153,.65),
-        inset 0 0 0 3px rgba(255,255,255,.35),
-        inset 0 0 30px rgba(120,0,55,.35);
+
+        0 18px 45px
+        rgba(255,51,153,.65),
+
+        inset 0 0 0 3px
+        rgba(255,255,255,.35),
+
+        inset 0 0 30px
+        rgba(120,0,55,.35);
 
     display:flex;
+
     justify-content:center;
     align-items:center;
+
     text-align:center;
-    padding:32px 24px;
+
+    padding:
+        32px 24px;
 
     overflow:hidden;
 }
 
+
 /* Dos liv */
 
 .cover-front::before{
+
     content:"";
+
     position:absolute;
+
     left:9px;
+
     top:8px;
     bottom:8px;
+
     width:18px;
 
     background:
+
         linear-gradient(
             to right,
             rgba(80,0,35,.55),
@@ -323,102 +466,165 @@ body{
             rgba(80,0,35,.35)
         );
 
-    border-radius:5px 0 0 5px;
+    border-radius:
+        5px 0 0 5px;
 
     box-shadow:
-        inset -2px 0 4px rgba(255,255,255,.35),
-        3px 0 8px rgba(90,0,40,.3);
+
+        inset -2px 0 4px
+        rgba(255,255,255,.35),
+
+        3px 0 8px
+        rgba(90,0,40,.3);
 }
+
 
 /* Ankadreman */
 
 .cover-front::after{
+
     content:"";
+
     position:absolute;
+
     inset:18px;
-    border:2px solid rgba(255,244,170,.85);
-    border-radius:7px 15px 15px 7px;
+
+    border:
+        2px solid
+        rgba(255,244,170,.85);
+
+    border-radius:
+        7px 15px 15px 7px;
 
     box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,.35);
+        inset 0 0 0 1px
+        rgba(255,255,255,.35);
 
     pointer-events:none;
 }
 
+
 /* Kontni kouvèti */
 
 .cover-front > div{
+
     position:relative;
+
     z-index:3;
+
     width:100%;
     height:100%;
 
     display:flex;
+
     flex-direction:column;
+
     justify-content:center;
+
     align-items:center;
 }
+
 
 /* Ti kè */
 
 .cover-front > div::before{
+
     content:"♥";
+
     position:absolute;
+
     top:7px;
+
     left:50%;
-    transform:translateX(-50%);
+
+    transform:
+        translateX(-50%);
 
     font-size:32px;
+
     color:#fff5ad;
 
     text-shadow:
+
         0 0 6px #fff,
+
         0 0 15px #ff3399;
 }
+
 
 /* Dekorasyon */
 
 .cover-front > div::after{
+
     content:"✦  ✧  ✦";
+
     position:absolute;
+
     top:48px;
+
     left:50%;
-    transform:translateX(-50%);
+
+    transform:
+        translateX(-50%);
 
     color:#fff3a6;
+
     font-size:16px;
+
     letter-spacing:4px;
 
     text-shadow:
-        0 0 8px rgba(255,255,255,.9);
+        0 0 8px
+        rgba(255,255,255,.9);
 }
+
 
 /* TIT */
 
 .cover-title{
-    font-family:'Great Vibes',cursive;
 
-    font-size:clamp(3rem, 13vw, 4.2rem);
+    font-family:
+        'Great Vibes',
+        cursive;
+
+    font-size:
+        clamp(
+            3rem,
+            13vw,
+            4.2rem
+        );
 
     line-height:1.02;
 
     color:#fff9bd;
 
     text-shadow:
+
         2px 3px 0 #a7195d,
-        0 0 8px rgba(255,255,255,.9),
-        0 0 22px rgba(255,230,120,.65);
+
+        0 0 8px
+        rgba(255,255,255,.9),
+
+        0 0 22px
+        rgba(255,230,120,.65);
 
     margin-top:22px;
 
-    transform:rotate(-2deg);
+    transform:
+        rotate(-2deg);
 }
 
 .cover-title::after{
-    content:"────── ♥ ──────";
+
+    content:
+        "────── ♥ ──────";
+
     display:block;
 
-    font-family:'Playfair Display',serif;
+    font-family:
+        'Playfair Display',
+        serif;
+
     font-size:11px;
 
     letter-spacing:2px;
@@ -428,13 +634,17 @@ body{
     margin-top:12px;
 
     text-shadow:
-        0 0 8px rgba(255,255,255,.8);
+        0 0 8px
+        rgba(255,255,255,.8);
 }
 
 .cover-subtitle{
+
     display:block;
 
-    font-family:'Playfair Display',serif;
+    font-family:
+        'Playfair Display',
+        serif;
 
     font-size:.82rem;
 
@@ -447,11 +657,15 @@ body{
     text-transform:uppercase;
 
     text-shadow:
-        0 1px 4px rgba(100,0,50,.8);
+        0 1px 4px
+        rgba(100,0,50,.8);
 }
 
-.cover-front .cover-subtitle::after{
-    content:"🌸  ✨  🌸";
+.cover-front
+.cover-subtitle::after{
+
+    content:
+        "🌸  ✨  🌸";
 
     display:block;
 
@@ -462,48 +676,45 @@ body{
     letter-spacing:2px;
 }
 
+
 /* =========================
    PAGES
 ========================= */
 
 .pages{
-    position:absolute;
-    inset:10px;
-    z-index:10;
-    transform-style:preserve-3d;
 
-    /*
-       Sa pèmèt tout paj yo
-       reyini ansanm lè liv la ap fèmen.
-    */
-    transition:
-        transform 1.8s cubic-bezier(.65,.05,.36,1);
+    position:absolute;
+
+    inset:10px;
+
+    z-index:10;
+
+    transform-style:preserve-3d;
 }
+
 
 /*
-   Lè fermeture kòmanse,
-   tout bloc paj yo fè yon ti
-   retou tankou yon liv reyèl.
+   Pa gen reset sou page yo lè
+   liv la ap fèmen.
+   Sa anpeche Page 1 re-parèt.
 */
-.book.closing .pages{
-    transform:
-        translateZ(3px)
-        rotateY(0deg)
-        scaleX(.96);
-}
 
 .page{
+
     position:absolute;
+
     inset:0;
 
     background:#fff1a8;
 
-    border:3px solid #ff78b5;
+    border:
+        3px solid #ff78b5;
 
     border-radius:
         7px 15px 15px 7px;
 
-    padding:22px 18px;
+    padding:
+        22px 18px;
 
     color:#d63384;
 
@@ -512,14 +723,20 @@ body{
     transform-style:preserve-3d;
 
     transition:
-        transform 1.5s cubic-bezier(.65,.05,.36,1),
+        transform 1.5s
+        cubic-bezier(.65,.05,.36,1),
+
         box-shadow 1s;
 
     backface-visibility:hidden;
 
     box-shadow:
-        inset 0 0 15px rgba(255,255,255,.5),
-        3px 5px 12px rgba(210,80,130,.25);
+
+        inset 0 0 15px
+        rgba(255,255,255,.5),
+
+        3px 5px 12px
+        rgba(210,80,130,.25);
 
     overflow:hidden;
 }
@@ -541,45 +758,49 @@ body{
 }
 
 .page.flipped{
-    transform:rotateY(-180deg);
+
+    transform:
+        rotateY(-180deg);
 }
 
-/*
-   Lè fermeture a kòmanse,
-   paj ki te pase yo retounen
-   pou yo fòme liv la ankò.
-*/
-.book.closing .page{
-    transform:rotateY(0deg);
-    transition:
-        transform 1.7s cubic-bezier(.65,.05,.36,1);
-}
 
 /* Kontni paj */
 
 .page-content{
+
     width:100%;
     height:100%;
 
     display:flex;
+
     flex-direction:column;
 
     align-items:center;
+
     justify-content:center;
 
     text-align:center;
 }
 
 .page-number{
-    font-family:'Great Vibes',cursive;
+
+    font-family:
+        'Great Vibes',
+        cursive;
+
     font-size:1.8rem;
+
     margin-bottom:8px;
+
     color:#e83e8c;
 }
 
 .message-box{
+
     background:#fff8cf;
-    border:2px solid #ff8fbe;
+
+    border:
+        2px solid #ff8fbe;
 
     padding:13px;
 
@@ -587,7 +808,9 @@ body{
 
     margin-bottom:15px;
 
-    font-family:'Great Vibes',cursive;
+    font-family:
+        'Great Vibes',
+        cursive;
 
     font-size:1.45rem;
 
@@ -596,11 +819,14 @@ body{
     line-height:1.35;
 
     box-shadow:
-        0 4px 12px rgba(255,51,153,.18);
+        0 4px 12px
+        rgba(255,51,153,.18);
 }
 
 .photo-frame{
+
     display:flex;
+
     gap:9px;
 
     justify-content:center;
@@ -611,66 +837,41 @@ body{
 }
 
 .photo-frame img{
+
     width:44%;
+
     height:175px;
 
     object-fit:cover;
 
     border-radius:8px;
 
-    border:3px solid #ff72ad;
+    border:
+        3px solid #ff72ad;
 
     box-shadow:
-        0 5px 12px rgba(214,51,132,.3);
+        0 5px 12px
+        rgba(214,51,132,.3);
 }
 
 .page-decoration{
+
     color:#ff5ca8;
+
     font-size:22px;
+
     margin-bottom:5px;
 }
 
-/* =========================
-   SIGNATURE
-========================= */
-
-/*
-   Ders anba foto yo,
-   a dwat.
-*/
-
-.signature{
-    align-self:flex-end;
-
-    margin-top:-2px;
-    margin-right:8px;
-    margin-bottom:7px;
-
-    flex-shrink:0;
-
-    font-family:'Great Vibes',cursive;
-
-    font-size:1.5rem;
-
-    color:#d63384;
-
-    text-decoration:underline;
-
-    text-underline-offset:4px;
-
-    transform:rotate(-4deg);
-
-    position:relative;
-
-    z-index:3;
-}
 
 /* =========================
-   COEUR
+   COEUR FINAL
 ========================= */
 
 .heart-grid{
+
     position:absolute;
+
     inset:0;
 
     width:100%;
@@ -680,6 +881,7 @@ body{
 }
 
 .mini-card{
+
     position:absolute;
 
     width:43px;
@@ -692,12 +894,15 @@ body{
     border-radius:5px;
 
     box-shadow:
-        0 0 8px rgba(255,51,153,.8);
+        0 0 8px
+        rgba(255,51,153,.8);
 
-    transition:transform .5s;
+    transition:
+        transform .5s;
 }
 
 .mini-card img{
+
     width:100%;
     height:100%;
 
@@ -706,11 +911,13 @@ body{
     border-radius:3px;
 }
 
+
 /* =========================
    TITRE FINAL
 ========================= */
 
 .heart-title{
+
     position:absolute;
 
     z-index:6;
@@ -722,7 +929,9 @@ body{
 
     text-align:center;
 
-    font-family:'Great Vibes',cursive;
+    font-family:
+        'Great Vibes',
+        cursive;
 
     color:#ff79b5;
 
@@ -734,23 +943,119 @@ body{
     opacity:0;
 
     animation:
-        heartTitle 2s ease forwards;
+        heartTitle
+        2s ease forwards;
 
     animation-delay:1.5s;
 }
 
 @keyframes heartTitle{
+
     to{
         opacity:1;
     }
+
 }
+
+
+/* =========================
+   DERS FINAL
+========================= */
+
+.final-signature{
+
+    position:absolute;
+
+    right:24px;
+
+    bottom:22px;
+
+    z-index:100;
+
+    min-width:90px;
+
+    text-align:right;
+
+    font-family:
+        'Great Vibes',
+        cursive;
+
+    font-size:2.25rem;
+
+    font-weight:400;
+
+    color:#fff;
+
+    letter-spacing:1px;
+
+    white-space:nowrap;
+
+    opacity:1;
+
+    pointer-events:none;
+
+    text-shadow:
+
+        0 0 5px
+        rgba(255,255,255,.95),
+
+        0 0 10px
+        rgba(255,255,255,.9),
+
+        0 0 18px
+        rgba(255,120,200,.9),
+
+        0 0 30px
+        rgba(255,80,170,.65);
+
+    animation:
+        signatureGlow
+        2s ease-in-out
+        infinite alternate;
+}
+
+@keyframes signatureGlow{
+
+    0%{
+        text-shadow:
+
+            0 0 4px
+            rgba(255,255,255,.8),
+
+            0 0 9px
+            rgba(255,255,255,.7),
+
+            0 0 15px
+            rgba(255,120,200,.6);
+    }
+
+    100%{
+        text-shadow:
+
+            0 0 6px
+            #fff,
+
+            0 0 13px
+            #fff,
+
+            0 0 22px
+            rgba(255,120,200,1),
+
+            0 0 35px
+            rgba(255,80,170,.8);
+    }
+
+}
+
 
 /* =========================
    VRÈ TI ETWAL YO
 ========================= */
 
 .star-field{
+
     position:absolute;
+
     inset:0;
 
     width:100%;
@@ -764,6 +1069,7 @@ body{
 }
 
 .real-star{
+
     position:absolute;
 
     border-radius:50%;
@@ -775,13 +1081,19 @@ body{
     transform:scale(0);
 
     box-shadow:
+
         0 0 4px #fff,
-        0 0 9px rgba(255,255,255,.95),
-        0 0 17px rgba(255,210,245,.9);
+
+        0 0 9px
+        rgba(255,255,255,.95),
+
+        0 0 17px
+        rgba(255,210,245,.9);
 }
 
 .real-star::before,
 .real-star::after{
+
     content:"";
 
     position:absolute;
@@ -796,6 +1108,7 @@ body{
 }
 
 .real-star::before{
+
     width:2px;
     height:24px;
 
@@ -809,6 +1122,7 @@ body{
 }
 
 .real-star::after{
+
     width:24px;
     height:2px;
 
@@ -822,9 +1136,20 @@ body{
 }
 
 .real-star.lit{
+
     animation:
-        starAppear .7s ease-out forwards,
-        starTwinkle 2.5s ease-in-out .7s infinite alternate;
+
+        starAppear
+        .7s
+        ease-out
+        forwards,
+
+        starTwinkle
+        2.5s
+        ease-in-out
+        .7s
+        infinite
+        alternate;
 }
 
 @keyframes starAppear{
@@ -843,6 +1168,7 @@ body{
         opacity:1;
         transform:scale(1);
     }
+
 }
 
 @keyframes starTwinkle{
@@ -856,7 +1182,9 @@ body{
         filter:brightness(2);
         transform:scale(1.2);
     }
+
 }
+
 
 /* =========================
    PETITS ECRANS
@@ -865,80 +1193,116 @@ body{
 @media(max-width:380px){
 
     .book{
+
         width:86vw;
+
         height:72vh;
     }
 
     .cover-title{
+
         font-size:3rem;
     }
 
     .cover-front{
-        padding:28px 20px;
+
+        padding:
+            28px 20px;
     }
 
     .cover-front::after{
+
         inset:15px;
     }
 
     .cover-front > div::before{
+
         top:5px;
     }
 
     .cover-front > div::after{
+
         top:42px;
+
         font-size:13px;
     }
 
     .cover-subtitle{
+
         font-size:.72rem;
+
         letter-spacing:1.5px;
     }
 
     .message-box{
+
         font-size:1.25rem;
     }
 
     .photo-frame img{
+
         height:145px;
     }
 
     .mini-card{
+
         width:38px;
         height:46px;
     }
 
     .heart-title{
+
         font-size:2.2rem;
     }
 
-    .signature{
-        font-size:1.2rem;
-        margin-right:5px;
-        margin-bottom:6px;
+    /* DERS sou ti ekran */
+
+    .final-signature{
+
+        right:18px;
+
+        bottom:16px;
+
+        font-size:1.9rem;
+
+        min-width:75px;
     }
 
     .birthday-title{
-        font-size:clamp(1.15rem, 6vw, 1.7rem);
+
+        font-size:
+            clamp(
+                1.15rem,
+                6vw,
+                1.7rem
+            );
+
         gap:5px;
     }
 
     .flower{
+
         font-size:1.35rem;
     }
 
     .real-star::before{
+
         height:18px;
     }
 
     .real-star::after{
+
         width:18px;
     }
+
 }
+
 </style>
 </head>
 
+
 <body>
+
 
 <!-- =========================
      MATRIX
@@ -948,7 +1312,10 @@ body{
 
     <canvas id="matrix-canvas"></canvas>
 
-    <div class="matrix-text" id="matrix-text">
+    <div
+        class="matrix-text"
+        id="matrix-text"
+    >
         3
     </div>
 
@@ -973,11 +1340,17 @@ body{
 
         <div class="birthday-title">
 
-            <span class="flower">🌸</span>
+            <span class="flower">
+                🌸
+            </span>
 
-            <span>HAPPY BIRTHDAY HARLIE</span>
+            <span>
+                HAPPY BIRTHDAY HARLIE
+            </span>
 
-            <span class="flower">🌸</span>
+            <span class="flower">
+                🌸
+            </span>
 
         </div>
 
@@ -990,9 +1363,14 @@ body{
      FEU D'ARTIFICE
 ========================= -->
 
-<div id="fireworks-screen" class="screen">
+<div
+    id="fireworks-screen"
+    class="screen"
+>
 
-    <canvas id="fireworks-canvas"></canvas>
+    <canvas
+        id="fireworks-canvas"
+    ></canvas>
 
 </div>
 
@@ -1001,13 +1379,19 @@ body{
      LIVRE
 ========================= -->
 
-<div id="screen-card" class="screen">
+<div
+    id="screen-card"
+    class="screen"
+>
 
     <div class="stars-bg"></div>
 
     <div class="book-area">
 
-        <div class="book" id="book">
+        <div
+            class="book"
+            id="book"
+        >
 
             <div class="book-inside"></div>
 
@@ -1018,7 +1402,10 @@ body{
                      PAGE 1
                 ====================== -->
 
-                <div class="page" id="page1">
+                <div
+                    class="page"
+                    id="page1"
+                >
 
                     <div class="page-content">
 
@@ -1031,7 +1418,10 @@ body{
                         </div>
 
                         <div class="message-box">
-                            Joyeux Anniversaire mon Nounours 🧸❤️
+
+                            Joyeux Anniversaire
+                            mon Nounours 🧸❤️
+
                         </div>
 
                         <div class="photo-frame">
@@ -1061,7 +1451,10 @@ body{
                      PAGE 2
                 ====================== -->
 
-                <div class="page" id="page2">
+                <div
+                    class="page"
+                    id="page2"
+                >
 
                     <div class="page-content">
 
@@ -1074,7 +1467,11 @@ body{
                         </div>
 
                         <div class="message-box">
-                            Que le Seigneur t'accorde la paix, la joie, le succès, la santé et beaucoup d'amour ❤️
+
+                            Que le Seigneur t'accorde
+                            la paix, la joie, le succès,
+                            la santé et beaucoup d'amour ❤️
+
                         </div>
 
                         <div class="photo-frame">
@@ -1104,7 +1501,10 @@ body{
                      PAGE 3
                 ====================== -->
 
-                <div class="page" id="page3">
+                <div
+                    class="page"
+                    id="page3"
+                >
 
                     <div class="page-content">
 
@@ -1117,7 +1517,13 @@ body{
                         </div>
 
                         <div class="message-box">
-                            Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. Et aujourd'hui encore plus, je veux que tu te sentes unique, chouchoutée, aimée, valorisée, comblée. ✨
+
+                            Chaque jour, j'essaie de te montrer
+                            à quel point tu es spéciale à mes yeux.
+                            Et aujourd'hui encore plus, je veux que
+                            tu te sentes unique, chouchoutée,
+                            aimée, valorisée, comblée. ✨
+
                         </div>
 
                         <div class="photo-frame">
@@ -1147,7 +1553,10 @@ body{
                      PAGE 4
                 ====================== -->
 
-                <div class="page" id="page4">
+                <div
+                    class="page"
+                    id="page4"
+                >
 
                     <div class="page-content">
 
@@ -1160,10 +1569,15 @@ body{
                         </div>
 
                         <div class="message-box">
-                            Toi qui as fait de mon cœur un musée qui déborde de tes plus beaux portraits, ce musée dont j'ai jeté les clés afin qu'il reste ouvert à jamais... Ainsi, je pourrai contempler ces œuvres d'art sans jamais me lasser. 💖
-                        </div>
 
-                        <!-- FOTO YO ANVAN -->
+                            Toi qui as fait de mon cœur
+                            un musée qui déborde de tes plus
+                            beaux portraits, ce musée dont j'ai
+                            jeté les clés afin qu'il reste ouvert
+                            à jamais... Ainsi, je pourrai contempler
+                            ces œuvres d'art sans jamais me lasser. 💖
+
+                        </div>
 
                         <div class="photo-frame">
 
@@ -1177,12 +1591,6 @@ body{
                                 alt="Foto Harlie"
                             >
 
-                        </div>
-
-                        <!-- DERS ANBA FOTO YO, A DWAT -->
-
-                        <div class="signature">
-                            Ders
                         </div>
 
                         <div class="page-decoration">
@@ -1201,20 +1609,27 @@ body{
                  KOUVÈTI
             ====================== -->
 
-            <div class="book-cover" id="bookCover">
+            <div
+                class="book-cover"
+                id="bookCover"
+            >
 
                 <div class="cover-front">
 
                     <div>
 
                         <div class="cover-title">
+
                             Happy<br>
                             Birthday<br>
                             Harlie
+
                         </div>
 
                         <span class="cover-subtitle">
+
                             Avec tout mon cœur 🧸❤️
+
                         </span>
 
                     </div>
@@ -1234,29 +1649,47 @@ body{
      COEUR FINAL
 ========================= -->
 
-<div id="screen-heart" class="screen">
+<div
+    id="screen-heart"
+    class="screen"
+>
 
     <div class="stars-bg"></div>
 
-    <div class="heart-grid" id="heartGrid"></div>
+    <div
+        class="heart-grid"
+        id="heartGrid"
+    ></div>
 
-    <div class="star-field" id="starField"></div>
+    <div
+        class="star-field"
+        id="starField"
+    ></div>
 
     <div class="heart-title">
         Mon chef-d’œuvre ❤️
     </div>
+
+    <!-- DERS AP PARÈT LA -->
+    <div
+        class="final-signature"
+        id="finalSignature"
+    ></div>
 
 </div>
 
 
 <script>
 
+
 /* =====================================================
    MATRIX
 ===================================================== */
 
 const canvas =
-    document.getElementById('matrix-canvas');
+    document.getElementById(
+        'matrix-canvas'
+    );
 
 const ctx =
     canvas.getContext('2d');
@@ -1279,7 +1712,12 @@ const columns =
 
 const drops = [];
 
-for(let i = 0; i < columns; i++){
+for(
+    let i = 0;
+    i < columns;
+    i++
+){
+
     drops[i] = 1;
 }
 
@@ -1301,7 +1739,11 @@ function drawMatrix(){
     ctx.font =
         fontSize + 'px monospace';
 
-    for(let i = 0; i < drops.length; i++){
+    for(
+        let i = 0;
+        i < drops.length;
+        i++
+    ){
 
         const text =
             characters.charAt(
@@ -1322,6 +1764,7 @@ function drawMatrix(){
             canvas.height &&
             Math.random() > 0.975
         ){
+
             drops[i] = 0;
         }
 
@@ -1346,6 +1789,7 @@ const textElement =
     );
 
 const sequence = [
+
     "3",
     "2",
     "1",
@@ -1353,6 +1797,7 @@ const sequence = [
     "BIRTHDAY",
     "TO",
     "HARLIE ❤️"
+
 ];
 
 let seqIndex = 0;
@@ -1362,7 +1807,10 @@ let seqTimer =
 
         seqIndex++;
 
-        if(seqIndex < sequence.length){
+        if(
+            seqIndex <
+            sequence.length
+        ){
 
             textElement.innerText =
                 sequence[seqIndex];
@@ -1370,7 +1818,10 @@ let seqTimer =
         }else{
 
             clearInterval(seqTimer);
-            clearInterval(matrixInterval);
+
+            clearInterval(
+                matrixInterval
+            );
 
             switchScreen(
                 'screen-cat'
@@ -1390,17 +1841,24 @@ let seqTimer =
    CHANGER D'ECRAN
 ===================================================== */
 
-function switchScreen(screenId){
+function switchScreen(
+    screenId
+){
 
     document
         .querySelectorAll('.screen')
-        .forEach(s =>
-            s.classList.remove('active')
+        .forEach(
+            s =>
+                s.classList.remove(
+                    'active'
+                )
         );
 
     document
         .getElementById(screenId)
-        .classList.add('active');
+        .classList.add(
+            'active'
+        );
 }
 
 
@@ -1414,11 +1872,16 @@ const fireworksCanvas =
     );
 
 const fireworksCtx =
-    fireworksCanvas.getContext('2d');
+    fireworksCanvas.getContext(
+        '2d'
+    );
 
 let fireworksAnimation;
+
 let fireworksParticles = [];
+
 let fireworksRockets = [];
+
 
 function resizeFireworks(){
 
@@ -1438,9 +1901,14 @@ resizeFireworks();
 
 class FireworkParticle{
 
-    constructor(x,y,color){
+    constructor(
+        x,
+        y,
+        color
+    ){
 
         this.x = x;
+
         this.y = y;
 
         const angle =
@@ -1451,10 +1919,12 @@ class FireworkParticle{
             Math.random() * 5 + 2;
 
         this.vx =
-            Math.cos(angle) * speed;
+            Math.cos(angle) *
+            speed;
 
         this.vy =
-            Math.sin(angle) * speed;
+            Math.sin(angle) *
+            speed;
 
         this.gravity =
             0.045;
@@ -1463,10 +1933,14 @@ class FireworkParticle{
             1;
 
         this.decay =
-            Math.random() * 0.012 + 0.008;
+            Math.random() *
+            0.012 +
+            0.008;
 
         this.size =
-            Math.random() * 2.5 + 1;
+            Math.random() *
+            2.5 +
+            1;
 
         this.color =
             color;
@@ -1475,14 +1949,20 @@ class FireworkParticle{
     update(){
 
         this.x += this.vx;
+
         this.y += this.vy;
 
-        this.vy += this.gravity;
+        this.vy +=
+            this.gravity;
 
-        this.vx *= 0.985;
-        this.vy *= 0.985;
+        this.vx *=
+            0.985;
 
-        this.life -= this.decay;
+        this.vy *=
+            0.985;
+
+        this.life -=
+            this.decay;
     }
 
     draw(){
@@ -1490,7 +1970,10 @@ class FireworkParticle{
         fireworksCtx.save();
 
         fireworksCtx.globalAlpha =
-            Math.max(this.life,0);
+            Math.max(
+                this.life,
+                0
+            );
 
         fireworksCtx.fillStyle =
             this.color;
@@ -1531,7 +2014,8 @@ class FireworkRocket{
             fireworksCanvas.width;
 
         this.y =
-            fireworksCanvas.height + 10;
+            fireworksCanvas.height +
+            10;
 
         this.targetY =
             Math.random() *
@@ -1541,7 +2025,9 @@ class FireworkRocket{
             0.12;
 
         this.speed =
-            Math.random() * 5 + 8;
+            Math.random() *
+            5 +
+            8;
 
         this.color =
             getFireworkColor();
@@ -1552,18 +2038,22 @@ class FireworkRocket{
 
     update(){
 
-        this.y -= this.speed;
+        this.y -=
+            this.speed;
 
-        this.speed *= 0.985;
+        this.speed *=
+            0.985;
 
         if(
-            this.y <= this.targetY &&
+            this.y <=
+                this.targetY &&
             !this.exploded
         ){
 
             this.explode();
 
-            this.exploded = true;
+            this.exploded =
+                true;
 
             return true;
         }
@@ -1575,7 +2065,9 @@ class FireworkRocket{
 
         const particleCount =
             Math.floor(
-                Math.random() * 35 + 65
+                Math.random() *
+                35 +
+                65
             );
 
         for(
@@ -1585,11 +2077,13 @@ class FireworkRocket{
         ){
 
             fireworksParticles.push(
+
                 new FireworkParticle(
                     this.x,
                     this.y,
                     this.color
                 )
+
             );
         }
     }
@@ -1631,6 +2125,7 @@ class FireworkRocket{
 function getFireworkColor(){
 
     const colors = [
+
         '#ff3399',
         '#ff5ca8',
         '#ffd94d',
@@ -1639,6 +2134,7 @@ function getFireworkColor(){
         '#9c7cff',
         '#5ce1e6',
         '#ffffff'
+
     ];
 
     return colors[
@@ -1656,7 +2152,9 @@ function getFireworkColor(){
 
 let lastRocketTime = 0;
 
-function animateFireworks(time){
+function animateFireworks(
+    time
+){
 
     fireworksCtx.clearRect(
         0,
@@ -1666,7 +2164,8 @@ function animateFireworks(time){
     );
 
     if(
-        time - lastRocketTime >
+        time -
+        lastRocketTime >
         450
     ){
 
@@ -1674,11 +2173,13 @@ function animateFireworks(time){
             new FireworkRocket()
         );
 
-        lastRocketTime = time;
+        lastRocketTime =
+            time;
     }
 
     for(
-        let i = fireworksRockets.length - 1;
+        let i =
+            fireworksRockets.length - 1;
         i >= 0;
         i--
     ){
@@ -1703,7 +2204,8 @@ function animateFireworks(time){
     }
 
     for(
-        let i = fireworksParticles.length - 1;
+        let i =
+            fireworksParticles.length - 1;
         i >= 0;
         i--
     ){
@@ -1712,6 +2214,7 @@ function animateFireworks(time){
             fireworksParticles[i];
 
         particle.update();
+
         particle.draw();
 
         if(
@@ -1739,6 +2242,7 @@ function animateFireworks(time){
 function startFireworks(){
 
     fireworksRockets = [];
+
     fireworksParticles = [];
 
     switchScreen(
@@ -1772,7 +2276,9 @@ function startFireworks(){
 
 function stopFireworks(){
 
-    if(fireworksAnimation){
+    if(
+        fireworksAnimation
+    ){
 
         cancelAnimationFrame(
             fireworksAnimation
@@ -1783,6 +2289,7 @@ function stopFireworks(){
     }
 
     fireworksRockets = [];
+
     fireworksParticles = [];
 
     fireworksCtx.clearRect(
@@ -1801,37 +2308,65 @@ function stopFireworks(){
 function startBookAnimation(){
 
     const book =
-        document.getElementById('book');
+        document.getElementById(
+            'book'
+        );
 
     const page1 =
-        document.getElementById('page1');
+        document.getElementById(
+            'page1'
+        );
 
     const page2 =
-        document.getElementById('page2');
+        document.getElementById(
+            'page2'
+        );
 
     const page3 =
-        document.getElementById('page3');
+        document.getElementById(
+            'page3'
+        );
 
     const page4 =
-        document.getElementById('page4');
+        document.getElementById(
+            'page4'
+        );
 
 
     /* RESET */
 
-    book.classList.remove('open');
-    book.classList.remove('closing');
+    book.classList.remove(
+        'open'
+    );
 
-    page1.classList.remove('flipped');
-    page2.classList.remove('flipped');
-    page3.classList.remove('flipped');
-    page4.classList.remove('flipped');
+    book.classList.remove(
+        'closing'
+    );
+
+    page1.classList.remove(
+        'flipped'
+    );
+
+    page2.classList.remove(
+        'flipped'
+    );
+
+    page3.classList.remove(
+        'flipped'
+    );
+
+    page4.classList.remove(
+        'flipped'
+    );
 
 
     /* LIVRE FÈMEN 3 SEC */
 
     setTimeout(() => {
 
-        book.classList.add('open');
+        book.classList.add(
+            'open'
+        );
 
     },3000);
 
@@ -1840,7 +2375,9 @@ function startBookAnimation(){
 
     setTimeout(() => {
 
-        page1.classList.add('flipped');
+        page1.classList.add(
+            'flipped'
+        );
 
     },8000);
 
@@ -1849,7 +2386,9 @@ function startBookAnimation(){
 
     setTimeout(() => {
 
-        page2.classList.add('flipped');
+        page2.classList.add(
+            'flipped'
+        );
 
     },13000);
 
@@ -1858,7 +2397,9 @@ function startBookAnimation(){
 
     setTimeout(() => {
 
-        page3.classList.add('flipped');
+        page3.classList.add(
+            'flipped'
+        );
 
     },20000);
 
@@ -1867,36 +2408,29 @@ function startBookAnimation(){
 
     setTimeout(() => {
 
-        page4.classList.add('flipped');
+        page4.classList.add(
+            'flipped'
+        );
 
     },27000);
 
 
     /*
-     * PAGE 4 FINI PASE.
-     *
-     * Nou tann 1.5 sec pou
-     * mouvman paj 4 la fini.
-     */
+       LIV LA KÒMANSE FÈMEN
+    */
 
     setTimeout(() => {
 
-        /*
-         * KOUNYE A LIV LA
-         * KÒMANSE FÈMEN VRE.
-         */
-
-        book.classList.add('closing');
+        book.classList.add(
+            'closing'
+        );
 
     },28500);
 
 
     /*
-     * KOUVÈTI/PAGES YO GEN TAN
-     * REYINI.
-     *
-     * Kè a pa parèt touswit.
-     */
+       DÈNYE EKRAN
+    */
 
     setTimeout(() => {
 
@@ -1907,6 +2441,8 @@ function startBookAnimation(){
         createHeartFormation();
 
         createRealStars();
+
+        animateFinalSignature();
 
     },31500);
 }
@@ -1957,20 +2493,26 @@ function createHeartFormation(){
         "WhatsApp Image 2026-09-22 at 5.01.22 PM.jpeg",
 
         "WhatsApp Image 2026-09-22 at 5.01.16 PM.jpeg"
+
     ];
 
 
     const numCards = 20;
 
     const cardWidth = 43;
+
     const cardHeight = 51;
 
 
     const heartScale =
         Math.min(
+
             window.innerWidth / 38,
+
             window.innerHeight / 48,
+
             10
+
         );
 
 
@@ -1985,7 +2527,11 @@ function createHeartFormation(){
         (6 * heartScale);
 
 
-    for(let i = 0; i < numCards; i++){
+    for(
+        let i = 0;
+        i < numCards;
+        i++
+    ){
 
         const t =
             (i / numCards) *
@@ -2021,12 +2567,15 @@ function createHeartFormation(){
 
         const photoSrc =
             photosList[
-                i % photosList.length
+                i %
+                photosList.length
             ];
 
 
         const card =
-            document.createElement('div');
+            document.createElement(
+                'div'
+            );
 
         card.className =
             'mini-card';
@@ -2041,10 +2590,16 @@ function createHeartFormation(){
 
 
         card.innerHTML =
-            `<img src="${photoSrc}" alt="Heart Photo">`;
+
+            `<img
+                src="${photoSrc}"
+                alt="Heart Photo"
+            >`;
 
 
-        container.appendChild(card);
+        container.appendChild(
+            card
+        );
     }
 }
 
@@ -2066,13 +2621,21 @@ function createRealStars(){
     const positions = [];
 
 
-    for(let i = 0; i < 36; i++){
+    for(
+        let i = 0;
+        i < 36;
+        i++
+    ){
 
         const left =
-            Math.random() * 94 + 3;
+            Math.random() *
+            94 +
+            3;
 
         const top =
-            Math.random() * 88 + 6;
+            Math.random() *
+            88 +
+            6;
 
         positions.push([
             left,
@@ -2082,7 +2645,10 @@ function createRealStars(){
 
 
     positions.forEach(
-        (position,index) => {
+        (
+            position,
+            index
+        ) => {
 
             const star =
                 document.createElement(
@@ -2095,15 +2661,19 @@ function createRealStars(){
 
 
             star.style.left =
-                position[0] + '%';
+                position[0] +
+                '%';
 
 
             star.style.top =
-                position[1] + '%';
+                position[1] +
+                '%';
 
 
             const size =
-                Math.random() * 4 + 2;
+                Math.random() *
+                4 +
+                2;
 
 
             star.style.width =
@@ -2131,7 +2701,8 @@ function createRealStars(){
 
 
             star.style.animationDelay =
-                (index * 0.14) + 's';
+                (index * 0.14) +
+                's';
 
 
             container.appendChild(
@@ -2139,15 +2710,77 @@ function createRealStars(){
             );
 
 
-            requestAnimationFrame(() => {
+            requestAnimationFrame(
+                () => {
 
-                star.classList.add(
-                    'lit'
-                );
+                    star.classList.add(
+                        'lit'
+                    );
 
-            });
+                }
+            );
 
         }
+    );
+}
+
+
+/* =====================================================
+   ANIMATION DERS
+===================================================== */
+
+function animateFinalSignature(){
+
+    const signature =
+        document.getElementById(
+            'finalSignature'
+        );
+
+    if(!signature){
+        return;
+    }
+
+
+    signature.textContent = "";
+
+
+    const text =
+        "Ders";
+
+    let i = 0;
+
+
+    function showNextLetter(){
+
+        if(
+            i <
+            text.length
+        ){
+
+            signature.textContent +=
+                text[i];
+
+            i++;
+
+
+            setTimeout(
+                showNextLetter,
+                120
+            );
+
+        }
+
+    }
+
+
+    /*
+       Ti reta anvan premye
+       lèt la parèt.
+    */
+
+    setTimeout(
+        showNextLetter,
+        300
     );
 }
 
