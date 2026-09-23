@@ -68,8 +68,12 @@ body{
 }
 
 @keyframes pulse{
-    0%{transform:scale(1);}
-    100%{transform:scale(1.08);}
+    0%{
+        transform:scale(1);
+    }
+    100%{
+        transform:scale(1.08);
+    }
 }
 
 /* FOND */
@@ -89,8 +93,10 @@ body{
     z-index:2;
     text-align:center;
     padding:20px;
+    width:100%;
 }
 
+/* GIF */
 .cat-img{
     width:180px;
     height:180px;
@@ -100,18 +106,26 @@ body{
 }
 
 @keyframes floatCat{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-15px);}
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-15px);
+    }
 }
 
-/* NOUVELLE POLICE DU TITRE SOUS LE GIF */
+/* TITRE SOUS LE GIF */
 .birthday-title{
     color:#ff5ca8;
     font-family:'Playfair Display',serif;
-    font-size:2rem;
+    font-size:clamp(1.35rem, 7vw, 2rem);
     font-weight:700;
     line-height:1.2;
-    white-space:nowrap;
+    white-space:normal;
+    text-align:center;
+    width:100%;
+    max-width:90vw;
+    padding:0 10px;
     text-shadow:
         0 1px 3px rgba(255,255,255,.9);
 }
@@ -176,7 +190,8 @@ body{
     z-index:20;
     transform-origin:left center;
     transform-style:preserve-3d;
-    transition:transform 2s cubic-bezier(.65,.05,.36,1);
+    transition:
+        transform 2s cubic-bezier(.65,.05,.36,1);
 }
 
 .book.open .book-cover{
@@ -314,7 +329,8 @@ body{
     font-size:1.45rem;
     color:#d63384;
     line-height:1.35;
-    box-shadow:0 4px 12px rgba(255,51,153,.18);
+    box-shadow:
+        0 4px 12px rgba(255,51,153,.18);
 }
 
 .photo-frame{
@@ -330,7 +346,8 @@ body{
     object-fit:cover;
     border-radius:8px;
     border:3px solid #ff72ad;
-    box-shadow:0 5px 12px rgba(214,51,132,.3);
+    box-shadow:
+        0 5px 12px rgba(214,51,132,.3);
 }
 
 .page-decoration{
@@ -355,7 +372,8 @@ body{
     background:white;
     padding:2px;
     border-radius:5px;
-    box-shadow:0 0 8px rgba(255,51,153,.8);
+    box-shadow:
+        0 0 8px rgba(255,51,153,.8);
     transition:transform .5s;
 }
 
@@ -383,9 +401,12 @@ body{
 }
 
 @keyframes heartTitle{
-    to{opacity:1;}
+    to{
+        opacity:1;
+    }
 }
 
+/* PETITS ECRANS */
 @media(max-width:380px){
 
     .book{
@@ -421,12 +442,15 @@ body{
 
 <!-- MATRIX -->
 <div id="screen-matrix" class="screen active">
+
     <canvas id="matrix-canvas"></canvas>
 
     <div class="matrix-text" id="matrix-text">
         3
     </div>
+
 </div>
+
 
 <!-- GIF CHAT -->
 <div id="screen-cat" class="screen">
@@ -446,7 +470,9 @@ body{
         </h1>
 
     </div>
+
 </div>
+
 
 <!-- LIVRE -->
 <div id="screen-card" class="screen">
@@ -497,7 +523,9 @@ body{
                         </div>
 
                     </div>
+
                 </div>
+
 
                 <!-- PAGE 2 -->
                 <div class="page" id="page2">
@@ -518,7 +546,7 @@ body{
 
                         <div class="photo-frame">
 
-                            <!-- NOUVELLES PHOTOS DE LA PAGE 2 -->
+                            <!-- NOUVELLES PHOTOS PAGE 2 -->
                             <img
                                 src="WhatsApp Image 2026-09-22 at 5.01.16 PM.jpeg"
                                 alt="Foto Harlie"
@@ -536,7 +564,9 @@ body{
                         </div>
 
                     </div>
+
                 </div>
+
 
                 <!-- PAGE 3 -->
                 <div class="page" id="page3">
@@ -574,9 +604,11 @@ body{
                         </div>
 
                     </div>
+
                 </div>
 
             </div>
+
 
             <!-- COUVERTURE -->
             <div class="book-cover" id="bookCover">
@@ -606,7 +638,9 @@ body{
         </div>
 
     </div>
+
 </div>
+
 
 <!-- COEUR -->
 <div id="screen-heart" class="screen">
@@ -621,18 +655,32 @@ body{
 
 </div>
 
+
 <script>
 
 /* MATRIX */
-const canvas = document.getElementById('matrix-canvas');
-const ctx = canvas.getContext('2d');
+const canvas =
+    document.getElementById('matrix-canvas');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+const ctx =
+    canvas.getContext('2d');
 
-const characters = "HAPPYBIRTHDAYHARLIE321🧸❤️";
+canvas.width =
+    window.innerWidth;
+
+canvas.height =
+    window.innerHeight;
+
+const characters =
+    "HAPPYBIRTHDAYHARLIE321🧸❤️";
+
 const fontSize = 16;
-const columns = Math.floor(canvas.width / fontSize);
+
+const columns =
+    Math.floor(
+        canvas.width / fontSize
+    );
+
 const drops = [];
 
 for(let i = 0; i < columns; i++){
@@ -641,7 +689,9 @@ for(let i = 0; i < columns; i++){
 
 function drawMatrix(){
 
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillStyle =
+        'rgba(0, 0, 0, 0.05)';
+
     ctx.fillRect(
         0,
         0,
@@ -649,15 +699,19 @@ function drawMatrix(){
         canvas.height
     );
 
-    ctx.fillStyle = '#ff3399';
-    ctx.font = fontSize + 'px monospace';
+    ctx.fillStyle =
+        '#ff3399';
+
+    ctx.font =
+        fontSize + 'px monospace';
 
     for(let i = 0; i < drops.length; i++){
 
         const text =
             characters.charAt(
                 Math.floor(
-                    Math.random() * characters.length
+                    Math.random() *
+                    characters.length
                 )
             );
 
@@ -668,7 +722,8 @@ function drawMatrix(){
         );
 
         if(
-            drops[i] * fontSize > canvas.height &&
+            drops[i] * fontSize >
+            canvas.height &&
             Math.random() > 0.975
         ){
             drops[i] = 0;
@@ -678,16 +733,20 @@ function drawMatrix(){
     }
 }
 
+
 /* MATRIX PLUS LENT */
-let matrixInterval = setInterval(
-    drawMatrix,
-    70
-);
+let matrixInterval =
+    setInterval(
+        drawMatrix,
+        70
+    );
 
 
 /* SEQUENCE */
 const textElement =
-    document.getElementById('matrix-text');
+    document.getElementById(
+        'matrix-text'
+    );
 
 const sequence = [
     "3",
@@ -701,31 +760,37 @@ const sequence = [
 
 let seqIndex = 0;
 
-let seqTimer = setInterval(() => {
+let seqTimer =
+    setInterval(() => {
 
-    seqIndex++;
+        seqIndex++;
 
-    if(seqIndex < sequence.length){
+        if(seqIndex < sequence.length){
 
-        textElement.innerText =
-            sequence[seqIndex];
+            textElement.innerText =
+                sequence[seqIndex];
 
-    }else{
+        }else{
 
-        clearInterval(seqTimer);
-        clearInterval(matrixInterval);
+            clearInterval(seqTimer);
+            clearInterval(matrixInterval);
 
-        switchScreen('screen-cat');
+            switchScreen(
+                'screen-cat'
+            );
 
-        setTimeout(() => {
+            setTimeout(() => {
 
-            switchScreen('screen-card');
-            startBookAnimation();
+                switchScreen(
+                    'screen-card'
+                );
 
-        },4000);
-    }
+                startBookAnimation();
 
-},1200);
+            },4000);
+        }
+
+    },1200);
 
 
 /* CHANGER D'ECRAN */
@@ -764,12 +829,14 @@ function startBookAnimation(){
     page2.classList.remove('flipped');
     page3.classList.remove('flipped');
 
+
     /* LE LIVRE RESTE FERME 2 SECONDES */
     setTimeout(() => {
 
         book.classList.add('open');
 
     },2000);
+
 
     /* PAGE 1 */
     setTimeout(() => {
@@ -778,6 +845,7 @@ function startBookAnimation(){
 
     },7000);
 
+
     /* PAGE 2 */
     setTimeout(() => {
 
@@ -785,10 +853,14 @@ function startBookAnimation(){
 
     },13000);
 
+
     /* PASSAGE AU COEUR */
     setTimeout(() => {
 
-        switchScreen('screen-heart');
+        switchScreen(
+            'screen-heart'
+        );
+
         createHeartFormation();
 
     },19500);
@@ -799,15 +871,17 @@ function startBookAnimation(){
 function createHeartFormation(){
 
     const container =
-        document.getElementById('heartGrid');
+        document.getElementById(
+            'heartGrid'
+        );
 
     container.innerHTML = "";
 
+
     /*
       IMPORTANT :
-      CETTE LISTE RESTE INCHANGÉE.
-      Les changements de Page 2 ne modifient
-      PAS l'animation du cœur.
+      Les photos du cœur restent
+      exactement comme avant.
     */
     const photosList = [
 
@@ -842,15 +916,14 @@ function createHeartFormation(){
         "WhatsApp Image 2026-09-22 at 5.01.16 PM.jpeg"
     ];
 
+
     const numCards = 20;
 
     const cardWidth = 43;
     const cardHeight = 51;
 
-    /*
-      Position ajustée pour que le cœur
-      apparaisse bien centré sur l'écran.
-    */
+
+    /* COEUR CENTRE */
     const heartScale =
         Math.min(
             window.innerWidth / 38,
@@ -867,6 +940,7 @@ function createHeartFormation(){
         (cardHeight / 2) -
         (6 * heartScale);
 
+
     for(let i = 0; i < numCards; i++){
 
         const t =
@@ -874,16 +948,19 @@ function createHeartFormation(){
             Math.PI * 2;
 
         const x =
-            16 * Math.pow(
+            16 *
+            Math.pow(
                 Math.sin(t),
                 3
             );
 
         const y =
-            -(13 * Math.cos(t)
-            - 5 * Math.cos(2 * t)
-            - 2 * Math.cos(3 * t)
-            - Math.cos(4 * t));
+            -(
+                13 * Math.cos(t)
+                - 5 * Math.cos(2 * t)
+                - 2 * Math.cos(3 * t)
+                - Math.cos(4 * t)
+            );
 
         const posX =
             centerX +
@@ -919,17 +996,20 @@ function createHeartFormation(){
 
 
 /* RESIZE */
-window.addEventListener('resize', () => {
+window.addEventListener(
+    'resize',
+    () => {
 
-    canvas.width =
-        window.innerWidth;
+        canvas.width =
+            window.innerWidth;
 
-    canvas.height =
-        window.innerHeight;
+        canvas.height =
+            window.innerHeight;
 
-});
+    }
+);
 
 </script>
 
 </body>
-</html>
+    </html>
