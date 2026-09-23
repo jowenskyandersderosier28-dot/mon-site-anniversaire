@@ -7,104 +7,97 @@
   <style>
     body {
       margin: 0;
-      background-color: #050505;
+      background-color: #000;
       font-family: 'Courier New', Courier, monospace;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      overflow: hidden;
-      color: #fff;
-      padding: 15px;
+      overflow-x: hidden;
+      color: #ff2a85;
+      padding: 10px;
       box-sizing: border-box;
       position: relative;
     }
 
-    /* Ti fil/limyè woz k ap desann yo */
-    .rain-drop {
-      position: absolute;
-      top: -20px;
-      background: linear-gradient(transparent, #ff2a85);
-      width: 2px;
-      height: 25px;
-      opacity: 0.7;
-      animation: fall linear infinite;
-    }
-
-    @keyframes fall {
-      0% {
-        transform: translateY(-20px);
-        opacity: 0;
-      }
-      50% {
-        opacity: 0.8;
-      }
-      100% {
-        transform: translateY(105vh);
-        opacity: 0;
-      }
-    }
-
-    /* Pati konte a: 3, 2, 1, Happy Birthday */
-    #countdown-overlay {
+    /* Matrix woz efè an dèyè */
+    canvas {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: #050505;
+      z-index: 1;
+    }
+
+    .content-box {
+      position: relative;
+      z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      z-index: 999;
-      transition: opacity 1s ease;
+      width: 100%;
     }
 
-    #countdown-number {
-      font-size: 5rem;
-      font-weight: bold;
-      color: #ff2a85;
-      text-shadow: 0 0 20px #ff2a85, 0 0 40px #ff2a85;
-      animation: pulseNum 1s infinite alternate;
+    .screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
     }
 
-    @keyframes pulseNum {
-      0% { transform: scale(0.9); opacity: 0.8; }
-      100% { transform: scale(1.1); opacity: 1; }
+    .screen.active {
+      display: flex;
     }
 
-    .card {
-      background: rgba(20, 20, 20, 0.9);
+    .card-container {
+      background: rgba(15, 15, 15, 0.95);
       border: 2px solid #ff2a85;
       border-radius: 15px;
       padding: 15px;
-      max-width: 380px;
-      box-shadow: 0 0 20px rgba(255, 42, 133, 0.4);
+      width: 100%;
+      box-shadow: 0 0 25px rgba(255, 42, 133, 0.5);
       margin-bottom: 15px;
-      text-align: center;
-      z-index: 2;
+      box-sizing: border-box;
     }
 
-    p {
-      font-size: 0.72rem;
+    .message-box {
+      font-size: 0.75rem;
       line-height: 1.4;
       color: #ffc2d9;
-      margin: 0;
+      margin-bottom: 12px;
+      text-align: left;
     }
 
-    .heart-container {
+    .photo-frame {
+      display: flex;
+      justify-content: space-around;
+      gap: 10px;
+    }
+
+    .photo-frame img {
+      width: 45%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid #ff2a85;
+      box-shadow: 0 0 10px #ff2a85;
+    }
+
+    /* Ekran kè a */
+    .heart-grid {
       position: relative;
-      width: 240px;
-      height: 220px;
-      z-index: 2;
+      width: 280px;
+      height: 260px;
     }
 
-    .heart-container img {
+    .heart-grid img {
       position: absolute;
-      width: 42px;
-      height: 42px;
+      width: 45px;
+      height: 45px;
       object-fit: cover;
       border-radius: 50%;
       border: 2px solid #ff2a85;
@@ -112,44 +105,96 @@
       transform: translate(-50%, -50%);
     }
 
-    .main-content {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+    #countdown-display {
+      font-size: 5rem;
+      font-weight: bold;
+      text-shadow: 0 0 20px #ff2a85;
     }
   </style>
 </head>
 <body>
 
-  <!-- Ekran konte a -->
-  <div id="countdown-overlay">
-    <div id="countdown-number">3</div>
-  </div>
+  <canvas id="matrix-canvas"></canvas>
 
-  <!-- Sèn prensipal la -->
-  <div class="main-content" id="mainContent">
-    <div class="card">
-      <p>
-        Que le Seigneur t'accorde la paix, la joie, le succès, la santé et beaucoup d'amour. Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. Et aujourd'hui encore plus, je veux que tu te sentes unique, chouchoutée, aimée, valorisée, comblée. Toi qui as fait de mon cœur un musée qui déborde de tes plus beaux portraits, ce musée dont j'ai jeté les clés afin qu'il reste ouvert à jamais... Ainsi, je pourrai contempler ces œuvres d'art, et penser à m'en lasser, jamais. Merci d'être cette personne exceptionnelle qui illumine ma vie. Joyeux anniversaire mon Nounours ! 🧸❤️✨
-      </p>
+  <div class="content-box">
+    <!-- Ekran 1: Konte 3, 2, 1 -->
+    <div id="screen-countdown" class="screen active">
+      <div id="countdown-display">3</div>
     </div>
 
-    <div class="heart-container" id="heartGallery"></div>
+    <!-- Ekran 2: Kat mesaj 1 -->
+    <div id="screen-card-1" class="screen">
+      <div class="card-container">
+        <div class="message-box">Happy Birthday mon nounours 🧸❤️</div>
+        <div class="photo-frame">
+          <img src="WhatsApp Image 2026-09-22 at 5.01.16 PM.jpeg" alt="Foto Harlie">
+          <img src="WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg" alt="Foto Harlie">
+        </div>
+      </div>
+    </div>
+
+    <!-- Ekran 3: Kat mesaj 2 -->
+    <div id="screen-card-2" class="screen">
+      <div class="card-container">
+        <div class="message-box">Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. Et aujourd'hui encore plus, je veux que tu te sentes unique, chouchoutée, aimée, valorisée, comblée. ✨</div>
+        <div class="photo-frame">
+          <img src="WhatsApp Image 2026-09-22 at 5.01.17 PM.jpeg" alt="Foto Harlie">
+          <img src="WhatsApp Image 2026-09-22 at 5.01.20 PM.jpeg" alt="Foto Harlie">
+        </div>
+      </div>
+    </div>
+
+    <!-- Ekran 4: Kat mesaj 3 -->
+    <div id="screen-card-3" class="screen">
+      <div class="card-container">
+        <div class="message-box">Toi qui as fait de mon cœur un musée qui déborde de tes plus beaux portraits, ce musée dont j'ai jeté les clés afin qu'il reste ouvert à jamais... Ainsi, je pourrai contempler ces œuvres d'art, et penser à m'en lasser, jamais. ❤️</div>
+        <div class="photo-frame">
+          <img src="WhatsApp Image 2026-09-22 at 5.01.21 PM (1).jpeg" alt="Foto Harlie">
+          <img src="WhatsApp Image 2026-09-22 at 5.01.21 PM (2).jpeg" alt="Foto Harlie">
+        </div>
+      </div>
+    </div>
+
+    <!-- Ekran 5: Kè foto a -->
+    <div id="screen-heart" class="screen">
+      <div class="heart-grid" id="heartGrid"></div>
+    </div>
   </div>
 
   <script>
-    // Kreye ti fil woz k ap desann yo
-    for (let i = 0; i < 35; i++) {
-      const drop = document.createElement('div');
-      drop.classList.add('rain-drop');
-      drop.style.left = `${Math.random() * 100}vw`;
-      drop.style.animationDuration = `${1.5 + Math.random() * 2}s`;
-      drop.style.animationDelay = `${Math.random() * 3}s`;
-      document.body.appendChild(drop);
-    }
+    // --- 1. MATRIX EFFECT ---
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
 
-    // Lis tout foto WhatsApp yo
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const chars = "HARLIE❤️321✨HBD";
+    const fontSize = 14;
+    let columns = canvas.width / fontSize;
+    const drops = [];
+    for (let x = 0; x < columns; x++) drops[x] = 1;
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#ff2a85';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars.charAt(Math.floor(Math.random() * chars.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+    setInterval(drawMatrix, 50);
+
+    // --- 2. FLOW MANAGMENT ---
     const photosList = [
       "WhatsApp Image 2026-09-22 at 5.01.16 PM.jpeg",
       "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg",
@@ -164,36 +209,47 @@
       "WhatsApp Image 2026-09-22 at 5.01.23 PM.jpeg"
     ];
 
-    // Konte 3, 2, 1
-    const countdownEl = document.getElementById('countdown-number');
-    const overlayEl = document.getElementById('countdown-overlay');
-    const mainContentEl = document.getElementById('mainContent');
-
     let count = 3;
+    const countdownEl = document.getElementById('countdown-display');
+    const screenCountdown = document.getElementById('screen-countdown');
+    const screenCard1 = document.getElementById('screen-card-1');
+    const screenCard2 = document.getElementById('screen-card-2');
+    const screenCard3 = document.getElementById('screen-card-3');
+    const screenHeart = document.getElementById('screen-heart');
+
     const timer = setInterval(() => {
       count--;
       if (count > 0) {
         countdownEl.innerText = count;
-      } else if (count === 0) {
-        countdownEl.innerText = "🎉 Happy Birthday Harlie! 🎉";
-        countdownEl.style.fontSize = "2.2rem";
       } else {
         clearInterval(timer);
-        overlayEl.style.opacity = '0';
+        screenCountdown.classList.remove('active');
+        screenCard1.classList.add('active');
+
         setTimeout(() => {
-          overlayEl.style.display = 'none';
-          mainContentEl.style.display = 'flex';
-          buildHeart();
-        }, 1000);
+          screenCard1.classList.remove('active');
+          screenCard2.classList.add('active');
+        }, 5000);
+
+        setTimeout(() => {
+          screenCard2.classList.remove('active');
+          screenCard3.classList.add('active');
+        }, 10000);
+
+        setTimeout(() => {
+          screenCard3.classList.remove('active');
+          screenHeart.classList.add('active');
+          createHeartFormation();
+        }, 15000);
       }
     }, 1000);
 
-    // Bati fòm kè a ak foto yo
-    function buildHeart() {
-      const container = document.getElementById('heartGallery');
+    // --- 3. HEART FORMATION ---
+    function createHeartFormation() {
+      const container = document.getElementById('heartGrid');
       const totalPhotos = photosList.length;
-      const centerX = 120;
-      const centerY = 110;
+      const centerX = 140;
+      const centerY = 130;
       const scale = 8.5;
 
       for (let i = 0; i < totalPhotos; i++) {
