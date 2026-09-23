@@ -21,7 +21,6 @@
       position: relative;
     }
 
-    /* Matrix woz efè an dèyè */
     canvas {
       position: fixed;
       top: 0;
@@ -72,22 +71,6 @@
       text-align: left;
     }
 
-    .photo-frame {
-      display: flex;
-      justify-content: space-around;
-      gap: 10px;
-    }
-
-    .photo-frame img {
-      width: 45%;
-      height: 140px;
-      object-fit: cover;
-      border-radius: 10px;
-      border: 2px solid #ff2a85;
-      box-shadow: 0 0 10px #ff2a85;
-    }
-
-    /* Ekran kè a */
     .heart-grid {
       position: relative;
       width: 280px;
@@ -122,47 +105,22 @@
       <div id="countdown-display">3</div>
     </div>
 
-    <!-- Ekran 2: Kat mesaj 1 -->
-    <div id="screen-card-1" class="screen">
+    <!-- Ekran 2: Kat mesaj -->
+    <div id="screen-card" class="screen">
       <div class="card-container">
-        <div class="message-box">Happy Birthday mon nounours 🧸❤️</div>
-        <div class="photo-frame">
-          <img src="WhatsApp Image 2026-09-22 at 5.01.16 PM.jpeg" alt="Foto Harlie">
-          <img src="WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg" alt="Foto Harlie">
+        <div class="message-box">
+          Que le Seigneur t'accorde la paix, la joie, le succès, la santé et beaucoup d'amour. Joyeux anniversaire mon Nounours ! 🧸❤️✨
         </div>
       </div>
     </div>
 
-    <!-- Ekran 3: Kat mesaj 2 -->
-    <div id="screen-card-2" class="screen">
-      <div class="card-container">
-        <div class="message-box">Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. Et aujourd'hui encore plus, je veux que tu te sentes unique, chouchoutée, aimée, valorisée, comblée. ✨</div>
-        <div class="photo-frame">
-          <img src="WhatsApp Image 2026-09-22 at 5.01.17 PM.jpeg" alt="Foto Harlie">
-          <img src="WhatsApp Image 2026-09-22 at 5.01.20 PM.jpeg" alt="Foto Harlie">
-        </div>
-      </div>
-    </div>
-
-    <!-- Ekran 4: Kat mesaj 3 -->
-    <div id="screen-card-3" class="screen">
-      <div class="card-container">
-        <div class="message-box">Toi qui as fait de mon cœur un musée qui déborde de tes plus beaux portraits, ce musée dont j'ai jeté les clés afin qu'il reste ouvert à jamais... Ainsi, je pourrai contempler ces œuvres d'art, et penser à m'en lasser, jamais. ❤️</div>
-        <div class="photo-frame">
-          <img src="WhatsApp Image 2026-09-22 at 5.01.21 PM (1).jpeg" alt="Foto Harlie">
-          <img src="WhatsApp Image 2026-09-22 at 5.01.21 PM (2).jpeg" alt="Foto Harlie">
-        </div>
-      </div>
-    </div>
-
-    <!-- Ekran 5: Kè foto a -->
+    <!-- Ekran 3: Kè foto a -->
     <div id="screen-heart" class="screen">
       <div class="heart-grid" id="heartGrid"></div>
     </div>
   </div>
 
   <script>
-    // --- 1. MATRIX EFFECT ---
     const canvas = document.getElementById('matrix-canvas');
     const ctx = canvas.getContext('2d');
 
@@ -194,7 +152,7 @@
     }
     setInterval(drawMatrix, 50);
 
-    // --- 2. FLOW MANAGMENT ---
+    // Lis egzak tout non WhatsApp ou yo sou GitHub la
     const photosList = [
       "WhatsApp Image 2026-09-22 at 5.01.16 PM.jpeg",
       "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg",
@@ -212,9 +170,7 @@
     let count = 3;
     const countdownEl = document.getElementById('countdown-display');
     const screenCountdown = document.getElementById('screen-countdown');
-    const screenCard1 = document.getElementById('screen-card-1');
-    const screenCard2 = document.getElementById('screen-card-2');
-    const screenCard3 = document.getElementById('screen-card-3');
+    const screenCard = document.getElementById('screen-card');
     const screenHeart = document.getElementById('screen-heart');
 
     const timer = setInterval(() => {
@@ -224,27 +180,16 @@
       } else {
         clearInterval(timer);
         screenCountdown.classList.remove('active');
-        screenCard1.classList.add('active');
+        screenCard.classList.add('active');
 
         setTimeout(() => {
-          screenCard1.classList.remove('active');
-          screenCard2.classList.add('active');
-        }, 5000);
-
-        setTimeout(() => {
-          screenCard2.classList.remove('active');
-          screenCard3.classList.add('active');
-        }, 10000);
-
-        setTimeout(() => {
-          screenCard3.classList.remove('active');
+          screenCard.classList.remove('active');
           screenHeart.classList.add('active');
           createHeartFormation();
-        }, 15000);
+        }, 5000);
       }
     }, 1000);
 
-    // --- 3. HEART FORMATION ---
     function createHeartFormation() {
       const container = document.getElementById('heartGrid');
       const totalPhotos = photosList.length;
@@ -254,7 +199,8 @@
 
       for (let i = 0; i < totalPhotos; i++) {
         const img = document.createElement('img');
-        img.src = photosList[i];
+        // Itilize encodeURI pou asire w navigatè a li espas ki nan non WhatsApp yo kòrèkteman
+        img.src = encodeURI(photosList[i]);
 
         const t = ((i + 1) / totalPhotos) * 2 * Math.PI;
         const x = centerX + scale * 16 * Math.pow(Math.sin(t), 3);
