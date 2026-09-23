@@ -1,1045 +1,935 @@
 <!DOCTYPE html>
 <html lang="ht">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Harlie</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Harlie</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        body {
-            background: #000;
-            color: #fff;
-            font-family: 'Playfair Display', serif;
-            overflow: hidden;
-            height: 100vh;
-            width: 100vw;
-        }
+body{
+    background:#000;
+    color:#fff;
+    font-family:'Playfair Display',serif;
+    overflow:hidden;
+    height:100vh;
+    width:100vw;
+}
 
-        .screen {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 1s ease-in-out;
-        }
+.screen{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 1s ease-in-out;
+}
 
-        .screen.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
+.screen.active{
+    opacity:1;
+    pointer-events:auto;
+}
 
-        /* =========================
-           MATRIX
-        ========================= */
+/* MATRIX */
+#matrix-canvas{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:1;
+}
 
-        #matrix-canvas {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
+.matrix-text{
+    position:relative;
+    z-index:2;
+    font-size:4rem;
+    font-weight:bold;
+    color:#ff3399;
+    text-shadow:
+        0 0 20px #ff3399,
+        0 0 40px #ff007f;
+    animation:pulse 1s infinite alternate;
+    text-align:center;
+    padding:0 20px;
+}
 
-        .matrix-text {
-            position: relative;
-            z-index: 2;
-            font-size: 4rem;
-            font-weight: bold;
-            color: #ff3399;
-            text-shadow:
-                0 0 20px #ff3399,
-                0 0 40px #ff007f;
-            animation: pulse 1s infinite alternate;
-            text-align: center;
-            padding: 0 20px;
-        }
+@keyframes pulse{
+    0%{transform:scale(1);}
+    100%{transform:scale(1.08);}
+}
 
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
+/* FOND */
+.stars-bg{
+    position:absolute;
+    inset:0;
+    background:radial-gradient(
+        ellipse at bottom,
+        #1b2735 0%,
+        #090a0f 100%
+    );
+    z-index:1;
+}
 
-            100% {
-                transform: scale(1.08);
-            }
-        }
+.content-box{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:20px;
+}
 
-        /* =========================
-           BACKGROUND
-        ========================= */
+.cat-img{
+    width:180px;
+    height:180px;
+    object-fit:contain;
+    margin-bottom:20px;
+    animation:floatCat 3s ease-in-out infinite;
+}
 
-        .stars-bg {
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(
-                    ellipse at bottom,
-                    #1b2735 0%,
-                    #090a0f 100%
-                );
-            z-index: 1;
-        }
+@keyframes floatCat{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
+}
 
-        /* =========================
-           CAT
-        ========================= */
+/* NOUVELLE POLICE DU TITRE SOUS LE GIF */
+.birthday-title{
+    color:#ff5ca8;
+    font-family:'Playfair Display',serif;
+    font-size:2rem;
+    font-weight:700;
+    line-height:1.2;
+    white-space:nowrap;
+    text-shadow:
+        0 1px 3px rgba(255,255,255,.9);
+}
 
-        .content-box {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            padding: 20px;
-        }
+/* LIVRE */
+.book-area{
+    position:relative;
+    z-index:2;
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    perspective:1800px;
+}
 
-        .cat-img {
-            width: 180px;
-            height: 180px;
-            object-fit: contain;
-            margin-bottom: 20px;
-            animation: floatCat 3s ease-in-out infinite;
-        }
+.book{
+    position:relative;
+    width:min(350px,88vw);
+    height:min(450px,76vh);
+    transform-style:preserve-3d;
+}
 
-        @keyframes floatCat {
-            0%, 100% {
-                transform: translateY(0);
-            }
+.book::after{
+    content:"";
+    position:absolute;
+    width:85%;
+    height:25px;
+    bottom:-22px;
+    left:7.5%;
+    background:rgba(255,51,153,.35);
+    filter:blur(15px);
+    border-radius:50%;
+    z-index:-2;
+}
 
-            50% {
-                transform: translateY(-15px);
-            }
-        }
+.book-inside{
+    position:absolute;
+    inset:0;
+    background:#ffd6e7;
+    border:5px solid #ff78b5;
+    border-radius:10px 18px 18px 10px;
+    box-shadow:
+        0 15px 40px rgba(255,51,153,.5),
+        inset 0 0 20px rgba(255,255,255,.5);
+    overflow:hidden;
+}
 
-        .birthday-title {
-            color: #ff5ca8;
-            font-family: 'Great Vibes', cursive;
-            font-size: 2rem;
-            line-height: 1.2;
-            white-space: nowrap;
-            text-shadow:
-                0 0 10px #ff3399,
-                0 0 20px #ff007f;
-        }
+.book-inside::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:0;
+    height:100%;
+    width:3px;
+    background:rgba(210,110,145,.25);
+}
 
-        /* =========================
-           BOOK SCREEN
-        ========================= */
+.book-cover{
+    position:absolute;
+    inset:0;
+    z-index:20;
+    transform-origin:left center;
+    transform-style:preserve-3d;
+    transition:transform 2s cubic-bezier(.65,.05,.36,1);
+}
 
-        .book-area {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 1800px;
-        }
+.book.open .book-cover{
+    transform:rotateY(-165deg);
+}
 
-        .book {
-            position: relative;
-            width: min(350px, 88vw);
-            height: min(450px, 76vh);
-            transform-style: preserve-3d;
-        }
+.cover-front,
+.cover-back{
+    position:absolute;
+    inset:0;
+    border-radius:12px 20px 20px 12px;
+    backface-visibility:hidden;
+}
 
-        .book::after {
-            content: "";
-            position: absolute;
-            width: 85%;
-            height: 25px;
-            bottom: -22px;
-            left: 7.5%;
-            background: rgba(255, 51, 153, 0.35);
-            filter: blur(15px);
-            border-radius: 50%;
-            z-index: -2;
-        }
+.cover-front{
+    background:linear-gradient(
+        135deg,
+        #ff6fae,
+        #ff9bc8 45%,
+        #ffd95e 100%
+    );
+    border:5px solid #ffd94d;
+    box-shadow:
+        0 15px 40px rgba(255,51,153,.55),
+        inset 0 0 25px rgba(255,255,255,.3);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:25px;
+}
 
-        .book-inside {
-            position: absolute;
-            inset: 0;
-            background: #ffd6e7;
-            border: 5px solid #ff78b5;
-            border-radius: 10px 18px 18px 10px;
-            box-shadow:
-                0 15px 40px rgba(255, 51, 153, 0.5),
-                inset 0 0 20px rgba(255, 255, 255, 0.5);
-            overflow: hidden;
-        }
+.cover-front::before{
+    content:"♥";
+    position:absolute;
+    top:20px;
+    font-size:35px;
+    color:#fff5a6;
+    text-shadow:0 0 10px #ff3399;
+}
 
-        .book-inside::before {
-            content: "";
-            position: absolute;
-            left: 50%;
-            top: 0;
-            height: 100%;
-            width: 3px;
-            background: rgba(210, 110, 145, 0.25);
-        }
+.cover-title{
+    font-family:'Great Vibes',cursive;
+    font-size:3.5rem;
+    line-height:1.1;
+    color:#fff8a8;
+    text-shadow:
+        2px 2px 0 #d63384,
+        0 0 15px rgba(255,255,255,.7);
+}
 
-        /* =========================
-           BOOK COVER
-        ========================= */
+.cover-subtitle{
+    display:block;
+    font-family:'Playfair Display',serif;
+    font-size:1rem;
+    margin-top:18px;
+    color:#fff;
+    letter-spacing:2px;
+}
 
-        .book-cover {
-            position: absolute;
-            inset: 0;
-            z-index: 20;
-            transform-origin: left center;
-            transform-style: preserve-3d;
-            transition: transform 2s cubic-bezier(.65, .05, .36, 1);
-        }
+.cover-back{
+    transform:rotateY(180deg);
+    background:#ffd6e7;
+    border:5px solid #ff78b5;
+}
 
-        .book.open .book-cover {
-            transform: rotateY(-165deg);
-        }
+/* PAGES */
+.pages{
+    position:absolute;
+    inset:10px;
+    z-index:10;
+    transform-style:preserve-3d;
+}
 
-        .cover-front,
-        .cover-back {
-            position: absolute;
-            inset: 0;
-            border-radius: 12px 20px 20px 12px;
-            backface-visibility: hidden;
-        }
+.page{
+    position:absolute;
+    inset:0;
+    background:#fff1a8;
+    border:3px solid #ff78b5;
+    border-radius:7px 15px 15px 7px;
+    padding:22px 18px;
+    color:#d63384;
+    transform-origin:left center;
+    transform-style:preserve-3d;
+    transition:
+        transform 1.5s cubic-bezier(.65,.05,.36,1),
+        box-shadow 1s;
+    backface-visibility:hidden;
+    box-shadow:
+        inset 0 0 15px rgba(255,255,255,.5),
+        3px 5px 12px rgba(210,80,130,.25);
+    overflow:hidden;
+}
 
-        .cover-front {
-            background:
-                linear-gradient(
-                    135deg,
-                    #ff6fae,
-                    #ff9bc8 45%,
-                    #ffd95e 100%
-                );
-            border: 5px solid #ffd94d;
-            box-shadow:
-                0 15px 40px rgba(255, 51, 153, 0.55),
-                inset 0 0 25px rgba(255, 255, 255, 0.3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 25px;
-        }
+.page:nth-child(1){
+    z-index:3;
+}
 
-        .cover-front::before {
-            content: "♥";
-            position: absolute;
-            top: 20px;
-            font-size: 35px;
-            color: #fff5a6;
-            text-shadow: 0 0 10px #ff3399;
-        }
+.page:nth-child(2){
+    z-index:2;
+}
 
-        .cover-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem;
-            line-height: 1.1;
-            color: #fff8a8;
-            text-shadow:
-                2px 2px 0 #d63384,
-                0 0 15px rgba(255,255,255,.7);
-        }
+.page:nth-child(3){
+    z-index:1;
+}
 
-        .cover-subtitle {
-            display: block;
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem;
-            margin-top: 18px;
-            color: #fff;
-            letter-spacing: 2px;
-        }
+.page.flipped{
+    transform:rotateY(-180deg);
+}
 
-        .cover-back {
-            transform: rotateY(180deg);
-            background: #ffd6e7;
-            border: 5px solid #ff78b5;
-        }
+.page-content{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
 
-        /* =========================
-           PAGES
-        ========================= */
+.page-number{
+    font-family:'Great Vibes',cursive;
+    font-size:1.8rem;
+    margin-bottom:8px;
+    color:#e83e8c;
+}
 
-        .pages {
-            position: absolute;
-            inset: 10px;
-            z-index: 10;
-            transform-style: preserve-3d;
-        }
+.message-box{
+    background:#fff8cf;
+    border:2px solid #ff8fbe;
+    padding:13px;
+    border-radius:12px;
+    margin-bottom:15px;
+    font-family:'Great Vibes',cursive;
+    font-size:1.45rem;
+    color:#d63384;
+    line-height:1.35;
+    box-shadow:0 4px 12px rgba(255,51,153,.18);
+}
 
-        .page {
-            position: absolute;
-            inset: 0;
-            background: #fff1a8;
-            border: 3px solid #ff78b5;
-            border-radius: 7px 15px 15px 7px;
-            padding: 22px 18px;
-            color: #d63384;
-            transform-origin: left center;
-            transform-style: preserve-3d;
-            transition:
-                transform 1.5s cubic-bezier(.65, .05, .36, 1),
-                box-shadow 1s;
-            backface-visibility: hidden;
-            box-shadow:
-                inset 0 0 15px rgba(255,255,255,.5),
-                3px 5px 12px rgba(210, 80, 130, .25);
-            overflow: hidden;
-        }
+.photo-frame{
+    display:flex;
+    gap:9px;
+    justify-content:center;
+    width:100%;
+}
 
-        .page:nth-child(1) {
-            z-index: 3;
-        }
+.photo-frame img{
+    width:44%;
+    height:175px;
+    object-fit:cover;
+    border-radius:8px;
+    border:3px solid #ff72ad;
+    box-shadow:0 5px 12px rgba(214,51,132,.3);
+}
 
-        .page:nth-child(2) {
-            z-index: 2;
-        }
+.page-decoration{
+    color:#ff5ca8;
+    font-size:22px;
+    margin-bottom:5px;
+}
 
-        .page:nth-child(3) {
-            z-index: 1;
-        }
+/* COEUR */
+.heart-grid{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:2;
+}
 
-        .page.flipped {
-            transform: rotateY(-180deg);
-        }
+.mini-card{
+    position:absolute;
+    width:43px;
+    height:51px;
+    background:white;
+    padding:2px;
+    border-radius:5px;
+    box-shadow:0 0 8px rgba(255,51,153,.8);
+    transition:transform .5s;
+}
 
-        .page-content {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
+.mini-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:3px;
+}
 
-        .page-number {
-            font-family: 'Great Vibes', cursive;
-            font-size: 1.8rem;
-            margin-bottom: 8px;
-            color: #e83e8c;
-        }
+.heart-title{
+    position:absolute;
+    z-index:5;
+    top:7%;
+    left:0;
+    right:0;
+    text-align:center;
+    font-family:'Great Vibes',cursive;
+    color:#ff79b5;
+    font-size:2.5rem;
+    text-shadow:0 0 15px #ff3399;
+    opacity:0;
+    animation:heartTitle 2s ease forwards;
+    animation-delay:1.5s;
+}
 
-        .message-box {
-            background: #fff8cf;
-            border: 2px solid #ff8fbe;
-            padding: 13px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            font-family: 'Great Vibes', cursive;
-            font-size: 1.45rem;
-            color: #d63384;
-            line-height: 1.35;
-            box-shadow:
-                0 4px 12px rgba(255, 51, 153, .18);
-        }
+@keyframes heartTitle{
+    to{opacity:1;}
+}
 
-        .photo-frame {
-            display: flex;
-            gap: 9px;
-            justify-content: center;
-            width: 100%;
-        }
+@media(max-width:380px){
 
-        .photo-frame img {
-            width: 44%;
-            height: 175px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 3px solid #ff72ad;
-            box-shadow:
-                0 5px 12px rgba(214, 51, 132, .3);
-        }
+    .book{
+        width:86vw;
+        height:72vh;
+    }
 
-        .page-decoration {
-            color: #ff5ca8;
-            font-size: 22px;
-            margin-bottom: 5px;
-        }
+    .cover-title{
+        font-size:3rem;
+    }
 
-        /* =========================
-           HEART
-        ========================= */
+    .message-box{
+        font-size:1.25rem;
+    }
 
-        .heart-grid {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-        }
+    .photo-frame img{
+        height:145px;
+    }
 
-        .mini-card {
-            position: absolute;
-            width: 43px;
-            height: 51px;
-            background: white;
-            padding: 2px;
-            border-radius: 5px;
-            box-shadow:
-                0 0 8px rgba(255, 51, 153, 0.8);
-            transition: transform 0.5s;
-        }
+    .mini-card{
+        width:38px;
+        height:46px;
+    }
 
-        .mini-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 3px;
-        }
-
-        .heart-title {
-            position: absolute;
-            z-index: 5;
-            top: 7%;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-family: 'Great Vibes', cursive;
-            color: #ff79b5;
-            font-size: 2.5rem;
-            text-shadow: 0 0 15px #ff3399;
-            opacity: 0;
-            animation: heartTitle 2s ease forwards;
-            animation-delay: 1.5s;
-        }
-
-        @keyframes heartTitle {
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media (max-width: 380px) {
-            .book {
-                width: 86vw;
-                height: 72vh;
-            }
-
-            .cover-title {
-                font-size: 3rem;
-            }
-
-            .message-box {
-                font-size: 1.25rem;
-            }
-
-            .photo-frame img {
-                height: 145px;
-            }
-
-            .mini-card {
-                width: 38px;
-                height: 46px;
-            }
-
-            .heart-title {
-                font-size: 2.2rem;
-            }
-        }
-    </style>
+    .heart-title{
+        font-size:2.2rem;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- =========================
-         MATRIX
-    ========================= -->
+<!-- MATRIX -->
+<div id="screen-matrix" class="screen active">
+    <canvas id="matrix-canvas"></canvas>
 
-    <div id="screen-matrix" class="screen active">
-        <canvas id="matrix-canvas"></canvas>
-        <div class="matrix-text" id="matrix-text">3</div>
+    <div class="matrix-text" id="matrix-text">
+        3
     </div>
+</div>
 
+<!-- GIF CHAT -->
+<div id="screen-cat" class="screen">
 
-    <!-- =========================
-         CAT
-    ========================= -->
+    <div class="stars-bg"></div>
 
-    <div id="screen-cat" class="screen">
-        <div class="stars-bg"></div>
+    <div class="content-box">
 
-        <div class="content-box">
-            <img
-                src="https://ugokawaii.com/wp-content/uploads/2023/03/guitar.gif"
-                alt="Cat playing guitar"
-                class="cat-img"
-            >
+        <img
+            src="https://ugokawaii.com/wp-content/uploads/2023/03/guitar.gif"
+            alt="Cat playing guitar"
+            class="cat-img"
+        >
 
-            <h1 class="birthday-title">
-                HAPPY BIRTHDAY HARLIE
-            </h1>
-        </div>
+        <h1 class="birthday-title">
+            HAPPY BIRTHDAY HARLIE
+        </h1>
+
     </div>
+</div>
 
+<!-- LIVRE -->
+<div id="screen-card" class="screen">
 
-    <!-- =========================
-         BOOK
-    ========================= -->
+    <div class="stars-bg"></div>
 
-    <div id="screen-card" class="screen">
+    <div class="book-area">
 
-        <div class="stars-bg"></div>
+        <div class="book" id="book">
 
-        <div class="book-area">
+            <div class="book-inside"></div>
 
-            <div class="book" id="book">
+            <div class="pages">
 
-                <div class="book-inside"></div>
+                <!-- PAGE 1 -->
+                <div class="page" id="page1">
 
-                <div class="pages">
+                    <div class="page-content">
 
-                    <div class="page" id="page1">
+                        <div class="page-decoration">
+                            💗 ✨ 💗
+                        </div>
 
-                        <div class="page-content">
+                        <div class="page-number">
+                            Pour toi...
+                        </div>
 
-                            <div class="page-decoration">
-                                💗 ✨ 💗
-                            </div>
+                        <div class="message-box">
+                            Happy Birthday mon nounours🧸❤️
+                        </div>
 
-                            <div class="page-number">
-                                Pour toi...
-                            </div>
+                        <div class="photo-frame">
 
-                            <div class="message-box">
-                                Happy Birthday mon nounours🧸❤️
-                            </div>
+                            <img
+                                src="WhatsApp Image 2026-09-22 at 5.01.25 PM.jpeg"
+                                alt="Foto Harlie"
+                            >
 
-                            <div class="photo-frame">
-                                <img
-                                    src="WhatsApp Image 2026-09-22 at 5.01.25 PM.jpeg"
-                                    alt="Foto Harlie"
-                                >
+                            <img
+                                src="WhatsApp Image 2026-09-22 at 5.01.24 PM (1).jpeg"
+                                alt="Foto Harlie"
+                            >
 
-                                <img
-                                    src="WhatsApp Image 2026-09-22 at 5.01.24 PM (1).jpeg"
-                                    alt="Foto Harlie"
-                                >
-                            </div>
+                        </div>
 
-                            <div class="page-decoration">
-                                💛 🌸 💛
-                            </div>
-
+                        <div class="page-decoration">
+                            💛 🌸 💛
                         </div>
 
                     </div>
+                </div>
 
+                <!-- PAGE 2 -->
+                <div class="page" id="page2">
 
-                    <div class="page" id="page2">
+                    <div class="page-content">
 
-                        <div class="page-content">
+                        <div class="page-decoration">
+                            🌸 💗 🌸
+                        </div>
 
-                            <div class="page-decoration">
-                                🌸 💗 🌸
-                            </div>
+                        <div class="page-number">
+                            Une pensée pour toi
+                        </div>
 
-                            <div class="page-number">
-                                Une pensée pour toi
-                            </div>
+                        <div class="message-box">
+                            Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. Et aujourd'hui encore plus, je veux que tu te sentes unique, chouchoutée, aimée, valorisée, comblée. ✨
+                        </div>
 
-                            <div class="message-box">
-                                Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. Et aujourd'hui encore plus, je veux que tu te sentes unique, chouchoutée, aimée, valorisée, comblée. ✨
-                            </div>
+                        <div class="photo-frame">
 
-                            <div class="photo-frame">
-                                <img
-                                    src="WhatsApp Image 2026-09-22 at 5.01.24 PM.jpeg"
-                                    alt="Foto Harlie"
-                                >
+                            <!-- NOUVELLES PHOTOS DE LA PAGE 2 -->
+                            <img
+                                src="WhatsApp Image 2026-09-22 at 5.01.16 PM.jpeg"
+                                alt="Foto Harlie"
+                            >
 
-                                <img
-                                    src="WhatsApp Image 2026-09-22 at 5.01.26 PM.jpeg"
-                                    alt="Foto Harlie"
-                                >
-                            </div>
+                            <img
+                                src="WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg"
+                                alt="Foto Harlie"
+                            >
 
-                            <div class="page-decoration">
-                                💗 ✨ 💗
-                            </div>
+                        </div>
 
+                        <div class="page-decoration">
+                            💗 ✨ 💗
                         </div>
 
                     </div>
+                </div>
 
+                <!-- PAGE 3 -->
+                <div class="page" id="page3">
 
-                    <div class="page" id="page3">
+                    <div class="page-content">
 
-                        <div class="page-content">
+                        <div class="page-decoration">
+                            💛 💗 💛
+                        </div>
 
-                            <div class="page-decoration">
-                                💛 💗 💛
-                            </div>
+                        <div class="page-number">
+                            Et encore une chose...
+                        </div>
 
-                            <div class="page-number">
-                                Et encore une chose...
-                            </div>
+                        <div class="message-box">
+                            Toi qui as fait de mon cœur un musée qui déborde de tes plus beaux portraits, ce musée dont j'ai jeté les clés afin qu'il reste ouvert à jamais... Ainsi, je pourrai contempler ces œuvres d'art sans jamais me lasser. 💖
+                        </div>
 
-                            <div class="message-box">
-                                Toi qui as fait de mon cœur un musée qui déborde de tes plus beaux portraits, ce musée dont j'ai jeté les clés afin qu'il reste ouvert à jamais... Ainsi, je pourrai contempler ces œuvres d'art sans jamais me lasser. 💖
-                            </div>
+                        <div class="photo-frame">
 
-                            <div class="photo-frame">
-                                <img
-                                    src="WhatsApp Image 2026-09-22 at 5.01.23 PM.jpeg"
-                                    alt="Foto Harlie"
-                                >
+                            <img
+                                src="WhatsApp Image 2026-09-22 at 5.01.23 PM.jpeg"
+                                alt="Foto Harlie"
+                            >
 
-                                <img
-                                    src="WhatsApp Image 2026-09-22 at 5.01.23 PM (2).jpeg"
-                                    alt="Foto Harlie"
-                                >
-                            </div>
-
-                            <div class="page-decoration">
-                                💗 🌸 💗
-                            </div>
+                            <img
+                                src="WhatsApp Image 2026-09-22 at 5.01.23 PM (2).jpeg"
+                                alt="Foto Harlie"
+                            >
 
                         </div>
+
+                        <div class="page-decoration">
+                            💗 🌸 💗
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- COUVERTURE -->
+            <div class="book-cover" id="bookCover">
+
+                <div class="cover-front">
+
+                    <div>
+
+                        <div class="cover-title">
+                            Happy<br>
+                            Birthday<br>
+                            Harlie
+                        </div>
+
+                        <span class="cover-subtitle">
+                            Avec tout mon cœur 🧸❤️
+                        </span>
 
                     </div>
 
                 </div>
 
-
-                <div class="book-cover" id="bookCover">
-
-                    <div class="cover-front">
-
-                        <div>
-
-                            <div class="cover-title">
-                                Happy<br>
-                                Birthday<br>
-                                Harlie
-                            </div>
-
-                            <span class="cover-subtitle">
-                                Avec tout mon cœur 🧸❤️
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                    <div class="cover-back"></div>
-
-                </div>
+                <div class="cover-back"></div>
 
             </div>
 
         </div>
 
     </div>
+</div>
 
+<!-- COEUR -->
+<div id="screen-heart" class="screen">
 
-    <!-- =========================
-         HEART
-    ========================= -->
+    <div class="stars-bg"></div>
 
-    <div id="screen-heart" class="screen">
+    <div class="heart-grid" id="heartGrid"></div>
 
-        <div class="stars-bg"></div>
-
-        <div class="heart-grid" id="heartGrid"></div>
-
-        <div class="heart-title">
-            Mon chef-d’œuvre ❤️
-        </div>
-
+    <div class="heart-title">
+        Mon chef-d’œuvre ❤️
     </div>
 
+</div>
 
-    <script>
+<script>
 
-        /* =========================
-           MATRIX
-        ========================= */
+/* MATRIX */
+const canvas = document.getElementById('matrix-canvas');
+const ctx = canvas.getContext('2d');
 
-        const canvas =
-            document.getElementById('matrix-canvas');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-        const ctx =
-            canvas.getContext('2d');
+const characters = "HAPPYBIRTHDAYHARLIE321🧸❤️";
+const fontSize = 16;
+const columns = Math.floor(canvas.width / fontSize);
+const drops = [];
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+for(let i = 0; i < columns; i++){
+    drops[i] = 1;
+}
 
-        const characters =
-            "HAPPYBIRTHDAYHARLIE321🧸❤️";
+function drawMatrix(){
 
-        const fontSize = 16;
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
 
-        const columns =
-            Math.floor(canvas.width / fontSize);
+    ctx.fillStyle = '#ff3399';
+    ctx.font = fontSize + 'px monospace';
 
-        const drops = [];
+    for(let i = 0; i < drops.length; i++){
 
-        for (let i = 0; i < columns; i++) {
-            drops[i] = 1;
-        }
-
-        function drawMatrix() {
-
-            ctx.fillStyle =
-                'rgba(0, 0, 0, 0.05)';
-
-            ctx.fillRect(
-                0,
-                0,
-                canvas.width,
-                canvas.height
+        const text =
+            characters.charAt(
+                Math.floor(
+                    Math.random() * characters.length
+                )
             );
 
-            ctx.fillStyle = '#ff3399';
-
-            ctx.font =
-                fontSize + 'px monospace';
-
-            for (
-                let i = 0;
-                i < drops.length;
-                i++
-            ) {
-
-                const text =
-                    characters.charAt(
-                        Math.floor(
-                            Math.random() *
-                            characters.length
-                        )
-                    );
-
-                ctx.fillText(
-                    text,
-                    i * fontSize,
-                    drops[i] * fontSize
-                );
-
-                if (
-                    drops[i] * fontSize >
-                    canvas.height &&
-                    Math.random() > 0.975
-                ) {
-                    drops[i] = 0;
-                }
-
-                drops[i]++;
-            }
-        }
-
-        /* FIL WOZ YO PI DOUSMAN */
-
-        let matrixInterval =
-            setInterval(drawMatrix, 70);
-
-
-        /* =========================
-           INTRO SEQUENCE
-        ========================= */
-
-        const textElement =
-            document.getElementById('matrix-text');
-
-        const sequence = [
-            "3",
-            "2",
-            "1",
-            "HAPPY",
-            "BIRTHDAY",
-            "TO",
-            "HARLIE ❤️"
-        ];
-
-        let seqIndex = 0;
-
-        let seqTimer =
-            setInterval(() => {
-
-                seqIndex++;
-
-                if (
-                    seqIndex <
-                    sequence.length
-                ) {
-
-                    textElement.innerText =
-                        sequence[seqIndex];
-
-                } else {
-
-                    clearInterval(seqTimer);
-                    clearInterval(matrixInterval);
-
-                    switchScreen('screen-cat');
-
-                    setTimeout(() => {
-
-                        switchScreen('screen-card');
-
-                        startBookAnimation();
-
-                    }, 4000);
-                }
-
-            }, 1200);
-
-
-        /* =========================
-           CHANGE SCREEN
-        ========================= */
-
-        function switchScreen(screenId) {
-
-            document
-                .querySelectorAll('.screen')
-                .forEach(s =>
-                    s.classList.remove('active')
-                );
-
-            document
-                .getElementById(screenId)
-                .classList.add('active');
-        }
-
-
-        /* =========================
-           BOOK ANIMATION
-        ========================= */
-
-        function startBookAnimation() {
-
-            const book =
-                document.getElementById('book');
-
-            const page1 =
-                document.getElementById('page1');
-
-            const page2 =
-                document.getElementById('page2');
-
-            const page3 =
-                document.getElementById('page3');
-
-
-            book.classList.remove('open');
-
-            page1.classList.remove('flipped');
-            page2.classList.remove('flipped');
-            page3.classList.remove('flipped');
-
-
-            setTimeout(() => {
-
-                book.classList.add('open');
-
-            }, 700);
-
-
-            setTimeout(() => {
-
-                page1.classList.add('flipped');
-
-            }, 7000);
-
-
-            setTimeout(() => {
-
-                page2.classList.add('flipped');
-
-            }, 13000);
-
-
-            setTimeout(() => {
-
-                switchScreen('screen-heart');
-
-                createHeartFormation();
-
-            }, 19500);
-        }
-
-
-        /* =========================
-           HEART FORMATION
-        ========================= */
-
-        function createHeartFormation() {
-
-            const container =
-                document.getElementById('heartGrid');
-
-            container.innerHTML = "";
-
-            const photosList = [
-
-                "WhatsApp Image 2026-09-22 at 5.01.25 PM.jpeg",
-
-                "WhatsApp Image 2026-09-22 at 5.01.24 PM (1).jpeg",
-
-                "WhatsApp Image 2026-09-22 at 5.01.24 PM.jpeg",
-
-                "WhatsApp Image 2026-09-22 at 5.01.26 PM.jpeg",
-
-                "WhatsApp Image 2026-09-22 at 5.01.23 PM.jpeg",
-
-                "WhatsApp Image 2026-09-22 at 5.01.23 PM (2).jpeg",
-
-                "WhatsApp Image 2026-09-22 at 5.01.23 PM (1).jpeg",
-
-                "WhatsApp Image 2026-09-22 at 5.01.21 PM.jpeg",
-
-                "WhatsApp Image 2026-09-22 at 5.01.21 PM (2).jpeg",
-
-                "WhatsApp Image 2026-09-22 at 5.01.21 PM (1).jpeg",
-
-                "WhatsApp Image 2026-09-22 at 5.01.20 PM.jpeg",
-
-                "WhatsApp Image 2026-09-22 at 5.01.17 PM.jpeg",
-
-                "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg",
-
-                "WhatsApp Image 2026-09-22 at 5.01.22 PM.jpeg",
-
-                "WhatsApp Image 2026-09-22 at 5.01.16 PM.jpeg"
-            ];
-
-
-            const numCards = 20;
-
-            const cardWidth = 43;
-            const cardHeight = 51;
-
-            const centerX =
-                window.innerWidth / 2 -
-                cardWidth / 2;
-
-            const centerY =
-                window.innerHeight / 2 -
-                cardHeight / 2;
-
-
-            const heartScale =
-                Math.min(
-                    window.innerWidth / 38,
-                    window.innerHeight / 48,
-                    10
-                );
-
-
-            for (
-                let i = 0;
-                i < numCards;
-                i++
-            ) {
-
-                const t =
-                    (i / numCards) *
-                    Math.PI * 2;
-
-
-                const x =
-                    16 *
-                    Math.pow(
-                        Math.sin(t),
-                        3
-                    );
-
-
-                const y =
-                    -(
-                        13 *
-                        Math.cos(t)
-                        -
-                        5 *
-                        Math.cos(2 * t)
-                        -
-                        2 *
-                        Math.cos(3 * t)
-                        -
-                        Math.cos(4 * t)
-                    );
-
-
-                const posX =
-                    centerX +
-                    x * heartScale;
-
-
-                const posY =
-                    centerY +
-                    y * heartScale;
-
-
-                const photoSrc =
-                    photosList[
-                        i % photosList.length
-                    ];
-
-
-                const card =
-                    document.createElement('div');
-
-                card.className =
-                    'mini-card';
-
-
-                card.style.left =
-                    posX + 'px';
-
-
-                card.style.top =
-                    posY + 'px';
-
-
-                card.innerHTML = `
-                    <img
-                        src="${photoSrc}"
-                        alt="Heart Photo"
-                    >
-                `;
-
-
-                container.appendChild(card);
-            }
-        }
-
-
-        /* =========================
-           RESIZE
-        ========================= */
-
-        window.addEventListener(
-            'resize',
-            () => {
-
-                canvas.width =
-                    window.innerWidth;
-
-                canvas.height =
-                    window.innerHeight;
-            }
+        ctx.fillText(
+            text,
+            i * fontSize,
+            drops[i] * fontSize
         );
 
-    </script>
+        if(
+            drops[i] * fontSize > canvas.height &&
+            Math.random() > 0.975
+        ){
+            drops[i] = 0;
+        }
+
+        drops[i]++;
+    }
+}
+
+/* MATRIX PLUS LENT */
+let matrixInterval = setInterval(
+    drawMatrix,
+    70
+);
+
+
+/* SEQUENCE */
+const textElement =
+    document.getElementById('matrix-text');
+
+const sequence = [
+    "3",
+    "2",
+    "1",
+    "HAPPY",
+    "BIRTHDAY",
+    "TO",
+    "HARLIE ❤️"
+];
+
+let seqIndex = 0;
+
+let seqTimer = setInterval(() => {
+
+    seqIndex++;
+
+    if(seqIndex < sequence.length){
+
+        textElement.innerText =
+            sequence[seqIndex];
+
+    }else{
+
+        clearInterval(seqTimer);
+        clearInterval(matrixInterval);
+
+        switchScreen('screen-cat');
+
+        setTimeout(() => {
+
+            switchScreen('screen-card');
+            startBookAnimation();
+
+        },4000);
+    }
+
+},1200);
+
+
+/* CHANGER D'ECRAN */
+function switchScreen(screenId){
+
+    document
+        .querySelectorAll('.screen')
+        .forEach(s =>
+            s.classList.remove('active')
+        );
+
+    document
+        .getElementById(screenId)
+        .classList.add('active');
+}
+
+
+/* ANIMATION DU LIVRE */
+function startBookAnimation(){
+
+    const book =
+        document.getElementById('book');
+
+    const page1 =
+        document.getElementById('page1');
+
+    const page2 =
+        document.getElementById('page2');
+
+    const page3 =
+        document.getElementById('page3');
+
+    book.classList.remove('open');
+
+    page1.classList.remove('flipped');
+    page2.classList.remove('flipped');
+    page3.classList.remove('flipped');
+
+    /* LE LIVRE RESTE FERME 2 SECONDES */
+    setTimeout(() => {
+
+        book.classList.add('open');
+
+    },2000);
+
+    /* PAGE 1 */
+    setTimeout(() => {
+
+        page1.classList.add('flipped');
+
+    },7000);
+
+    /* PAGE 2 */
+    setTimeout(() => {
+
+        page2.classList.add('flipped');
+
+    },13000);
+
+    /* PASSAGE AU COEUR */
+    setTimeout(() => {
+
+        switchScreen('screen-heart');
+        createHeartFormation();
+
+    },19500);
+}
+
+
+/* ANIMATION COEUR */
+function createHeartFormation(){
+
+    const container =
+        document.getElementById('heartGrid');
+
+    container.innerHTML = "";
+
+    /*
+      IMPORTANT :
+      CETTE LISTE RESTE INCHANGÉE.
+      Les changements de Page 2 ne modifient
+      PAS l'animation du cœur.
+    */
+    const photosList = [
+
+        "WhatsApp Image 2026-09-22 at 5.01.25 PM.jpeg",
+
+        "WhatsApp Image 2026-09-22 at 5.01.24 PM (1).jpeg",
+
+        "WhatsApp Image 2026-09-22 at 5.01.24 PM.jpeg",
+
+        "WhatsApp Image 2026-09-22 at 5.01.26 PM.jpeg",
+
+        "WhatsApp Image 2026-09-22 at 5.01.23 PM.jpeg",
+
+        "WhatsApp Image 2026-09-22 at 5.01.23 PM (2).jpeg",
+
+        "WhatsApp Image 2026-09-22 at 5.01.23 PM (1).jpeg",
+
+        "WhatsApp Image 2026-09-22 at 5.01.21 PM.jpeg",
+
+        "WhatsApp Image 2026-09-22 at 5.01.21 PM (2).jpeg",
+
+        "WhatsApp Image 2026-09-22 at 5.01.21 PM (1).jpeg",
+
+        "WhatsApp Image 2026-09-22 at 5.01.20 PM.jpeg",
+
+        "WhatsApp Image 2026-09-22 at 5.01.17 PM.jpeg",
+
+        "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg",
+
+        "WhatsApp Image 2026-09-22 at 5.01.22 PM.jpeg",
+
+        "WhatsApp Image 2026-09-22 at 5.01.16 PM.jpeg"
+    ];
+
+    const numCards = 20;
+
+    const cardWidth = 43;
+    const cardHeight = 51;
+
+    /*
+      Position ajustée pour que le cœur
+      apparaisse bien centré sur l'écran.
+    */
+    const heartScale =
+        Math.min(
+            window.innerWidth / 38,
+            window.innerHeight / 48,
+            10
+        );
+
+    const centerX =
+        (window.innerWidth / 2) -
+        (cardWidth / 2);
+
+    const centerY =
+        (window.innerHeight / 2) -
+        (cardHeight / 2) -
+        (6 * heartScale);
+
+    for(let i = 0; i < numCards; i++){
+
+        const t =
+            (i / numCards) *
+            Math.PI * 2;
+
+        const x =
+            16 * Math.pow(
+                Math.sin(t),
+                3
+            );
+
+        const y =
+            -(13 * Math.cos(t)
+            - 5 * Math.cos(2 * t)
+            - 2 * Math.cos(3 * t)
+            - Math.cos(4 * t));
+
+        const posX =
+            centerX +
+            x * heartScale;
+
+        const posY =
+            centerY +
+            y * heartScale;
+
+        const photoSrc =
+            photosList[
+                i % photosList.length
+            ];
+
+        const card =
+            document.createElement('div');
+
+        card.className =
+            'mini-card';
+
+        card.style.left =
+            posX + 'px';
+
+        card.style.top =
+            posY + 'px';
+
+        card.innerHTML =
+            `<img src="${photoSrc}" alt="Heart Photo">`;
+
+        container.appendChild(card);
+    }
+}
+
+
+/* RESIZE */
+window.addEventListener('resize', () => {
+
+    canvas.width =
+        window.innerWidth;
+
+    canvas.height =
+        window.innerHeight;
+
+});
+
+</script>
 
 </body>
-    </html>
+</html>
