@@ -130,6 +130,57 @@ body{
         0 1px 3px rgba(255,255,255,.9);
 }
 
+/* =========================
+   FEU D'ARTIFICE
+   ========================= */
+
+#fireworks-screen{
+    background:
+        radial-gradient(
+            ellipse at center,
+            #151525 0%,
+            #05050a 65%,
+            #000 100%
+        );
+    z-index:50;
+}
+
+#fireworks-canvas{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:1;
+}
+
+.fireworks-text{
+    position:relative;
+    z-index:3;
+    text-align:center;
+    font-family:'Great Vibes',cursive;
+    font-size:clamp(2.5rem,10vw,4.5rem);
+    color:#fff4a8;
+    text-shadow:
+        0 0 10px #ff5ca8,
+        0 0 25px #ff3399,
+        0 0 45px #ffd94d;
+    opacity:0;
+    animation:fireworksText 1s ease forwards;
+    animation-delay:.5s;
+    padding:0 20px;
+}
+
+@keyframes fireworksText{
+    from{
+        opacity:0;
+        transform:scale(.7);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
 /* LIVRE */
 .book-area{
     position:relative;
@@ -434,6 +485,10 @@ body{
     .heart-title{
         font-size:2.2rem;
     }
+
+    .fireworks-text{
+        font-size:2.8rem;
+    }
 }
 </style>
 </head>
@@ -469,6 +524,18 @@ body{
             HAPPY BIRTHDAY HARLIE
         </h1>
 
+    </div>
+
+</div>
+
+
+<!-- FEU D'ARTIFICE -->
+<div id="fireworks-screen" class="screen">
+
+    <canvas id="fireworks-canvas"></canvas>
+
+    <div class="fireworks-text">
+        Happy Birthday Harlie 🎆❤️
     </div>
 
 </div>
@@ -546,7 +613,6 @@ body{
 
                         <div class="photo-frame">
 
-                            <!-- NOUVELLES PHOTOS PAGE 2 -->
                             <img
                                 src="WhatsApp Image 2026-09-22 at 5.01.16 PM.jpeg"
                                 alt="Foto Harlie"
@@ -658,7 +724,10 @@ body{
 
 <script>
 
-/* MATRIX */
+/* =====================================================
+   MATRIX
+===================================================== */
+
 const canvas =
     document.getElementById('matrix-canvas');
 
@@ -733,8 +802,6 @@ function drawMatrix(){
     }
 }
 
-
-/* MATRIX PLUS LENT */
 let matrixInterval =
     setInterval(
         drawMatrix,
@@ -742,7 +809,10 @@ let matrixInterval =
     );
 
 
-/* SEQUENCE */
+/* =====================================================
+   SEQUENCE
+===================================================== */
+
 const textElement =
     document.getElementById(
         'matrix-text'
@@ -779,13 +849,14 @@ let seqTimer =
                 'screen-cat'
             );
 
+            /*
+             * GIF CHAT
+             * Li rete 4 secondes.
+             * Apre sa feu d'artifice la kòmanse.
+             */
             setTimeout(() => {
 
-                switchScreen(
-                    'screen-card'
-                );
-
-                startBookAnimation();
+                startFireworks();
 
             },4000);
         }
@@ -793,7 +864,10 @@ let seqTimer =
     },1200);
 
 
-/* CHANGER D'ECRAN */
+/* =====================================================
+   CHANGER D'ECRAN
+===================================================== */
+
 function switchScreen(screenId){
 
     document
@@ -808,7 +882,394 @@ function switchScreen(screenId){
 }
 
 
-/* ANIMATION DU LIVRE */
+/* =====================================================
+   FEU D'ARTIFICE
+   SAN GIF / SAN FICHYE EXTERNE
+===================================================== */
+
+const fireworksCanvas =
+    document.getElementById(
+        'fireworks-canvas'
+    );
+
+const fireworksCtx =
+    fireworksCanvas.getContext('2d');
+
+let fireworksAnimation;
+let fireworksParticles = [];
+let fireworksRockets = [];
+
+function resizeFireworks(){
+
+    fireworksCanvas.width =
+        window.innerWidth;
+
+    fireworksCanvas.height =
+        window.innerHeight;
+}
+
+resizeFireworks();
+
+
+/* TI PATI FIREWORKS */
+class FireworkParticle{
+
+    constructor(x,y,color){
+
+        this.x = x;
+        this.y = y;
+
+        const angle =
+            Math.random() *
+            Math.PI * 2;
+
+        const speed =
+            Math.random() * 5 + 2;
+
+        this.vx =
+            Math.cos(angle) * speed;
+
+        this.vy =
+            Math.sin(angle) * speed;
+
+        this.gravity =
+            0.045;
+
+        this.life =
+            1;
+
+        this.decay =
+            Math.random() * 0.012 + 0.008;
+
+        this.size =
+            Math.random() * 2.5 + 1;
+
+        this.color =
+            color;
+    }
+
+    update(){
+
+        this.x += this.vx;
+
+        this.y += this.vy;
+
+        this.vy += this.gravity;
+
+        this.vx *= 0.985;
+        this.vy *= 0.985;
+
+        this.life -= this.decay;
+    }
+
+    draw(){
+
+        fireworksCtx.save();
+
+        fireworksCtx.globalAlpha =
+            Math.max(this.life,0);
+
+        fireworksCtx.fillStyle =
+            this.color;
+
+        fireworksCtx.shadowBlur =
+            12;
+
+        fireworksCtx.shadowColor =
+            this.color;
+
+        fireworksCtx.beginPath();
+
+        fireworksCtx.arc(
+            this.x,
+            this.y,
+            this.size,
+            0,
+            Math.PI * 2
+        );
+
+        fireworksCtx.fill();
+
+        fireworksCtx.restore();
+    }
+}
+
+
+/* ROCKET */
+class FireworkRocket{
+
+    constructor(){
+
+        this.x =
+            Math.random() *
+            fireworksCanvas.width;
+
+        this.y =
+            fireworksCanvas.height + 10;
+
+        this.targetY =
+            Math.random() *
+            fireworksCanvas.height *
+            0.45 +
+            fireworksCanvas.height *
+            0.12;
+
+        this.speed =
+            Math.random() * 5 + 8;
+
+        this.color =
+            getFireworkColor();
+
+        this.exploded =
+            false;
+    }
+
+    update(){
+
+        this.y -= this.speed;
+
+        this.speed *= 0.985;
+
+        if(
+            this.y <= this.targetY &&
+            !this.exploded
+        ){
+
+            this.explode();
+
+            this.exploded = true;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    explode(){
+
+        const particleCount =
+            Math.floor(
+                Math.random() * 35 + 65
+            );
+
+        for(
+            let i = 0;
+            i < particleCount;
+            i++
+        ){
+
+            fireworksParticles.push(
+                new FireworkParticle(
+                    this.x,
+                    this.y,
+                    this.color
+                )
+            );
+        }
+    }
+
+    draw(){
+
+        fireworksCtx.save();
+
+        fireworksCtx.fillStyle =
+            this.color;
+
+        fireworksCtx.shadowBlur =
+            10;
+
+        fireworksCtx.shadowColor =
+            this.color;
+
+        fireworksCtx.beginPath();
+
+        fireworksCtx.arc(
+            this.x,
+            this.y,
+            2,
+            0,
+            Math.PI * 2
+        );
+
+        fireworksCtx.fill();
+
+        fireworksCtx.restore();
+    }
+}
+
+
+/* COULEURS */
+function getFireworkColor(){
+
+    const colors = [
+        '#ff3399',
+        '#ff5ca8',
+        '#ffd94d',
+        '#fff176',
+        '#ff6b6b',
+        '#9c7cff',
+        '#5ce1e6',
+        '#ffffff'
+    ];
+
+    return colors[
+        Math.floor(
+            Math.random() *
+            colors.length
+        )
+    ];
+}
+
+
+/* AJOUTER DES ROCKETS */
+let lastRocketTime = 0;
+
+function animateFireworks(time){
+
+    fireworksCtx.clearRect(
+        0,
+        0,
+        fireworksCanvas.width,
+        fireworksCanvas.height
+    );
+
+
+    /* Nouvo feu chak ti moman */
+    if(
+        time - lastRocketTime >
+        450
+    ){
+
+        fireworksRockets.push(
+            new FireworkRocket()
+        );
+
+        lastRocketTime = time;
+    }
+
+
+    /* ROCKETS */
+    for(
+        let i = fireworksRockets.length - 1;
+        i >= 0;
+        i--
+    ){
+
+        const rocket =
+            fireworksRockets[i];
+
+        const exploded =
+            rocket.update();
+
+        if(!exploded){
+            rocket.draw();
+        }else{
+            fireworksRockets.splice(
+                i,
+                1
+            );
+        }
+    }
+
+
+    /* PARTICULES */
+    for(
+        let i = fireworksParticles.length - 1;
+        i >= 0;
+        i--
+    ){
+
+        const particle =
+            fireworksParticles[i];
+
+        particle.update();
+        particle.draw();
+
+        if(
+            particle.life <= 0
+        ){
+
+            fireworksParticles.splice(
+                i,
+                1
+            );
+        }
+    }
+
+
+    fireworksAnimation =
+        requestAnimationFrame(
+            animateFireworks
+        );
+}
+
+
+/* KÒMANSE FIREWORKS */
+function startFireworks(){
+
+    fireworksRockets = [];
+    fireworksParticles = [];
+
+    switchScreen(
+        'fireworks-screen'
+    );
+
+    lastRocketTime = 0;
+
+    fireworksAnimation =
+        requestAnimationFrame(
+            animateFireworks
+        );
+
+
+    /*
+     * Fireworks yo rete
+     * anviwon 5 secondes.
+     * Apre sa liv la parèt.
+     */
+    setTimeout(() => {
+
+        stopFireworks();
+
+        switchScreen(
+            'screen-card'
+        );
+
+        startBookAnimation();
+
+    },5500);
+}
+
+
+/* SISPANN FIREWORKS */
+function stopFireworks(){
+
+    if(fireworksAnimation){
+
+        cancelAnimationFrame(
+            fireworksAnimation
+        );
+
+        fireworksAnimation =
+            null;
+    }
+
+    fireworksRockets = [];
+    fireworksParticles = [];
+
+    fireworksCtx.clearRect(
+        0,
+        0,
+        fireworksCanvas.width,
+        fireworksCanvas.height
+    );
+}
+
+
+/* =====================================================
+   ANIMATION DU LIVRE
+===================================================== */
+
 function startBookAnimation(){
 
     const book =
@@ -867,7 +1328,10 @@ function startBookAnimation(){
 }
 
 
-/* ANIMATION COEUR */
+/* =====================================================
+   ANIMATION COEUR
+===================================================== */
+
 function createHeartFormation(){
 
     const container =
@@ -878,11 +1342,6 @@ function createHeartFormation(){
     container.innerHTML = "";
 
 
-    /*
-      IMPORTANT :
-      Les photos du cœur restent
-      exactement comme avant.
-    */
     const photosList = [
 
         "WhatsApp Image 2026-09-22 at 5.01.25 PM.jpeg",
@@ -923,7 +1382,6 @@ function createHeartFormation(){
     const cardHeight = 51;
 
 
-    /* COEUR CENTRE */
     const heartScale =
         Math.min(
             window.innerWidth / 38,
@@ -995,7 +1453,10 @@ function createHeartFormation(){
 }
 
 
-/* RESIZE */
+/* =====================================================
+   RESIZE
+===================================================== */
+
 window.addEventListener(
     'resize',
     () => {
@@ -1006,10 +1467,12 @@ window.addEventListener(
         canvas.height =
             window.innerHeight;
 
+        resizeFireworks();
+
     }
 );
 
 </script>
 
 </body>
-    </html>
+                            </html>
