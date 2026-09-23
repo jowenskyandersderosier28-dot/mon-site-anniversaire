@@ -128,10 +128,12 @@
         .birthday-title {
             color: #ff5ca8;
             font-family: 'Great Vibes', cursive;
-            font-size: 3rem;
+            font-size: 2rem;
+            line-height: 1.2;
+            white-space: nowrap;
             text-shadow:
-                0 0 15px #ff3399,
-                0 0 30px #ff007f;
+                0 0 10px #ff3399,
+                0 0 20px #ff007f;
         }
 
         /* =========================
@@ -156,8 +158,6 @@
             transform-style: preserve-3d;
         }
 
-        /* Ombre du livre */
-
         .book::after {
             content: "";
             position: absolute;
@@ -170,8 +170,6 @@
             border-radius: 50%;
             z-index: -2;
         }
-
-        /* Intérieur du livre */
 
         .book-inside {
             position: absolute;
@@ -505,10 +503,8 @@
 
             <div class="book" id="book">
 
-                <!-- INTERIOR -->
                 <div class="book-inside"></div>
 
-                <!-- PAGE 1 -->
                 <div class="pages">
 
                     <div class="page" id="page1">
@@ -548,8 +544,6 @@
                     </div>
 
 
-                    <!-- PAGE 2 -->
-
                     <div class="page" id="page2">
 
                         <div class="page-content">
@@ -586,8 +580,6 @@
 
                     </div>
 
-
-                    <!-- PAGE 3 -->
 
                     <div class="page" id="page3">
 
@@ -627,8 +619,6 @@
 
                 </div>
 
-
-                <!-- COVER -->
 
                 <div class="book-cover" id="bookCover">
 
@@ -672,7 +662,7 @@
         <div class="heart-grid" id="heartGrid"></div>
 
         <div class="heart-title">
-            Pour toujours 💗
+            Mon chef-d’œuvre ❤️
         </div>
 
     </div>
@@ -756,8 +746,10 @@
             }
         }
 
+        /* FIL WOZ YO PI DOUSMAN */
+
         let matrixInterval =
-            setInterval(drawMatrix, 33);
+            setInterval(drawMatrix, 70);
 
 
         /* =========================
@@ -774,7 +766,7 @@
             "HAPPY",
             "BIRTHDAY",
             "TO",
-            "HARLIE 🧸"
+            "HARLIE ❤️"
         ];
 
         let seqIndex = 0;
@@ -848,16 +840,12 @@
                 document.getElementById('page3');
 
 
-            /* Le livre commence fermé */
-
             book.classList.remove('open');
 
             page1.classList.remove('flipped');
             page2.classList.remove('flipped');
             page3.classList.remove('flipped');
 
-
-            /* Ouvre le livre */
 
             setTimeout(() => {
 
@@ -866,8 +854,6 @@
             }, 700);
 
 
-            /* Tourne la première page */
-
             setTimeout(() => {
 
                 page1.classList.add('flipped');
@@ -875,16 +861,12 @@
             }, 7000);
 
 
-            /* Tourne la deuxième page */
-
             setTimeout(() => {
 
                 page2.classList.add('flipped');
 
             }, 13000);
 
-
-            /* Après la dernière page */
 
             setTimeout(() => {
 
@@ -898,7 +880,6 @@
 
         /* =========================
            HEART FORMATION
-           PLUS PETIT POUR MOBILE
         ========================= */
 
         function createHeartFormation() {
@@ -942,11 +923,6 @@
             ];
 
 
-            /*
-             * Kè a fèt pi piti pou tout fòm nan
-             * ka parèt nèt sou ekran telefòn nan.
-             */
-
             const numCards = 20;
 
             const cardWidth = 43;
@@ -960,11 +936,6 @@
                 window.innerHeight / 2 -
                 cardHeight / 2;
 
-
-            /*
-             * 10 se echèl kè a.
-             * Li pi piti pase ansyen 15 la.
-             */
 
             const heartScale =
                 Math.min(
@@ -1071,4 +1042,4 @@
     </script>
 
 </body>
-</html>
+    </html>
