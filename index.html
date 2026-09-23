@@ -44,7 +44,10 @@ body{
     pointer-events:auto;
 }
 
-/* MATRIX */
+/* =========================
+   MATRIX
+========================= */
+
 #matrix-canvas{
     position:absolute;
     inset:0;
@@ -71,12 +74,16 @@ body{
     0%{
         transform:scale(1);
     }
+
     100%{
         transform:scale(1.08);
     }
 }
 
-/* FOND */
+/* =========================
+   FOND
+========================= */
+
 .stars-bg{
     position:absolute;
     inset:0;
@@ -96,7 +103,10 @@ body{
     width:100%;
 }
 
-/* GIF */
+/* =========================
+   GIF CHAT
+========================= */
+
 .cat-img{
     width:180px;
     height:180px;
@@ -109,30 +119,55 @@ body{
     0%,100%{
         transform:translateY(0);
     }
+
     50%{
         transform:translateY(-15px);
     }
 }
 
-/* TITRE SOUS LE GIF */
+/* =========================
+   TITRE SOUS LE GIF
+========================= */
+
 .birthday-title{
     color:#ff5ca8;
     font-family:'Playfair Display',serif;
-    font-size:clamp(1.35rem, 7vw, 2rem);
+    font-size:clamp(1.25rem, 6.5vw, 2rem);
     font-weight:700;
     line-height:1.2;
-    white-space:normal;
     text-align:center;
     width:100%;
-    max-width:90vw;
-    padding:0 10px;
+    max-width:95vw;
+    margin:0 auto;
+    padding:0 5px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
     text-shadow:
         0 1px 3px rgba(255,255,255,.9);
 }
 
+.flower{
+    font-size:clamp(1.4rem, 7vw, 2rem);
+    flex-shrink:0;
+    filter:drop-shadow(0 0 5px #ff69b4);
+    animation:flowerGlow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes flowerGlow{
+    from{
+        transform:scale(1);
+    }
+
+    to{
+        transform:scale(1.15);
+    }
+}
+
 /* =========================
    FEU D'ARTIFICE
-   ========================= */
+========================= */
 
 #fireworks-screen{
     background:
@@ -153,7 +188,10 @@ body{
     z-index:1;
 }
 
-/* LIVRE */
+/* =========================
+   LIVRE
+========================= */
+
 .book-area{
     position:relative;
     z-index:2;
@@ -281,7 +319,10 @@ body{
     border:5px solid #ff78b5;
 }
 
-/* PAGES */
+/* =========================
+   PAGES
+========================= */
+
 .pages{
     position:absolute;
     inset:10px;
@@ -379,7 +420,27 @@ body{
     margin-bottom:5px;
 }
 
-/* COEUR */
+/* =========================
+   SIGNATURE
+========================= */
+
+.signature{
+    align-self:flex-end;
+    margin-top:4px;
+    margin-right:8px;
+    margin-bottom:8px;
+    font-family:'Great Vibes',cursive;
+    font-size:1.35rem;
+    color:#d63384;
+    text-decoration:underline;
+    text-underline-offset:4px;
+    transform:rotate(-4deg);
+}
+
+/* =========================
+   COEUR
+========================= */
+
 .heart-grid{
     position:absolute;
     inset:0;
@@ -429,7 +490,10 @@ body{
     }
 }
 
-/* PETITS ECRANS */
+/* =========================
+   PETITS ECRANS
+========================= */
+
 @media(max-width:380px){
 
     .book{
@@ -457,13 +521,30 @@ body{
     .heart-title{
         font-size:2.2rem;
     }
+
+    .signature{
+        font-size:1.2rem;
+        margin-right:5px;
+    }
+
+    .birthday-title{
+        font-size:clamp(1.15rem, 6vw, 1.7rem);
+        gap:5px;
+    }
+
+    .flower{
+        font-size:1.35rem;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- MATRIX -->
+<!-- =========================
+     MATRIX
+========================= -->
+
 <div id="screen-matrix" class="screen active">
 
     <canvas id="matrix-canvas"></canvas>
@@ -475,7 +556,10 @@ body{
 </div>
 
 
-<!-- GIF CHAT -->
+<!-- =========================
+     GIF CHAT
+========================= -->
+
 <div id="screen-cat" class="screen">
 
     <div class="stars-bg"></div>
@@ -488,16 +572,25 @@ body{
             class="cat-img"
         >
 
-        <h1 class="birthday-title">
-            HAPPY BIRTHDAY HARLIE
-        </h1>
+        <div class="birthday-title">
+
+            <span class="flower">🌸</span>
+
+            <span>HAPPY BIRTHDAY HARLIE</span>
+
+            <span class="flower">🌸</span>
+
+        </div>
 
     </div>
 
 </div>
 
 
-<!-- FEU D'ARTIFICE -->
+<!-- =========================
+     FEU D'ARTIFICE
+========================= -->
+
 <div id="fireworks-screen" class="screen">
 
     <canvas id="fireworks-canvas"></canvas>
@@ -505,7 +598,10 @@ body{
 </div>
 
 
-<!-- LIVRE -->
+<!-- =========================
+     LIVRE
+========================= -->
+
 <div id="screen-card" class="screen">
 
     <div class="stars-bg"></div>
@@ -518,7 +614,10 @@ body{
 
             <div class="pages">
 
-                <!-- PAGE 1 -->
+                <!-- =====================
+                     PAGE 1
+                ====================== -->
+
                 <div class="page" id="page1">
 
                     <div class="page-content">
@@ -558,7 +657,10 @@ body{
                 </div>
 
 
-                <!-- PAGE 2 -->
+                <!-- =====================
+                     PAGE 2
+                ====================== -->
+
                 <div class="page" id="page2">
 
                     <div class="page-content">
@@ -598,7 +700,10 @@ body{
                 </div>
 
 
-                <!-- PAGE 3 -->
+                <!-- =====================
+                     PAGE 3
+                ====================== -->
+
                 <div class="page" id="page3">
 
                     <div class="page-content">
@@ -613,6 +718,10 @@ body{
 
                         <div class="message-box">
                             Toi qui as fait de mon cœur un musée qui déborde de tes plus beaux portraits, ce musée dont j'ai jeté les clés afin qu'il reste ouvert à jamais... Ainsi, je pourrai contempler ces œuvres d'art sans jamais me lasser. 💖
+                        </div>
+
+                        <div class="signature">
+                            Ders
                         </div>
 
                         <div class="photo-frame">
@@ -640,7 +749,10 @@ body{
             </div>
 
 
-            <!-- COUVERTURE -->
+            <!-- =====================
+                 COUVERTURE
+            ====================== -->
+
             <div class="book-cover" id="bookCover">
 
                 <div class="cover-front">
@@ -672,7 +784,10 @@ body{
 </div>
 
 
-<!-- COEUR -->
+<!-- =========================
+     COEUR FINAL
+========================= -->
+
 <div id="screen-heart" class="screen">
 
     <div class="stars-bg"></div>
@@ -818,6 +933,7 @@ let seqTimer =
              * Li rete 4 secondes.
              * Apre sa feu d'artifice la kòmanse.
              */
+
             setTimeout(() => {
 
                 startFireworks();
@@ -848,7 +964,6 @@ function switchScreen(screenId){
 
 /* =====================================================
    FEU D'ARTIFICE
-   SAN GIF / SAN FICHYE EXTERNE
 ===================================================== */
 
 const fireworksCanvas =
@@ -876,6 +991,7 @@ resizeFireworks();
 
 
 /* TI PATI FIREWORKS */
+
 class FireworkParticle{
 
     constructor(x,y,color){
@@ -915,7 +1031,6 @@ class FireworkParticle{
     update(){
 
         this.x += this.vx;
-
         this.y += this.vy;
 
         this.vy += this.gravity;
@@ -960,6 +1075,7 @@ class FireworkParticle{
 
 
 /* ROCKET */
+
 class FireworkRocket{
 
     constructor(){
@@ -1063,6 +1179,7 @@ class FireworkRocket{
 
 
 /* COULEURS */
+
 function getFireworkColor(){
 
     const colors = [
@@ -1086,6 +1203,7 @@ function getFireworkColor(){
 
 
 /* AJOUTER DES ROCKETS */
+
 let lastRocketTime = 0;
 
 function animateFireworks(time){
@@ -1097,8 +1215,6 @@ function animateFireworks(time){
         fireworksCanvas.height
     );
 
-
-    /* Nouvo feu chak ti moman */
     if(
         time - lastRocketTime >
         450
@@ -1113,6 +1229,7 @@ function animateFireworks(time){
 
 
     /* ROCKETS */
+
     for(
         let i = fireworksRockets.length - 1;
         i >= 0;
@@ -1126,8 +1243,11 @@ function animateFireworks(time){
             rocket.update();
 
         if(!exploded){
+
             rocket.draw();
+
         }else{
+
             fireworksRockets.splice(
                 i,
                 1
@@ -1137,6 +1257,7 @@ function animateFireworks(time){
 
 
     /* PARTICULES */
+
     for(
         let i = fireworksParticles.length - 1;
         i >= 0;
@@ -1168,7 +1289,10 @@ function animateFireworks(time){
 }
 
 
-/* KÒMANSE FIREWORKS */
+/* =====================================================
+   KÒMANSE FIREWORKS
+===================================================== */
+
 function startFireworks(){
 
     fireworksRockets = [];
@@ -1190,6 +1314,7 @@ function startFireworks(){
      * Fireworks yo rete 4 secondes.
      * Apre sa liv la parèt.
      */
+
     setTimeout(() => {
 
         stopFireworks();
@@ -1204,7 +1329,10 @@ function startFireworks(){
 }
 
 
-/* SISPANN FIREWORKS */
+/* =====================================================
+   SISPANN FIREWORKS
+===================================================== */
+
 function stopFireworks(){
 
     if(fireworksAnimation){
@@ -1247,6 +1375,7 @@ function startBookAnimation(){
     const page3 =
         document.getElementById('page3');
 
+
     book.classList.remove('open');
 
     page1.classList.remove('flipped');
@@ -1254,7 +1383,11 @@ function startBookAnimation(){
     page3.classList.remove('flipped');
 
 
-    /* LE LIVRE RESTE FERME 3 SECONDES */
+    /*
+     * LIVRE FÈMEN 3 SECONDES
+     * Apre sa li ouvri.
+     */
+
     setTimeout(() => {
 
         book.classList.add('open');
@@ -1262,15 +1395,23 @@ function startBookAnimation(){
     },3000);
 
 
-    /* PAGE 1 */
+    /*
+     * PAGE 1
+     * Rete 5 secondes.
+     */
+
     setTimeout(() => {
 
         page1.classList.add('flipped');
 
-    },7000);
+    },8000);
 
 
-    /* PAGE 2 */
+    /*
+     * PAGE 2
+     * Rete 5 secondes.
+     */
+
     setTimeout(() => {
 
         page2.classList.add('flipped');
@@ -1278,7 +1419,23 @@ function startBookAnimation(){
     },13000);
 
 
-    /* PASSAGE AU COEUR */
+    /*
+     * PAGE 3
+     * Rete 7 secondes.
+     */
+
+    setTimeout(() => {
+
+        page3.classList.add('flipped');
+
+    },20000);
+
+
+    /*
+     * APRE 7 SEC SOU DÈNYE PAJ LA
+     * Pase sou ekran KÈ a.
+     */
+
     setTimeout(() => {
 
         switchScreen(
@@ -1287,7 +1444,7 @@ function startBookAnimation(){
 
         createHeartFormation();
 
-    },19500);
+    },21500);
 }
 
 
@@ -1438,4 +1595,4 @@ window.addEventListener(
 </script>
 
 </body>
-</html>
+    </html>
