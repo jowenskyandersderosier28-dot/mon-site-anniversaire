@@ -1,325 +1,214 @@
 <!DOCTYPE html>
 <html lang="ht">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Harlie</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            background-color: #000;
-            color: #fff;
-            font-family: 'Arial', sans-serif;
-            overflow: hidden;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Harlie</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #050505;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+      color: #fff;
+      padding: 15px;
+      box-sizing: border-box;
+      position: relative;
+    }
 
-        .screen {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 1s ease-in-out;
-        }
+    /* Ti fil/limyè woz k ap desann yo */
+    .rain-drop {
+      position: absolute;
+      top: -20px;
+      background: linear-gradient(transparent, #ff2a85);
+      width: 2px;
+      height: 25px;
+      opacity: 0.7;
+      animation: fall linear infinite;
+    }
 
-        .screen.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
+    @keyframes fall {
+      0% {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(105vh);
+        opacity: 0;
+      }
+    }
 
-        /* --- MATRIX SCREEN --- */
-        #matrix-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
+    /* Pati konte a: 3, 2, 1, Happy Birthday */
+    #countdown-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #050505;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      transition: opacity 1s ease;
+    }
 
-        .matrix-text {
-            position: relative;
-            z-index: 2;
-            font-size: 4rem;
-            font-weight: bold;
-            color: #ff3399;
-            text-shadow: 0 0 20px #ff3399, 0 0 40px #ff007f;
-            animation: pulse 1s infinite alternate;
-            text-align: center;
-            padding: 0 20px;
-        }
+    #countdown-number {
+      font-size: 5rem;
+      font-weight: bold;
+      color: #ff2a85;
+      text-shadow: 0 0 20px #ff2a85, 0 0 40px #ff2a85;
+      animation: pulseNum 1s infinite alternate;
+    }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.08); }
-        }
+    @keyframes pulseNum {
+      0% { transform: scale(0.9); opacity: 0.8; }
+      100% { transform: scale(1.1); opacity: 1; }
+    }
 
-        /* --- STARS & ANIMATED HEART SCREEN --- */
-        .stars-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-            z-index: 1;
-        }
+    .card {
+      background: rgba(20, 20, 20, 0.9);
+      border: 2px solid #ff2a85;
+      border-radius: 15px;
+      padding: 15px;
+      max-width: 380px;
+      box-shadow: 0 0 20px rgba(255, 42, 133, 0.4);
+      margin-bottom: 15px;
+      text-align: center;
+      z-index: 2;
+    }
 
-        .content-box {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-        }
+    p {
+      font-size: 0.72rem;
+      line-height: 1.4;
+      color: #ffc2d9;
+      margin: 0;
+    }
 
-        .heart-icon-anim {
-            font-size: 5rem;
-            margin-bottom: 20px;
-            animation: floatHeart 3s ease-in-out infinite;
-        }
+    .heart-container {
+      position: relative;
+      width: 240px;
+      height: 220px;
+      z-index: 2;
+    }
 
-        @keyframes floatHeart {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
+    .heart-container img {
+      position: absolute;
+      width: 42px;
+      height: 42px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid #ff2a85;
+      box-shadow: 0 0 10px #ff2a85;
+      transform: translate(-50%, -50%);
+    }
 
-        /* --- CARD SCREEN --- */
-        .card-container {
-            position: relative;
-            z-index: 2;
-            background: #fff;
-            color: #333;
-            width: 350px;
-            max-height: 90vh;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(255, 51, 153, 0.4);
-            text-align: center;
-            animation: slideUp 1s ease-out;
-            overflow-y: auto;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .message-box {
-            background: #fdf2f8;
-            padding: 12px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-            color: #db2777;
-            font-style: italic;
-            line-height: 1.4;
-        }
-
-        .photo-frame {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        .photo-frame img {
-            width: 140px;
-            height: 170px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 2px solid #ff3399;
-        }
-
-        /* --- FINAL HEART SCREEN --- */
-        .heart-grid {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-        }
-
-        .mini-card {
-            position: absolute;
-            width: 60px;
-            height: 70px;
-            background: white;
-            padding: 3px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(255, 51, 153, 0.8);
-            transition: transform 0.5s;
-        }
-
-        .mini-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 3px;
-        }
-    </style>
+    .main-content {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
 </head>
 <body>
 
-    <div id="screen-matrix" class="screen active">
-        <canvas id="matrix-canvas"></canvas>
-        <div class="matrix-text" id="matrix-text">3</div>
+  <!-- Ekran konte a -->
+  <div id="countdown-overlay">
+    <div id="countdown-number">3</div>
+  </div>
+
+  <!-- Sèn prensipal la -->
+  <div class="main-content" id="mainContent">
+    <div class="card">
+      <p>
+        Que le Seigneur t'accorde la paix, la joie, le succès, la santé et beaucoup d'amour. Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. Et aujourd'hui encore plus, je veux que tu te sentes unique, chouchoutée, aimée, valorisée, comblée. Toi qui as fait de mon cœur un musée qui déborde de tes plus beaux portraits, ce musée dont j'ai jeté les clés afin qu'il reste ouvert à jamais... Ainsi, je pourrai contempler ces œuvres d'art, et penser à m'en lasser, jamais. Merci d'être cette personne exceptionnelle qui illumine ma vie. Joyeux anniversaire mon Nounours ! 🧸❤️✨
+      </p>
     </div>
 
-    <div id="screen-cat" class="screen">
-        <div class="stars-bg"></div>
-        <div class="content-box">
-            <div class="heart-icon-anim">💖</div>
-            <h1 style="color: #ff3399; font-size: 2.2rem; text-shadow: 0 0 15px #ff3399;">HAPPY BIRTHDAY HARLIE</h1>
-        </div>
-    </div>
+    <div class="heart-container" id="heartGallery"></div>
+  </div>
 
-    <div id="screen-card" class="screen">
-        <div class="stars-bg"></div>
-        <div class="card-container" id="card-box">
-            <div class="message-box" id="card-msg">Happy Birthday mon nounours🧸❤️</div>
-            <div class="photo-frame" id="card-photos">
-                <img src="1000089080.jpg" alt="Foto Harlie">
-                <img src="1000089081.jpg" alt="Foto Harlie">
-            </div>
-        </div>
-    </div>
+  <script>
+    // Kreye ti fil woz k ap desann yo
+    for (let i = 0; i < 35; i++) {
+      const drop = document.createElement('div');
+      drop.classList.add('rain-drop');
+      drop.style.left = `${Math.random() * 100}vw`;
+      drop.style.animationDuration = `${1.5 + Math.random() * 2}s`;
+      drop.style.animationDelay = `${Math.random() * 3}s`;
+      document.body.appendChild(drop);
+    }
 
-    <div id="screen-heart" class="screen">
-        <div class="stars-bg"></div>
-        <div class="heart-grid" id="heartGrid"></div>
-    </div>
+    // Lis tout foto WhatsApp yo
+    const photosList = [
+      "WhatsApp Image 2026-09-22 at 5.01.16 PM.jpeg",
+      "WhatsApp Image 2026-09-22 at 5.01.17 PM (1).jpeg",
+      "WhatsApp Image 2026-09-22 at 5.01.17 PM.jpeg",
+      "WhatsApp Image 2026-09-22 at 5.01.20 PM.jpeg",
+      "WhatsApp Image 2026-09-22 at 5.01.21 PM (1).jpeg",
+      "WhatsApp Image 2026-09-22 at 5.01.21 PM (2).jpeg",
+      "WhatsApp Image 2026-09-22 at 5.01.21 PM.jpeg",
+      "WhatsApp Image 2026-09-22 at 5.01.22 PM.jpeg",
+      "WhatsApp Image 2026-09-22 at 5.01.23 PM (1).jpeg",
+      "WhatsApp Image 2026-09-22 at 5.01.23 PM (2).jpeg",
+      "WhatsApp Image 2026-09-22 at 5.01.23 PM.jpeg"
+    ];
 
-    <script>
-        // --- 1. MATRIX EFFECT ---
-        const canvas = document.getElementById('matrix-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+    // Konte 3, 2, 1
+    const countdownEl = document.getElementById('countdown-number');
+    const overlayEl = document.getElementById('countdown-overlay');
+    const mainContentEl = document.getElementById('mainContent');
 
-        const characters = "HAPPYBIRTHDAYHARLIE321🧸❤️";
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        const drops = [];
-        for (let i = 0; i < columns; i++) drops[i] = 1;
+    let count = 3;
+    const timer = setInterval(() => {
+      count--;
+      if (count > 0) {
+        countdownEl.innerText = count;
+      } else if (count === 0) {
+        countdownEl.innerText = "🎉 Happy Birthday Harlie! 🎉";
+        countdownEl.style.fontSize = "2.2rem";
+      } else {
+        clearInterval(timer);
+        overlayEl.style.opacity = '0';
+        setTimeout(() => {
+          overlayEl.style.display = 'none';
+          mainContentEl.style.display = 'flex';
+          buildHeart();
+        }, 1000);
+      }
+    }, 1000);
 
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#ff3399';
-            ctx.font = fontSize + 'px monospace';
-            for (let i = 0; i < drops.length; i++) {
-                const text = characters.charAt(Math.floor(Math.random() * characters.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
-        }
-        let matrixInterval = setInterval(drawMatrix, 33);
+    // Bati fòm kè a ak foto yo
+    function buildHeart() {
+      const container = document.getElementById('heartGallery');
+      const totalPhotos = photosList.length;
+      const centerX = 120;
+      const centerY = 110;
+      const scale = 8.5;
 
-        // Sekans dekont lan
-        const textElement = document.getElementById('matrix-text');
-        const sequence = ["3", "2", "1", "HAPPY", "BIRTHDAY", "TO", "HARLIE 🧸"];
-        let seqIndex = 0;
+      for (let i = 0; i < totalPhotos; i++) {
+        const img = document.createElement('img');
+        img.src = photosList[i];
 
-        let seqTimer = setInterval(() => {
-            seqIndex++;
-            if (seqIndex < sequence.length) {
-                textElement.innerText = sequence[seqIndex];
-            } else {
-                clearInterval(seqTimer);
-                clearInterval(matrixInterval);
-                switchScreen('screen-cat');
-                setTimeout(() => {
-                    switchScreen('screen-card');
-                    startCardSlideshow();
-                }, 4000);
-            }
-        }, 1200);
+        const t = ((i + 1) / totalPhotos) * 2 * Math.PI;
+        const x = centerX + scale * 16 * Math.pow(Math.sin(t), 3);
+        const y = centerY - scale * (13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
 
-        function switchScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(screenId).classList.add('active');
-        }
-
-        // --- 3. CARD SLIDESHOW AK MESAJ OU YO ---
-        const slides = [
-            { 
-                msg: "Happy Birthday mon nounours🧸❤️", 
-                img1: "1000089080.jpg", 
-                img2: "1000089081.jpg" 
-            },
-            { 
-                msg: "Chaque jour, j'essaie de te montrer à quel point tu es spéciale à mes yeux. Et aujourd'hui encore plus, je veux que tu te sentes unique, chouchoutée, aimée, valorisée, comblée. ✨", 
-                img1: "1000089082.jpg", 
-                img2: "1000089083.jpg" 
-            },
-            { 
-                msg: "Toi qui as fait de mon cœur un musée qui déborde de tes plus beaux portraits, ce musée dont j'ai jeté les clés afin qu'il reste ouvert à jamais... Ainsi, je pourrai contempler ces œuvres d'art sans jamais me lasser. 💖", 
-                img1: "1000089084.jpg", 
-                img2: "1000089085.jpg" 
-            }
-        ];
-        let slideIdx = 0;
-
-        function startCardSlideshow() {
-            let cardInterval = setInterval(() => {
-                slideIdx++;
-                if (slideIdx < slides.length) {
-                    document.getElementById('card-msg').innerText = slides[slideIdx].msg;
-                    document.getElementById('card-photos').innerHTML = `
-                        <img src="${slides[slideIdx].img1}" alt="Foto Harlie">
-                        <img src="${slides[slideIdx].img2}" alt="Foto Harlie">
-                    `;
-                } else {
-                    clearInterval(cardInterval);
-                    switchScreen('screen-heart');
-                    createHeartFormation();
-                }
-            }, 6000); 
-        }
-
-        // --- 4. HEART FORMATION ---
-        function createHeartFormation() {
-            const container = document.getElementById('heartGrid');
-            
-            const photosList = [
-                "1000089080.jpg", "1000089081.jpg", "1000089082.jpg", 
-                "1000089083.jpg", "1000089084.jpg", "1000089085.jpg", 
-                "1000089087.jpg", "1000089092.jpg", "1000089107.jpg", 
-                "1000089109.jpg", "1000089111.jpg", "1000089113.jpg", 
-                "1000089115.jpg", "1000089124.jpg"
-            ];
-            
-            const numCards = 20;
-            const centerX = window.innerWidth / 2 - 30;
-            const centerY = window.innerHeight / 2 - 35;
-
-            for (let i = 0; i < numCards; i++) {
-                let t = (i / numCards) * Math.PI * 2;
-                let x = 16 * Math.pow(Math.sin(t), 3);
-                let y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
-                
-                let posX = centerX + x * 15;
-                let posY = centerY + y * 15;
-
-                let photoSrc = photosList[i % photosList.length];
-
-                const card = document.createElement('div');
-                card.className = 'mini-card';
-                card.style.left = posX + 'px';
-                card.style.top = posY + 'px';
-                card.innerHTML = `<img src="${photoSrc}" alt="Heart Photo">`;
-                
-                container.appendChild(card);
-            }
-        }
-    </script>
+        img.style.left = `${x}px`;
+        img.style.top = `${y}px`;
+        container.appendChild(img);
+      }
+    }
+  </script>
 </body>
 </html>
