@@ -1753,7 +1753,9 @@ backgroundMusic.volume = 0.55;
 
 
 /*
-   Eseye kòmanse mizik la otomatikman.
+   Kòmanse mizik la.
+   Navigatè telefòn ka bloke autoplay,
+   se poutèt sa nou gen fallback touch/click.
 */
 
 function startMusic(){
@@ -1762,11 +1764,9 @@ function startMusic(){
         .play()
         .catch(() => {
 
-            /*
-               Si navigatè a bloke autoplay,
-               premye touch/click itilizatè a
-               ap lanse mizik la.
-            */
+            console.log(
+                "Autoplay bloqué. Attente d'une interaction."
+            );
 
         });
 
@@ -1774,29 +1774,47 @@ function startMusic(){
 
 
 /*
-   Eseye lanse mizik la
-   depi sit la ouvri.
+   Premye tantativ otomatik.
 */
 
 startMusic();
 
 
 /*
-   Si autoplay bloke sou telefòn nan,
-   nenpòt premye touch/click
+   Si navigatè a bloke autoplay,
+   premye touch/click itilizatè a
    ap lanse mizik la.
 */
 
+function unlockMusic(){
+
+    backgroundMusic
+        .play()
+        .then(() => {
+
+            document.removeEventListener(
+                "click",
+                unlockMusic
+            );
+
+            document.removeEventListener(
+                "touchstart",
+                unlockMusic
+            );
+
+        })
+        .catch(() => {});
+
+}
+
 document.addEventListener(
     "click",
-    startMusic,
-    { once:true }
+    unlockMusic
 );
 
 document.addEventListener(
     "touchstart",
-    startMusic,
-    { once:true }
+    unlockMusic
 );
 
 
@@ -2573,7 +2591,7 @@ function startBookAnimation(){
 
 
 /* =====================================================
-   FOTO KI NOU KÒNNEN KI TE PARÈT NAN KÈ A
+   FOTO KI NAN KÈ A
 ===================================================== */
 
 const heartPhotos = [
@@ -2938,4 +2956,4 @@ window.addEventListener(
 </script>
 
 </body>
-   </html>
+    </html>
