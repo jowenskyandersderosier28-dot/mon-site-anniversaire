@@ -655,7 +655,6 @@ body{
     position:absolute;
     inset:0;
 
-    /* JÒN NAN PAJ LIV LA → BLAN */
     background:#ffffff;
 
     border:
@@ -762,7 +761,6 @@ body{
 
 .message-box{
 
-    /* JÒN NAN MESSAGE BOX LIV LA → BLAN */
     background:#ffffff;
 
     border:
@@ -905,6 +903,7 @@ body{
 
 /* =====================================================
    COEUR FINAL
+   PA MANYEN — MENM KÈ FOTO A
 ===================================================== */
 
 .heart-grid{
@@ -1786,6 +1785,7 @@ body{
 
 <!-- =====================================================
      COEUR FINAL
+     KÈ FOTO A RETE MENM JAN
 ===================================================== -->
 
 <div
@@ -1821,7 +1821,9 @@ body{
 
 
 /* =====================================================
-   MATRIX
+   MATRIX — NOUVO EFE A
+   ANPIL LIGNES VÈTIKAL
+   CHAK LIGNE GEN TI EKRI TOUT SERE
 ===================================================== */
 
 const canvas =
@@ -1832,92 +1834,368 @@ const canvas =
 const ctx =
     canvas.getContext('2d');
 
-canvas.width =
-    window.innerWidth;
+let matrixWidth = window.innerWidth;
+let matrixHeight = window.innerHeight;
 
-canvas.height =
-    window.innerHeight;
+const matrixWords = [
 
-const characters =
-    "HAPPYBIRTHDAYTOOURLOVES321❤️";
+    "HAPPY",
+    "BIRTHDAY",
+    "TO",
+    "OUR",
+    "LOVES",
+    "LOVE",
+    "HAPPY",
+    "BIRTHDAY",
+    "LOVE",
+    "OUR",
+    "LOVES",
+    "2026",
+    "9",
+    "❤️"
 
-const fontSize = 16;
+];
 
-const columns =
-    Math.floor(
-        canvas.width /
-        fontSize
+let matrixStreams = [];
+
+function resizeMatrix(){
+
+    matrixWidth =
+        window.innerWidth;
+
+    matrixHeight =
+        window.innerHeight;
+
+    const dpr =
+        Math.min(
+            window.devicePixelRatio || 1,
+            2
+        );
+
+    canvas.width =
+        matrixWidth * dpr;
+
+    canvas.height =
+        matrixHeight * dpr;
+
+    canvas.style.width =
+        matrixWidth + "px";
+
+    canvas.style.height =
+        matrixHeight + "px";
+
+    ctx.setTransform(
+        dpr,
+        0,
+        0,
+        dpr,
+        0,
+        0
     );
 
-const drops = [];
-
-for(
-    let i = 0;
-    i < columns;
-    i++
-){
-
-    drops[i] = 1;
+    createMatrixStreams();
 }
+
+
+/* =====================================================
+   KREYE ANPIL LIGNES
+===================================================== */
+
+function createMatrixStreams(){
+
+    matrixStreams = [];
+
+    /*
+       Ti distans ant liy yo.
+       6px = anpil liy sou ekran an.
+    */
+
+    const columnGap =
+        Math.max(
+            5.5,
+            Math.min(
+                7,
+                matrixWidth / 150
+            )
+        );
+
+    const fontSize =
+        Math.max(
+            5.5,
+            Math.min(
+                7,
+                matrixWidth / 145
+            )
+        );
+
+    for(
+        let x = -10;
+        x < matrixWidth + 10;
+        x += columnGap
+    ){
+
+        const streamLength =
+            Math.floor(
+                matrixHeight /
+                (fontSize * .72)
+            ) +
+            Math.floor(
+                Math.random() * 45
+            );
+
+        const speed =
+            .20 +
+            Math.random() * .55;
+
+        const startY =
+            Math.random() *
+            matrixHeight *
+            1.5 -
+            matrixHeight;
+
+        const opacity =
+            .25 +
+            Math.random() * .55;
+
+        const words = [];
+
+        for(
+            let j = 0;
+            j < streamLength;
+            j++
+        ){
+
+            words.push(
+                matrixWords[
+                    Math.floor(
+                        Math.random() *
+                        matrixWords.length
+                    )
+                ]
+            );
+        }
+
+        matrixStreams.push({
+
+            x:x,
+
+            y:startY,
+
+            speed:speed,
+
+            opacity:opacity,
+
+            words:words,
+
+            offset:
+                Math.random() *
+                1000,
+
+            length:
+                streamLength
+
+        });
+    }
+}
+
+
+/* =====================================================
+   DESINE MATRIX LA
+===================================================== */
 
 function drawMatrix(){
 
     ctx.fillStyle =
-        'rgba(0, 0, 0, 0.05)';
+        'rgba(0,0,0,0.14)';
 
     ctx.fillRect(
         0,
         0,
-        canvas.width,
-        canvas.height
+        matrixWidth,
+        matrixHeight
     );
 
-    ctx.fillStyle =
-        '#ff3399';
-
-    ctx.font =
-        fontSize +
-        'px monospace';
-
-    for(
-        let i = 0;
-        i < drops.length;
-        i++
-    ){
-
-        const text =
-            characters.charAt(
-                Math.floor(
-                    Math.random() *
-                    characters.length
-                )
-            );
-
-        ctx.fillText(
-            text,
-            i * fontSize,
-            drops[i] * fontSize
+    const fontSize =
+        Math.max(
+            5.5,
+            Math.min(
+                7,
+                matrixWidth / 145
+            )
         );
 
-        if(
-            drops[i] *
-            fontSize >
-            canvas.height &&
-            Math.random() > .975
-        ){
+    const lineHeight =
+        fontSize * .82;
 
-            drops[i] = 0;
+    ctx.font =
+        "600 " +
+        fontSize +
+        "px 'Playfair Display', serif";
+
+    ctx.textAlign =
+        "center";
+
+    ctx.textBaseline =
+        "middle";
+
+    matrixStreams.forEach(
+        stream => {
+
+            stream.y +=
+                stream.speed;
+
+            /*
+               Si tout stream nan soti anba,
+               voye l tounen anlè.
+            */
+
+            if(
+                stream.y -
+                stream.length *
+                lineHeight >
+                matrixHeight
+            ){
+
+                stream.y =
+                    -Math.random() *
+                    matrixHeight *
+                    .8;
+
+                stream.speed =
+                    .20 +
+                    Math.random() * .55;
+            }
+
+
+            for(
+                let i = 0;
+                i < stream.length;
+                i++
+            ){
+
+                const y =
+                    stream.y +
+                    i *
+                    lineHeight;
+
+                if(
+                    y < -10 ||
+                    y > matrixHeight + 10
+                ){
+
+                    continue;
+                }
+
+
+                /*
+                   Ti ekriti diferan nan chak liy.
+                */
+
+                const word =
+                    stream.words[
+                        i %
+                        stream.words.length
+                    ];
+
+
+                /*
+                   Gen kèk pati ki pi klere,
+                   lòt yo pi fèb.
+                */
+
+                const middle =
+                    matrixHeight / 2;
+
+                const distance =
+                    Math.abs(
+                        y - middle
+                    ) /
+                    matrixHeight;
+
+                let alpha =
+                    stream.opacity *
+                    (
+                        .35 +
+                        .65 *
+                        (1 - distance)
+                    );
+
+
+                /*
+                   Premye kèk ekriti yo ka pi klere.
+                */
+
+                if(
+                    i < 4
+                ){
+
+                    alpha += .20;
+                }
+
+                alpha =
+                    Math.min(
+                        alpha,
+                        .9
+                    );
+
+
+                ctx.fillStyle =
+                    `rgba(255,51,153,${alpha})`;
+
+
+                /*
+                   Ti varyasyon bò kote liy lan
+                   pou l pa parèt tankou yon liy
+                   mekanik twò pafè.
+                */
+
+                const jitter =
+                    Math.sin(
+                        (
+                            i +
+                            stream.offset
+                        ) * .7
+                    ) *
+                    .7;
+
+
+                ctx.fillText(
+
+                    word,
+
+                    stream.x +
+                    jitter,
+
+                    y
+
+                );
+            }
+
         }
+    );
 
-        drops[i]++;
-    }
+
+    /*
+       Yon ti glow jeneral pou liy yo.
+    */
+
+    ctx.shadowBlur = 3;
+
+    ctx.shadowColor =
+        'rgba(255,51,153,.55)';
+
+    ctx.shadowBlur = 0;
+
+
+    requestAnimationFrame(
+        drawMatrix
+    );
 }
 
-let matrixInterval =
-    setInterval(
-        drawMatrix,
-        70
-    );
+
+resizeMatrix();
+
+drawMatrix();
 
 
 /* =====================================================
@@ -1967,10 +2245,6 @@ let seqTimer =
 
                 clearInterval(
                     seqTimer
-                );
-
-                clearInterval(
-                    matrixInterval
                 );
 
 
@@ -2853,6 +3127,7 @@ function startBookAnimation(){
 
     /* =================================================
        KÈ FINAL
+       MEN KÈ FOTO A RETE MENM JAN
     ================================================= */
 
     setTimeout(
@@ -2876,6 +3151,7 @@ function startBookAnimation(){
 
 /* =====================================================
    FOTO KI NAN KÈ A
+   PA MANYEN
 ===================================================== */
 
 const heartPhotos = [
@@ -2916,6 +3192,7 @@ function createMediaElement(
 
 /* =====================================================
    KÈ FINAL
+   KÈ FOTO A PA CHANJE
 ===================================================== */
 
 function createHeartFormation(){
@@ -3246,11 +3523,7 @@ window.addEventListener(
     'resize',
     () => {
 
-        canvas.width =
-            window.innerWidth;
-
-        canvas.height =
-            window.innerHeight;
+        resizeMatrix();
 
         resizeFireworks();
 
@@ -3260,4 +3533,4 @@ window.addEventListener(
 </script>
 
 </body>
-</html>
+   </html>
