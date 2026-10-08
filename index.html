@@ -730,10 +730,6 @@ body{
 
     flex-shrink:0;
 
-    /*
-       EFÈ EKRI
-    */
-
     min-height:1.9rem;
 }
 
@@ -774,10 +770,6 @@ body{
     width:100%;
 
     flex-shrink:0;
-
-    /*
-       EFÈ EKRI
-    */
 
     min-height:60px;
 }
@@ -2428,11 +2420,6 @@ function stopFireworks(){
    EFÈ "AP EKRI" SOU PAJ YO
 ===================================================== */
 
-/*
-   Fonksyon sa a pran tèks la epi li montre l
-   lèt pa lèt, tankou yon moun ap ekri li.
-*/
-
 function typeText(
     element,
     speed = 28
@@ -2441,11 +2428,6 @@ function typeText(
     if(!element){
         return;
     }
-
-    /*
-       Premye fwa sèlman:
-       nou sove tèks orijinal la.
-    */
 
     if(
         !element.dataset.originalText
@@ -2499,11 +2481,6 @@ function typeText(
 
                     clearInterval(timer);
 
-                    /*
-                       Nou kite ti curseur la
-                       disparèt apre tèks la fini.
-                    */
-
                     setTimeout(
                         () => {
 
@@ -2521,11 +2498,6 @@ function typeText(
     return timer;
 }
 
-
-/*
-   Chak fwa yon paj pral parèt,
-   nou fè tit la ak mesaj la ekri.
-*/
 
 function startPageTyping(
     pageId
@@ -2550,39 +2522,24 @@ function startPageTyping(
             ".message-box"
         );
 
-    /*
-       Tit anlè a kòmanse an premye.
-    */
-
     typeText(
         title,
-        70
+        60
     );
-
-    /*
-       Gwo mesaj la kòmanse yon ti moman
-       apre tit la, pou efè a parèt pi natirèl.
-    */
 
     setTimeout(
         () => {
 
             typeText(
                 message,
-                22
+                18
             );
 
         },
-        450
+        350
     );
 }
 
-
-/*
-   Prepare tout paj yo.
-   Sa fè tèks yo pa rete vizib avan
-   animasyon typing lan kòmanse.
-*/
 
 function prepareTypingPages(){
 
@@ -2631,6 +2588,7 @@ function prepareTypingPages(){
 
 /* =====================================================
    LIV LA
+   VÈSYON PI RAPID
 ===================================================== */
 
 function startBookAnimation(){
@@ -2661,10 +2619,6 @@ function startBookAnimation(){
         );
 
 
-    /*
-       Prepare typing effect.
-    */
-
     prepareTypingPages();
 
 
@@ -2693,9 +2647,7 @@ function startBookAnimation(){
     );
 
 
-    /*
-       LIV LA OUVÈTI
-    */
+    /* LIV LA OUVÈTI */
 
     setTimeout(
         () => {
@@ -2703,11 +2655,6 @@ function startBookAnimation(){
             book.classList.add(
                 'open'
             );
-
-            /*
-               Apre liv la ouvè,
-               tèks premye paj la kòmanse ekri.
-            */
 
             setTimeout(
                 () => {
@@ -2717,17 +2664,15 @@ function startBookAnimation(){
                     );
 
                 },
-                650
+                500
             );
 
         },
-        3000
+        2500
     );
 
 
-    /*
-       PAGE 1 -> PAGE 2
-    */
+    /* PAGE 1 -> PAGE 2 */
 
     setTimeout(
         () => {
@@ -2735,11 +2680,6 @@ function startBookAnimation(){
             page1.classList.add(
                 'flipped'
             );
-
-            /*
-               Lè page 2 parèt,
-               tèks li kòmanse ekri.
-            */
 
             setTimeout(
                 () => {
@@ -2749,17 +2689,15 @@ function startBookAnimation(){
                     );
 
                 },
-                500
+                400
             );
 
         },
-        8000
+        9500
     );
 
 
-    /*
-       PAGE 2 -> PAGE 3
-    */
+    /* PAGE 2 -> PAGE 3 */
 
     setTimeout(
         () => {
@@ -2776,17 +2714,15 @@ function startBookAnimation(){
                     );
 
                 },
-                500
+                400
             );
 
         },
-        13000
+        15500
     );
 
 
-    /*
-       PAGE 3 -> PAGE 4
-    */
+    /* PAGE 3 -> PAGE 4 */
 
     setTimeout(
         () => {
@@ -2803,17 +2739,15 @@ function startBookAnimation(){
                     );
 
                 },
-                500
+                400
             );
 
         },
-        20000
+        21500
     );
 
 
-    /*
-       PAGE 4 vire
-    */
+    /* PAGE 4 VIRE */
 
     setTimeout(
         () => {
@@ -2823,13 +2757,11 @@ function startBookAnimation(){
             );
 
         },
-        27000
+        27500
     );
 
 
-    /*
-       Liv la fèmen
-    */
+    /* LIV LA FÈMEN */
 
     setTimeout(
         () => {
@@ -2839,13 +2771,11 @@ function startBookAnimation(){
             );
 
         },
-        28500
+        29000
     );
 
 
-    /*
-       KÈ FINAL
-    */
+    /* KÈ FINAL */
 
     setTimeout(
         () => {
@@ -3252,4 +3182,4 @@ window.addEventListener(
 </script>
 
 </body>
-   </html>
+</html>
