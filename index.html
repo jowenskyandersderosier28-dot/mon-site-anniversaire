@@ -1617,11 +1617,13 @@ body{
                             <img
                                 src="WhatsApp Image 2026-10-07 at 7.59.07 AM (1).jpeg"
                                 alt="Photo"
+                                onerror="this.onerror=null;this.src='WhatsApp Image 2026-10-07 at 7.59.11 AM (1).jpeg';"
                             >
 
                             <img
                                 src="WhatsApp Image 2026-10-07 at 7.59.11 AM (1).jpeg"
                                 alt="Photo"
+                                onerror="this.onerror=null;this.src='WhatsApp Image 2026-10-07 at 7.59.11 AM.jpeg';"
                             >
 
                         </div>
@@ -1669,6 +1671,7 @@ body{
                             <img
                                 src="WhatsApp Image 2026-10-07 at 7.59.11 AM.jpeg"
                                 alt="Photo"
+                                onerror="this.onerror=null;this.src='WhatsApp Image 2026-10-07 at 7.59.11 AM (1).jpeg';"
                             >
 
                             <video
@@ -1678,6 +1681,7 @@ body{
                                 loop
                                 playsinline
                                 preload="metadata"
+                                onerror="this.style.display='none';"
                             ></video>
 
                         </div>
@@ -1724,11 +1728,13 @@ body{
                             <img
                                 src="WhatsApp Image 2026-10-07 at 7.59.12 AM (1).jpeg"
                                 alt="Photo"
+                                onerror="this.onerror=null;this.src='WhatsApp Image 2026-10-07 at 7.59.11 AM (1).jpeg';"
                             >
 
                             <img
                                 src="WhatsApp Image 2026-10-07 at 7.59.12 AM (2).jpeg"
                                 alt="Photo"
+                                onerror="this.onerror=null;this.src='WhatsApp Image 2026-10-07 at 7.59.11 AM.jpeg';"
                             >
 
                         </div>
@@ -1780,6 +1786,7 @@ body{
                                 loop
                                 playsinline
                                 preload="metadata"
+                                onerror="this.style.display='none';"
                             ></video>
 
                             <video
@@ -1789,6 +1796,7 @@ body{
                                 loop
                                 playsinline
                                 preload="metadata"
+                                onerror="this.style.display='none';"
                             ></video>
 
                         </div>
@@ -2850,8 +2858,21 @@ function startBookAnimation(){
 
 
 /* =====================================================
-   TOUT 15 MEDIA YO
+   MEDIA
 ===================================================== */
+
+/*
+   FOTO PRINCIPAL KI NOU KONNEN
+   KI DEJA AP PARÈT SOU SIT LA.
+*/
+
+const fallbackImage =
+    "WhatsApp Image 2026-10-07 at 7.59.11 AM (1).jpeg";
+
+
+/*
+   Tout medya yo.
+*/
 
 const allMedia = [
 
@@ -3005,6 +3026,45 @@ function createMediaElement(
             "metadata";
 
 
+        /*
+           Si video a pa egziste,
+           mete foto fallback la.
+        */
+
+        video.addEventListener(
+            "error",
+            () => {
+
+                const img =
+                    document.createElement(
+                        "img"
+                    );
+
+                img.src =
+                    fallbackImage;
+
+                img.alt =
+                    "Photo";
+
+                img.className =
+                    "fallback-media";
+
+                if(video.parentNode){
+
+                    video.parentNode.replaceChild(
+                        img,
+                        video
+                    );
+
+                }
+
+            },
+            {
+                once:true
+            }
+        );
+
+
         return video;
     }
 
@@ -3021,6 +3081,31 @@ function createMediaElement(
 
     img.alt =
         "Photo";
+
+
+    /*
+       SI FOTO A PA EXISTE,
+       RANPLASE LI AK FOTO FALLBACK LA.
+    */
+
+    img.addEventListener(
+        "error",
+        () => {
+
+            if(
+                img.dataset.fallbackApplied
+            ){
+                return;
+            }
+
+            img.dataset.fallbackApplied =
+                "true";
+
+            img.src =
+                fallbackImage;
+
+        }
+    );
 
 
     return img;
@@ -3135,7 +3220,7 @@ function createHeartFormation(){
 
 
     /*
-       Création des 15 photos.
+       Création des 15 médias.
     */
 
     allMedia.forEach(
@@ -3214,9 +3299,8 @@ function createHeartFormation(){
 
 
             /*
-               Chaque photo commence
-               à un endroit différent
-               autour de l'écran.
+               Chak foto kòmanse
+               yon kote diferan.
             */
 
             const startAngle =
@@ -3289,8 +3373,7 @@ function createHeartFormation(){
 
 
             /*
-               Nou kite yon ti moman
-               avan chak foto antre.
+               Chak foto antre youn apre lòt.
             */
 
             setTimeout(
@@ -3343,8 +3426,7 @@ function createHeartFormation(){
 
 
     /*
-       Glow la kòmanse apre
-       kèk foto fin antre.
+       Glow la.
     */
 
     setTimeout(
@@ -3363,8 +3445,7 @@ function createHeartFormation(){
 
 
     /*
-       Apre tout foto yo fòme kè a,
-       tit la parèt.
+       Tit la.
     */
 
     setTimeout(
@@ -3383,7 +3464,7 @@ function createHeartFormation(){
 
 
     /*
-       Signature la parèt anreta.
+       Signature.
     */
 
     setTimeout(
