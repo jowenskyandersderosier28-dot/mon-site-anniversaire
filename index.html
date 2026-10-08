@@ -49,6 +49,92 @@ body{
 
 
 /* =====================================================
+   BOUTON MUSIQUE
+===================================================== */
+
+#musicButton{
+
+    position:fixed;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    z-index:9999;
+
+    border:none;
+
+    padding:15px 25px;
+
+    border-radius:50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff3399,
+            #ff72ad,
+            #ff3399
+        );
+
+    color:white;
+
+    font-family:'Playfair Display',serif;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+    box-shadow:
+        0 0 15px rgba(255,51,153,.8),
+        0 0 35px rgba(255,51,153,.5);
+
+    cursor:pointer;
+
+    animation:musicPulse 1.5s ease-in-out infinite alternate;
+
+    transition:
+        opacity .5s,
+        transform .3s;
+}
+
+#musicButton:active{
+
+    transform:
+        translate(-50%,-50%)
+        scale(.94);
+}
+
+@keyframes musicPulse{
+
+    from{
+        box-shadow:
+            0 0 12px rgba(255,51,153,.7),
+            0 0 25px rgba(255,51,153,.4);
+    }
+
+    to{
+        box-shadow:
+            0 0 20px rgba(255,51,153,1),
+            0 0 45px rgba(255,51,153,.7);
+    }
+}
+
+#musicButton.hidden{
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transform:
+        translate(-50%,-50%)
+        scale(.8);
+}
+
+
+/* =====================================================
    MATRIX
 ===================================================== */
 
@@ -75,6 +161,7 @@ body{
 }
 
 @keyframes pulse{
+
     0%{
         transform:scale(1);
     }
@@ -1294,6 +1381,14 @@ body{
 
         width:18px;
     }
+
+    #musicButton{
+
+        font-size:.9rem;
+
+        padding:
+            13px 21px;
+    }
 }
 
 
@@ -1358,6 +1453,15 @@ body{
     loop
     preload="auto"
 ></audio>
+
+
+<!-- BOUTON POUR ACTIVER LA MUSIQUE -->
+
+<button
+    id="musicButton"
+>
+    🎵 ACTIVER LA MUSIQUE
+</button>
 
 
 <!-- =====================================================
@@ -1749,41 +1853,75 @@ const backgroundMusic =
         "backgroundMusic"
     );
 
+const musicButton =
+    document.getElementById(
+        "musicButton"
+    );
+
 backgroundMusic.volume = 0.55;
-
-
-/*
-   Kòmanse mizik la.
-   Navigatè telefòn ka bloke autoplay,
-   se poutèt sa nou gen fallback touch/click.
-*/
-
-function startMusic(){
-
-    backgroundMusic
-        .play()
-        .catch(() => {
-
-            console.log(
-                "Autoplay bloqué. Attente d'une interaction."
-            );
-
-        });
-
-}
 
 
 /*
    Premye tantativ otomatik.
 */
 
+function startMusic(){
+
+    backgroundMusic
+        .play()
+        .then(() => {
+
+            musicButton.classList.add(
+                "hidden"
+            );
+
+        })
+        .catch(() => {
+
+            console.log(
+                "Autoplay bloqué."
+            );
+
+        });
+
+}
+
 startMusic();
 
 
 /*
-   Si navigatè a bloke autoplay,
-   premye touch/click itilizatè a
-   ap lanse mizik la.
+   Lè moun nan peze bouton an,
+   mizik la kòmanse.
+*/
+
+musicButton.addEventListener(
+    "click",
+    async () => {
+
+        try{
+
+            await backgroundMusic.play();
+
+            musicButton.classList.add(
+                "hidden"
+            );
+
+        }catch(error){
+
+            console.log(
+                "Impossible de démarrer la musique.",
+                error
+            );
+
+        }
+
+    }
+);
+
+
+/*
+   Si moun nan touche ekran an
+   nenpòt kote, eseye kòmanse mizik la.
 */
 
 function unlockMusic(){
@@ -1792,14 +1930,8 @@ function unlockMusic(){
         .play()
         .then(() => {
 
-            document.removeEventListener(
-                "click",
-                unlockMusic
-            );
-
-            document.removeEventListener(
-                "touchstart",
-                unlockMusic
+            musicButton.classList.add(
+                "hidden"
             );
 
         })
@@ -1808,12 +1940,12 @@ function unlockMusic(){
 }
 
 document.addEventListener(
-    "click",
+    "touchstart",
     unlockMusic
 );
 
 document.addEventListener(
-    "touchstart",
+    "click",
     unlockMusic
 );
 
