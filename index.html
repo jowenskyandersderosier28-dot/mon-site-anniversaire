@@ -638,12 +638,6 @@ body{
     border-radius:
         7px 15px 15px 7px;
 
-    /*
-       MODIFICATION:
-       plis piti padding anlè pou
-       "Mon amour ❤️" pa koupe
-    */
-
     padding:
         10px 16px;
 
@@ -711,12 +705,6 @@ body{
 
     align-items:center;
 
-    /*
-       MODIFICATION:
-       Nou pa mete tout bagay nan mitan
-       paske sa te fè "Mon amour" koupe anlè.
-    */
-
     justify-content:flex-start;
 
     text-align:center;
@@ -733,11 +721,6 @@ body{
     font-size:
         1.65rem;
 
-    /*
-       MODIFICATION:
-       li kòmanse byen anba paj la
-    */
-
     margin-top:2px;
     margin-bottom:5px;
 
@@ -746,6 +729,12 @@ body{
     line-height:1.1;
 
     flex-shrink:0;
+
+    /*
+       EFÈ EKRI
+    */
+
+    min-height:1.9rem;
 }
 
 .message-box{
@@ -767,11 +756,6 @@ body{
         'Great Vibes',
         cursive;
 
-    /*
-       MODIFICATION:
-       ti kras pi piti pou tout mesaj la antre
-    */
-
     font-size:
         clamp(
             1.15rem,
@@ -790,6 +774,49 @@ body{
     width:100%;
 
     flex-shrink:0;
+
+    /*
+       EFÈ EKRI
+    */
+
+    min-height:60px;
+}
+
+
+/* =====================================================
+   CURSEUR PANDAN L EKRI
+===================================================== */
+
+.typing-cursor{
+
+    display:inline-block;
+
+    width:2px;
+
+    height:1em;
+
+    margin-left:2px;
+
+    vertical-align:-0.1em;
+
+    background:#d63384;
+
+    animation:
+        cursorBlink
+        .65s
+        steps(1)
+        infinite;
+}
+
+@keyframes cursorBlink{
+
+    0%,49%{
+        opacity:1;
+    }
+
+    50%,100%{
+        opacity:0;
+    }
 }
 
 
@@ -814,12 +841,6 @@ body{
 .photo-frame video{
 
     width:46%;
-
-    /*
-       MODIFICATION:
-       Foto yo pi kout pou "Mon amour"
-       rete vizib anlè
-    */
 
     height:135px;
 
@@ -876,13 +897,6 @@ body{
 
     z-index:2;
 }
-
-
-/*
-   MODIFICATION:
-   20 ti kat yo rete menm jan,
-   men yo itilize sèlman foto ki mache.
-*/
 
 .mini-card{
 
@@ -1247,10 +1261,6 @@ body{
         letter-spacing:1.5px;
     }
 
-    /*
-       MODIFICATION PAGE
-    */
-
     .page{
 
         padding:
@@ -1263,6 +1273,8 @@ body{
 
         margin-top:0;
         margin-bottom:4px;
+
+        min-height:1.7rem;
     }
 
     .message-box{
@@ -1275,6 +1287,8 @@ body{
             8px 9px;
 
         margin-bottom:8px;
+
+        min-height:55px;
     }
 
     .photo-frame img,
@@ -1358,6 +1372,8 @@ body{
 
         margin-top:1px;
         margin-bottom:5px;
+
+        min-height:1.8rem;
     }
 
     .message-box{
@@ -1370,6 +1386,8 @@ body{
             9px 10px;
 
         margin-bottom:9px;
+
+        min-height:60px;
     }
 
     .photo-frame img,
@@ -2407,6 +2425,211 @@ function stopFireworks(){
 
 
 /* =====================================================
+   EFÈ "AP EKRI" SOU PAJ YO
+===================================================== */
+
+/*
+   Fonksyon sa a pran tèks la epi li montre l
+   lèt pa lèt, tankou yon moun ap ekri li.
+*/
+
+function typeText(
+    element,
+    speed = 28
+){
+
+    if(!element){
+        return;
+    }
+
+    /*
+       Premye fwa sèlman:
+       nou sove tèks orijinal la.
+    */
+
+    if(
+        !element.dataset.originalText
+    ){
+
+        element.dataset.originalText =
+            element.textContent
+                .replace(/\s+/g, ' ')
+                .trim();
+    }
+
+    const fullText =
+        element.dataset.originalText;
+
+    element.innerHTML = "";
+
+    const textSpan =
+        document.createElement("span");
+
+    const cursor =
+        document.createElement("span");
+
+    cursor.className =
+        "typing-cursor";
+
+    element.appendChild(
+        textSpan
+    );
+
+    element.appendChild(
+        cursor
+    );
+
+    let index = 0;
+
+    const timer =
+        setInterval(
+            () => {
+
+                if(
+                    index <
+                    fullText.length
+                ){
+
+                    textSpan.textContent +=
+                        fullText.charAt(index);
+
+                    index++;
+
+                }else{
+
+                    clearInterval(timer);
+
+                    /*
+                       Nou kite ti curseur la
+                       disparèt apre tèks la fini.
+                    */
+
+                    setTimeout(
+                        () => {
+
+                            cursor.remove();
+
+                        },
+                        700
+                    );
+                }
+
+            },
+            speed
+        );
+
+    return timer;
+}
+
+
+/*
+   Chak fwa yon paj pral parèt,
+   nou fè tit la ak mesaj la ekri.
+*/
+
+function startPageTyping(
+    pageId
+){
+
+    const page =
+        document.getElementById(
+            pageId
+        );
+
+    if(!page){
+        return;
+    }
+
+    const title =
+        page.querySelector(
+            ".page-number"
+        );
+
+    const message =
+        page.querySelector(
+            ".message-box"
+        );
+
+    /*
+       Tit anlè a kòmanse an premye.
+    */
+
+    typeText(
+        title,
+        70
+    );
+
+    /*
+       Gwo mesaj la kòmanse yon ti moman
+       apre tit la, pou efè a parèt pi natirèl.
+    */
+
+    setTimeout(
+        () => {
+
+            typeText(
+                message,
+                22
+            );
+
+        },
+        450
+    );
+}
+
+
+/*
+   Prepare tout paj yo.
+   Sa fè tèks yo pa rete vizib avan
+   animasyon typing lan kòmanse.
+*/
+
+function prepareTypingPages(){
+
+    const pages =
+        document.querySelectorAll(
+            ".page"
+        );
+
+    pages.forEach(
+        page => {
+
+            const title =
+                page.querySelector(
+                    ".page-number"
+                );
+
+            const message =
+                page.querySelector(
+                    ".message-box"
+                );
+
+            if(title){
+
+                title.dataset.originalText =
+                    title.textContent
+                        .replace(/\s+/g, ' ')
+                        .trim();
+
+                title.innerHTML = "";
+            }
+
+            if(message){
+
+                message.dataset.originalText =
+                    message.textContent
+                        .replace(/\s+/g, ' ')
+                        .trim();
+
+                message.innerHTML = "";
+            }
+
+        }
+    );
+}
+
+
+/* =====================================================
    LIV LA
 ===================================================== */
 
@@ -2438,6 +2661,13 @@ function startBookAnimation(){
         );
 
 
+    /*
+       Prepare typing effect.
+    */
+
+    prepareTypingPages();
+
+
     book.classList.remove(
         'open'
     );
@@ -2463,6 +2693,10 @@ function startBookAnimation(){
     );
 
 
+    /*
+       LIV LA OUVÈTI
+    */
+
     setTimeout(
         () => {
 
@@ -2470,10 +2704,30 @@ function startBookAnimation(){
                 'open'
             );
 
+            /*
+               Apre liv la ouvè,
+               tèks premye paj la kòmanse ekri.
+            */
+
+            setTimeout(
+                () => {
+
+                    startPageTyping(
+                        'page1'
+                    );
+
+                },
+                650
+            );
+
         },
         3000
     );
 
+
+    /*
+       PAGE 1 -> PAGE 2
+    */
 
     setTimeout(
         () => {
@@ -2482,10 +2736,30 @@ function startBookAnimation(){
                 'flipped'
             );
 
+            /*
+               Lè page 2 parèt,
+               tèks li kòmanse ekri.
+            */
+
+            setTimeout(
+                () => {
+
+                    startPageTyping(
+                        'page2'
+                    );
+
+                },
+                500
+            );
+
         },
         8000
     );
 
+
+    /*
+       PAGE 2 -> PAGE 3
+    */
 
     setTimeout(
         () => {
@@ -2494,10 +2768,25 @@ function startBookAnimation(){
                 'flipped'
             );
 
+            setTimeout(
+                () => {
+
+                    startPageTyping(
+                        'page3'
+                    );
+
+                },
+                500
+            );
+
         },
         13000
     );
 
+
+    /*
+       PAGE 3 -> PAGE 4
+    */
 
     setTimeout(
         () => {
@@ -2506,10 +2795,25 @@ function startBookAnimation(){
                 'flipped'
             );
 
+            setTimeout(
+                () => {
+
+                    startPageTyping(
+                        'page4'
+                    );
+
+                },
+                500
+            );
+
         },
         20000
     );
 
+
+    /*
+       PAGE 4 vire
+    */
 
     setTimeout(
         () => {
@@ -2523,6 +2827,10 @@ function startBookAnimation(){
     );
 
 
+    /*
+       Liv la fèmen
+    */
+
     setTimeout(
         () => {
 
@@ -2534,6 +2842,10 @@ function startBookAnimation(){
         28500
     );
 
+
+    /*
+       KÈ FINAL
+    */
 
     setTimeout(
         () => {
@@ -2555,18 +2867,8 @@ function startBookAnimation(){
 
 
 /* =====================================================
-   FOTO KI NOU KONNEN KI TE PARÈT NAN KÈ A
+   FOTO KI NAN KÈ A
 ===================================================== */
-
-/*
-   IMPORTANT:
-
-   Nou pa mete video ki te konn bay "Photo"
-   oswa imaj kase yo ankò.
-
-   Nou itilize sèlman foto yo ki te deja
-   parèt nan kè a.
-*/
 
 const heartPhotos = [
 
@@ -2617,13 +2919,6 @@ function createHeartFormation(){
 
     container.innerHTML = "";
 
-
-    /*
-       20 kat
-
-       Men chak kat ap itilize
-       youn nan foto ki mache.
-    */
 
     const numCards = 20;
 
@@ -2712,14 +3007,6 @@ function createHeartFormation(){
             y *
             heartScale;
 
-
-        /*
-           Nou pran foto yo
-           youn apre lòt.
-
-           Lè nou rive nan dènye a,
-           nou retounen nan premye a.
-        */
 
         const photo =
             heartPhotos[
@@ -2965,4 +3252,4 @@ window.addEventListener(
 </script>
 
 </body>
-    </html>
+   </html>
