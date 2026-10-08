@@ -655,7 +655,6 @@ body{
     position:absolute;
     inset:0;
 
-    /* JÒN NAN PAJ LIV LA → BLAN */
     background:#ffffff;
 
     border:
@@ -762,7 +761,6 @@ body{
 
 .message-box{
 
-    /* JÒN NAN MESSAGE BOX LIV LA → BLAN */
     background:#ffffff;
 
     border:
@@ -1009,7 +1007,7 @@ body{
 
 
 /* =====================================================
-   DERS
+   SIGNATURE
 ===================================================== */
 
 .final-signature{
@@ -1972,10 +1970,6 @@ let seqTimer =
                 );
 
 
-                /* =========================================
-                   OUR LOVES DISPARÈT
-                ========================================= */
-
                 textElement.innerText = "";
 
                 textElement.classList.add(
@@ -1984,10 +1978,6 @@ let seqTimer =
 
                 textElement.innerHTML = "♥";
 
-
-                /* =========================================
-                   GWO KÈ WOZ LA PARÈT
-                ========================================= */
 
                 setTimeout(
                     () => {
@@ -2646,7 +2636,10 @@ function prepareTypingPages(){
 
 /* =====================================================
    LIV LA
-   CHAK PAJ = 15 SEGONN
+   PAGE 1 = 10 SEC
+   PAGE 2 = 9 SEC
+   PAGE 3 = 8 SEC
+   PAGE 4 = 9 SEC
 ===================================================== */
 
 function startBookAnimation(){
@@ -2733,7 +2726,7 @@ function startBookAnimation(){
 
 
     /* =================================================
-       PAGE 1 RESTE 15 SEC
+       PAGE 1 = 10 SEC
        PAGE 1 -> PAGE 2
     ================================================= */
 
@@ -2756,12 +2749,12 @@ function startBookAnimation(){
             );
 
         },
-        17500
+        12500
     );
 
 
     /* =================================================
-       PAGE 2 RESTE 15 SEC
+       PAGE 2 = 9 SEC
        PAGE 2 -> PAGE 3
     ================================================= */
 
@@ -2784,12 +2777,12 @@ function startBookAnimation(){
             );
 
         },
-        32500
+        21500
     );
 
 
     /* =================================================
-       PAGE 3 RESTE 15 SEC
+       PAGE 3 = 8 SEC
        PAGE 3 -> PAGE 4
     ================================================= */
 
@@ -2812,12 +2805,12 @@ function startBookAnimation(){
             );
 
         },
-        47500
+        29500
     );
 
 
     /* =================================================
-       PAGE 4 RESTE 15 SEC
+       PAGE 4 = 9 SEC
        PAGE 4 -> FIN
     ================================================= */
 
@@ -2829,7 +2822,7 @@ function startBookAnimation(){
             );
 
         },
-        62500
+        38500
     );
 
 
@@ -2845,7 +2838,7 @@ function startBookAnimation(){
             );
 
         },
-        64000
+        40000
     );
 
 
@@ -2867,7 +2860,7 @@ function startBookAnimation(){
             animateFinalSignature();
 
         },
-        66500
+        42500
     );
 }
 
@@ -3183,7 +3176,7 @@ function createRealStars(){
 
 
 /* =====================================================
-   DERS
+   SIGNATURE COUPLE
 ===================================================== */
 
 function animateFinalSignature(){
@@ -3202,7 +3195,7 @@ function animateFinalSignature(){
 
 
     const text =
-        "Ders";
+        "Birdensky ♡ Winie";
 
 
     let i = 0;
