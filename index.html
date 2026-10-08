@@ -14,6 +14,16 @@
 <style>
 
 /* =====================================================
+   PALETTE
+   Rose poudré  : #D98AA6
+   Champagne    : #E7C873
+   Crème        : #FFF7E6
+   Bordeaux     : #7B2746
+   Noir         : #09070A
+===================================================== */
+
+
+/* =====================================================
    BASE
 ===================================================== */
 
@@ -24,7 +34,7 @@
 }
 
 body{
-    background:#000;
+    background:#09070A;
     color:#fff;
     font-family:'Playfair Display',serif;
     overflow:hidden;
@@ -69,16 +79,19 @@ body{
     z-index:2;
     font-size:4rem;
     font-weight:bold;
-    color:#ff3399;
+    color:#D98AA6;
+
     text-shadow:
-        0 0 20px #ff3399,
-        0 0 40px #ff007f;
+        0 0 20px #D98AA6,
+        0 0 40px #7B2746;
+
     animation:pulse 1s infinite alternate;
     text-align:center;
     padding:0 20px;
 }
 
 @keyframes pulse{
+
     0%{
         transform:scale(1);
     }
@@ -100,8 +113,9 @@ body{
     background:
         radial-gradient(
             ellipse at bottom,
-            #1b2735 0%,
-            #090a0f 100%
+            #2A1820 0%,
+            #120B10 45%,
+            #09070A 100%
         );
 
     z-index:1;
@@ -145,7 +159,9 @@ body{
 ===================================================== */
 
 .birthday-title{
-    color:#ff5ca8;
+
+    color:#E7C873;
+
     font-family:'Playfair Display',serif;
 
     font-size:
@@ -156,25 +172,37 @@ body{
         );
 
     font-weight:700;
+
     line-height:1.2;
+
     text-align:center;
+
     width:100%;
+
     max-width:95vw;
 
     margin:0 auto;
+
     padding:0 5px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     gap:8px;
 
     text-shadow:
-        0 1px 3px rgba(255,255,255,.9);
+        0 1px 3px
+        rgba(255,247,230,.9),
+
+        0 0 12px
+        rgba(231,200,115,.45);
 }
 
 .flower{
+
     font-size:
         clamp(
             1.4rem,
@@ -186,7 +214,7 @@ body{
 
     filter:
         drop-shadow(
-            0 0 5px #ff69b4
+            0 0 5px #D98AA6
         );
 
     animation:
@@ -218,9 +246,9 @@ body{
     background:
         radial-gradient(
             ellipse at center,
-            #151525 0%,
-            #05050a 65%,
-            #000 100%
+            #28141F 0%,
+            #100910 60%,
+            #09070A 100%
         );
 
     z-index:50;
@@ -245,12 +273,14 @@ body{
 .book-area{
 
     position:relative;
+
     z-index:2;
 
     width:100%;
     height:100%;
 
     display:flex;
+
     justify-content:center;
     align-items:center;
 
@@ -288,9 +318,9 @@ body{
 
     background:
         rgba(
-            255,
-            51,
-            153,
+            217,
+            138,
+            166,
             .35
         );
 
@@ -306,18 +336,19 @@ body{
     position:absolute;
     inset:0;
 
-    background:#ffd6e7;
+    background:#FFF7E6;
 
     border:
         5px solid
-        #ff78b5;
+        #D98AA6;
 
     border-radius:
         10px 18px 18px 10px;
 
     box-shadow:
+
         0 15px 40px
-        rgba(255,51,153,.5),
+        rgba(123,39,70,.45),
 
         inset 0 0 20px
         rgba(255,255,255,.5);
@@ -338,6 +369,7 @@ body{
     z-index:20;
 
     transform-origin:left center;
+
     transform-style:preserve-3d;
 
     transition:
@@ -374,36 +406,37 @@ body{
 
         radial-gradient(
             circle at 75% 18%,
-            rgba(255,255,255,.45),
+            rgba(255,247,230,.45),
             transparent 18%
         ),
 
         linear-gradient(
             135deg,
-            #c21868 0%,
-            #ed4f93 35%,
-            #ff86ba 70%,
-            #d91f72 100%
+            #7B2746 0%,
+            #A94F70 35%,
+            #D98AA6 70%,
+            #8C3455 100%
         );
 
     border:
         5px solid
-        #ffd95e;
+        #E7C873;
 
     box-shadow:
 
         0 18px 45px
-        rgba(255,51,153,.65),
+        rgba(123,39,70,.65),
 
         inset 0 0 0 3px
-        rgba(255,255,255,.35),
+        rgba(255,247,230,.35),
 
         inset 0 0 30px
-        rgba(120,0,55,.35);
+        rgba(70,10,35,.35);
 
     display:flex;
 
     justify-content:center;
+
     align-items:center;
 
     text-align:center;
@@ -429,9 +462,9 @@ body{
     background:
         linear-gradient(
             to right,
-            rgba(80,0,35,.55),
-            rgba(255,255,255,.2),
-            rgba(80,0,35,.35)
+            rgba(70,10,35,.55),
+            rgba(255,247,230,.2),
+            rgba(70,10,35,.35)
         );
 
     border-radius:
@@ -440,10 +473,10 @@ body{
     box-shadow:
 
         inset -2px 0 4px
-        rgba(255,255,255,.35),
+        rgba(255,247,230,.35),
 
         3px 0 8px
-        rgba(90,0,40,.3);
+        rgba(70,10,35,.3);
 }
 
 .cover-front::after{
@@ -456,14 +489,14 @@ body{
 
     border:
         2px solid
-        rgba(255,244,170,.85);
+        rgba(231,200,115,.9);
 
     border-radius:
         7px 15px 15px 7px;
 
     box-shadow:
         inset 0 0 0 1px
-        rgba(255,255,255,.35);
+        rgba(255,247,230,.35);
 
     pointer-events:none;
 }
@@ -471,6 +504,7 @@ body{
 .cover-front > div{
 
     position:relative;
+
     z-index:3;
 
     width:100%;
@@ -481,6 +515,7 @@ body{
     flex-direction:column;
 
     justify-content:center;
+
     align-items:center;
 }
 
@@ -498,11 +533,11 @@ body{
 
     font-size:32px;
 
-    color:#fff5ad;
+    color:#FFF7E6;
 
     text-shadow:
         0 0 6px #fff,
-        0 0 15px #ff3399;
+        0 0 15px #E7C873;
 }
 
 .cover-front > div::after{
@@ -517,7 +552,7 @@ body{
     transform:
         translateX(-50%);
 
-    color:#fff3a6;
+    color:#E7C873;
 
     font-size:16px;
 
@@ -525,7 +560,7 @@ body{
 
     text-shadow:
         0 0 8px
-        rgba(255,255,255,.9);
+        rgba(255,247,230,.9);
 }
 
 .cover-title{
@@ -543,18 +578,18 @@ body{
 
     line-height:1.02;
 
-    color:#fff9bd;
+    color:#FFF7E6;
 
     text-shadow:
 
         2px 3px 0
-        #a7195d,
+        #7B2746,
 
         0 0 8px
-        rgba(255,255,255,.9),
+        rgba(255,247,230,.9),
 
         0 0 22px
-        rgba(255,230,120,.65);
+        rgba(231,200,115,.65);
 
     margin-top:22px;
 
@@ -577,13 +612,13 @@ body{
 
     letter-spacing:2px;
 
-    color:#fff4ad;
+    color:#E7C873;
 
     margin-top:12px;
 
     text-shadow:
         0 0 8px
-        rgba(255,255,255,.8);
+        rgba(255,247,230,.8);
 }
 
 .cover-subtitle{
@@ -598,7 +633,7 @@ body{
 
     margin-top:18px;
 
-    color:#fff;
+    color:#FFF7E6;
 
     letter-spacing:2px;
 
@@ -606,7 +641,7 @@ body{
 
     text-shadow:
         0 1px 4px
-        rgba(100,0,50,.8);
+        rgba(70,10,35,.8);
 }
 
 
@@ -617,6 +652,7 @@ body{
 .pages{
 
     position:absolute;
+
     inset:10px;
 
     z-index:10;
@@ -627,13 +663,14 @@ body{
 .page{
 
     position:absolute;
+
     inset:0;
 
-    background:#fff1a8;
+    background:#FFF7E6;
 
     border:
         3px solid
-        #ff78b5;
+        #D98AA6;
 
     border-radius:
         7px 15px 15px 7px;
@@ -641,9 +678,10 @@ body{
     padding:
         10px 16px;
 
-    color:#d63384;
+    color:#7B2746;
 
     transform-origin:left center;
+
     transform-style:preserve-3d;
 
     transition:
@@ -662,7 +700,7 @@ body{
         rgba(255,255,255,.5),
 
         3px 5px 12px
-        rgba(210,80,130,.25);
+        rgba(123,39,70,.25);
 
     overflow:hidden;
 }
@@ -724,7 +762,7 @@ body{
     margin-top:2px;
     margin-bottom:5px;
 
-    color:#e83e8c;
+    color:#7B2746;
 
     line-height:1.1;
 
@@ -735,11 +773,11 @@ body{
 
 .message-box{
 
-    background:#fff8cf;
+    background:#FFF1D6;
 
     border:
         2px solid
-        #ff8fbe;
+        #D98AA6;
 
     padding:
         10px 11px;
@@ -759,13 +797,13 @@ body{
             1.35rem
         );
 
-    color:#d63384;
+    color:#7B2746;
 
     line-height:1.25;
 
     box-shadow:
         0 4px 12px
-        rgba(255,51,153,.18);
+        rgba(123,39,70,.18);
 
     width:100%;
 
@@ -791,7 +829,7 @@ body{
 
     vertical-align:-0.1em;
 
-    background:#d63384;
+    background:#7B2746;
 
     animation:
         cursorBlink
@@ -842,13 +880,13 @@ body{
 
     border:
         3px solid
-        #ff72ad;
+        #D98AA6;
 
     box-shadow:
         0 5px 12px
-        rgba(214,51,132,.3);
+        rgba(123,39,70,.3);
 
-    background:#000;
+    background:#09070A;
 
     display:block;
 }
@@ -865,7 +903,7 @@ body{
 
 .page-decoration{
 
-    color:#ff5ca8;
+    color:#C58B32;
 
     font-size:18px;
 
@@ -882,6 +920,7 @@ body{
 .heart-grid{
 
     position:absolute;
+
     inset:0;
 
     width:100%;
@@ -897,7 +936,7 @@ body{
     width:43px;
     height:51px;
 
-    background:white;
+    background:#FFF7E6;
 
     padding:2px;
 
@@ -905,7 +944,7 @@ body{
 
     box-shadow:
         0 0 8px
-        rgba(255,51,153,.8);
+        rgba(217,138,166,.8);
 
     transition:
         transform .5s;
@@ -923,7 +962,7 @@ body{
 
     display:block;
 
-    background:#000;
+    background:#09070A;
 }
 
 .mini-card video{
@@ -953,13 +992,13 @@ body{
         'Great Vibes',
         cursive;
 
-    color:#ff79b5;
+    color:#E7C873;
 
     font-size:2.5rem;
 
     text-shadow:
         0 0 15px
-        #ff3399;
+        #D98AA6;
 
     opacity:0;
 
@@ -1005,7 +1044,7 @@ body{
 
     font-weight:400;
 
-    color:#fff;
+    color:#FFF7E6;
 
     letter-spacing:1px;
 
@@ -1018,16 +1057,16 @@ body{
     text-shadow:
 
         0 0 5px
-        rgba(255,255,255,.95),
+        rgba(255,247,230,.95),
 
         0 0 10px
-        rgba(255,255,255,.9),
+        rgba(255,247,230,.9),
 
         0 0 18px
-        rgba(255,120,200,.9),
+        rgba(217,138,166,.9),
 
         0 0 30px
-        rgba(255,80,170,.65);
+        rgba(123,39,70,.65);
 
     animation:
         signatureGlow
@@ -1044,28 +1083,28 @@ body{
         text-shadow:
 
             0 0 4px
-            rgba(255,255,255,.8),
+            rgba(255,247,230,.8),
 
             0 0 9px
-            rgba(255,255,255,.7),
+            rgba(255,247,230,.7),
 
             0 0 15px
-            rgba(255,120,200,.6);
+            rgba(217,138,166,.6);
     }
 
     100%{
 
         text-shadow:
 
-            0 0 6px #fff,
+            0 0 6px #FFF7E6,
 
-            0 0 13px #fff,
+            0 0 13px #FFF7E6,
 
             0 0 22px
-            rgba(255,120,200,1),
+            rgba(217,138,166,1),
 
             0 0 35px
-            rgba(255,80,170,.8);
+            rgba(123,39,70,.8);
     }
 }
 
@@ -1077,6 +1116,7 @@ body{
 .star-field{
 
     position:absolute;
+
     inset:0;
 
     width:100%;
@@ -1095,7 +1135,7 @@ body{
 
     border-radius:50%;
 
-    background:#fff;
+    background:#FFF7E6;
 
     opacity:0;
 
@@ -1103,13 +1143,13 @@ body{
 
     box-shadow:
 
-        0 0 4px #fff,
+        0 0 4px #FFF7E6,
 
         0 0 9px
-        rgba(255,255,255,.95),
+        rgba(231,200,115,.95),
 
         0 0 17px
-        rgba(255,210,245,.9);
+        rgba(217,138,166,.9);
 }
 
 .real-star::before,
@@ -1137,7 +1177,7 @@ body{
         linear-gradient(
             to bottom,
             transparent,
-            #fff,
+            #E7C873,
             transparent
         );
 }
@@ -1151,7 +1191,7 @@ body{
         linear-gradient(
             to right,
             transparent,
-            #fff,
+            #E7C873,
             transparent
         );
 }
@@ -1835,7 +1875,7 @@ for(
 function drawMatrix(){
 
     ctx.fillStyle =
-        'rgba(0, 0, 0, 0.05)';
+        'rgba(9, 7, 10, 0.05)';
 
     ctx.fillRect(
         0,
@@ -1845,7 +1885,7 @@ function drawMatrix(){
     );
 
     ctx.fillStyle =
-        '#ff3399';
+        '#D98AA6';
 
     ctx.font =
         fontSize +
@@ -2250,14 +2290,14 @@ function getFireworkColor(){
 
     const colors = [
 
-        '#ff3399',
-        '#ff5ca8',
-        '#ffd94d',
-        '#fff176',
-        '#ff6b6b',
-        '#9c7cff',
-        '#5ce1e6',
-        '#ffffff'
+        '#D98AA6',
+        '#E7C873',
+        '#FFF7E6',
+        '#B85C7A',
+        '#C58B32',
+        '#A94F70',
+        '#F0D9A0',
+        '#FFFFFF'
 
     ];
 
@@ -2588,7 +2628,7 @@ function prepareTypingPages(){
 
 /* =====================================================
    LIV LA
-   CHAK PAJ = 15 SEGONN
+   CHAK PAJ = 12 SEGONN
 ===================================================== */
 
 function startBookAnimation(){
@@ -2675,7 +2715,7 @@ function startBookAnimation(){
 
 
     /* =================================================
-       PAGE 1 RESTE 15 SEC
+       PAGE 1 RESTE 12 SEC
        PAGE 1 -> PAGE 2
     ================================================= */
 
@@ -2698,12 +2738,12 @@ function startBookAnimation(){
             );
 
         },
-        17500
+        14500
     );
 
 
     /* =================================================
-       PAGE 2 RESTE 15 SEC
+       PAGE 2 RESTE 12 SEC
        PAGE 2 -> PAGE 3
     ================================================= */
 
@@ -2726,12 +2766,12 @@ function startBookAnimation(){
             );
 
         },
-        32500
+        26500
     );
 
 
     /* =================================================
-       PAGE 3 RESTE 15 SEC
+       PAGE 3 RESTE 12 SEC
        PAGE 3 -> PAGE 4
     ================================================= */
 
@@ -2754,12 +2794,12 @@ function startBookAnimation(){
             );
 
         },
-        47500
+        38500
     );
 
 
     /* =================================================
-       PAGE 4 RESTE 15 SEC
+       PAGE 4 RESTE 12 SEC
        PAGE 4 -> FIN
     ================================================= */
 
@@ -2771,7 +2811,7 @@ function startBookAnimation(){
             );
 
         },
-        62500
+        50500
     );
 
 
@@ -2787,7 +2827,7 @@ function startBookAnimation(){
             );
 
         },
-        64000
+        52000
     );
 
 
@@ -2809,7 +2849,7 @@ function startBookAnimation(){
             animateFinalSignature();
 
         },
-        66500
+        54500
     );
 }
 
@@ -3200,4 +3240,4 @@ window.addEventListener(
 </script>
 
 </body>
-</html>
+   </html>
