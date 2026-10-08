@@ -62,38 +62,29 @@ body{
     width:100%;
     height:100%;
     z-index:1;
-    pointer-events:none;
 }
 
 .matrix-text{
     position:relative;
     z-index:2;
-
     font-size:4rem;
     font-weight:bold;
-
     color:#ff3399;
-
     text-shadow:
-        0 0 15px #ff3399,
-        0 0 30px #ff007f;
-
+        0 0 20px #ff3399,
+        0 0 40px #ff007f;
     animation:pulse 1s infinite alternate;
-
     text-align:center;
     padding:0 20px;
 }
 
 .matrix-heart{
     font-size:8rem;
-
     color:#ff69b4;
-
     text-shadow:
         0 0 20px #ff69b4,
         0 0 40px #ff3399,
         0 0 70px #ff007f;
-
     animation:
         heartPulse
         1s
@@ -103,7 +94,6 @@ body{
 }
 
 @keyframes pulse{
-
     0%{
         transform:scale(1);
     }
@@ -665,6 +655,7 @@ body{
     position:absolute;
     inset:0;
 
+    /* JÒN NAN PAJ LIV LA → BLAN */
     background:#ffffff;
 
     border:
@@ -771,6 +762,7 @@ body{
 
 .message-box{
 
+    /* JÒN NAN MESSAGE BOX LIV LA → BLAN */
     background:#ffffff;
 
     border:
@@ -913,7 +905,6 @@ body{
 
 /* =====================================================
    COEUR FINAL
-   PA MANYEN — MENM KÈ FOTO A
 ===================================================== */
 
 .heart-grid{
@@ -1795,7 +1786,6 @@ body{
 
 <!-- =====================================================
      COEUR FINAL
-     KÈ FOTO A RETE MENM JAN
 ===================================================== -->
 
 <div
@@ -1831,9 +1821,7 @@ body{
 
 
 /* =====================================================
-   MATRIX — EFE PI PWÒP
-   ANPIL TI LIGNES VÈTIKAL
-   MEN YO PA FÈ YON GWO BLOK WOZ
+   MATRIX
 ===================================================== */
 
 const canvas =
@@ -1844,384 +1832,91 @@ const canvas =
 const ctx =
     canvas.getContext('2d');
 
-let matrixWidth =
+canvas.width =
     window.innerWidth;
 
-let matrixHeight =
+canvas.height =
     window.innerHeight;
 
-const matrixWords = [
+const characters =
+    "HAPPYBIRTHDAYTOOURLOVES321❤️";
 
-    "HAPPY",
-    "BIRTHDAY",
-    "TO",
-    "OUR",
-    "LOVES",
-    "LOVE",
-    "2026",
-    "9",
-    "HAPPY",
-    "LOVE",
-    "OUR",
-    "LOVES"
+const fontSize = 16;
 
-];
-
-let matrixStreams = [];
-
-let matrixAnimation = null;
-
-
-/* =====================================================
-   RESIZE MATRIX
-===================================================== */
-
-function resizeMatrix(){
-
-    matrixWidth =
-        window.innerWidth;
-
-    matrixHeight =
-        window.innerHeight;
-
-    const dpr =
-        Math.min(
-            window.devicePixelRatio || 1,
-            2
-        );
-
-    canvas.width =
-        matrixWidth * dpr;
-
-    canvas.height =
-        matrixHeight * dpr;
-
-    canvas.style.width =
-        matrixWidth + "px";
-
-    canvas.style.height =
-        matrixHeight + "px";
-
-    ctx.setTransform(
-        dpr,
-        0,
-        0,
-        dpr,
-        0,
-        0
+const columns =
+    Math.floor(
+        canvas.width /
+        fontSize
     );
 
-    createMatrixStreams();
-}
+const drops = [];
 
-
-/* =====================================================
-   KREYE LIGNES YO
-===================================================== */
-
-function createMatrixStreams(){
-
-    matrixStreams = [];
-
-
-    /*
-       Sou yon telefòn,
-       liy yo apeprè 8px apa.
-       Sa bay anpil liy,
-       men li kite nwa ant yo.
-    */
-
-    const columnGap =
-        Math.max(
-            7,
-            Math.min(
-                9,
-                matrixWidth / 125
-            )
-        );
-
-
-    /*
-       Ti ekriti yo.
-    */
-
-    const fontSize =
-        Math.max(
-            5,
-            Math.min(
-                6.5,
-                matrixWidth / 150
-            )
-        );
-
-
-    for(
-        let x = -5;
-        x < matrixWidth + 10;
-        x += columnGap
-    ){
-
-        const lineHeight =
-            fontSize * .95;
-
-
-        const streamLength =
-            Math.floor(
-                matrixHeight /
-                lineHeight
-            ) +
-            Math.floor(
-                Math.random() * 30
-            );
-
-
-        const words = [];
-
-
-        for(
-            let i = 0;
-            i < streamLength;
-            i++
-        ){
-
-            /*
-               Pa mete ❤️ ankò.
-               Sa anpeche ekran an
-               plen ak ti kè zoranj/woz.
-            */
-
-            words.push(
-                matrixWords[
-                    Math.floor(
-                        Math.random() *
-                        matrixWords.length
-                    )
-                ]
-            );
-        }
-
-
-        matrixStreams.push({
-
-            x:x,
-
-            y:
-                Math.random() *
-                matrixHeight *
-                1.5 -
-                matrixHeight,
-
-            speed:
-                .12 +
-                Math.random() *
-                .30,
-
-            opacity:
-                .16 +
-                Math.random() *
-                .30,
-
-            words:words,
-
-            length:streamLength,
-
-            phase:
-                Math.random() *
-                Math.PI *
-                2
-
-        });
-
-    }
-
-}
-
-
-/* =====================================================
-   MATRIX DRAW
-===================================================== */
-
-function drawMatrix(
-    time
+for(
+    let i = 0;
+    i < columns;
+    i++
 ){
 
-    /*
-       Efase dousman pou mouvman an
-       rete lis san li pa vin yon gwo
-       tach woz.
-    */
+    drops[i] = 1;
+}
+
+function drawMatrix(){
 
     ctx.fillStyle =
-        "rgba(0,0,0,0.20)";
+        'rgba(0, 0, 0, 0.05)';
 
     ctx.fillRect(
         0,
         0,
-        matrixWidth,
-        matrixHeight
+        canvas.width,
+        canvas.height
     );
 
-
-    const fontSize =
-        Math.max(
-            5,
-            Math.min(
-                6.5,
-                matrixWidth / 150
-            )
-        );
-
-
-    const lineHeight =
-        fontSize * .95;
-
+    ctx.fillStyle =
+        '#ff3399';
 
     ctx.font =
-        "500 " +
         fontSize +
-        "px 'Playfair Display', serif";
+        'px monospace';
 
+    for(
+        let i = 0;
+        i < drops.length;
+        i++
+    ){
 
-    ctx.textAlign =
-        "center";
-
-    ctx.textBaseline =
-        "middle";
-
-
-    ctx.shadowBlur = 0;
-
-
-    matrixStreams.forEach(
-        stream => {
-
-
-            stream.y +=
-                stream.speed;
-
-
-            /*
-               Lè liy nan soti anba,
-               li tounen anlè.
-            */
-
-            if(
-                stream.y -
-                stream.length *
-                lineHeight >
-                matrixHeight
-            ){
-
-                stream.y =
-                    -Math.random() *
-                    matrixHeight *
-                    .7;
-
-                stream.speed =
-                    .12 +
+        const text =
+            characters.charAt(
+                Math.floor(
                     Math.random() *
-                    .30;
-            }
+                    characters.length
+                )
+            );
 
-
-            for(
-                let i = 0;
-                i < stream.length;
-                i++
-            ){
-
-                const y =
-                    stream.y +
-                    i *
-                    lineHeight;
-
-
-                if(
-                    y < -10 ||
-                    y > matrixHeight + 10
-                ){
-
-                    continue;
-                }
-
-
-                const word =
-                    stream.words[
-                        i
-                    ];
-
-
-                /*
-                   Ti mouvman natirèl.
-                */
-
-                const wave =
-                    Math.sin(
-                        time * .0007 +
-                        i * .25 +
-                        stream.phase
-                    ) *
-                    .35;
-
-
-                /*
-                   Liy yo pa tout menm klète.
-                */
-
-                const variation =
-                    .72 +
-                    .28 *
-                    Math.sin(
-                        i * .17 +
-                        stream.phase
-                    );
-
-
-                const alpha =
-                    Math.max(
-                        .06,
-                        stream.opacity *
-                        variation
-                    );
-
-
-                /*
-                   Pink la rete lejè.
-                */
-
-                ctx.fillStyle =
-                    `rgba(255,65,165,${alpha})`;
-
-
-                ctx.fillText(
-
-                    word,
-
-                    stream.x +
-                    wave,
-
-                    y
-
-                );
-
-            }
-
-        }
-    );
-
-
-    matrixAnimation =
-        requestAnimationFrame(
-            drawMatrix
+        ctx.fillText(
+            text,
+            i * fontSize,
+            drops[i] * fontSize
         );
+
+        if(
+            drops[i] *
+            fontSize >
+            canvas.height &&
+            Math.random() > .975
+        ){
+
+            drops[i] = 0;
+        }
+
+        drops[i]++;
+    }
 }
 
-
-resizeMatrix();
-
-matrixAnimation =
-    requestAnimationFrame(
-        drawMatrix
+let matrixInterval =
+    setInterval(
+        drawMatrix,
+        70
     );
 
 
@@ -2274,23 +1969,9 @@ let seqTimer =
                     seqTimer
                 );
 
-
-                /*
-                   SISPANN MATRIX LA
-                   ANVAN NOU ALE SOU CHAT LA.
-                */
-
-                if(
-                    matrixAnimation
-                ){
-
-                    cancelAnimationFrame(
-                        matrixAnimation
-                    );
-
-                    matrixAnimation =
-                        null;
-                }
+                clearInterval(
+                    matrixInterval
+                );
 
 
                 /* =========================================
@@ -3172,7 +2853,6 @@ function startBookAnimation(){
 
     /* =================================================
        KÈ FINAL
-       MEN KÈ FOTO A RETE MENM JAN
     ================================================= */
 
     setTimeout(
@@ -3196,7 +2876,6 @@ function startBookAnimation(){
 
 /* =====================================================
    FOTO KI NAN KÈ A
-   PA MANYEN
 ===================================================== */
 
 const heartPhotos = [
@@ -3237,7 +2916,6 @@ function createMediaElement(
 
 /* =====================================================
    KÈ FINAL
-   KÈ FOTO A PA CHANJE
 ===================================================== */
 
 function createHeartFormation(){
@@ -3568,13 +3246,11 @@ window.addEventListener(
     'resize',
     () => {
 
-        /*
-           Pa manyen kè foto a.
-           Resize sa a sèlman pou
-           Matrix ak fireworks.
-        */
+        canvas.width =
+            window.innerWidth;
 
-        resizeMatrix();
+        canvas.height =
+            window.innerHeight;
 
         resizeFireworks();
 
