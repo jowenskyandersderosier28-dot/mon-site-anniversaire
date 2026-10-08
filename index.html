@@ -354,7 +354,6 @@ body{
 
 /* =====================================================
    KOUVÈTI
-   ROSE
 ===================================================== */
 
 .book-cover{
@@ -804,7 +803,7 @@ body{
 
 
 /* =====================================================
-   CURSEUR PANDAN L EKRI
+   CURSEUR
 ===================================================== */
 
 .typing-cursor{
@@ -1531,9 +1530,7 @@ body{
             <div class="pages">
 
 
-                <!-- =================================================
-                     PAGE 1
-                ================================================== -->
+                <!-- PAGE 1 -->
 
                 <div
                     class="page"
@@ -1581,9 +1578,7 @@ body{
                 </div>
 
 
-                <!-- =================================================
-                     PAGE 2
-                ================================================== -->
+                <!-- PAGE 2 -->
 
                 <div
                     class="page"
@@ -1635,9 +1630,7 @@ body{
                 </div>
 
 
-                <!-- =================================================
-                     PAGE 3
-                ================================================== -->
+                <!-- PAGE 3 -->
 
                 <div
                     class="page"
@@ -1683,9 +1676,7 @@ body{
                 </div>
 
 
-                <!-- =================================================
-                     PAGE 4
-                ================================================== -->
+                <!-- PAGE 4 -->
 
                 <div
                     class="page"
@@ -1742,9 +1733,7 @@ body{
             </div>
 
 
-            <!-- =================================================
-                 KOUVÈTI
-            ================================================== -->
+            <!-- KOUVÈTI -->
 
             <div
                 class="book-cover"
@@ -1971,7 +1960,6 @@ let seqTimer =
                     matrixInterval
                 );
 
-
                 textElement.innerText = "";
 
                 textElement.classList.add(
@@ -2045,6 +2033,7 @@ function switchScreen(
 
 /* =====================================================
    FEU D'ARTIFICE
+   AVÈ TI KÈ ❤️
 ===================================================== */
 
 const fireworksCanvas =
@@ -2076,12 +2065,17 @@ function resizeFireworks(){
 resizeFireworks();
 
 
+/* =====================================================
+   PATIKIL FEU D'ARTIFICE
+===================================================== */
+
 class FireworkParticle{
 
     constructor(
         x,
         y,
-        color
+        color,
+        isHeart = false
     ){
 
         this.x = x;
@@ -2123,6 +2117,18 @@ class FireworkParticle{
 
         this.color =
             color;
+
+        this.isHeart =
+            isHeart;
+
+        /* Ti kè yo pi piti */
+        if(this.isHeart){
+
+            this.size =
+                Math.random() *
+                5 +
+                4;
+        }
     }
 
     update(){
@@ -2160,27 +2166,64 @@ class FireworkParticle{
             this.color;
 
         fireworksCtx.shadowBlur =
-            12;
+            this.isHeart
+                ? 18
+                : 12;
 
         fireworksCtx.shadowColor =
             this.color;
 
-        fireworksCtx.beginPath();
 
-        fireworksCtx.arc(
-            this.x,
-            this.y,
-            this.size,
-            0,
-            Math.PI * 2
-        );
+        /* =================================================
+           SI SE KÈ ❤️
+        ================================================= */
 
-        fireworksCtx.fill();
+        if(this.isHeart){
+
+            fireworksCtx.font =
+                `${this.size}px Arial`;
+
+            fireworksCtx.textAlign =
+                "center";
+
+            fireworksCtx.textBaseline =
+                "middle";
+
+            fireworksCtx.fillText(
+                "♥",
+                this.x,
+                this.y
+            );
+
+        }
+
+        /* =================================================
+           SI SE PATIKIL ÒDINÈ
+        ================================================= */
+
+        else{
+
+            fireworksCtx.beginPath();
+
+            fireworksCtx.arc(
+                this.x,
+                this.y,
+                this.size,
+                0,
+                Math.PI * 2
+            );
+
+            fireworksCtx.fill();
+        }
 
         fireworksCtx.restore();
     }
 }
 
+
+/* =====================================================
+   ROCKET
+===================================================== */
 
 class FireworkRocket{
 
@@ -2239,18 +2282,62 @@ class FireworkRocket{
         return false;
     }
 
+
+    /* =================================================
+       EXPLOSION AK TI KÈ
+    ================================================= */
+
     explode(){
+
+        /*
+         * Anviwon 80 patikil.
+         * Majorite yo se ti kè.
+         */
 
         const particleCount =
             Math.floor(
                 Math.random() *
-                35 +
-                65
+                25 +
+                70
             );
+
 
         for(
             let i = 0;
             i < particleCount;
+            i++
+        ){
+
+            /*
+             * 75% chans pou patikil la
+             * se yon ti kè.
+             */
+
+            const isHeart =
+                Math.random() < .75;
+
+
+            fireworksParticles.push(
+
+                new FireworkParticle(
+                    this.x,
+                    this.y,
+                    this.color,
+                    isHeart
+                )
+
+            );
+        }
+
+
+        /*
+         * Yon ti flash blan nan sant
+         * lè eksplozyon an fèt.
+         */
+
+        for(
+            let i = 0;
+            i < 15;
             i++
         ){
 
@@ -2259,7 +2346,8 @@ class FireworkRocket{
                 new FireworkParticle(
                     this.x,
                     this.y,
-                    this.color
+                    '#ffffff',
+                    false
                 )
 
             );
@@ -2296,6 +2384,10 @@ class FireworkRocket{
 }
 
 
+/* =====================================================
+   KOULÈ FEU YO
+===================================================== */
+
 function getFireworkColor(){
 
     const colors = [
@@ -2320,11 +2412,19 @@ function getFireworkColor(){
 }
 
 
+/* =====================================================
+   ANIMATION FEU D'ARTIFICE
+===================================================== */
+
 let lastRocketTime = 0;
 
 function animateFireworks(
     time
 ){
+
+    /*
+     * Fon nwa a rete pwòp.
+     */
 
     fireworksCtx.clearRect(
         0,
@@ -2332,6 +2432,12 @@ function animateFireworks(
         fireworksCanvas.width,
         fireworksCanvas.height
     );
+
+
+    /*
+     * Yon nouvo feu chak anviwon
+     * 450 milliseconds.
+     */
 
     if(
         time -
@@ -2346,6 +2452,11 @@ function animateFireworks(
         lastRocketTime =
             time;
     }
+
+
+    /* =================================================
+       ROCKETS
+    ================================================= */
 
     for(
         let i =
@@ -2373,6 +2484,11 @@ function animateFireworks(
         }
     }
 
+
+    /* =================================================
+       TI KÈ YO AK PATIKIL YO
+    ================================================= */
+
     for(
         let i =
             fireworksParticles.length - 1;
@@ -2398,12 +2514,17 @@ function animateFireworks(
         }
     }
 
+
     fireworksAnimation =
         requestAnimationFrame(
             animateFireworks
         );
 }
 
+
+/* =====================================================
+   KÒMANSE FEU D'ARTIFICE
+===================================================== */
 
 function startFireworks(){
 
@@ -2422,6 +2543,12 @@ function startFireworks(){
             animateFireworks
         );
 
+
+    /*
+     * Apre 4 segonn,
+     * ale sou liv la.
+     */
+
     setTimeout(
         () => {
 
@@ -2438,6 +2565,10 @@ function startFireworks(){
     );
 }
 
+
+/* =====================================================
+   SISPANN FEU D'ARTIFICE
+===================================================== */
 
 function stopFireworks(){
 
@@ -2467,7 +2598,7 @@ function stopFireworks(){
 
 
 /* =====================================================
-   EFÈ "AP EKRI" SOU PAJ YO
+   EFÈ "AP EKRI"
 ===================================================== */
 
 function typeText(
@@ -2638,10 +2769,6 @@ function prepareTypingPages(){
 
 /* =====================================================
    LIV LA
-   PAGE 1 = 10 SEC
-   PAGE 2 = 9 SEC
-   PAGE 3 = 8 SEC
-   PAGE 4 = 9 SEC
 ===================================================== */
 
 function startBookAnimation(){
@@ -2700,9 +2827,7 @@ function startBookAnimation(){
     );
 
 
-    /* =================================================
-       LIV LA OUVÈTI
-    ================================================= */
+    /* LIV LA OUVÈTI */
 
     setTimeout(
         () => {
@@ -2727,10 +2852,7 @@ function startBookAnimation(){
     );
 
 
-    /* =================================================
-       PAGE 1 = 10 SEC
-       PAGE 1 -> PAGE 2
-    ================================================= */
+    /* PAGE 1 -> PAGE 2 */
 
     setTimeout(
         () => {
@@ -2755,10 +2877,7 @@ function startBookAnimation(){
     );
 
 
-    /* =================================================
-       PAGE 2 = 9 SEC
-       PAGE 2 -> PAGE 3
-    ================================================= */
+    /* PAGE 2 -> PAGE 3 */
 
     setTimeout(
         () => {
@@ -2783,10 +2902,7 @@ function startBookAnimation(){
     );
 
 
-    /* =================================================
-       PAGE 3 = 8 SEC
-       PAGE 3 -> PAGE 4
-    ================================================= */
+    /* PAGE 3 -> PAGE 4 */
 
     setTimeout(
         () => {
@@ -2811,10 +2927,7 @@ function startBookAnimation(){
     );
 
 
-    /* =================================================
-       PAGE 4 = 9 SEC
-       PAGE 4 -> FIN
-    ================================================= */
+    /* PAGE 4 -> FIN */
 
     setTimeout(
         () => {
@@ -2828,9 +2941,7 @@ function startBookAnimation(){
     );
 
 
-    /* =================================================
-       LIV LA FÈMEN
-    ================================================= */
+    /* LIV LA FÈMEN */
 
     setTimeout(
         () => {
@@ -2844,9 +2955,7 @@ function startBookAnimation(){
     );
 
 
-    /* =================================================
-       KÈ FINAL
-    ================================================= */
+    /* KÈ FINAL */
 
     setTimeout(
         () => {
@@ -3253,4 +3362,4 @@ window.addEventListener(
 </script>
 
 </body>
-</html>
+   </html>
