@@ -13,10 +13,6 @@
 
 <style>
 
-/* =====================================================
-   BASE
-===================================================== */
-
 *{
     margin:0;
     padding:0;
@@ -638,12 +634,6 @@ body{
     border-radius:
         7px 15px 15px 7px;
 
-    /*
-       MODIFICATION:
-       plis piti padding anlè pou
-       "Mon amour ❤️" pa koupe
-    */
-
     padding:
         10px 16px;
 
@@ -711,12 +701,6 @@ body{
 
     align-items:center;
 
-    /*
-       MODIFICATION:
-       Nou pa mete tout bagay nan mitan
-       paske sa te fè "Mon amour" koupe anlè.
-    */
-
     justify-content:flex-start;
 
     text-align:center;
@@ -732,11 +716,6 @@ body{
 
     font-size:
         1.65rem;
-
-    /*
-       MODIFICATION:
-       li kòmanse byen anba paj la
-    */
 
     margin-top:2px;
     margin-bottom:5px;
@@ -766,11 +745,6 @@ body{
     font-family:
         'Great Vibes',
         cursive;
-
-    /*
-       MODIFICATION:
-       ti kras pi piti pou tout mesaj la antre
-    */
 
     font-size:
         clamp(
@@ -814,12 +788,6 @@ body{
 .photo-frame video{
 
     width:46%;
-
-    /*
-       MODIFICATION:
-       Foto yo pi kout pou "Mon amour"
-       rete vizib anlè
-    */
 
     height:135px;
 
@@ -876,13 +844,6 @@ body{
 
     z-index:2;
 }
-
-
-/*
-   MODIFICATION:
-   20 ti kat yo rete menm jan,
-   men yo itilize sèlman foto ki mache.
-*/
 
 .mini-card{
 
@@ -1247,10 +1208,6 @@ body{
         letter-spacing:1.5px;
     }
 
-    /*
-       MODIFICATION PAGE
-    */
-
     .page{
 
         padding:
@@ -1392,6 +1349,18 @@ body{
 
 
 <!-- =====================================================
+     MIZIK BACKGROUND
+===================================================== -->
+
+<audio
+    id="backgroundMusic"
+    src="dandelions.mp3"
+    loop
+    preload="auto"
+></audio>
+
+
+<!-- =====================================================
      MATRIX
 ===================================================== -->
 
@@ -1493,9 +1462,7 @@ body{
             <div class="pages">
 
 
-                <!-- =================================================
-                     PAGE 1
-                ================================================== -->
+                <!-- PAGE 1 -->
 
                 <div
                     class="page"
@@ -1543,9 +1510,7 @@ body{
                 </div>
 
 
-                <!-- =================================================
-                     PAGE 2
-                ================================================== -->
+                <!-- PAGE 2 -->
 
                 <div
                     class="page"
@@ -1597,9 +1562,7 @@ body{
                 </div>
 
 
-                <!-- =================================================
-                     PAGE 3
-                ================================================== -->
+                <!-- PAGE 3 -->
 
                 <div
                     class="page"
@@ -1645,9 +1608,7 @@ body{
                 </div>
 
 
-                <!-- =================================================
-                     PAGE 4
-                ================================================== -->
+                <!-- PAGE 4 -->
 
                 <div
                     class="page"
@@ -1702,13 +1663,10 @@ body{
 
                 </div>
 
-
             </div>
 
 
-            <!-- =================================================
-                 KOUVÈTI
-            ================================================== -->
+            <!-- KOUVÈTI -->
 
             <div
                 class="book-cover"
@@ -1780,6 +1738,66 @@ body{
 
 
 <script>
+
+
+/* =====================================================
+   MUSIQUE
+===================================================== */
+
+const backgroundMusic =
+    document.getElementById(
+        "backgroundMusic"
+    );
+
+backgroundMusic.volume = 0.55;
+
+
+/*
+   Eseye kòmanse mizik la otomatikman.
+*/
+
+function startMusic(){
+
+    backgroundMusic
+        .play()
+        .catch(() => {
+
+            /*
+               Si navigatè a bloke autoplay,
+               premye touch/click itilizatè a
+               ap lanse mizik la.
+            */
+
+        });
+
+}
+
+
+/*
+   Eseye lanse mizik la
+   depi sit la ouvri.
+*/
+
+startMusic();
+
+
+/*
+   Si autoplay bloke sou telefòn nan,
+   nenpòt premye touch/click
+   ap lanse mizik la.
+*/
+
+document.addEventListener(
+    "click",
+    startMusic,
+    { once:true }
+);
+
+document.addEventListener(
+    "touchstart",
+    startMusic,
+    { once:true }
+);
 
 
 /* =====================================================
@@ -2555,18 +2573,8 @@ function startBookAnimation(){
 
 
 /* =====================================================
-   FOTO KI NOU KONNEN KI TE PARÈT NAN KÈ A
+   FOTO KI NOU KÒNNEN KI TE PARÈT NAN KÈ A
 ===================================================== */
-
-/*
-   IMPORTANT:
-
-   Nou pa mete video ki te konn bay "Photo"
-   oswa imaj kase yo ankò.
-
-   Nou itilize sèlman foto yo ki te deja
-   parèt nan kè a.
-*/
 
 const heartPhotos = [
 
@@ -2616,14 +2624,6 @@ function createHeartFormation(){
         );
 
     container.innerHTML = "";
-
-
-    /*
-       20 kat
-
-       Men chak kat ap itilize
-       youn nan foto ki mache.
-    */
 
     const numCards = 20;
 
@@ -2712,14 +2712,6 @@ function createHeartFormation(){
             y *
             heartScale;
 
-
-        /*
-           Nou pran foto yo
-           youn apre lòt.
-
-           Lè nou rive nan dènye a,
-           nou retounen nan premye a.
-        */
 
         const photo =
             heartPhotos[
@@ -2845,25 +2837,6 @@ function createRealStars(){
                 'px';
 
 
-            const branch =
-                size *
-                5;
-
-
-            star.style.setProperty(
-                '--star-size',
-                size +
-                'px'
-            );
-
-
-            star.style.setProperty(
-                '--star-branch',
-                branch +
-                'px'
-            );
-
-
             star.style.animationDelay =
                 (index * .14) +
                 's';
@@ -2965,4 +2938,4 @@ window.addEventListener(
 </script>
 
 </body>
-    </html>
+   </html>
