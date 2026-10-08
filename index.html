@@ -1098,7 +1098,7 @@ body{
 
 
 /* =====================================================
-   ETWAL
+   ETWAL FINAL
 ===================================================== */
 
 .star-field{
@@ -1530,7 +1530,9 @@ body{
             <div class="pages">
 
 
-                <!-- PAGE 1 -->
+                <!-- =================================================
+                     PAGE 1
+                ================================================== -->
 
                 <div
                     class="page"
@@ -1578,7 +1580,9 @@ body{
                 </div>
 
 
-                <!-- PAGE 2 -->
+                <!-- =================================================
+                     PAGE 2
+                ================================================== -->
 
                 <div
                     class="page"
@@ -1630,7 +1634,9 @@ body{
                 </div>
 
 
-                <!-- PAGE 3 -->
+                <!-- =================================================
+                     PAGE 3
+                ================================================== -->
 
                 <div
                     class="page"
@@ -1676,7 +1682,9 @@ body{
                 </div>
 
 
-                <!-- PAGE 4 -->
+                <!-- =================================================
+                     PAGE 4
+                ================================================== -->
 
                 <div
                     class="page"
@@ -1733,7 +1741,9 @@ body{
             </div>
 
 
-            <!-- KOUVÈTI -->
+            <!-- =================================================
+                 KOUVÈTI
+            ================================================== -->
 
             <div
                 class="book-cover"
@@ -2033,7 +2043,7 @@ function switchScreen(
 
 /* =====================================================
    FEU D'ARTIFICE
-   AVÈ TI KÈ ❤️
+   PETITS COEURS + PETITES ETOILES
 ===================================================== */
 
 const fireworksCanvas =
@@ -2066,7 +2076,7 @@ resizeFireworks();
 
 
 /* =====================================================
-   PATIKIL FEU D'ARTIFICE
+   PARTICULE COEUR / ETOILE
 ===================================================== */
 
 class FireworkParticle{
@@ -2075,11 +2085,13 @@ class FireworkParticle{
         x,
         y,
         color,
-        isHeart = false
+        type = "heart"
     ){
 
         this.x = x;
         this.y = y;
+
+        this.type = type;
 
         const angle =
             Math.random() *
@@ -2088,8 +2100,8 @@ class FireworkParticle{
 
         const speed =
             Math.random() *
-            5 +
-            2;
+            3.8 +
+            1.5;
 
         this.vx =
             Math.cos(angle) *
@@ -2100,36 +2112,34 @@ class FireworkParticle{
             speed;
 
         this.gravity =
-            .045;
+            .025;
 
         this.life =
             1;
 
         this.decay =
             Math.random() *
-            .012 +
-            .008;
+            .018 +
+            .012;
 
         this.size =
             Math.random() *
-            2.5 +
-            1;
+            5 +
+            5;
 
         this.color =
             color;
 
-        this.isHeart =
-            isHeart;
+        this.rotation =
+            Math.random() *
+            Math.PI *
+            2;
 
-        /* Ti kè yo pi piti */
-        if(this.isHeart){
-
-            this.size =
-                Math.random() *
-                5 +
-                4;
-        }
+        this.rotationSpeed =
+            (Math.random() - .5) *
+            .06;
     }
+
 
     update(){
 
@@ -2148,9 +2158,13 @@ class FireworkParticle{
         this.vy *=
             .985;
 
+        this.rotation +=
+            this.rotationSpeed;
+
         this.life -=
             this.decay;
     }
+
 
     draw(){
 
@@ -2162,58 +2176,145 @@ class FireworkParticle{
                 0
             );
 
+        fireworksCtx.translate(
+            this.x,
+            this.y
+        );
+
+        fireworksCtx.rotate(
+            this.rotation
+        );
+
+        fireworksCtx.strokeStyle =
+            this.color;
+
         fireworksCtx.fillStyle =
             this.color;
 
+        fireworksCtx.lineWidth =
+            1.4;
+
         fireworksCtx.shadowBlur =
-            this.isHeart
-                ? 18
-                : 12;
+            10;
 
         fireworksCtx.shadowColor =
             this.color;
 
 
-        /* =================================================
-           SI SE KÈ ❤️
-        ================================================= */
+        /* =============================================
+           TI KÈ  ♡
+        ============================================= */
 
-        if(this.isHeart){
+        if(
+            this.type === "heart"
+        ){
 
-            fireworksCtx.font =
-                `${this.size}px Arial`;
-
-            fireworksCtx.textAlign =
-                "center";
-
-            fireworksCtx.textBaseline =
-                "middle";
-
-            fireworksCtx.fillText(
-                "♥",
-                this.x,
-                this.y
-            );
-
-        }
-
-        /* =================================================
-           SI SE PATIKIL ÒDINÈ
-        ================================================= */
-
-        else{
+            const s =
+                this.size;
 
             fireworksCtx.beginPath();
 
-            fireworksCtx.arc(
-                this.x,
-                this.y,
-                this.size,
+            fireworksCtx.moveTo(
                 0,
-                Math.PI * 2
+                s * .85
             );
 
-            fireworksCtx.fill();
+            fireworksCtx.bezierCurveTo(
+                -s * 1.25,
+                s * .05,
+                -s * .85,
+                -s * .9,
+                -s * .38,
+                -s * .82
+            );
+
+            fireworksCtx.bezierCurveTo(
+                -s * .10,
+                -s * .78,
+                0,
+                -s * .45,
+                0,
+                -s * .25
+            );
+
+            fireworksCtx.bezierCurveTo(
+                0,
+                -s * .45,
+                s * .10,
+                -s * .78,
+                s * .38,
+                -s * .82
+            );
+
+            fireworksCtx.bezierCurveTo(
+                s * .85,
+                -s * .9,
+                s * 1.25,
+                s * .05,
+                0,
+                s * .85
+            );
+
+            fireworksCtx.stroke();
+
+        }
+
+
+        /* =============================================
+           TI ZETWAL  ✦
+        ============================================= */
+
+        else{
+
+            const s =
+                this.size;
+
+            fireworksCtx.beginPath();
+
+            fireworksCtx.moveTo(
+                0,
+                -s
+            );
+
+            fireworksCtx.lineTo(
+                s * .28,
+                -s * .28
+            );
+
+            fireworksCtx.lineTo(
+                s,
+                0
+            );
+
+            fireworksCtx.lineTo(
+                s * .28,
+                s * .28
+            );
+
+            fireworksCtx.lineTo(
+                0,
+                s
+            );
+
+            fireworksCtx.lineTo(
+                -s * .28,
+                s * .28
+            );
+
+            fireworksCtx.lineTo(
+                -s,
+                0
+            );
+
+            fireworksCtx.lineTo(
+                -s * .28,
+                -s * .28
+            );
+
+            fireworksCtx.closePath();
+
+            fireworksCtx.stroke();
+
         }
 
         fireworksCtx.restore();
@@ -2257,6 +2358,7 @@ class FireworkRocket{
             false;
     }
 
+
     update(){
 
         this.y -=
@@ -2283,22 +2385,21 @@ class FireworkRocket{
     }
 
 
-    /* =================================================
-       EXPLOSION AK TI KÈ
-    ================================================= */
-
     explode(){
 
         /*
-         * Anviwon 80 patikil.
-         * Majorite yo se ti kè.
+         * Chak eksplozyon gen anviwon
+         * 55 ti kè ak kèk ti zetwal.
+         *
+         * Yo sòti sèlman nan pwen kote
+         * rocket la pete.
          */
 
         const particleCount =
             Math.floor(
                 Math.random() *
-                25 +
-                70
+                18 +
+                42
             );
 
 
@@ -2309,12 +2410,14 @@ class FireworkRocket{
         ){
 
             /*
-             * 75% chans pou patikil la
-             * se yon ti kè.
+             * Majorite patikil yo se ti kè.
+             * Kèk sèlman se zetwal.
              */
 
-            const isHeart =
-                Math.random() < .75;
+            const type =
+                Math.random() < .78
+                    ? "heart"
+                    : "star";
 
 
             fireworksParticles.push(
@@ -2323,7 +2426,7 @@ class FireworkRocket{
                     this.x,
                     this.y,
                     this.color,
-                    isHeart
+                    type
                 )
 
             );
@@ -2331,13 +2434,14 @@ class FireworkRocket{
 
 
         /*
-         * Yon ti flash blan nan sant
-         * lè eksplozyon an fèt.
+         * Kèk ti zetwal blan
+         * pou bay eksplozyon an
+         * plis briyans.
          */
 
         for(
             let i = 0;
-            i < 15;
+            i < 8;
             i++
         ){
 
@@ -2346,13 +2450,14 @@ class FireworkRocket{
                 new FireworkParticle(
                     this.x,
                     this.y,
-                    '#ffffff',
-                    false
+                    "#ffffff",
+                    "star"
                 )
 
             );
         }
     }
+
 
     draw(){
 
@@ -2385,7 +2490,7 @@ class FireworkRocket{
 
 
 /* =====================================================
-   KOULÈ FEU YO
+   KOULÈ FEU D'ARTIFICE
 ===================================================== */
 
 function getFireworkColor(){
@@ -2422,10 +2527,6 @@ function animateFireworks(
     time
 ){
 
-    /*
-     * Fon nwa a rete pwòp.
-     */
-
     fireworksCtx.clearRect(
         0,
         0,
@@ -2435,14 +2536,15 @@ function animateFireworks(
 
 
     /*
-     * Yon nouvo feu chak anviwon
-     * 450 milliseconds.
+     * Rocket yo pa soti twò souvan.
+     * Sa fè ekran an rete elegant
+     * olye li chaje ak patikil.
      */
 
     if(
         time -
         lastRocketTime >
-        450
+        520
     ){
 
         fireworksRockets.push(
@@ -2454,9 +2556,9 @@ function animateFireworks(
     }
 
 
-    /* =================================================
+    /* =============================================
        ROCKETS
-    ================================================= */
+    ============================================= */
 
     for(
         let i =
@@ -2485,9 +2587,9 @@ function animateFireworks(
     }
 
 
-    /* =================================================
-       TI KÈ YO AK PATIKIL YO
-    ================================================= */
+    /* =============================================
+       KÈ + ZETWAL
+    ============================================= */
 
     for(
         let i =
@@ -2502,6 +2604,7 @@ function animateFireworks(
         particle.update();
 
         particle.draw();
+
 
         if(
             particle.life <= 0
@@ -2523,7 +2626,7 @@ function animateFireworks(
 
 
 /* =====================================================
-   KÒMANSE FEU D'ARTIFICE
+   START FIREWORKS
 ===================================================== */
 
 function startFireworks(){
@@ -2544,11 +2647,6 @@ function startFireworks(){
         );
 
 
-    /*
-     * Apre 4 segonn,
-     * ale sou liv la.
-     */
-
     setTimeout(
         () => {
 
@@ -2567,7 +2665,7 @@ function startFireworks(){
 
 
 /* =====================================================
-   SISPANN FEU D'ARTIFICE
+   STOP FIREWORKS
 ===================================================== */
 
 function stopFireworks(){
@@ -2827,7 +2925,9 @@ function startBookAnimation(){
     );
 
 
-    /* LIV LA OUVÈTI */
+    /* =================================================
+       LIV LA OUVÈTI
+    ================================================= */
 
     setTimeout(
         () => {
@@ -2852,7 +2952,9 @@ function startBookAnimation(){
     );
 
 
-    /* PAGE 1 -> PAGE 2 */
+    /* =================================================
+       PAGE 1
+    ================================================= */
 
     setTimeout(
         () => {
@@ -2877,7 +2979,9 @@ function startBookAnimation(){
     );
 
 
-    /* PAGE 2 -> PAGE 3 */
+    /* =================================================
+       PAGE 2
+    ================================================= */
 
     setTimeout(
         () => {
@@ -2902,7 +3006,9 @@ function startBookAnimation(){
     );
 
 
-    /* PAGE 3 -> PAGE 4 */
+    /* =================================================
+       PAGE 3
+    ================================================= */
 
     setTimeout(
         () => {
@@ -2927,7 +3033,9 @@ function startBookAnimation(){
     );
 
 
-    /* PAGE 4 -> FIN */
+    /* =================================================
+       PAGE 4
+    ================================================= */
 
     setTimeout(
         () => {
@@ -2941,7 +3049,9 @@ function startBookAnimation(){
     );
 
 
-    /* LIV LA FÈMEN */
+    /* =================================================
+       LIV LA FÈMEN
+    ================================================= */
 
     setTimeout(
         () => {
@@ -2955,7 +3065,9 @@ function startBookAnimation(){
     );
 
 
-    /* KÈ FINAL */
+    /* =================================================
+       KÈ FINAL
+    ================================================= */
 
     setTimeout(
         () => {
@@ -3163,7 +3275,7 @@ function createHeartFormation(){
 
 
 /* =====================================================
-   ETWAL
+   ETWAL FINAL
 ===================================================== */
 
 function createRealStars(){
@@ -3362,4 +3474,4 @@ window.addEventListener(
 </script>
 
 </body>
-   </html>
+                           </html>
