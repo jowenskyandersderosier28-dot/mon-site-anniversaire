@@ -49,57 +49,6 @@ body{
 
 
 /* =====================================================
-   BOUTON MUSIQUE
-===================================================== */
-
-#musicButton{
-    position:fixed;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    z-index:9999;
-    border:none;
-    padding:15px 25px;
-    border-radius:50px;
-    background:linear-gradient(135deg,#ff3399,#ff72ad,#ff3399);
-    color:white;
-    font-family:'Playfair Display',serif;
-    font-size:1rem;
-    font-weight:700;
-    letter-spacing:.5px;
-    box-shadow:
-        0 0 15px rgba(255,51,153,.8),
-        0 0 35px rgba(255,51,153,.5);
-    cursor:pointer;
-    animation:musicPulse 1.5s ease-in-out infinite alternate;
-    transition:opacity .5s,transform .3s;
-}
-
-#musicButton:active{
-    transform:translate(-50%,-50%) scale(.94);
-}
-
-#musicButton.hidden{
-    opacity:0;
-    pointer-events:none;
-    transform:translate(-50%,-50%) scale(.8);
-}
-
-@keyframes musicPulse{
-    from{
-        box-shadow:
-            0 0 12px rgba(255,51,153,.7),
-            0 0 25px rgba(255,51,153,.4);
-    }
-    to{
-        box-shadow:
-            0 0 20px rgba(255,51,153,1),
-            0 0 45px rgba(255,51,153,.7);
-    }
-}
-
-
-/* =====================================================
    MATRIX
 ===================================================== */
 
@@ -126,8 +75,13 @@ body{
 }
 
 @keyframes pulse{
-    0%{transform:scale(1);}
-    100%{transform:scale(1.08);}
+    0%{
+        transform:scale(1);
+    }
+
+    100%{
+        transform:scale(1.08);
+    }
 }
 
 
@@ -138,12 +92,14 @@ body{
 .stars-bg{
     position:absolute;
     inset:0;
+
     background:
         radial-gradient(
             ellipse at bottom,
             #1b2735 0%,
             #090a0f 100%
         );
+
     z-index:1;
 }
 
@@ -169,38 +125,90 @@ body{
 }
 
 @keyframes floatCat{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-15px);}
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-15px);
+    }
+
 }
 
 .birthday-title{
+
     color:#ff5ca8;
+
     font-family:'Playfair Display',serif;
-    font-size:clamp(1.25rem,6.5vw,2rem);
+
+    font-size:
+        clamp(
+            1.25rem,
+            6.5vw,
+            2rem
+        );
+
     font-weight:700;
+
     line-height:1.2;
+
     text-align:center;
+
     width:100%;
+
     max-width:95vw;
+
     margin:0 auto;
+
     padding:0 5px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     gap:8px;
-    text-shadow:0 1px 3px rgba(255,255,255,.9);
+
+    text-shadow:
+        0 1px 3px rgba(255,255,255,.9);
 }
 
 .flower{
-    font-size:clamp(1.4rem,7vw,2rem);
+
+    font-size:
+        clamp(
+            1.4rem,
+            7vw,
+            2rem
+        );
+
     flex-shrink:0;
-    filter:drop-shadow(0 0 5px #ff69b4);
-    animation:flowerGlow 1.5s ease-in-out infinite alternate;
+
+    filter:
+        drop-shadow(
+            0 0 5px #ff69b4
+        );
+
+    animation:
+        flowerGlow
+        1.5s
+        ease-in-out
+        infinite
+        alternate;
 }
 
 @keyframes flowerGlow{
-    from{transform:scale(1);}
-    to{transform:scale(1.15);}
+
+    from{
+        transform:scale(1);
+    }
+
+    to{
+        transform:scale(1.15);
+    }
+
 }
 
 
@@ -209,6 +217,7 @@ body{
 ===================================================== */
 
 #fireworks-screen{
+
     background:
         radial-gradient(
             ellipse at center,
@@ -216,14 +225,20 @@ body{
             #05050a 65%,
             #000 100%
         );
+
     z-index:50;
 }
 
 #fireworks-canvas{
+
     position:absolute;
+
     inset:0;
+
     width:100%;
+
     height:100%;
+
     z-index:1;
 }
 
@@ -233,45 +248,76 @@ body{
 ===================================================== */
 
 .book-area{
+
     position:relative;
+
     z-index:2;
+
     width:100%;
+
     height:100%;
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
     perspective:1800px;
 }
 
 .book{
+
     position:relative;
+
     width:min(350px,88vw);
+
     height:min(450px,76vh);
+
     transform-style:preserve-3d;
 }
 
 .book::after{
+
     content:"";
+
     position:absolute;
+
     width:85%;
+
     height:25px;
+
     bottom:-22px;
+
     left:7.5%;
-    background:rgba(255,51,153,.35);
+
+    background:
+        rgba(255,51,153,.35);
+
     filter:blur(15px);
+
     border-radius:50%;
+
     z-index:-2;
 }
 
 .book-inside{
+
     position:absolute;
+
     inset:0;
+
     background:#ffd6e7;
+
     border:5px solid #ff78b5;
-    border-radius:10px 18px 18px 10px;
+
+    border-radius:
+        10px 18px 18px 10px;
+
     box-shadow:
         0 15px 40px rgba(255,51,153,.5),
         inset 0 0 20px rgba(255,255,255,.5);
+
     overflow:hidden;
 }
 
@@ -281,35 +327,55 @@ body{
 ===================================================== */
 
 .book-cover{
+
     position:absolute;
+
     inset:-4px;
+
     z-index:20;
+
     transform-origin:left center;
+
     transform-style:preserve-3d;
+
     transition:
-        transform 2.2s cubic-bezier(.65,.05,.36,1),
+        transform 2.2s
+        cubic-bezier(.65,.05,.36,1),
+
         opacity .2s;
 }
 
 .book.open .book-cover{
-    transform:rotateY(-165deg);
+
+    transform:
+        rotateY(-165deg);
 }
 
 .book.closing .book-cover{
-    transform:rotateY(0deg);
+
+    transform:
+        rotateY(0deg);
 }
 
 .cover-front{
+
     position:absolute;
+
     inset:0;
-    border-radius:8px 20px 20px 8px;
+
+    border-radius:
+        8px 20px 20px 8px;
+
     backface-visibility:hidden;
+
     background:
+
         radial-gradient(
             circle at 75% 18%,
             rgba(255,255,255,.45),
             transparent 18%
         ),
+
         linear-gradient(
             135deg,
             #c21868 0%,
@@ -317,110 +383,208 @@ body{
             #ff86ba 70%,
             #d91f72 100%
         );
+
     border:5px solid #ffd95e;
+
     box-shadow:
-        0 18px 45px rgba(255,51,153,.65),
-        inset 0 0 0 3px rgba(255,255,255,.35),
-        inset 0 0 30px rgba(120,0,55,.35);
+
+        0 18px 45px
+        rgba(255,51,153,.65),
+
+        inset 0 0 0 3px
+        rgba(255,255,255,.35),
+
+        inset 0 0 30px
+        rgba(120,0,55,.35);
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
     text-align:center;
+
     padding:32px 24px;
+
     overflow:hidden;
 }
 
 .cover-front::before{
+
     content:"♥";
+
     position:absolute;
+
     left:9px;
+
     top:8px;
+
     bottom:8px;
+
     width:18px;
+
     background:
+
         linear-gradient(
             to right,
             rgba(80,0,35,.55),
             rgba(255,255,255,.2),
             rgba(80,0,35,.35)
         );
-    border-radius:5px 0 0 5px;
+
+    border-radius:
+        5px 0 0 5px;
 }
 
 .cover-front::after{
+
     content:"✦  ✧  ✦";
+
     position:absolute;
+
     inset:18px;
-    border:2px solid rgba(255,244,170,.85);
-    border-radius:7px 15px 15px 7px;
+
+    border:
+        2px solid
+        rgba(255,244,170,.85);
+
+    border-radius:
+        7px 15px 15px 7px;
+
     pointer-events:none;
 }
 
 .cover-front > div{
+
     position:relative;
+
     z-index:3;
+
     width:100%;
+
     height:100%;
+
     display:flex;
+
     flex-direction:column;
+
     justify-content:center;
+
     align-items:center;
 }
 
 .cover-front > div::before{
+
     content:"♥";
+
     position:absolute;
+
     top:7px;
+
     left:50%;
-    transform:translateX(-50%);
+
+    transform:
+        translateX(-50%);
+
     font-size:32px;
+
     color:#fff5ad;
+
     text-shadow:
         0 0 6px #fff,
         0 0 15px #ff3399;
 }
 
 .cover-front > div::after{
+
     content:"✦  ✧  ✦";
+
     position:absolute;
+
     top:48px;
+
     left:50%;
-    transform:translateX(-50%);
+
+    transform:
+        translateX(-50%);
+
     color:#fff3a6;
+
     font-size:16px;
+
     letter-spacing:4px;
 }
 
 .cover-title{
-    font-family:'Great Vibes',cursive;
-    font-size:clamp(3rem,13vw,4.2rem);
+
+    font-family:
+        'Great Vibes',
+        cursive;
+
+    font-size:
+        clamp(
+            3rem,
+            13vw,
+            4.2rem
+        );
+
     line-height:1.02;
+
     color:#fff9bd;
+
     text-shadow:
+
         2px 3px 0 #a7195d,
-        0 0 8px rgba(255,255,255,.9),
-        0 0 22px rgba(255,230,120,.65);
+
+        0 0 8px
+        rgba(255,255,255,.9),
+
+        0 0 22px
+        rgba(255,230,120,.65);
+
     margin-top:22px;
-    transform:rotate(-2deg);
+
+    transform:
+        rotate(-2deg);
 }
 
 .cover-title::after{
-    content:"────── ♥ ──────";
+
+    content:
+        "────── ♥ ──────";
+
     display:block;
-    font-family:'Playfair Display',serif;
+
+    font-family:
+        'Playfair Display',
+        serif;
+
     font-size:11px;
+
     letter-spacing:2px;
+
     color:#fff4ad;
+
     margin-top:12px;
 }
 
 .cover-subtitle{
+
     display:block;
-    font-family:'Playfair Display',serif;
+
+    font-family:
+        'Playfair Display',
+        serif;
+
     font-size:.82rem;
+
     margin-top:18px;
+
     color:#fff;
+
     letter-spacing:2px;
+
     text-transform:uppercase;
 }
 
@@ -430,105 +594,206 @@ body{
 ===================================================== */
 
 .pages{
+
     position:absolute;
+
     inset:10px;
+
     z-index:10;
-    transform-style:preserve-3d;
+
+    transform-style:
+        preserve-3d;
 }
 
 .page{
+
     position:absolute;
+
     inset:0;
+
     background:#fff1a8;
-    border:3px solid #ff78b5;
-    border-radius:7px 15px 15px 7px;
+
+    border:
+        3px solid #ff78b5;
+
+    border-radius:
+        7px 15px 15px 7px;
+
     padding:10px 16px;
+
     color:#d63384;
+
     transform-origin:left center;
-    transform-style:preserve-3d;
+
+    transform-style:
+        preserve-3d;
+
     transition:
-        transform 1.5s cubic-bezier(.65,.05,.36,1),
+
+        transform 1.5s
+        cubic-bezier(.65,.05,.36,1),
+
         box-shadow 1s;
+
     backface-visibility:hidden;
+
     box-shadow:
-        inset 0 0 15px rgba(255,255,255,.5),
-        3px 5px 12px rgba(210,80,130,.25);
+
+        inset 0 0 15px
+        rgba(255,255,255,.5),
+
+        3px 5px 12px
+        rgba(210,80,130,.25);
+
     overflow:hidden;
 }
 
-.page:nth-child(1){z-index:4;}
-.page:nth-child(2){z-index:3;}
-.page:nth-child(3){z-index:2;}
-.page:nth-child(4){z-index:1;}
+.page:nth-child(1){
+    z-index:4;
+}
+
+.page:nth-child(2){
+    z-index:3;
+}
+
+.page:nth-child(3){
+    z-index:2;
+}
+
+.page:nth-child(4){
+    z-index:1;
+}
 
 .page.flipped{
-    transform:rotateY(-180deg);
+
+    transform:
+        rotateY(-180deg);
 }
 
 .page-content{
+
     width:100%;
+
     height:100%;
+
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
+
     justify-content:flex-start;
+
     text-align:center;
+
     overflow:hidden;
 }
 
 .page-number{
-    font-family:'Great Vibes',cursive;
+
+    font-family:
+        'Great Vibes',
+        cursive;
+
     font-size:1.65rem;
+
     margin-top:2px;
+
     margin-bottom:5px;
+
     color:#e83e8c;
+
     line-height:1.1;
+
     flex-shrink:0;
 }
 
 .message-box{
+
     background:#fff8cf;
-    border:2px solid #ff8fbe;
+
+    border:
+        2px solid #ff8fbe;
+
     padding:10px 11px;
+
     border-radius:12px;
+
     margin-bottom:10px;
-    font-family:'Great Vibes',cursive;
-    font-size:clamp(1.15rem,4.8vw,1.35rem);
+
+    font-family:
+        'Great Vibes',
+        cursive;
+
+    font-size:
+        clamp(
+            1.15rem,
+            4.8vw,
+            1.35rem
+        );
+
     color:#d63384;
+
     line-height:1.25;
-    box-shadow:0 4px 12px rgba(255,51,153,.18);
+
+    box-shadow:
+        0 4px 12px
+        rgba(255,51,153,.18);
+
     width:100%;
+
     flex-shrink:0;
 }
 
 .photo-frame{
+
     display:flex;
+
     gap:8px;
+
     justify-content:center;
+
     width:100%;
+
     flex-shrink:0;
 }
 
 .photo-frame img,
 .photo-frame video{
+
     width:46%;
+
     height:135px;
+
     object-fit:cover;
+
     border-radius:8px;
-    border:3px solid #ff72ad;
-    box-shadow:0 5px 12px rgba(214,51,132,.3);
+
+    border:
+        3px solid #ff72ad;
+
+    box-shadow:
+        0 5px 12px
+        rgba(214,51,132,.3);
+
     background:#000;
+
     display:block;
 }
 
 .photo-frame video{
+
     pointer-events:none;
 }
 
 .page-decoration{
+
     color:#ff5ca8;
+
     font-size:18px;
+
     margin-bottom:3px;
+
     flex-shrink:0;
 }
 
@@ -537,38 +802,187 @@ body{
    COEUR FINAL
 ===================================================== */
 
-.heart-grid{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    z-index:2;
+#screen-heart{
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            #180817 0%,
+            #07030a 55%,
+            #000 100%
+        );
+
+    overflow:hidden;
 }
 
-.mini-card{
+.heart-grid{
+
     position:absolute;
+
+    inset:0;
+
+    width:100%;
+
+    height:100%;
+
+    z-index:5;
+
+    pointer-events:none;
+}
+
+
+/* =====================================================
+   FOTO YO
+===================================================== */
+
+.mini-card{
+
+    position:absolute;
+
     width:43px;
+
     height:51px;
-    background:white;
+
+    background:#fff;
+
     padding:2px;
-    border-radius:5px;
-    box-shadow:0 0 8px rgba(255,51,153,.8);
-    transition:transform .5s;
+
+    border-radius:6px;
+
+    box-shadow:
+
+        0 0 7px
+        rgba(255,51,153,.8),
+
+        0 0 16px
+        rgba(255,51,153,.35);
+
     overflow:hidden;
+
+    opacity:0;
+
+    transform:
+        translate(0,0)
+        scale(.15)
+        rotate(0deg);
+
+    transition:
+
+        left 2.5s
+        cubic-bezier(.2,.8,.2,1),
+
+        top 2.5s
+        cubic-bezier(.2,.8,.2,1),
+
+        transform 2.5s
+        cubic-bezier(.2,.8,.2,1),
+
+        opacity .8s ease;
 }
 
 .mini-card img,
 .mini-card video{
+
     width:100%;
+
     height:100%;
+
     object-fit:cover;
-    border-radius:3px;
+
+    border-radius:4px;
+
     display:block;
+
     background:#000;
 }
 
 .mini-card video{
+
     pointer-events:none;
+}
+
+
+/* =====================================================
+   GLOW KÈ A
+===================================================== */
+
+.heart-glow{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    width:80px;
+
+    height:80px;
+
+    transform:
+        translate(-50%,-50%)
+        scale(.2);
+
+    border-radius:50%;
+
+    background:
+        rgba(255,51,153,.4);
+
+    filter:blur(30px);
+
+    opacity:0;
+
+    z-index:2;
+
+    transition:
+        opacity 1.5s ease,
+        transform 2.5s ease;
+}
+
+.heart-glow.show{
+
+    opacity:1;
+
+    transform:
+        translate(-50%,-50%)
+        scale(5);
+}
+
+
+/* =====================================================
+   PARTICULES DU COEUR
+===================================================== */
+
+.heart-particle{
+
+    position:absolute;
+
+    width:4px;
+
+    height:4px;
+
+    border-radius:50%;
+
+    background:#ff5ca8;
+
+    box-shadow:
+
+        0 0 5px #ff5ca8,
+
+        0 0 12px #ff3399;
+
+    opacity:0;
+
+    z-index:3;
+
+    transition:
+        left 2s ease,
+        top 2s ease,
+        opacity 1s ease;
+}
+
+.heart-particle.show{
+
+    opacity:1;
 }
 
 
@@ -577,23 +991,55 @@ body{
 ===================================================== */
 
 .heart-title{
+
     position:absolute;
-    z-index:6;
+
+    z-index:20;
+
     top:7%;
+
     left:0;
+
     right:0;
+
     text-align:center;
-    font-family:'Great Vibes',cursive;
+
+    font-family:
+        'Great Vibes',
+        cursive;
+
     color:#ff79b5;
+
     font-size:2.5rem;
-    text-shadow:0 0 15px #ff3399;
+
+    text-shadow:
+
+        0 0 8px #ff3399,
+
+        0 0 15px #ff3399,
+
+        0 0 30px rgba(255,51,153,.7);
+
     opacity:0;
-    animation:heartTitle 2s ease forwards;
-    animation-delay:1.5s;
+
+    transform:
+        translateY(-20px)
+        scale(.8);
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s ease;
+
+    pointer-events:none;
 }
 
-@keyframes heartTitle{
-    to{opacity:1;}
+.heart-title.show{
+
+    opacity:1;
+
+    transform:
+        translateY(0)
+        scale(1);
 }
 
 
@@ -602,41 +1048,105 @@ body{
 ===================================================== */
 
 .final-signature{
+
     position:absolute;
+
     right:24px;
+
     bottom:22px;
+
     z-index:100;
+
     min-width:90px;
+
     text-align:right;
-    font-family:'Great Vibes',cursive;
+
+    font-family:
+        'Great Vibes',
+        cursive;
+
     font-size:2.25rem;
+
     font-weight:400;
+
     color:#fff;
+
     letter-spacing:1px;
+
     white-space:nowrap;
-    opacity:1;
+
+    opacity:0;
+
+    transform:
+        translateY(15px);
+
     pointer-events:none;
+
     text-shadow:
-        0 0 5px rgba(255,255,255,.95),
-        0 0 10px rgba(255,255,255,.9),
-        0 0 18px rgba(255,120,200,.9),
-        0 0 30px rgba(255,80,170,.65);
-    animation:signatureGlow 2s ease-in-out infinite alternate;
+
+        0 0 5px
+        rgba(255,255,255,.95),
+
+        0 0 10px
+        rgba(255,255,255,.9),
+
+        0 0 18px
+        rgba(255,120,200,.9),
+
+        0 0 30px
+        rgba(255,80,170,.65);
+
+    transition:
+
+        opacity 1s ease,
+
+        transform 1s ease;
+
+    animation:
+        signatureGlow
+        2s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+.final-signature.show{
+
+    opacity:1;
+
+    transform:
+        translateY(0);
 }
 
 @keyframes signatureGlow{
+
     0%{
+
         text-shadow:
-            0 0 4px rgba(255,255,255,.8),
-            0 0 9px rgba(255,255,255,.7),
-            0 0 15px rgba(255,120,200,.6);
+
+            0 0 4px
+            rgba(255,255,255,.8),
+
+            0 0 9px
+            rgba(255,255,255,.7),
+
+            0 0 15px
+            rgba(255,120,200,.6);
     }
+
     100%{
+
         text-shadow:
+
             0 0 6px #fff,
+
             0 0 13px #fff,
-            0 0 22px rgba(255,120,200,1),
-            0 0 35px rgba(255,80,170,.8);
+
+            0 0 22px
+            rgba(255,120,200,1),
+
+            0 0 35px
+            rgba(255,80,170,.8);
     }
 }
 
@@ -646,87 +1156,144 @@ body{
 ===================================================== */
 
 .star-field{
+
     position:absolute;
+
     inset:0;
+
     width:100%;
+
     height:100%;
-    z-index:4;
+
+    z-index:10;
+
     pointer-events:none;
+
     overflow:hidden;
 }
 
 .real-star{
+
     position:absolute;
+
     border-radius:50%;
+
     background:#fff;
+
     opacity:0;
+
     transform:scale(0);
+
     box-shadow:
+
         0 0 4px #fff,
-        0 0 9px rgba(255,255,255,.95),
-        0 0 17px rgba(255,210,245,.9);
+
+        0 0 9px
+        rgba(255,255,255,.95),
+
+        0 0 17px
+        rgba(255,210,245,.9);
 }
 
 .real-star::before,
 .real-star::after{
+
     content:"";
+
     position:absolute;
+
     left:50%;
+
     top:50%;
-    transform:translate(-50%,-50%);
+
+    transform:
+        translate(-50%,-50%);
+
     border-radius:50%;
 }
 
 .real-star::before{
+
     width:2px;
+
     height:24px;
-    background:linear-gradient(
-        to bottom,
-        transparent,
-        #fff,
-        transparent
-    );
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent,
+            #fff,
+            transparent
+        );
 }
 
 .real-star::after{
+
     width:24px;
+
     height:2px;
-    background:linear-gradient(
-        to right,
-        transparent,
-        #fff,
-        transparent
-    );
+
+    background:
+        linear-gradient(
+            to right,
+            transparent,
+            #fff,
+            transparent
+        );
 }
 
 .real-star.lit{
+
     animation:
-        starAppear .7s ease-out forwards,
-        starTwinkle 2.5s ease-in-out .7s infinite alternate;
+
+        starAppear .7s
+        ease-out
+        forwards,
+
+        starTwinkle 2.5s
+        ease-in-out
+        .7s
+        infinite
+        alternate;
 }
 
 @keyframes starAppear{
+
     0%{
+
         opacity:0;
+
         transform:scale(0);
     }
+
     60%{
+
         opacity:1;
+
         transform:scale(1.35);
     }
+
     100%{
+
         opacity:1;
+
         transform:scale(1);
     }
 }
 
 @keyframes starTwinkle{
+
     0%{
+
         filter:brightness(.75);
+
         transform:scale(.85);
     }
+
     100%{
+
         filter:brightness(2);
+
         transform:scale(1.2);
     }
 }
@@ -739,127 +1306,170 @@ body{
 @media(max-width:380px){
 
     .book{
+
         width:86vw;
+
         height:72vh;
     }
 
     .cover-title{
+
         font-size:3rem;
     }
 
     .cover-front{
+
         padding:28px 20px;
     }
 
     .cover-front::after{
+
         inset:15px;
     }
 
     .cover-front > div::before{
+
         top:5px;
     }
 
     .cover-front > div::after{
+
         top:42px;
+
         font-size:13px;
     }
 
     .cover-subtitle{
+
         font-size:.72rem;
+
         letter-spacing:1.5px;
     }
 
     .page{
+
         padding:8px 12px;
     }
 
     .page-number{
+
         font-size:1.5rem;
+
         margin-top:0;
+
         margin-bottom:4px;
     }
 
     .message-box{
+
         font-size:1.08rem;
+
         line-height:1.2;
+
         padding:8px 9px;
+
         margin-bottom:8px;
     }
 
     .photo-frame img,
     .photo-frame video{
+
         height:125px;
     }
 
     .page-decoration{
+
         font-size:16px;
+
         margin-bottom:2px;
     }
 
     .mini-card{
+
         width:38px;
+
         height:46px;
     }
 
     .heart-title{
+
         font-size:2.2rem;
     }
 
     .final-signature{
+
         right:18px;
+
         bottom:16px;
+
         font-size:1.9rem;
+
         min-width:75px;
     }
 
     .birthday-title{
-        font-size:clamp(1.15rem,6vw,1.7rem);
+
+        font-size:
+            clamp(
+                1.15rem,
+                6vw,
+                1.7rem
+            );
+
         gap:5px;
     }
 
     .flower{
+
         font-size:1.35rem;
     }
 
     .real-star::before{
+
         height:18px;
     }
 
     .real-star::after{
-        width:18px;
-    }
 
-    #musicButton{
-        font-size:.9rem;
-        padding:13px 21px;
+        width:18px;
     }
 }
 
 @media(min-width:381px) and (max-width:600px){
 
     .page{
+
         padding:10px 14px;
     }
 
     .page-number{
+
         font-size:1.6rem;
+
         margin-top:1px;
+
         margin-bottom:5px;
     }
 
     .message-box{
+
         font-size:1.2rem;
+
         line-height:1.23;
+
         padding:9px 10px;
+
         margin-bottom:9px;
     }
 
     .photo-frame img,
     .photo-frame video{
+
         height:140px;
     }
 
     .page-decoration{
+
         font-size:17px;
     }
 }
@@ -871,32 +1481,22 @@ body{
 
 
 <!-- =====================================================
-     MIZIK
-===================================================== -->
-
-<audio
-    id="backgroundMusic"
-    preload="auto"
-    loop
-    playsinline
->
-    <source src="./dandelions.mp3" type="audio/mpeg">
-</audio>
-
-<button id="musicButton">
-    🎵 ACTIVER LA MUSIQUE
-</button>
-
-
-<!-- =====================================================
      MATRIX
 ===================================================== -->
 
-<div id="screen-matrix" class="screen active">
+<div
+    id="screen-matrix"
+    class="screen active"
+>
 
-    <canvas id="matrix-canvas"></canvas>
+    <canvas
+        id="matrix-canvas"
+    ></canvas>
 
-    <div class="matrix-text" id="matrix-text">
+    <div
+        class="matrix-text"
+        id="matrix-text"
+    >
         3
     </div>
 
@@ -907,7 +1507,10 @@ body{
      CHAT
 ===================================================== -->
 
-<div id="screen-cat" class="screen">
+<div
+    id="screen-cat"
+    class="screen"
+>
 
     <div class="stars-bg"></div>
 
@@ -921,13 +1524,17 @@ body{
 
         <div class="birthday-title">
 
-            <span class="flower">🌸</span>
+            <span class="flower">
+                🌸
+            </span>
 
             <span>
                 HAPPY BIRTHDAY TO OUR LOVES
             </span>
 
-            <span class="flower">🌸</span>
+            <span class="flower">
+                🌸
+            </span>
 
         </div>
 
@@ -940,9 +1547,14 @@ body{
      FEU D'ARTIFICE
 ===================================================== -->
 
-<div id="fireworks-screen" class="screen">
+<div
+    id="fireworks-screen"
+    class="screen"
+>
 
-    <canvas id="fireworks-canvas"></canvas>
+    <canvas
+        id="fireworks-canvas"
+    ></canvas>
 
 </div>
 
@@ -951,13 +1563,19 @@ body{
      LIVRE
 ===================================================== -->
 
-<div id="screen-card" class="screen">
+<div
+    id="screen-card"
+    class="screen"
+>
 
     <div class="stars-bg"></div>
 
     <div class="book-area">
 
-        <div class="book" id="book">
+        <div
+            class="book"
+            id="book"
+        >
 
             <div class="book-inside"></div>
 
@@ -968,7 +1586,10 @@ body{
                      PAGE 1
                 ========================== -->
 
-                <div class="page" id="page1">
+                <div
+                    class="page"
+                    id="page1"
+                >
 
                     <div class="page-content">
 
@@ -1018,7 +1639,10 @@ body{
                      PAGE 2
                 ========================== -->
 
-                <div class="page" id="page2">
+                <div
+                    class="page"
+                    id="page2"
+                >
 
                     <div class="page-content">
 
@@ -1071,7 +1695,10 @@ body{
                      PAGE 3
                 ========================== -->
 
-                <div class="page" id="page3">
+                <div
+                    class="page"
+                    id="page3"
+                >
 
                     <div class="page-content">
 
@@ -1119,7 +1746,10 @@ body{
                      PAGE 4
                 ========================== -->
 
-                <div class="page" id="page4">
+                <div
+                    class="page"
+                    id="page4"
+                >
 
                     <div class="page-content">
 
@@ -1178,7 +1808,10 @@ body{
                  KOUVÈTI
             ================================================== -->
 
-            <div class="book-cover" id="bookCover">
+            <div
+                class="book-cover"
+                id="bookCover"
+            >
 
                 <div class="cover-front">
 
@@ -1213,9 +1846,17 @@ body{
      COEUR FINAL
 ===================================================== -->
 
-<div id="screen-heart" class="screen">
+<div
+    id="screen-heart"
+    class="screen"
+>
 
     <div class="stars-bg"></div>
+
+    <div
+        class="heart-glow"
+        id="heartGlow"
+    ></div>
 
     <div
         class="heart-grid"
@@ -1227,7 +1868,10 @@ body{
         id="starField"
     ></div>
 
-    <div class="heart-title">
+    <div
+        class="heart-title"
+        id="heartTitle"
+    >
         Mon chef-d’œuvre ❤️
     </div>
 
@@ -1243,63 +1887,17 @@ body{
 
 
 /* =====================================================
-   MUSIQUE
-===================================================== */
-
-const backgroundMusic =
-    document.getElementById("backgroundMusic");
-
-const musicButton =
-    document.getElementById("musicButton");
-
-backgroundMusic.volume = 0.55;
-
-musicButton.addEventListener(
-    "click",
-    async function(){
-
-        try{
-
-            backgroundMusic.load();
-
-            await backgroundMusic.play();
-
-            musicButton.classList.add("hidden");
-
-        }catch(error){
-
-            console.error(
-                "Impossible de lancer la musique :",
-                error
-            );
-
-            alert(
-                "La musique ne peut pas démarrer. Vérifie que dandelions.mp3 est bien dans ton projet."
-            );
-        }
-
-    }
-);
-
-backgroundMusic.addEventListener(
-    "playing",
-    function(){
-
-        musicButton.classList.add("hidden");
-
-    }
-);
-
-
-/* =====================================================
    MATRIX
 ===================================================== */
 
 const canvas =
-    document.getElementById("matrix-canvas");
+    document.getElementById(
+        "matrix-canvas"
+    );
 
 const ctx =
     canvas.getContext("2d");
+
 
 function resizeMatrix(){
 
@@ -1310,7 +1908,9 @@ function resizeMatrix(){
         window.innerHeight;
 }
 
+
 resizeMatrix();
+
 
 const characters =
     "HAPPYBIRTHDAYTOOURLOVES321🧸❤️";
@@ -1319,23 +1919,26 @@ const fontSize = 16;
 
 let columns =
     Math.floor(
-        canvas.width / fontSize
+        canvas.width /
+        fontSize
     );
 
 let drops = [];
+
 
 function resetDrops(){
 
     columns =
         Math.floor(
-            canvas.width / fontSize
+            canvas.width /
+            fontSize
         );
 
     drops = [];
 
     for(
-        let i = 0;
-        i < columns;
+        let i=0;
+        i<columns;
         i++
     ){
 
@@ -1344,7 +1947,9 @@ function resetDrops(){
     }
 }
 
+
 resetDrops();
+
 
 function drawMatrix(){
 
@@ -1362,11 +1967,13 @@ function drawMatrix(){
         "#ff3399";
 
     ctx.font =
-        fontSize + "px monospace";
+        fontSize +
+        "px monospace";
+
 
     for(
-        let i = 0;
-        i < drops.length;
+        let i=0;
+        i<drops.length;
         i++
     ){
 
@@ -1384,10 +1991,14 @@ function drawMatrix(){
             drops[i] * fontSize
         );
 
+
         if(
+
             drops[i] * fontSize >
             canvas.height &&
+
             Math.random() > .975
+
         ){
 
             drops[i] = 0;
@@ -1398,6 +2009,7 @@ function drawMatrix(){
 
     }
 }
+
 
 let matrixInterval =
     setInterval(
@@ -1411,27 +2023,39 @@ let matrixInterval =
 ===================================================== */
 
 const textElement =
-    document.getElementById("matrix-text");
+    document.getElementById(
+        "matrix-text"
+    );
+
 
 const sequence = [
 
     "3",
+
     "2",
+
     "1",
+
     "HAPPY",
+
     "BIRTHDAY",
+
     "TO",
+
     "OUR LOVES ❤️"
 
 ];
 
+
 let seqIndex = 0;
+
 
 let seqTimer =
     setInterval(
         () => {
 
             seqIndex++;
+
 
             if(
                 seqIndex <
@@ -1441,20 +2065,29 @@ let seqTimer =
                 textElement.innerText =
                     sequence[seqIndex];
 
-            }else{
+            }
 
-                clearInterval(seqTimer);
+            else{
 
-                clearInterval(matrixInterval);
+                clearInterval(
+                    seqTimer
+                );
+
+                clearInterval(
+                    matrixInterval
+                );
+
 
                 switchScreen(
                     "screen-cat"
                 );
 
+
                 setTimeout(
                     startFireworks,
                     4000
                 );
+
             }
 
         },
@@ -1466,18 +2099,27 @@ let seqTimer =
    CHANGER D'ECRAN
 ===================================================== */
 
-function switchScreen(screenId){
+function switchScreen(
+    screenId
+){
 
     document
-        .querySelectorAll(".screen")
+        .querySelectorAll(
+            ".screen"
+        )
         .forEach(
             screen =>
-                screen.classList.remove("active")
+                screen.classList
+                    .remove("active")
         );
 
+
     document
-        .getElementById(screenId)
-        .classList.add("active");
+        .getElementById(
+            screenId
+        )
+        .classList
+        .add("active");
 }
 
 
@@ -1491,13 +2133,17 @@ const fireworksCanvas =
     );
 
 const fireworksCtx =
-    fireworksCanvas.getContext("2d");
+    fireworksCanvas.getContext(
+        "2d"
+    );
+
 
 let fireworksAnimation = null;
 
 let fireworksParticles = [];
 
 let fireworksRockets = [];
+
 
 function resizeFireworks(){
 
@@ -1508,87 +2154,134 @@ function resizeFireworks(){
         window.innerHeight;
 }
 
+
 resizeFireworks();
 
 
 class FireworkParticle{
 
-    constructor(x,y,color){
+    constructor(
+        x,
+        y,
+        color
+    ){
 
         this.x = x;
+
         this.y = y;
+
 
         const angle =
             Math.random() *
             Math.PI *
             2;
 
+
         const speed =
-            Math.random() * 5 + 2;
+            Math.random() *
+            5 + 2;
+
 
         this.vx =
-            Math.cos(angle) * speed;
+            Math.cos(angle) *
+            speed;
+
 
         this.vy =
-            Math.sin(angle) * speed;
+            Math.sin(angle) *
+            speed;
+
 
         this.gravity = .045;
 
         this.life = 1;
 
+
         this.decay =
-            Math.random() * .012 + .008;
+            Math.random() *
+            .012 + .008;
+
 
         this.size =
-            Math.random() * 2.5 + 1;
+            Math.random() *
+            2.5 + 1;
 
-        this.color = color;
+
+        this.color =
+            color;
     }
+
 
     update(){
 
-        this.x += this.vx;
+        this.x +=
+            this.vx;
 
-        this.y += this.vy;
+        this.y +=
+            this.vy;
 
-        this.vy += this.gravity;
+        this.vy +=
+            this.gravity;
 
-        this.vx *= .985;
+        this.vx *=
+            .985;
 
-        this.vy *= .985;
+        this.vy *=
+            .985;
 
-        this.life -= this.decay;
+        this.life -=
+            this.decay;
     }
+
 
     draw(){
 
         fireworksCtx.save();
 
+
         fireworksCtx.globalAlpha =
-            Math.max(this.life,0);
+            Math.max(
+                this.life,
+                0
+            );
+
 
         fireworksCtx.fillStyle =
             this.color;
 
-        fireworksCtx.shadowBlur = 12;
+
+        fireworksCtx.shadowBlur =
+            12;
+
 
         fireworksCtx.shadowColor =
             this.color;
 
+
         fireworksCtx.beginPath();
 
+
         fireworksCtx.arc(
+
             this.x,
+
             this.y,
+
             this.size,
+
             0,
+
             Math.PI * 2
+
         );
+
 
         fireworksCtx.fill();
 
+
         fireworksCtx.restore();
     }
+
 }
 
 
@@ -1600,52 +2293,78 @@ class FireworkRocket{
             Math.random() *
             fireworksCanvas.width;
 
+
         this.y =
-            fireworksCanvas.height + 10;
+            fireworksCanvas.height +
+            10;
+
 
         this.targetY =
+
             Math.random() *
             fireworksCanvas.height *
             .45 +
+
             fireworksCanvas.height *
             .12;
 
+
         this.speed =
-            Math.random() * 5 + 8;
+            Math.random() *
+            5 + 8;
+
 
         this.color =
             getFireworkColor();
 
-        this.exploded = false;
+
+        this.exploded =
+            false;
     }
+
 
     update(){
 
-        this.y -= this.speed;
+        this.y -=
+            this.speed;
 
-        this.speed *= .985;
+        this.speed *=
+            .985;
+
 
         if(
-            this.y <= this.targetY &&
+
+            this.y <=
+            this.targetY &&
+
             !this.exploded
+
         ){
 
             this.explode();
 
-            this.exploded = true;
+            this.exploded =
+                true;
 
             return true;
         }
 
+
         return false;
     }
+
 
     explode(){
 
         const particleCount =
+
             Math.floor(
-                Math.random() * 35 + 65
+
+                Math.random() *
+                35 + 65
+
             );
+
 
         for(
             let i=0;
@@ -1654,42 +2373,64 @@ class FireworkRocket{
         ){
 
             fireworksParticles.push(
+
                 new FireworkParticle(
+
                     this.x,
+
                     this.y,
+
                     this.color
+
                 )
+
             );
 
         }
     }
 
+
     draw(){
 
         fireworksCtx.save();
 
+
         fireworksCtx.fillStyle =
             this.color;
 
-        fireworksCtx.shadowBlur = 10;
+
+        fireworksCtx.shadowBlur =
+            10;
+
 
         fireworksCtx.shadowColor =
             this.color;
 
+
         fireworksCtx.beginPath();
 
+
         fireworksCtx.arc(
+
             this.x,
+
             this.y,
+
             2,
+
             0,
+
             Math.PI * 2
+
         );
+
 
         fireworksCtx.fill();
 
+
         fireworksCtx.restore();
     }
+
 }
 
 
@@ -1698,103 +2439,158 @@ function getFireworkColor(){
     const colors = [
 
         "#ff3399",
+
         "#ff5ca8",
+
         "#ffd94d",
+
         "#fff176",
+
         "#ff6b6b",
+
         "#9c7cff",
+
         "#5ce1e6",
+
         "#ffffff"
 
     ];
 
+
     return colors[
+
         Math.floor(
+
             Math.random() *
             colors.length
+
         )
+
     ];
 }
 
 
 let lastRocketTime = 0;
 
-function animateFireworks(time){
+
+function animateFireworks(
+    time
+){
 
     fireworksCtx.clearRect(
+
         0,
+
         0,
+
         fireworksCanvas.width,
+
         fireworksCanvas.height
+
     );
 
+
     if(
-        time - lastRocketTime > 450
+
+        time -
+        lastRocketTime >
+        450
+
     ){
 
         fireworksRockets.push(
+
             new FireworkRocket()
+
         );
 
-        lastRocketTime = time;
+        lastRocketTime =
+            time;
     }
 
+
     for(
+
         let i =
             fireworksRockets.length - 1;
+
         i >= 0;
+
         i--
+
     ){
 
         const rocket =
             fireworksRockets[i];
 
+
         const exploded =
             rocket.update();
+
 
         if(!exploded){
 
             rocket.draw();
 
-        }else{
+        }
+
+        else{
 
             fireworksRockets.splice(
+
                 i,
+
                 1
+
             );
 
         }
+
     }
 
+
     for(
+
         let i =
             fireworksParticles.length - 1;
+
         i >= 0;
+
         i--
+
     ){
 
         const particle =
             fireworksParticles[i];
 
+
         particle.update();
 
         particle.draw();
+
 
         if(
             particle.life <= 0
         ){
 
             fireworksParticles.splice(
+
                 i,
+
                 1
+
             );
 
         }
+
     }
+
 
     fireworksAnimation =
         requestAnimationFrame(
+
             animateFireworks
+
         );
 }
 
@@ -1805,30 +2601,41 @@ function startFireworks(){
 
     fireworksParticles = [];
 
+
     switchScreen(
         "fireworks-screen"
     );
 
+
     lastRocketTime = 0;
+
 
     fireworksAnimation =
         requestAnimationFrame(
+
             animateFireworks
+
         );
 
+
     setTimeout(
+
         () => {
 
             stopFireworks();
+
 
             switchScreen(
                 "screen-card"
             );
 
+
             startBookAnimation();
 
         },
+
         4000
+
     );
 }
 
@@ -1843,18 +2650,26 @@ function stopFireworks(){
             fireworksAnimation
         );
 
-        fireworksAnimation = null;
+        fireworksAnimation =
+            null;
     }
+
 
     fireworksRockets = [];
 
     fireworksParticles = [];
 
+
     fireworksCtx.clearRect(
+
         0,
+
         0,
+
         fireworksCanvas.width,
+
         fireworksCanvas.height
+
     );
 }
 
@@ -1866,109 +2681,170 @@ function stopFireworks(){
 function startBookAnimation(){
 
     const book =
-        document.getElementById("book");
+        document.getElementById(
+            "book"
+        );
+
 
     const page1 =
-        document.getElementById("page1");
+        document.getElementById(
+            "page1"
+        );
+
 
     const page2 =
-        document.getElementById("page2");
+        document.getElementById(
+            "page2"
+        );
+
 
     const page3 =
-        document.getElementById("page3");
+        document.getElementById(
+            "page3"
+        );
+
 
     const page4 =
-        document.getElementById("page4");
+        document.getElementById(
+            "page4"
+        );
 
 
-    book.classList.remove("open");
+    book.classList.remove(
+        "open"
+    );
 
-    book.classList.remove("closing");
+    book.classList.remove(
+        "closing"
+    );
 
-    page1.classList.remove("flipped");
 
-    page2.classList.remove("flipped");
+    page1.classList.remove(
+        "flipped"
+    );
 
-    page3.classList.remove("flipped");
+    page2.classList.remove(
+        "flipped"
+    );
 
-    page4.classList.remove("flipped");
+    page3.classList.remove(
+        "flipped"
+    );
+
+    page4.classList.remove(
+        "flipped"
+    );
 
 
     setTimeout(
+
         () => {
 
-            book.classList.add("open");
+            book.classList.add(
+                "open"
+            );
 
         },
+
         3000
+
     );
 
 
     setTimeout(
+
         () => {
 
-            page1.classList.add("flipped");
+            page1.classList.add(
+                "flipped"
+            );
 
         },
+
         8000
+
     );
 
 
     setTimeout(
+
         () => {
 
-            page2.classList.add("flipped");
+            page2.classList.add(
+                "flipped"
+            );
 
         },
+
         13000
+
     );
 
 
     setTimeout(
+
         () => {
 
-            page3.classList.add("flipped");
+            page3.classList.add(
+                "flipped"
+            );
 
         },
+
         20000
+
     );
 
 
     setTimeout(
+
         () => {
 
-            page4.classList.add("flipped");
+            page4.classList.add(
+                "flipped"
+            );
 
         },
+
         27000
+
     );
 
 
     setTimeout(
+
         () => {
 
-            book.classList.add("closing");
+            book.classList.add(
+                "closing"
+            );
 
         },
+
         28500
+
     );
 
 
     setTimeout(
+
         () => {
 
             switchScreen(
                 "screen-heart"
             );
 
+
             createHeartFormation();
+
 
             createRealStars();
 
-            animateFinalSignature();
 
         },
+
         31500
+
     );
 }
 
@@ -1981,78 +2857,107 @@ const allMedia = [
 
     {
         type:"image",
-        src:"WhatsApp Image 2026-10-07 at 7.59.07 AM (1).jpeg"
+
+        src:
+        "WhatsApp Image 2026-10-07 at 7.59.07 AM (1).jpeg"
     },
 
     {
         type:"image",
-        src:"WhatsApp Image 2026-10-07 at 7.59.11 AM (1).jpeg"
+
+        src:
+        "WhatsApp Image 2026-10-07 at 7.59.11 AM (1).jpeg"
     },
 
     {
         type:"image",
-        src:"WhatsApp Image 2026-10-07 at 7.59.11 AM.jpeg"
+
+        src:
+        "WhatsApp Image 2026-10-07 at 7.59.11 AM.jpeg"
     },
 
     {
         type:"image",
-        src:"WhatsApp Image 2026-10-07 at 7.59.12 AM (1).jpeg"
+
+        src:
+        "WhatsApp Image 2026-10-07 at 7.59.12 AM (1).jpeg"
     },
 
     {
         type:"image",
-        src:"WhatsApp Image 2026-10-07 at 7.59.12 AM (2).jpeg"
+
+        src:
+        "WhatsApp Image 2026-10-07 at 7.59.12 AM (2).jpeg"
     },
 
     {
         type:"image",
-        src:"WhatsApp Image 2026-10-07 at 9.41.07 AM.jpeg"
-    },
 
-
-    {
-        type:"video",
-        src:"WhatsApp Video 2026-10-07 at 7.59.07 AM (1).mp4"
+        src:
+        "WhatsApp Image 2026-10-07 at 9.41.07 AM.jpeg"
     },
 
     {
         type:"video",
-        src:"WhatsApp Video 2026-10-07 at 7.59.07 AM (2).mp4"
+
+        src:
+        "WhatsApp Video 2026-10-07 at 7.59.07 AM (1).mp4"
     },
 
     {
         type:"video",
-        src:"WhatsApp Video 2026-10-07 at 7.59.07 AM.mp4"
+
+        src:
+        "WhatsApp Video 2026-10-07 at 7.59.07 AM (2).mp4"
     },
 
     {
         type:"video",
-        src:"WhatsApp Video 2026-10-07 at 7.59.08 AM (3).mp4"
+
+        src:
+        "WhatsApp Video 2026-10-07 at 7.59.07 AM.mp4"
     },
 
     {
         type:"video",
-        src:"WhatsApp Video 2026-10-07 at 7.59.08 AM.mp4"
+
+        src:
+        "WhatsApp Video 2026-10-07 at 7.59.08 AM (3).mp4"
     },
 
     {
         type:"video",
-        src:"WhatsApp Video 2026-10-07 at 7.59.11 AM (1).mp4"
+
+        src:
+        "WhatsApp Video 2026-10-07 at 7.59.08 AM.mp4"
     },
 
     {
         type:"video",
-        src:"WhatsApp Video 2026-10-07 at 7.59.11 AM (4).mp4"
+
+        src:
+        "WhatsApp Video 2026-10-07 at 7.59.11 AM (1).mp4"
     },
 
     {
         type:"video",
-        src:"WhatsApp Video 2026-10-07 at 7.59.11 AM (7).mp4"
+
+        src:
+        "WhatsApp Video 2026-10-07 at 7.59.11 AM (4).mp4"
     },
 
     {
         type:"video",
-        src:"WhatsApp Video 2026-10-07 at 7.59.11 AM.mp4"
+
+        src:
+        "WhatsApp Video 2026-10-07 at 7.59.11 AM (7).mp4"
+    },
+
+    {
+        type:"video",
+
+        src:
+        "WhatsApp Video 2026-10-07 at 7.59.11 AM.mp4"
     }
 
 ];
@@ -2062,48 +2967,68 @@ const allMedia = [
    KREYE MEDIA
 ===================================================== */
 
-function createMediaElement(media){
+function createMediaElement(
+    media
+){
 
     if(
         media.type === "video"
     ){
 
         const video =
-            document.createElement("video");
+            document.createElement(
+                "video"
+            );
+
 
         video.src =
             media.src;
 
-        video.autoplay = true;
 
-        video.muted = true;
+        video.autoplay =
+            true;
 
-        video.loop = true;
 
-        video.playsInline = true;
+        video.muted =
+            true;
 
-        video.preload = "metadata";
+
+        video.loop =
+            true;
+
+
+        video.playsInline =
+            true;
+
+
+        video.preload =
+            "metadata";
+
 
         return video;
-
     }
 
 
     const img =
-        document.createElement("img");
+        document.createElement(
+            "img"
+        );
+
 
     img.src =
         media.src;
 
+
     img.alt =
         "Photo";
+
 
     return img;
 }
 
 
 /* =====================================================
-   KÈ FINAL AK 15 MEDIA YO
+   KÈ FINAL ANIME
 ===================================================== */
 
 function createHeartFormation(){
@@ -2113,68 +3038,461 @@ function createHeartFormation(){
             "heartGrid"
         );
 
+
+    const glow =
+        document.getElementById(
+            "heartGlow"
+        );
+
+
+    const title =
+        document.getElementById(
+            "heartTitle"
+        );
+
+
+    const signature =
+        document.getElementById(
+            "finalSignature"
+        );
+
+
     container.innerHTML = "";
 
+
+    title.classList.remove(
+        "show"
+    );
+
+
+    signature.classList.remove(
+        "show"
+    );
+
+
     /*
-       Nou mete 15 cards.
-       Chak fichye parèt yon sèl fwa.
+       Sou ekran final la,
+       kè a dwe rete vizib.
     */
 
-    const numCards =
-        allMedia.length;
+    const isSmall =
+        window.innerWidth <= 380;
+
 
     const cardWidth =
-        window.innerWidth <= 380
+        isSmall
         ? 38
         : 43;
 
+
     const cardHeight =
-        window.innerWidth <= 380
+        isSmall
         ? 46
         : 51;
 
 
     /*
-       Scale pou kè a pa soti
-       deyò ekran telefòn nan.
+       Nou adapte gwosè kè a
+       selon telefòn nan.
     */
 
-    const heartScale =
+    const scale =
+
         Math.min(
 
             window.innerWidth / 38,
 
-            window.innerHeight / 48,
+            window.innerHeight / 49,
 
-            10
+            9.5
 
         );
 
 
     const centerX =
-        (window.innerWidth / 2) -
-        (cardWidth / 2);
+
+        window.innerWidth / 2 -
+        cardWidth / 2;
 
 
     const centerY =
-        (window.innerHeight / 2) -
-        (cardHeight / 2) -
-        (6 * heartScale);
+
+        window.innerHeight / 2 -
+        cardHeight / 2 -
+        5;
+
+
+    /*
+       Nou kreye ti patikil yo
+       an premye.
+    */
+
+    createHeartParticles(
+        centerX,
+        centerY,
+        scale
+    );
+
+
+    /*
+       Création des 15 photos.
+    */
+
+    allMedia.forEach(
+
+        (media,index) => {
+
+            const t =
+
+                (index /
+                allMedia.length) *
+                Math.PI * 2;
+
+
+            /*
+               Fòm matematik kè.
+            */
+
+            const heartX =
+
+                16 *
+                Math.pow(
+                    Math.sin(t),
+                    3
+                );
+
+
+            const heartY =
+
+                -(
+                    13 *
+                    Math.cos(t)
+
+                    -
+
+                    5 *
+                    Math.cos(
+                        2 * t
+                    )
+
+                    -
+
+                    2 *
+                    Math.cos(
+                        3 * t
+                    )
+
+                    -
+
+                    Math.cos(
+                        4 * t
+                    )
+                );
+
+
+            const finalX =
+
+                centerX +
+                heartX * scale;
+
+
+            const finalY =
+
+                centerY +
+                heartY * scale;
+
+
+            const card =
+
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "mini-card";
+
+
+            /*
+               Chaque photo commence
+               à un endroit différent
+               autour de l'écran.
+            */
+
+            const startAngle =
+
+                Math.random() *
+                Math.PI * 2;
+
+
+            const distance =
+
+                Math.max(
+                    window.innerWidth,
+                    window.innerHeight
+                ) * .55;
+
+
+            const startX =
+
+                window.innerWidth / 2
+                +
+
+                Math.cos(
+                    startAngle
+                ) * distance;
+
+
+            const startY =
+
+                window.innerHeight / 2
+                +
+
+                Math.sin(
+                    startAngle
+                ) * distance;
+
+
+            card.style.left =
+                startX + "px";
+
+
+            card.style.top =
+                startY + "px";
+
+
+            card.style.transform =
+
+                `
+                scale(.15)
+                rotate(${Math.random()*120-60}deg)
+                `;
+
+
+            card.style.opacity = "0";
+
+
+            const mediaElement =
+                createMediaElement(
+                    media
+                );
+
+
+            card.appendChild(
+                mediaElement
+            );
+
+
+            container.appendChild(
+                card
+            );
+
+
+            /*
+               Nou kite yon ti moman
+               avan chak foto antre.
+            */
+
+            setTimeout(
+
+                () => {
+
+                    card.style.opacity =
+                        "1";
+
+
+                    card.style.left =
+                        finalX + "px";
+
+
+                    card.style.top =
+                        finalY + "px";
+
+
+                    card.style.transform =
+
+                        `
+                        scale(1)
+                        rotate(${Math.random()*12-6}deg)
+                        `;
+
+
+                    if(
+                        media.type ===
+                        "video"
+                    ){
+
+                        mediaElement
+                            .play()
+                            .catch(
+                                () => {}
+                            );
+
+                    }
+
+                },
+
+                450 +
+                index * 170
+
+            );
+
+        }
+
+    );
+
+
+    /*
+       Glow la kòmanse apre
+       kèk foto fin antre.
+    */
+
+    setTimeout(
+
+        () => {
+
+            glow.classList.add(
+                "show"
+            );
+
+        },
+
+        900
+
+    );
+
+
+    /*
+       Apre tout foto yo fòme kè a,
+       tit la parèt.
+    */
+
+    setTimeout(
+
+        () => {
+
+            title.classList.add(
+                "show"
+            );
+
+        },
+
+        3500
+
+    );
+
+
+    /*
+       Signature la parèt anreta.
+    */
+
+    setTimeout(
+
+        () => {
+
+            animateFinalSignature();
+
+        },
+
+        4200
+
+    );
+}
+
+
+/* =====================================================
+   PATIKIL KÈ
+===================================================== */
+
+function createHeartParticles(
+    centerX,
+    centerY,
+    scale
+){
+
+    const container =
+        document.getElementById(
+            "heartGrid"
+        );
+
+
+    const particleCount = 45;
 
 
     for(
         let i=0;
-        i<numCards;
+        i<particleCount;
         i++
     ){
 
+        const particle =
+            document.createElement(
+                "span"
+            );
+
+
+        particle.className =
+            "heart-particle";
+
+
+        const angle =
+            Math.random() *
+            Math.PI * 2;
+
+
+        const distance =
+
+            Math.random() *
+            Math.max(
+                window.innerWidth,
+                window.innerHeight
+            );
+
+
+        const startX =
+
+            window.innerWidth / 2
+            +
+
+            Math.cos(angle) *
+            distance;
+
+
+        const startY =
+
+            window.innerHeight / 2
+            +
+
+            Math.sin(angle) *
+            distance;
+
+
+        particle.style.left =
+            startX + "px";
+
+
+        particle.style.top =
+            startY + "px";
+
+
+        container.appendChild(
+            particle
+        );
+
+
+        /*
+           Patikil yo ale nan
+           diferan pwen sou kè a.
+        */
+
         const t =
-            (i / numCards) *
-            Math.PI *
-            2;
+
+            Math.random() *
+            Math.PI * 2;
 
 
-        const x =
+        const heartX =
+
             16 *
             Math.pow(
                 Math.sin(t),
@@ -2182,7 +3500,8 @@ function createHeartFormation(){
             );
 
 
-        const y =
+        const heartY =
+
             -(
                 13 *
                 Math.cos(t)
@@ -2209,72 +3528,43 @@ function createHeartFormation(){
             );
 
 
-        const posX =
+        const finalX =
+
             centerX +
-            x *
-            heartScale;
+            heartX * scale;
 
 
-        const posY =
+        const finalY =
+
             centerY +
-            y *
-            heartScale;
+            heartY * scale;
 
 
-        const card =
-            document.createElement(
-                "div"
-            );
+        setTimeout(
 
-        card.className =
-            "mini-card";
+            () => {
 
-
-        card.style.left =
-            posX + "px";
-
-
-        card.style.top =
-            posY + "px";
-
-
-        /*
-           Chak card pran youn
-           nan 15 media yo.
-        */
-
-        const mediaElement =
-            createMediaElement(
-                allMedia[i]
-            );
-
-
-        card.appendChild(
-            mediaElement
-        );
-
-
-        container.appendChild(
-            card
-        );
-
-
-        /*
-           Fòse videyo a jwe.
-        */
-
-        if(
-            allMedia[i].type === "video"
-        ){
-
-            mediaElement.play()
-                .catch(
-                    () => {}
+                particle.classList.add(
+                    "show"
                 );
 
-        }
+
+                particle.style.left =
+                    finalX + "px";
+
+
+                particle.style.top =
+                    finalY + "px";
+
+            },
+
+            300 +
+            Math.random() * 1700
+
+        );
 
     }
+
 }
 
 
@@ -2289,31 +3579,41 @@ function createRealStars(){
             "starField"
         );
 
+
     container.innerHTML = "";
+
 
     const positions = [];
 
+
     for(
         let i=0;
-        i<36;
+        i<42;
         i++
     ){
 
         const left =
-            Math.random() * 94 + 3;
+            Math.random() *
+            94 + 3;
+
 
         const top =
-            Math.random() * 88 + 6;
+            Math.random() *
+            88 + 6;
+
 
         positions.push([
+
             left,
             top
+
         ]);
 
     }
 
 
     positions.forEach(
+
         (
             position,
             index
@@ -2323,6 +3623,7 @@ function createRealStars(){
                 document.createElement(
                     "span"
                 );
+
 
             star.className =
                 "real-star";
@@ -2349,7 +3650,7 @@ function createRealStars(){
 
 
             star.style.animationDelay =
-                (index * .14) + "s";
+                (index * .08) + "s";
 
 
             container.appendChild(
@@ -2357,17 +3658,22 @@ function createRealStars(){
             );
 
 
-            requestAnimationFrame(
+            setTimeout(
+
                 () => {
 
                     star.classList.add(
                         "lit"
                     );
 
-                }
+                },
+
+                index * 80
+
             );
 
         }
+
     );
 }
 
@@ -2383,13 +3689,19 @@ function animateFinalSignature(){
             "finalSignature"
         );
 
+
     if(!signature){
         return;
     }
 
-    signature.textContent = "";
 
-    const text = "Ders";
+    signature.textContent =
+        "";
+
+
+    const text =
+        "Ders";
+
 
     let i = 0;
 
@@ -2403,21 +3715,32 @@ function animateFinalSignature(){
             signature.textContent +=
                 text[i];
 
+
             i++;
 
+
             setTimeout(
+
                 showNextLetter,
-                120
+
+                150
+
             );
 
         }
+
+        else{
+
+            signature.classList.add(
+                "show"
+            );
+
+        }
+
     }
 
 
-    setTimeout(
-        showNextLetter,
-        300
-    );
+    showNextLetter();
 }
 
 
@@ -2426,7 +3749,9 @@ function animateFinalSignature(){
 ===================================================== */
 
 window.addEventListener(
+
     "resize",
+
     () => {
 
         resizeMatrix();
@@ -2436,6 +3761,7 @@ window.addEventListener(
         resizeFireworks();
 
     }
+
 );
 
 </script>
