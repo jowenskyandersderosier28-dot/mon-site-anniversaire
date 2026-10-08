@@ -13,6 +13,10 @@
 
 <style>
 
+/* =====================================================
+   BASE
+===================================================== */
+
 *{
     margin:0;
     padding:0;
@@ -113,7 +117,7 @@ body{
 
 
 /* =====================================================
-   CHAT
+   GIF CHAT
 ===================================================== */
 
 .cat-img{
@@ -133,13 +137,15 @@ body{
     50%{
         transform:translateY(-15px);
     }
-
 }
 
+
+/* =====================================================
+   TITRE
+===================================================== */
+
 .birthday-title{
-
     color:#ff5ca8;
-
     font-family:'Playfair Display',serif;
 
     font-size:
@@ -150,23 +156,16 @@ body{
         );
 
     font-weight:700;
-
     line-height:1.2;
-
     text-align:center;
-
     width:100%;
-
     max-width:95vw;
 
     margin:0 auto;
-
     padding:0 5px;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     gap:8px;
@@ -176,7 +175,6 @@ body{
 }
 
 .flower{
-
     font-size:
         clamp(
             1.4rem,
@@ -208,7 +206,6 @@ body{
     to{
         transform:scale(1.15);
     }
-
 }
 
 
@@ -232,11 +229,9 @@ body{
 #fireworks-canvas{
 
     position:absolute;
-
     inset:0;
 
     width:100%;
-
     height:100%;
 
     z-index:1;
@@ -250,17 +245,13 @@ body{
 .book-area{
 
     position:relative;
-
     z-index:2;
 
     width:100%;
-
     height:100%;
 
     display:flex;
-
     justify-content:center;
-
     align-items:center;
 
     perspective:1800px;
@@ -270,9 +261,15 @@ body{
 
     position:relative;
 
-    width:min(350px,88vw);
+    width:min(
+        350px,
+        88vw
+    );
 
-    height:min(450px,76vh);
+    height:min(
+        450px,
+        76vh
+    );
 
     transform-style:preserve-3d;
 }
@@ -284,15 +281,18 @@ body{
     position:absolute;
 
     width:85%;
-
     height:25px;
 
     bottom:-22px;
-
     left:7.5%;
 
     background:
-        rgba(255,51,153,.35);
+        rgba(
+            255,
+            51,
+            153,
+            .35
+        );
 
     filter:blur(15px);
 
@@ -304,19 +304,23 @@ body{
 .book-inside{
 
     position:absolute;
-
     inset:0;
 
     background:#ffd6e7;
 
-    border:5px solid #ff78b5;
+    border:
+        5px solid
+        #ff78b5;
 
     border-radius:
         10px 18px 18px 10px;
 
     box-shadow:
-        0 15px 40px rgba(255,51,153,.5),
-        inset 0 0 20px rgba(255,255,255,.5);
+        0 15px 40px
+        rgba(255,51,153,.5),
+
+        inset 0 0 20px
+        rgba(255,255,255,.5);
 
     overflow:hidden;
 }
@@ -329,17 +333,16 @@ body{
 .book-cover{
 
     position:absolute;
-
     inset:-4px;
 
     z-index:20;
 
     transform-origin:left center;
-
     transform-style:preserve-3d;
 
     transition:
-        transform 2.2s
+        transform
+        2.2s
         cubic-bezier(.65,.05,.36,1),
 
         opacity .2s;
@@ -360,7 +363,6 @@ body{
 .cover-front{
 
     position:absolute;
-
     inset:0;
 
     border-radius:
@@ -384,7 +386,9 @@ body{
             #d91f72 100%
         );
 
-    border:5px solid #ffd95e;
+    border:
+        5px solid
+        #ffd95e;
 
     box-shadow:
 
@@ -400,12 +404,12 @@ body{
     display:flex;
 
     justify-content:center;
-
     align-items:center;
 
     text-align:center;
 
-    padding:32px 24px;
+    padding:
+        32px 24px;
 
     overflow:hidden;
 }
@@ -417,15 +421,12 @@ body{
     position:absolute;
 
     left:9px;
-
     top:8px;
-
     bottom:8px;
 
     width:18px;
 
     background:
-
         linear-gradient(
             to right,
             rgba(80,0,35,.55),
@@ -435,6 +436,14 @@ body{
 
     border-radius:
         5px 0 0 5px;
+
+    box-shadow:
+
+        inset -2px 0 4px
+        rgba(255,255,255,.35),
+
+        3px 0 8px
+        rgba(90,0,40,.3);
 }
 
 .cover-front::after{
@@ -452,17 +461,19 @@ body{
     border-radius:
         7px 15px 15px 7px;
 
+    box-shadow:
+        inset 0 0 0 1px
+        rgba(255,255,255,.35);
+
     pointer-events:none;
 }
 
 .cover-front > div{
 
     position:relative;
-
     z-index:3;
 
     width:100%;
-
     height:100%;
 
     display:flex;
@@ -470,7 +481,6 @@ body{
     flex-direction:column;
 
     justify-content:center;
-
     align-items:center;
 }
 
@@ -481,7 +491,6 @@ body{
     position:absolute;
 
     top:7px;
-
     left:50%;
 
     transform:
@@ -503,7 +512,6 @@ body{
     position:absolute;
 
     top:48px;
-
     left:50%;
 
     transform:
@@ -514,6 +522,10 @@ body{
     font-size:16px;
 
     letter-spacing:4px;
+
+    text-shadow:
+        0 0 8px
+        rgba(255,255,255,.9);
 }
 
 .cover-title{
@@ -535,7 +547,8 @@ body{
 
     text-shadow:
 
-        2px 3px 0 #a7195d,
+        2px 3px 0
+        #a7195d,
 
         0 0 8px
         rgba(255,255,255,.9),
@@ -567,6 +580,10 @@ body{
     color:#fff4ad;
 
     margin-top:12px;
+
+    text-shadow:
+        0 0 8px
+        rgba(255,255,255,.8);
 }
 
 .cover-subtitle{
@@ -586,6 +603,10 @@ body{
     letter-spacing:2px;
 
     text-transform:uppercase;
+
+    text-shadow:
+        0 1px 4px
+        rgba(100,0,50,.8);
 }
 
 
@@ -596,41 +617,45 @@ body{
 .pages{
 
     position:absolute;
-
     inset:10px;
 
     z-index:10;
 
-    transform-style:
-        preserve-3d;
+    transform-style:preserve-3d;
 }
 
 .page{
 
     position:absolute;
-
     inset:0;
 
     background:#fff1a8;
 
     border:
-        3px solid #ff78b5;
+        3px solid
+        #ff78b5;
 
     border-radius:
         7px 15px 15px 7px;
 
-    padding:10px 16px;
+    /*
+       MODIFICATION:
+       plis piti padding anlè pou
+       "Mon amour ❤️" pa koupe
+    */
+
+    padding:
+        10px 16px;
 
     color:#d63384;
 
     transform-origin:left center;
-
-    transform-style:
-        preserve-3d;
+    transform-style:preserve-3d;
 
     transition:
 
-        transform 1.5s
+        transform
+        1.5s
         cubic-bezier(.65,.05,.36,1),
 
         box-shadow 1s;
@@ -670,10 +695,14 @@ body{
         rotateY(-180deg);
 }
 
+
+/* =====================================================
+   PAGE CONTENT
+===================================================== */
+
 .page-content{
 
     width:100%;
-
     height:100%;
 
     display:flex;
@@ -681,6 +710,12 @@ body{
     flex-direction:column;
 
     align-items:center;
+
+    /*
+       MODIFICATION:
+       Nou pa mete tout bagay nan mitan
+       paske sa te fè "Mon amour" koupe anlè.
+    */
 
     justify-content:flex-start;
 
@@ -695,10 +730,15 @@ body{
         'Great Vibes',
         cursive;
 
-    font-size:1.65rem;
+    font-size:
+        1.65rem;
+
+    /*
+       MODIFICATION:
+       li kòmanse byen anba paj la
+    */
 
     margin-top:2px;
-
     margin-bottom:5px;
 
     color:#e83e8c;
@@ -713,9 +753,11 @@ body{
     background:#fff8cf;
 
     border:
-        2px solid #ff8fbe;
+        2px solid
+        #ff8fbe;
 
-    padding:10px 11px;
+    padding:
+        10px 11px;
 
     border-radius:12px;
 
@@ -724,6 +766,11 @@ body{
     font-family:
         'Great Vibes',
         cursive;
+
+    /*
+       MODIFICATION:
+       ti kras pi piti pou tout mesaj la antre
+    */
 
     font-size:
         clamp(
@@ -745,6 +792,11 @@ body{
     flex-shrink:0;
 }
 
+
+/* =====================================================
+   FOTO NAN LIV LA
+===================================================== */
+
 .photo-frame{
 
     display:flex;
@@ -763,6 +815,12 @@ body{
 
     width:46%;
 
+    /*
+       MODIFICATION:
+       Foto yo pi kout pou "Mon amour"
+       rete vizib anlè
+    */
+
     height:135px;
 
     object-fit:cover;
@@ -770,7 +828,8 @@ body{
     border-radius:8px;
 
     border:
-        3px solid #ff72ad;
+        3px solid
+        #ff72ad;
 
     box-shadow:
         0 5px 12px
@@ -785,6 +844,11 @@ body{
 
     pointer-events:none;
 }
+
+
+/* =====================================================
+   DEKORASYON
+===================================================== */
 
 .page-decoration{
 
@@ -802,94 +866,54 @@ body{
    COEUR FINAL
 ===================================================== */
 
-#screen-heart{
-
-    background:
-        radial-gradient(
-            ellipse at center,
-            #180817 0%,
-            #07030a 55%,
-            #000 100%
-        );
-
-    overflow:hidden;
-}
-
 .heart-grid{
 
     position:absolute;
-
     inset:0;
 
     width:100%;
-
     height:100%;
 
-    z-index:5;
-
-    pointer-events:none;
+    z-index:2;
 }
 
 
-/* =====================================================
-   FOTO YO
-===================================================== */
+/*
+   MODIFICATION:
+   20 ti kat yo rete menm jan,
+   men yo itilize sèlman foto ki mache.
+*/
 
 .mini-card{
 
     position:absolute;
 
     width:43px;
-
     height:51px;
 
-    background:#fff;
+    background:white;
 
     padding:2px;
 
-    border-radius:6px;
+    border-radius:5px;
 
     box-shadow:
-
-        0 0 7px
-        rgba(255,51,153,.8),
-
-        0 0 16px
-        rgba(255,51,153,.35);
-
-    overflow:hidden;
-
-    opacity:0;
-
-    transform:
-        translate(0,0)
-        scale(.15)
-        rotate(0deg);
+        0 0 8px
+        rgba(255,51,153,.8);
 
     transition:
-
-        left 2.5s
-        cubic-bezier(.2,.8,.2,1),
-
-        top 2.5s
-        cubic-bezier(.2,.8,.2,1),
-
-        transform 2.5s
-        cubic-bezier(.2,.8,.2,1),
-
-        opacity .8s ease;
+        transform .5s;
 }
 
 .mini-card img,
 .mini-card video{
 
     width:100%;
-
     height:100%;
 
     object-fit:cover;
 
-    border-radius:4px;
+    border-radius:3px;
 
     display:block;
 
@@ -903,90 +927,6 @@ body{
 
 
 /* =====================================================
-   GLOW KÈ A
-===================================================== */
-
-.heart-glow{
-
-    position:absolute;
-
-    left:50%;
-
-    top:50%;
-
-    width:80px;
-
-    height:80px;
-
-    transform:
-        translate(-50%,-50%)
-        scale(.2);
-
-    border-radius:50%;
-
-    background:
-        rgba(255,51,153,.4);
-
-    filter:blur(30px);
-
-    opacity:0;
-
-    z-index:2;
-
-    transition:
-        opacity 1.5s ease,
-        transform 2.5s ease;
-}
-
-.heart-glow.show{
-
-    opacity:1;
-
-    transform:
-        translate(-50%,-50%)
-        scale(5);
-}
-
-
-/* =====================================================
-   PARTICULES DU COEUR
-===================================================== */
-
-.heart-particle{
-
-    position:absolute;
-
-    width:4px;
-
-    height:4px;
-
-    border-radius:50%;
-
-    background:#ff5ca8;
-
-    box-shadow:
-
-        0 0 5px #ff5ca8,
-
-        0 0 12px #ff3399;
-
-    opacity:0;
-
-    z-index:3;
-
-    transition:
-        left 2s ease,
-        top 2s ease,
-        opacity 1s ease;
-}
-
-.heart-particle.show{
-
-    opacity:1;
-}
-
-
-/* =====================================================
    TITRE FINAL
 ===================================================== */
 
@@ -994,12 +934,11 @@ body{
 
     position:absolute;
 
-    z-index:20;
+    z-index:6;
 
     top:7%;
 
     left:0;
-
     right:0;
 
     text-align:center;
@@ -1013,33 +952,25 @@ body{
     font-size:2.5rem;
 
     text-shadow:
-
-        0 0 8px #ff3399,
-
-        0 0 15px #ff3399,
-
-        0 0 30px rgba(255,51,153,.7);
+        0 0 15px
+        #ff3399;
 
     opacity:0;
 
-    transform:
-        translateY(-20px)
-        scale(.8);
+    animation:
+        heartTitle
+        2s
+        ease
+        forwards;
 
-    transition:
-        opacity 1.2s ease,
-        transform 1.2s ease;
-
-    pointer-events:none;
+    animation-delay:1.5s;
 }
 
-.heart-title.show{
+@keyframes heartTitle{
 
-    opacity:1;
-
-    transform:
-        translateY(0)
-        scale(1);
+    to{
+        opacity:1;
+    }
 }
 
 
@@ -1052,7 +983,6 @@ body{
     position:absolute;
 
     right:24px;
-
     bottom:22px;
 
     z-index:100;
@@ -1075,10 +1005,7 @@ body{
 
     white-space:nowrap;
 
-    opacity:0;
-
-    transform:
-        translateY(15px);
+    opacity:1;
 
     pointer-events:none;
 
@@ -1096,26 +1023,12 @@ body{
         0 0 30px
         rgba(255,80,170,.65);
 
-    transition:
-
-        opacity 1s ease,
-
-        transform 1s ease;
-
     animation:
         signatureGlow
         2s
         ease-in-out
         infinite
         alternate;
-}
-
-.final-signature.show{
-
-    opacity:1;
-
-    transform:
-        translateY(0);
 }
 
 @keyframes signatureGlow{
@@ -1152,20 +1065,18 @@ body{
 
 
 /* =====================================================
-   ETOILES
+   ETWAL
 ===================================================== */
 
 .star-field{
 
     position:absolute;
-
     inset:0;
 
     width:100%;
-
     height:100%;
 
-    z-index:10;
+    z-index:4;
 
     pointer-events:none;
 
@@ -1203,7 +1114,6 @@ body{
     position:absolute;
 
     left:50%;
-
     top:50%;
 
     transform:
@@ -1215,7 +1125,6 @@ body{
 .real-star::before{
 
     width:2px;
-
     height:24px;
 
     background:
@@ -1230,7 +1139,6 @@ body{
 .real-star::after{
 
     width:24px;
-
     height:2px;
 
     background:
@@ -1246,11 +1154,13 @@ body{
 
     animation:
 
-        starAppear .7s
+        starAppear
+        .7s
         ease-out
         forwards,
 
-        starTwinkle 2.5s
+        starTwinkle
+        2.5s
         ease-in-out
         .7s
         infinite
@@ -1260,23 +1170,17 @@ body{
 @keyframes starAppear{
 
     0%{
-
         opacity:0;
-
         transform:scale(0);
     }
 
     60%{
-
         opacity:1;
-
         transform:scale(1.35);
     }
 
     100%{
-
         opacity:1;
-
         transform:scale(1);
     }
 }
@@ -1284,16 +1188,12 @@ body{
 @keyframes starTwinkle{
 
     0%{
-
         filter:brightness(.75);
-
         transform:scale(.85);
     }
 
     100%{
-
         filter:brightness(2);
-
         transform:scale(1.2);
     }
 }
@@ -1319,7 +1219,8 @@ body{
 
     .cover-front{
 
-        padding:28px 20px;
+        padding:
+            28px 20px;
     }
 
     .cover-front::after{
@@ -1346,9 +1247,14 @@ body{
         letter-spacing:1.5px;
     }
 
+    /*
+       MODIFICATION PAGE
+    */
+
     .page{
 
-        padding:8px 12px;
+        padding:
+            8px 12px;
     }
 
     .page-number{
@@ -1356,7 +1262,6 @@ body{
         font-size:1.5rem;
 
         margin-top:0;
-
         margin-bottom:4px;
     }
 
@@ -1366,7 +1271,8 @@ body{
 
         line-height:1.2;
 
-        padding:8px 9px;
+        padding:
+            8px 9px;
 
         margin-bottom:8px;
     }
@@ -1387,7 +1293,6 @@ body{
     .mini-card{
 
         width:38px;
-
         height:46px;
     }
 
@@ -1399,7 +1304,6 @@ body{
     .final-signature{
 
         right:18px;
-
         bottom:16px;
 
         font-size:1.9rem;
@@ -1435,11 +1339,17 @@ body{
     }
 }
 
+
+/* =====================================================
+   TELEFÒN PI LÈ
+===================================================== */
+
 @media(min-width:381px) and (max-width:600px){
 
     .page{
 
-        padding:10px 14px;
+        padding:
+            10px 14px;
     }
 
     .page-number{
@@ -1447,7 +1357,6 @@ body{
         font-size:1.6rem;
 
         margin-top:1px;
-
         margin-bottom:5px;
     }
 
@@ -1457,7 +1366,8 @@ body{
 
         line-height:1.23;
 
-        padding:9px 10px;
+        padding:
+            9px 10px;
 
         margin-bottom:9px;
     }
@@ -1476,6 +1386,7 @@ body{
 
 </style>
 </head>
+
 
 <body>
 
@@ -1582,9 +1493,9 @@ body{
             <div class="pages">
 
 
-                <!-- =========================
+                <!-- =================================================
                      PAGE 1
-                ========================== -->
+                ================================================== -->
 
                 <div
                     class="page"
@@ -1605,10 +1516,7 @@ body{
 
                             Mon amour ❤️
 
-                            Aujourd’hui, ça fait déjà 9 ans que nous sommes ensemble.
-                            Je veux simplement te dire merci pour tout :
-                            pour ton amour, ta patience, ta présence et tous les moments
-                            qu’on a partagés.
+                            Aujourd’hui, ça fait déjà 9 ans que nous sommes ensemble. Je veux simplement te dire merci pour tout : pour ton amour, ta patience, ta présence et tous les moments qu’on a partagés.
 
                         </div>
 
@@ -1616,14 +1524,12 @@ body{
 
                             <img
                                 src="WhatsApp Image 2026-10-07 at 7.59.07 AM (1).jpeg"
-                                alt="Photo"
-                                onerror="this.onerror=null;this.src='WhatsApp Image 2026-10-07 at 7.59.11 AM (1).jpeg';"
+                                alt="Photo de notre couple"
                             >
 
                             <img
                                 src="WhatsApp Image 2026-10-07 at 7.59.11 AM (1).jpeg"
-                                alt="Photo"
-                                onerror="this.onerror=null;this.src='WhatsApp Image 2026-10-07 at 7.59.11 AM.jpeg';"
+                                alt="Photo de notre couple"
                             >
 
                         </div>
@@ -1637,9 +1543,9 @@ body{
                 </div>
 
 
-                <!-- =========================
+                <!-- =================================================
                      PAGE 2
-                ========================== -->
+                ================================================== -->
 
                 <div
                     class="page"
@@ -1658,11 +1564,9 @@ body{
 
                         <div class="message-box">
 
-                            On a traversé beaucoup de choses ensemble,
-                            et je suis heureux de pouvoir encore être à tes côtés aujourd’hui.
+                            On a traversé beaucoup de choses ensemble, et je suis heureux de pouvoir encore être à tes côtés aujourd’hui.
 
-                            Merci d’être dans ma vie.
-                            Joyeux 9 ans à nous ❤️ Je t’aime.
+                            Merci d’être dans ma vie. Joyeux 9 ans à nous ❤️ Je t’aime.
 
                         </div>
 
@@ -1670,18 +1574,16 @@ body{
 
                             <img
                                 src="WhatsApp Image 2026-10-07 at 7.59.11 AM.jpeg"
-                                alt="Photo"
-                                onerror="this.onerror=null;this.src='WhatsApp Image 2026-10-07 at 7.59.11 AM (1).jpeg';"
+                                alt="Photo de notre couple"
                             >
 
                             <video
-                                src="WhatsApp Video 2026-10-07 at 7.59.07 AM (1).mp4"
+                                src="WhatsApp Video 2026-10-07 at 7.59.11 AM.mp4"
                                 autoplay
                                 muted
                                 loop
                                 playsinline
                                 preload="metadata"
-                                onerror="this.style.display='none';"
                             ></video>
 
                         </div>
@@ -1695,9 +1597,9 @@ body{
                 </div>
 
 
-                <!-- =========================
+                <!-- =================================================
                      PAGE 3
-                ========================== -->
+                ================================================== -->
 
                 <div
                     class="page"
@@ -1716,25 +1618,20 @@ body{
 
                         <div class="message-box">
 
-                            Ta présence dans ma vie compte énormément,
-                            et je veux te le montrer chaque jour.
-
-                            Tu comptes vraiment beaucoup pour moi. ❤️
+                            Ta présence dans ma vie compte énormément, et je veux te le montrer chaque jour. Tu comptes vraiment beaucoup pour moi. ❤️
 
                         </div>
 
                         <div class="photo-frame">
 
                             <img
-                                src="WhatsApp Image 2026-10-07 at 7.59.12 AM (1).jpeg"
-                                alt="Photo"
-                                onerror="this.onerror=null;this.src='WhatsApp Image 2026-10-07 at 7.59.11 AM (1).jpeg';"
+                                src="WhatsApp Image 2026-10-07 at 7.59.12 AM (2).jpeg"
+                                alt="Photo de notre couple"
                             >
 
                             <img
-                                src="WhatsApp Image 2026-10-07 at 7.59.12 AM (2).jpeg"
-                                alt="Photo"
-                                onerror="this.onerror=null;this.src='WhatsApp Image 2026-10-07 at 7.59.11 AM.jpeg';"
+                                src="WhatsApp Image 2026-10-07 at 9.41.07 AM.jpeg"
+                                alt="Photo de notre couple"
                             >
 
                         </div>
@@ -1748,9 +1645,9 @@ body{
                 </div>
 
 
-                <!-- =========================
+                <!-- =================================================
                      PAGE 4
-                ========================== -->
+                ================================================== -->
 
                 <div
                     class="page"
@@ -1769,11 +1666,9 @@ body{
 
                         <div class="message-box">
 
-                            On a traversé beaucoup de choses ensemble,
-                            et je suis heureux de pouvoir encore être à tes côtés aujourd’hui.
+                            On a traversé beaucoup de choses ensemble, et je suis heureux de pouvoir encore être à tes côtés aujourd’hui.
 
-                            Merci d’être dans ma vie.
-                            Joyeux 9 ans à nous ❤️ Je t’aime.
+                            Merci d’être dans ma vie. Joyeux 9 ans à nous ❤️ Je t’aime.
 
                         </div>
 
@@ -1786,7 +1681,6 @@ body{
                                 loop
                                 playsinline
                                 preload="metadata"
-                                onerror="this.style.display='none';"
                             ></video>
 
                             <video
@@ -1796,7 +1690,6 @@ body{
                                 loop
                                 playsinline
                                 preload="metadata"
-                                onerror="this.style.display='none';"
                             ></video>
 
                         </div>
@@ -1808,6 +1701,7 @@ body{
                     </div>
 
                 </div>
+
 
             </div>
 
@@ -1834,7 +1728,9 @@ body{
                         </div>
 
                         <span class="cover-subtitle">
+
                             Avec tout mon cœur 🧸❤️
+
                         </span>
 
                     </div>
@@ -1862,11 +1758,6 @@ body{
     <div class="stars-bg"></div>
 
     <div
-        class="heart-glow"
-        id="heartGlow"
-    ></div>
-
-    <div
         class="heart-grid"
         id="heartGrid"
     ></div>
@@ -1876,10 +1767,7 @@ body{
         id="starField"
     ></div>
 
-    <div
-        class="heart-title"
-        id="heartTitle"
-    >
+    <div class="heart-title">
         Mon chef-d’œuvre ❤️
     </div>
 
@@ -1900,69 +1788,44 @@ body{
 
 const canvas =
     document.getElementById(
-        "matrix-canvas"
+        'matrix-canvas'
     );
 
 const ctx =
-    canvas.getContext("2d");
+    canvas.getContext('2d');
 
+canvas.width =
+    window.innerWidth;
 
-function resizeMatrix(){
-
-    canvas.width =
-        window.innerWidth;
-
-    canvas.height =
-        window.innerHeight;
-}
-
-
-resizeMatrix();
-
+canvas.height =
+    window.innerHeight;
 
 const characters =
     "HAPPYBIRTHDAYTOOURLOVES321🧸❤️";
 
 const fontSize = 16;
 
-let columns =
+const columns =
     Math.floor(
         canvas.width /
         fontSize
     );
 
-let drops = [];
+const drops = [];
 
+for(
+    let i = 0;
+    i < columns;
+    i++
+){
 
-function resetDrops(){
-
-    columns =
-        Math.floor(
-            canvas.width /
-            fontSize
-        );
-
-    drops = [];
-
-    for(
-        let i=0;
-        i<columns;
-        i++
-    ){
-
-        drops[i] = 1;
-
-    }
+    drops[i] = 1;
 }
-
-
-resetDrops();
-
 
 function drawMatrix(){
 
     ctx.fillStyle =
-        "rgba(0,0,0,0.05)";
+        'rgba(0, 0, 0, 0.05)';
 
     ctx.fillRect(
         0,
@@ -1972,16 +1835,15 @@ function drawMatrix(){
     );
 
     ctx.fillStyle =
-        "#ff3399";
+        '#ff3399';
 
     ctx.font =
         fontSize +
-        "px monospace";
-
+        'px monospace';
 
     for(
-        let i=0;
-        i<drops.length;
+        let i = 0;
+        i < drops.length;
         i++
     ){
 
@@ -1999,25 +1861,19 @@ function drawMatrix(){
             drops[i] * fontSize
         );
 
-
         if(
-
-            drops[i] * fontSize >
+            drops[i] *
+            fontSize >
             canvas.height &&
-
             Math.random() > .975
-
         ){
 
             drops[i] = 0;
-
         }
 
         drops[i]++;
-
     }
 }
-
 
 let matrixInterval =
     setInterval(
@@ -2032,9 +1888,8 @@ let matrixInterval =
 
 const textElement =
     document.getElementById(
-        "matrix-text"
+        'matrix-text'
     );
-
 
 const sequence = [
 
@@ -2054,16 +1909,13 @@ const sequence = [
 
 ];
 
-
 let seqIndex = 0;
-
 
 let seqTimer =
     setInterval(
         () => {
 
             seqIndex++;
-
 
             if(
                 seqIndex <
@@ -2073,9 +1925,7 @@ let seqTimer =
                 textElement.innerText =
                     sequence[seqIndex];
 
-            }
-
-            else{
+            }else{
 
                 clearInterval(
                     seqTimer
@@ -2085,17 +1935,18 @@ let seqTimer =
                     matrixInterval
                 );
 
-
                 switchScreen(
-                    "screen-cat"
+                    'screen-cat'
                 );
-
 
                 setTimeout(
-                    startFireworks,
+                    () => {
+
+                        startFireworks();
+
+                    },
                     4000
                 );
-
             }
 
         },
@@ -2113,21 +1964,22 @@ function switchScreen(
 
     document
         .querySelectorAll(
-            ".screen"
+            '.screen'
         )
         .forEach(
-            screen =>
-                screen.classList
-                    .remove("active")
+            s =>
+                s.classList.remove(
+                    'active'
+                )
         );
-
 
     document
         .getElementById(
             screenId
         )
-        .classList
-        .add("active");
+        .classList.add(
+            'active'
+        );
 }
 
 
@@ -2137,16 +1989,15 @@ function switchScreen(
 
 const fireworksCanvas =
     document.getElementById(
-        "fireworks-canvas"
+        'fireworks-canvas'
     );
 
 const fireworksCtx =
     fireworksCanvas.getContext(
-        "2d"
+        '2d'
     );
 
-
-let fireworksAnimation = null;
+let fireworksAnimation;
 
 let fireworksParticles = [];
 
@@ -2162,7 +2013,6 @@ function resizeFireworks(){
         window.innerHeight;
 }
 
-
 resizeFireworks();
 
 
@@ -2175,50 +2025,45 @@ class FireworkParticle{
     ){
 
         this.x = x;
-
         this.y = y;
-
 
         const angle =
             Math.random() *
             Math.PI *
             2;
 
-
         const speed =
             Math.random() *
-            5 + 2;
-
+            5 +
+            2;
 
         this.vx =
             Math.cos(angle) *
             speed;
 
-
         this.vy =
             Math.sin(angle) *
             speed;
 
+        this.gravity =
+            .045;
 
-        this.gravity = .045;
-
-        this.life = 1;
-
+        this.life =
+            1;
 
         this.decay =
             Math.random() *
-            .012 + .008;
-
+            .012 +
+            .008;
 
         this.size =
             Math.random() *
-            2.5 + 1;
-
+            2.5 +
+            1;
 
         this.color =
             color;
     }
-
 
     update(){
 
@@ -2241,11 +2086,9 @@ class FireworkParticle{
             this.decay;
     }
 
-
     draw(){
 
         fireworksCtx.save();
-
 
         fireworksCtx.globalAlpha =
             Math.max(
@@ -2253,43 +2096,29 @@ class FireworkParticle{
                 0
             );
 
-
         fireworksCtx.fillStyle =
             this.color;
-
 
         fireworksCtx.shadowBlur =
             12;
 
-
         fireworksCtx.shadowColor =
             this.color;
 
-
         fireworksCtx.beginPath();
 
-
         fireworksCtx.arc(
-
             this.x,
-
             this.y,
-
             this.size,
-
             0,
-
             Math.PI * 2
-
         );
-
 
         fireworksCtx.fill();
 
-
         fireworksCtx.restore();
     }
-
 }
 
 
@@ -2301,14 +2130,11 @@ class FireworkRocket{
             Math.random() *
             fireworksCanvas.width;
 
-
         this.y =
             fireworksCanvas.height +
             10;
 
-
         this.targetY =
-
             Math.random() *
             fireworksCanvas.height *
             .45 +
@@ -2316,20 +2142,17 @@ class FireworkRocket{
             fireworksCanvas.height *
             .12;
 
-
         this.speed =
             Math.random() *
-            5 + 8;
-
+            5 +
+            8;
 
         this.color =
             getFireworkColor();
 
-
         this.exploded =
             false;
     }
-
 
     update(){
 
@@ -2339,14 +2162,10 @@ class FireworkRocket{
         this.speed *=
             .985;
 
-
         if(
-
             this.y <=
             this.targetY &&
-
             !this.exploded
-
         ){
 
             this.explode();
@@ -2357,88 +2176,63 @@ class FireworkRocket{
             return true;
         }
 
-
         return false;
     }
-
 
     explode(){
 
         const particleCount =
-
             Math.floor(
-
                 Math.random() *
-                35 + 65
-
+                35 +
+                65
             );
 
-
         for(
-            let i=0;
-            i<particleCount;
+            let i = 0;
+            i < particleCount;
             i++
         ){
 
             fireworksParticles.push(
 
                 new FireworkParticle(
-
                     this.x,
-
                     this.y,
-
                     this.color
-
                 )
 
             );
-
         }
     }
-
 
     draw(){
 
         fireworksCtx.save();
 
-
         fireworksCtx.fillStyle =
             this.color;
-
 
         fireworksCtx.shadowBlur =
             10;
 
-
         fireworksCtx.shadowColor =
             this.color;
 
-
         fireworksCtx.beginPath();
 
-
         fireworksCtx.arc(
-
             this.x,
-
             this.y,
-
             2,
-
             0,
-
             Math.PI * 2
-
         );
-
 
         fireworksCtx.fill();
 
-
         fireworksCtx.restore();
     }
-
 }
 
 
@@ -2446,159 +2240,107 @@ function getFireworkColor(){
 
     const colors = [
 
-        "#ff3399",
-
-        "#ff5ca8",
-
-        "#ffd94d",
-
-        "#fff176",
-
-        "#ff6b6b",
-
-        "#9c7cff",
-
-        "#5ce1e6",
-
-        "#ffffff"
+        '#ff3399',
+        '#ff5ca8',
+        '#ffd94d',
+        '#fff176',
+        '#ff6b6b',
+        '#9c7cff',
+        '#5ce1e6',
+        '#ffffff'
 
     ];
 
-
     return colors[
-
         Math.floor(
-
             Math.random() *
             colors.length
-
         )
-
     ];
 }
 
 
 let lastRocketTime = 0;
 
-
 function animateFireworks(
     time
 ){
 
     fireworksCtx.clearRect(
-
         0,
-
         0,
-
         fireworksCanvas.width,
-
         fireworksCanvas.height
-
     );
 
-
     if(
-
         time -
         lastRocketTime >
         450
-
     ){
 
         fireworksRockets.push(
-
             new FireworkRocket()
-
         );
 
         lastRocketTime =
             time;
     }
 
-
     for(
-
         let i =
             fireworksRockets.length - 1;
-
         i >= 0;
-
         i--
-
     ){
 
         const rocket =
             fireworksRockets[i];
 
-
         const exploded =
             rocket.update();
-
 
         if(!exploded){
 
             rocket.draw();
 
-        }
-
-        else{
+        }else{
 
             fireworksRockets.splice(
-
                 i,
-
                 1
-
             );
-
         }
-
     }
 
-
     for(
-
         let i =
             fireworksParticles.length - 1;
-
         i >= 0;
-
         i--
-
     ){
 
         const particle =
             fireworksParticles[i];
 
-
         particle.update();
 
         particle.draw();
-
 
         if(
             particle.life <= 0
         ){
 
             fireworksParticles.splice(
-
                 i,
-
                 1
-
             );
-
         }
-
     }
-
 
     fireworksAnimation =
         requestAnimationFrame(
-
             animateFireworks
-
         );
 }
 
@@ -2609,41 +2351,30 @@ function startFireworks(){
 
     fireworksParticles = [];
 
-
     switchScreen(
-        "fireworks-screen"
+        'fireworks-screen'
     );
-
 
     lastRocketTime = 0;
 
-
     fireworksAnimation =
         requestAnimationFrame(
-
             animateFireworks
-
         );
 
-
     setTimeout(
-
         () => {
 
             stopFireworks();
 
-
             switchScreen(
-                "screen-card"
+                'screen-card'
             );
-
 
             startBookAnimation();
 
         },
-
         4000
-
     );
 }
 
@@ -2662,324 +2393,190 @@ function stopFireworks(){
             null;
     }
 
-
     fireworksRockets = [];
 
     fireworksParticles = [];
 
-
     fireworksCtx.clearRect(
-
         0,
-
         0,
-
         fireworksCanvas.width,
-
         fireworksCanvas.height
-
     );
 }
 
 
 /* =====================================================
-   LIV
+   LIV LA
 ===================================================== */
 
 function startBookAnimation(){
 
     const book =
         document.getElementById(
-            "book"
+            'book'
         );
-
 
     const page1 =
         document.getElementById(
-            "page1"
+            'page1'
         );
-
 
     const page2 =
         document.getElementById(
-            "page2"
+            'page2'
         );
-
 
     const page3 =
         document.getElementById(
-            "page3"
+            'page3'
         );
-
 
     const page4 =
         document.getElementById(
-            "page4"
+            'page4'
         );
 
 
     book.classList.remove(
-        "open"
+        'open'
     );
 
     book.classList.remove(
-        "closing"
+        'closing'
     );
 
-
     page1.classList.remove(
-        "flipped"
+        'flipped'
     );
 
     page2.classList.remove(
-        "flipped"
+        'flipped'
     );
 
     page3.classList.remove(
-        "flipped"
+        'flipped'
     );
 
     page4.classList.remove(
-        "flipped"
+        'flipped'
     );
 
 
     setTimeout(
-
         () => {
 
             book.classList.add(
-                "open"
+                'open'
             );
 
         },
-
         3000
-
     );
 
 
     setTimeout(
-
         () => {
 
             page1.classList.add(
-                "flipped"
+                'flipped'
             );
 
         },
-
         8000
-
     );
 
 
     setTimeout(
-
         () => {
 
             page2.classList.add(
-                "flipped"
+                'flipped'
             );
 
         },
-
         13000
-
     );
 
 
     setTimeout(
-
         () => {
 
             page3.classList.add(
-                "flipped"
+                'flipped'
             );
 
         },
-
         20000
-
     );
 
 
     setTimeout(
-
         () => {
 
             page4.classList.add(
-                "flipped"
+                'flipped'
             );
 
         },
-
         27000
-
     );
 
 
     setTimeout(
-
         () => {
 
             book.classList.add(
-                "closing"
+                'closing'
             );
 
         },
-
         28500
-
     );
 
 
     setTimeout(
-
         () => {
 
             switchScreen(
-                "screen-heart"
+                'screen-heart'
             );
-
 
             createHeartFormation();
 
-
             createRealStars();
 
+            animateFinalSignature();
 
         },
-
         31500
-
     );
 }
 
 
 /* =====================================================
-   MEDIA
+   FOTO KI NOU KONNEN KI TE PARÈT NAN KÈ A
 ===================================================== */
 
 /*
-   FOTO PRINCIPAL KI NOU KONNEN
-   KI DEJA AP PARÈT SOU SIT LA.
+   IMPORTANT:
+
+   Nou pa mete video ki te konn bay "Photo"
+   oswa imaj kase yo ankò.
+
+   Nou itilize sèlman foto yo ki te deja
+   parèt nan kè a.
 */
 
-const fallbackImage =
-    "WhatsApp Image 2026-10-07 at 7.59.11 AM (1).jpeg";
+const heartPhotos = [
 
+    "WhatsApp Image 2026-10-07 at 7.59.07 AM (1).jpeg",
 
-/*
-   Tout medya yo.
-*/
+    "WhatsApp Image 2026-10-07 at 7.59.11 AM.jpeg",
 
-const allMedia = [
+    "WhatsApp Image 2026-10-07 at 7.59.11 AM (1).jpeg",
 
-    {
-        type:"image",
-
-        src:
-        "WhatsApp Image 2026-10-07 at 7.59.07 AM (1).jpeg"
-    },
-
-    {
-        type:"image",
-
-        src:
-        "WhatsApp Image 2026-10-07 at 7.59.11 AM (1).jpeg"
-    },
-
-    {
-        type:"image",
-
-        src:
-        "WhatsApp Image 2026-10-07 at 7.59.11 AM.jpeg"
-    },
-
-    {
-        type:"image",
-
-        src:
-        "WhatsApp Image 2026-10-07 at 7.59.12 AM (1).jpeg"
-    },
-
-    {
-        type:"image",
-
-        src:
-        "WhatsApp Image 2026-10-07 at 7.59.12 AM (2).jpeg"
-    },
-
-    {
-        type:"image",
-
-        src:
-        "WhatsApp Image 2026-10-07 at 9.41.07 AM.jpeg"
-    },
-
-    {
-        type:"video",
-
-        src:
-        "WhatsApp Video 2026-10-07 at 7.59.07 AM (1).mp4"
-    },
-
-    {
-        type:"video",
-
-        src:
-        "WhatsApp Video 2026-10-07 at 7.59.07 AM (2).mp4"
-    },
-
-    {
-        type:"video",
-
-        src:
-        "WhatsApp Video 2026-10-07 at 7.59.07 AM.mp4"
-    },
-
-    {
-        type:"video",
-
-        src:
-        "WhatsApp Video 2026-10-07 at 7.59.08 AM (3).mp4"
-    },
-
-    {
-        type:"video",
-
-        src:
-        "WhatsApp Video 2026-10-07 at 7.59.08 AM.mp4"
-    },
-
-    {
-        type:"video",
-
-        src:
-        "WhatsApp Video 2026-10-07 at 7.59.11 AM (1).mp4"
-    },
-
-    {
-        type:"video",
-
-        src:
-        "WhatsApp Video 2026-10-07 at 7.59.11 AM (4).mp4"
-    },
-
-    {
-        type:"video",
-
-        src:
-        "WhatsApp Video 2026-10-07 at 7.59.11 AM (7).mp4"
-    },
-
-    {
-        type:"video",
-
-        src:
-        "WhatsApp Video 2026-10-07 at 7.59.11 AM.mp4"
-    }
+    "WhatsApp Image 2026-10-07 at 7.59.12 AM (2).jpeg"
 
 ];
 
@@ -2992,588 +2589,84 @@ function createMediaElement(
     media
 ){
 
-    if(
-        media.type === "video"
-    ){
-
-        const video =
-            document.createElement(
-                "video"
-            );
-
-
-        video.src =
-            media.src;
-
-
-        video.autoplay =
-            true;
-
-
-        video.muted =
-            true;
-
-
-        video.loop =
-            true;
-
-
-        video.playsInline =
-            true;
-
-
-        video.preload =
-            "metadata";
-
-
-        /*
-           Si video a pa egziste,
-           mete foto fallback la.
-        */
-
-        video.addEventListener(
-            "error",
-            () => {
-
-                const img =
-                    document.createElement(
-                        "img"
-                    );
-
-                img.src =
-                    fallbackImage;
-
-                img.alt =
-                    "Photo";
-
-                img.className =
-                    "fallback-media";
-
-                if(video.parentNode){
-
-                    video.parentNode.replaceChild(
-                        img,
-                        video
-                    );
-
-                }
-
-            },
-            {
-                once:true
-            }
-        );
-
-
-        return video;
-    }
-
-
     const img =
         document.createElement(
             "img"
         );
 
-
     img.src =
-        media.src;
-
+        media;
 
     img.alt =
-        "Photo";
-
-
-    /*
-       SI FOTO A PA EXISTE,
-       RANPLASE LI AK FOTO FALLBACK LA.
-    */
-
-    img.addEventListener(
-        "error",
-        () => {
-
-            if(
-                img.dataset.fallbackApplied
-            ){
-                return;
-            }
-
-            img.dataset.fallbackApplied =
-                "true";
-
-            img.src =
-                fallbackImage;
-
-        }
-    );
-
+        "Photo de notre couple";
 
     return img;
 }
 
 
 /* =====================================================
-   KÈ FINAL ANIME
+   KÈ FINAL
 ===================================================== */
 
 function createHeartFormation(){
 
     const container =
         document.getElementById(
-            "heartGrid"
+            'heartGrid'
         );
-
-
-    const glow =
-        document.getElementById(
-            "heartGlow"
-        );
-
-
-    const title =
-        document.getElementById(
-            "heartTitle"
-        );
-
-
-    const signature =
-        document.getElementById(
-            "finalSignature"
-        );
-
 
     container.innerHTML = "";
 
 
-    title.classList.remove(
-        "show"
-    );
-
-
-    signature.classList.remove(
-        "show"
-    );
-
-
     /*
-       Sou ekran final la,
-       kè a dwe rete vizib.
+       20 kat
+
+       Men chak kat ap itilize
+       youn nan foto ki mache.
     */
 
-    const isSmall =
-        window.innerWidth <= 380;
+    const numCards = 20;
+
+    const cardWidth = 43;
+
+    const cardHeight = 51;
 
 
-    const cardWidth =
-        isSmall
-        ? 38
-        : 43;
-
-
-    const cardHeight =
-        isSmall
-        ? 46
-        : 51;
-
-
-    /*
-       Nou adapte gwosè kè a
-       selon telefòn nan.
-    */
-
-    const scale =
-
+    const heartScale =
         Math.min(
 
             window.innerWidth / 38,
 
-            window.innerHeight / 49,
+            window.innerHeight / 48,
 
-            9.5
-
+            10
         );
 
 
     const centerX =
-
-        window.innerWidth / 2 -
-        cardWidth / 2;
+        (window.innerWidth / 2) -
+        (cardWidth / 2);
 
 
     const centerY =
-
-        window.innerHeight / 2 -
-        cardHeight / 2 -
-        5;
-
-
-    /*
-       Nou kreye ti patikil yo
-       an premye.
-    */
-
-    createHeartParticles(
-        centerX,
-        centerY,
-        scale
-    );
-
-
-    /*
-       Création des 15 médias.
-    */
-
-    allMedia.forEach(
-
-        (media,index) => {
-
-            const t =
-
-                (index /
-                allMedia.length) *
-                Math.PI * 2;
-
-
-            /*
-               Fòm matematik kè.
-            */
-
-            const heartX =
-
-                16 *
-                Math.pow(
-                    Math.sin(t),
-                    3
-                );
-
-
-            const heartY =
-
-                -(
-                    13 *
-                    Math.cos(t)
-
-                    -
-
-                    5 *
-                    Math.cos(
-                        2 * t
-                    )
-
-                    -
-
-                    2 *
-                    Math.cos(
-                        3 * t
-                    )
-
-                    -
-
-                    Math.cos(
-                        4 * t
-                    )
-                );
-
-
-            const finalX =
-
-                centerX +
-                heartX * scale;
-
-
-            const finalY =
-
-                centerY +
-                heartY * scale;
-
-
-            const card =
-
-                document.createElement(
-                    "div"
-                );
-
-
-            card.className =
-                "mini-card";
-
-
-            /*
-               Chak foto kòmanse
-               yon kote diferan.
-            */
-
-            const startAngle =
-
-                Math.random() *
-                Math.PI * 2;
-
-
-            const distance =
-
-                Math.max(
-                    window.innerWidth,
-                    window.innerHeight
-                ) * .55;
-
-
-            const startX =
-
-                window.innerWidth / 2
-                +
-
-                Math.cos(
-                    startAngle
-                ) * distance;
-
-
-            const startY =
-
-                window.innerHeight / 2
-                +
-
-                Math.sin(
-                    startAngle
-                ) * distance;
-
-
-            card.style.left =
-                startX + "px";
-
-
-            card.style.top =
-                startY + "px";
-
-
-            card.style.transform =
-
-                `
-                scale(.15)
-                rotate(${Math.random()*120-60}deg)
-                `;
-
-
-            card.style.opacity = "0";
-
-
-            const mediaElement =
-                createMediaElement(
-                    media
-                );
-
-
-            card.appendChild(
-                mediaElement
-            );
-
-
-            container.appendChild(
-                card
-            );
-
-
-            /*
-               Chak foto antre youn apre lòt.
-            */
-
-            setTimeout(
-
-                () => {
-
-                    card.style.opacity =
-                        "1";
-
-
-                    card.style.left =
-                        finalX + "px";
-
-
-                    card.style.top =
-                        finalY + "px";
-
-
-                    card.style.transform =
-
-                        `
-                        scale(1)
-                        rotate(${Math.random()*12-6}deg)
-                        `;
-
-
-                    if(
-                        media.type ===
-                        "video"
-                    ){
-
-                        mediaElement
-                            .play()
-                            .catch(
-                                () => {}
-                            );
-
-                    }
-
-                },
-
-                450 +
-                index * 170
-
-            );
-
-        }
-
-    );
-
-
-    /*
-       Glow la.
-    */
-
-    setTimeout(
-
-        () => {
-
-            glow.classList.add(
-                "show"
-            );
-
-        },
-
-        900
-
-    );
-
-
-    /*
-       Tit la.
-    */
-
-    setTimeout(
-
-        () => {
-
-            title.classList.add(
-                "show"
-            );
-
-        },
-
-        3500
-
-    );
-
-
-    /*
-       Signature.
-    */
-
-    setTimeout(
-
-        () => {
-
-            animateFinalSignature();
-
-        },
-
-        4200
-
-    );
-}
-
-
-/* =====================================================
-   PATIKIL KÈ
-===================================================== */
-
-function createHeartParticles(
-    centerX,
-    centerY,
-    scale
-){
-
-    const container =
-        document.getElementById(
-            "heartGrid"
-        );
-
-
-    const particleCount = 45;
+        (window.innerHeight / 2) -
+        (cardHeight / 2) -
+        (6 * heartScale);
 
 
     for(
-        let i=0;
-        i<particleCount;
+        let i = 0;
+        i < numCards;
         i++
     ){
 
-        const particle =
-            document.createElement(
-                "span"
-            );
-
-
-        particle.className =
-            "heart-particle";
-
-
-        const angle =
-            Math.random() *
-            Math.PI * 2;
-
-
-        const distance =
-
-            Math.random() *
-            Math.max(
-                window.innerWidth,
-                window.innerHeight
-            );
-
-
-        const startX =
-
-            window.innerWidth / 2
-            +
-
-            Math.cos(angle) *
-            distance;
-
-
-        const startY =
-
-            window.innerHeight / 2
-            +
-
-            Math.sin(angle) *
-            distance;
-
-
-        particle.style.left =
-            startX + "px";
-
-
-        particle.style.top =
-            startY + "px";
-
-
-        container.appendChild(
-            particle
-        );
-
-
-        /*
-           Patikil yo ale nan
-           diferan pwen sou kè a.
-        */
-
         const t =
+            (i / numCards) *
+            Math.PI *
+            2;
 
-            Math.random() *
-            Math.PI * 2;
 
-
-        const heartX =
-
+        const x =
             16 *
             Math.pow(
                 Math.sin(t),
@@ -3581,8 +2674,7 @@ function createHeartParticles(
             );
 
 
-        const heartY =
-
+        const y =
             -(
                 13 *
                 Math.cos(t)
@@ -3609,92 +2701,110 @@ function createHeartParticles(
             );
 
 
-        const finalX =
-
+        const posX =
             centerX +
-            heartX * scale;
+            x *
+            heartScale;
 
 
-        const finalY =
-
+        const posY =
             centerY +
-            heartY * scale;
+            y *
+            heartScale;
 
 
-        setTimeout(
+        /*
+           Nou pran foto yo
+           youn apre lòt.
 
-            () => {
+           Lè nou rive nan dènye a,
+           nou retounen nan premye a.
+        */
 
-                particle.classList.add(
-                    "show"
-                );
+        const photo =
+            heartPhotos[
+                i %
+                heartPhotos.length
+            ];
 
 
-                particle.style.left =
-                    finalX + "px";
+        const card =
+            document.createElement(
+                'div'
+            );
+
+        card.className =
+            'mini-card';
 
 
-                particle.style.top =
-                    finalY + "px";
+        card.style.left =
+            posX +
+            'px';
 
-            },
 
-            300 +
-            Math.random() * 1700
+        card.style.top =
+            posY +
+            'px';
 
+
+        const mediaElement =
+            createMediaElement(
+                photo
+            );
+
+
+        card.appendChild(
+            mediaElement
         );
 
-    }
 
+        container.appendChild(
+            card
+        );
+    }
 }
 
 
 /* =====================================================
-   ETOILES
+   ETWAL
 ===================================================== */
 
 function createRealStars(){
 
     const container =
         document.getElementById(
-            "starField"
+            'starField'
         );
 
-
     container.innerHTML = "";
-
 
     const positions = [];
 
 
     for(
-        let i=0;
-        i<42;
+        let i = 0;
+        i < 36;
         i++
     ){
 
         const left =
             Math.random() *
-            94 + 3;
-
+            94 +
+            3;
 
         const top =
             Math.random() *
-            88 + 6;
-
+            88 +
+            6;
 
         positions.push([
-
             left,
             top
-
         ]);
-
     }
 
 
     positions.forEach(
-
         (
             position,
             index
@@ -3702,36 +2812,61 @@ function createRealStars(){
 
             const star =
                 document.createElement(
-                    "span"
+                    'span'
                 );
 
-
             star.className =
-                "real-star";
+                'real-star';
 
 
             star.style.left =
-                position[0] + "%";
+                position[0] +
+                '%';
 
 
             star.style.top =
-                position[1] + "%";
+                position[1] +
+                '%';
 
 
             const size =
-                Math.random() * 4 + 2;
+                Math.random() *
+                4 +
+                2;
 
 
             star.style.width =
-                size + "px";
+                size +
+                'px';
 
 
             star.style.height =
-                size + "px";
+                size +
+                'px';
+
+
+            const branch =
+                size *
+                5;
+
+
+            star.style.setProperty(
+                '--star-size',
+                size +
+                'px'
+            );
+
+
+            star.style.setProperty(
+                '--star-branch',
+                branch +
+                'px'
+            );
 
 
             star.style.animationDelay =
-                (index * .08) + "s";
+                (index * .14) +
+                's';
 
 
             container.appendChild(
@@ -3739,22 +2874,17 @@ function createRealStars(){
             );
 
 
-            setTimeout(
-
+            requestAnimationFrame(
                 () => {
 
                     star.classList.add(
-                        "lit"
+                        'lit'
                     );
 
-                },
-
-                index * 80
-
+                }
             );
 
         }
-
     );
 }
 
@@ -3767,17 +2897,15 @@ function animateFinalSignature(){
 
     const signature =
         document.getElementById(
-            "finalSignature"
+            'finalSignature'
         );
-
 
     if(!signature){
         return;
     }
 
 
-    signature.textContent =
-        "";
+    signature.textContent = "";
 
 
     const text =
@@ -3790,38 +2918,28 @@ function animateFinalSignature(){
     function showNextLetter(){
 
         if(
-            i < text.length
+            i <
+            text.length
         ){
 
             signature.textContent +=
                 text[i];
 
-
             i++;
 
 
             setTimeout(
-
                 showNextLetter,
-
-                150
-
+                120
             );
-
         }
-
-        else{
-
-            signature.classList.add(
-                "show"
-            );
-
-        }
-
     }
 
 
-    showNextLetter();
+    setTimeout(
+        showNextLetter,
+        300
+    );
 }
 
 
@@ -3830,19 +2948,18 @@ function animateFinalSignature(){
 ===================================================== */
 
 window.addEventListener(
-
-    "resize",
-
+    'resize',
     () => {
 
-        resizeMatrix();
+        canvas.width =
+            window.innerWidth;
 
-        resetDrops();
+        canvas.height =
+            window.innerHeight;
 
         resizeFireworks();
 
     }
-
 );
 
 </script>
