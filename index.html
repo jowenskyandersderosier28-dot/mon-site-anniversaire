@@ -78,6 +78,21 @@ body{
     padding:0 20px;
 }
 
+.matrix-heart{
+    font-size:8rem;
+    color:#ff69b4;
+    text-shadow:
+        0 0 20px #ff69b4,
+        0 0 40px #ff3399,
+        0 0 70px #ff007f;
+    animation:
+        heartPulse
+        1s
+        ease-in-out
+        infinite
+        alternate;
+}
+
 @keyframes pulse{
     0%{
         transform:scale(1);
@@ -85,6 +100,17 @@ body{
 
     100%{
         transform:scale(1.08);
+    }
+}
+
+@keyframes heartPulse{
+
+    0%{
+        transform:scale(.9);
+    }
+
+    100%{
+        transform:scale(1.12);
     }
 }
 
@@ -629,7 +655,8 @@ body{
     position:absolute;
     inset:0;
 
-    background:#fff1a8;
+    /* JÒN NAN PAJ LIV LA → BLAN */
+    background:#ffffff;
 
     border:
         3px solid
@@ -735,7 +762,8 @@ body{
 
 .message-box{
 
-    background:#fff8cf;
+    /* JÒN NAN MESSAGE BOX LIV LA → BLAN */
+    background:#ffffff;
 
     border:
         2px solid
@@ -1915,7 +1943,7 @@ const sequence = [
 
     "TO",
 
-    "OUR LOVES ❤️"
+    "OUR LOVES"
 
 ];
 
@@ -1945,18 +1973,50 @@ let seqTimer =
                     matrixInterval
                 );
 
-                switchScreen(
-                    'screen-cat'
+
+                /* =========================================
+                   OUR LOVES DISPARÈT
+                ========================================= */
+
+                textElement.innerText = "";
+
+                textElement.classList.add(
+                    "matrix-heart"
                 );
+
+                textElement.innerHTML = "♥";
+
+
+                /* =========================================
+                   GWO KÈ WOZ LA PARÈT
+                ========================================= */
 
                 setTimeout(
                     () => {
 
-                        startFireworks();
+                        textElement.classList.remove(
+                            "matrix-heart"
+                        );
+
+                        textElement.innerText = "";
+
+                        switchScreen(
+                            'screen-cat'
+                        );
+
+                        setTimeout(
+                            () => {
+
+                                startFireworks();
+
+                            },
+                            4000
+                        );
 
                     },
-                    4000
+                    1800
                 );
+
             }
 
         },
@@ -3200,4 +3260,4 @@ window.addEventListener(
 </script>
 
 </body>
-   </html>
+</html>
